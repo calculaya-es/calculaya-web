@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Genera la web estática CalculaYa. Ejecuta: python3 build.py  ->  carpeta ../site"""
+"""Genera la web estática Cuentalia. Ejecuta: python3 build.py  ->  carpeta ../site"""
 import os, shutil, datetime
 
 # ============ CONFIGURACIÓN (lo único que tienes que tocar) ============
-SITE_NAME   = "CalculaYa"
-SITE_URL    = "https://calculaya-es.pages.dev"   # cámbialo por tu dirección final (sin barra al final)
+SITE_NAME   = "Cuentalia"
+SITE_URL    = "https://cuentalia.pages.dev"   # cámbialo por tu dirección final (sin barra al final)
 ADSENSE_ID  = ""                          # ej. "ca-pub-1234567890123456" cuando te aprueben AdSense
 CONTACT     = "albertomartina30@gmail.com"
 # Enlaces de afiliado por herramienta: slug -> [(texto, url), ...]  (déjalo vacío al principio)
@@ -343,7 +343,7 @@ def head(title, desc, path):
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:type" content="website"><meta property="og:url" content="{canon}">
 <script>try{{var t=localStorage.getItem("th");if(!t&&matchMedia("(prefers-color-scheme:dark)").matches)t="dark";if(t)document.documentElement.setAttribute("data-t",t)}}catch(e){{}}</script><style>{CSS}</style></head><body>"""
 
-HEADER = f"""<header><div class="w top"><a class="logo" href="/">Calcula<span>Ya</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button></nav></div></header>"""
+HEADER = f"""<header><div class="w top"><a class="logo" href="/">Cuenta<span>lia</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button></nav></div></header>"""
 
 SITE_JS = """
 (function(){

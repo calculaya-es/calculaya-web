@@ -1,4 +1,4 @@
-# CalculaYa
+# Cuentalia
 
 Web estática de calculadoras. Se genera con `python3 build.py`.
 

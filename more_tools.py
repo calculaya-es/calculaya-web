@@ -1,4 +1,4 @@
-# Herramientas adicionales de CalculaYa (se cargan desde build.py)
+# Herramientas adicionales de Cuentalia (se cargan desde build.py)
 
 def conv(tool, slug, title, h1, desc, la, lb, ua, ub, fa, fb, text):
     body = ('<div class="row"><div><label for="a">' + la + '</label><input id="a" inputmode="decimal" value="1"></div>'
