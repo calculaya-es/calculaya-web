@@ -58,4 +58,17 @@ FAQS = {
         ("¿Para qué sirve la TAE?", "Para comparar el coste real de préstamos distintos, porque incluye intereses, comisiones y la frecuencia de pago."),
         ("¿Por qué la TAE es mayor que el TIN?", "Porque suma el efecto de las comisiones (como la de apertura) y de pagar intereses mensualmente."),
     ],
+    "calculadora-indemnizacion-despido": [
+        ("¿Cuántos días por año se pagan en un despido improcedente?", "33 días de salario por año trabajado, con un máximo de 24 mensualidades, para contratos posteriores a febrero de 2012."),
+        ("¿Y en un despido objetivo?", "20 días de salario por año trabajado, con un máximo de 12 mensualidades."),
+        ("¿Esta calculadora es exacta?", "Es orientativa. Si tu contrato es anterior a 2012 se aplican 45 días por año al periodo previo. Consulta a un profesional."),
+    ],
+    "calculadora-salario-bruto-neto": [
+        ("¿Es exacto el sueldo neto que sale?", "No. Es una estimación con una escala media de IRPF y una cotización del 6,5% aprox. Tu nómina real depende de tu comunidad, tu situación familiar y la retención de tu empresa."),
+        ("¿Qué diferencia hay entre 12 y 14 pagas?", "El neto anual es el mismo; con 14 pagas cobras dos extras y cada mensualidad es menor."),
+    ],
+    "calculadora-pagas-extra": [
+        ("¿Cobro más con 14 pagas que con 12?", "No. El salario anual es el mismo; solo cambia cómo se reparte entre los meses."),
+        ("¿Qué son las pagas prorrateadas?", "Las pagas extra repartidas en las 12 nóminas mensuales, de modo que cobras lo mismo cada mes."),
+    ],
 }

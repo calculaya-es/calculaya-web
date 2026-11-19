@@ -330,9 +330,10 @@ tool("calculadora-pintura", "Calculadora de pintura: cuántos litros necesito", 
 document.querySelectorAll('input').forEach(i=>i.oninput=c);c();""",
  """<p>En "largo de la pared total" suma el largo de todas las paredes que vas a pintar (el perímetro de la habitación). El rendimiento suele aparecer en el bote; lo habitual es entre 8 y 12 m² por litro. Se recomienda un 10% extra para retoques.</p>""")
 
-import more_tools, more_tools2
+import more_tools, more_tools2, more_tools3
 more_tools.add(tool)
 more_tools2.add(tool)
+more_tools3.add(tool)
 from faqs import FAQS
 
 # ======================== PLANTILLAS ========================
@@ -413,7 +414,7 @@ CATS = [
  ("dia-a-dia","Día a día","Pintura, gasolina, IMC y más."),
 ]
 ASSIGN = {
- "finanzas":"calculadora-iva calculadora-descuentos calculadora-hipoteca calculadora-prestamos calculadora-interes-compuesto calculadora-margen-beneficio calculadora-roi calculadora-inflacion calculadora-ahorro-objetivo calculadora-rentabilidad-alquiler calculadora-propinas capacidad-endeudamiento-hipoteca amortizacion-anticipada-hipoteca revision-hipoteca-variable-euribor calculadora-tae calculadora-gastos-compra-vivienda cuanto-tardo-en-pagar-un-prestamo",
+ "finanzas":"calculadora-iva calculadora-descuentos calculadora-hipoteca calculadora-prestamos calculadora-interes-compuesto calculadora-margen-beneficio calculadora-roi calculadora-inflacion calculadora-ahorro-objetivo calculadora-rentabilidad-alquiler calculadora-propinas capacidad-endeudamiento-hipoteca amortizacion-anticipada-hipoteca revision-hipoteca-variable-euribor calculadora-tae calculadora-gastos-compra-vivienda cuanto-tardo-en-pagar-un-prestamo calculadora-salario-bruto-neto calculadora-indemnizacion-despido calculadora-pagas-extra",
  "conversores":"conversor-unidades kilometros-a-millas kilos-a-libras celsius-a-fahrenheit litros-a-galones centimetros-a-pulgadas kmh-a-mph conversor-binario-decimal-hexadecimal conversor-zonas-horarias numeros-romanos",
  "fechas":"dias-entre-fechas calculadora-edad calculadora-horas-trabajadas dias-para-navidad sumar-dias-a-fecha numero-de-semana",
  "matematicas":"calculadora-porcentajes regla-de-tres calculadora-fracciones calculadora-media-mediana-moda calculadora-pitagoras calculadora-area-figuras numero-aleatorio lanzar-dado-moneda calculadora-nota-media",
