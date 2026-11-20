@@ -71,4 +71,45 @@ FAQS = {
         ("¿Cobro más con 14 pagas que con 12?", "No. El salario anual es el mismo; solo cambia cómo se reparte entre los meses."),
         ("¿Qué son las pagas prorrateadas?", "Las pagas extra repartidas en las 12 nóminas mensuales, de modo que cobras lo mismo cada mes."),
     ],
+    "calculadora-inflacion": [
+        ("¿Qué es la inflación?", "Es la subida generalizada y sostenida de los precios, que reduce el poder adquisitivo del dinero con el tiempo."),
+        ("¿Cómo se calcula cuánto vale hoy un importe del pasado?", "Se multiplica el importe por (1 + inflación) elevado al número de años. Con una inflación media del 3% anual, 100 € de hoy equivalen a unos 134 € dentro de 10 años."),
+        ("¿Usa datos oficiales del IPC?", "No. Aplica la tasa media que tú indiques, por lo que es una estimación."),
+    ],
+    "calculadora-descuentos": [
+        ("¿Cómo se calcula un descuento?", "Precio final = precio original × (1 − descuento/100). Por ejemplo, 80 € con un 25% de descuento son 60 €."),
+        ("¿Dos descuentos del 20% y 10% suman un 30%?", "No. Se aplican en cadena: 100 € → 80 € → 72 €, un 28% de descuento total."),
+    ],
+    "calculadora-roi": [
+        ("¿Cómo se calcula el ROI?", "ROI = (ganancia − inversión) / inversión × 100. Invertir 1.000 € y obtener 1.200 € da un ROI del 20%."),
+        ("¿Tiene en cuenta el tiempo?", "No. Un 20% en un año no es lo mismo que en cinco; para comparar usa la rentabilidad anualizada."),
+    ],
+    "calculadora-margen-beneficio": [
+        ("¿Qué diferencia hay entre margen y markup?", "El margen se calcula sobre el precio de venta y el markup sobre el coste. Con coste 60 € y venta 100 €, el margen es 40% y el markup 66,7%."),
+        ("¿Cómo fijo el precio para un margen concreto?", "Precio = coste / (1 − margen). Para un 30% de margen con coste 70 €, el precio es 100 €."),
+    ],
+    "calculadora-rentabilidad-alquiler": [
+        ("¿Qué es la rentabilidad bruta de un alquiler?", "Es el alquiler anual dividido entre el precio de compra, en porcentaje. No descuenta gastos ni impuestos."),
+        ("¿Y la rentabilidad neta?", "Resta gastos como IBI, comunidad, seguros, mantenimiento y periodos vacíos, y es la cifra más realista."),
+    ],
+    "calculadora-gastos-compra-vivienda": [
+        ("¿Qué gastos hay al comprar una vivienda?", "Impuestos (ITP o IVA y AJD según el caso), notaría, registro, gestoría y tasación. Suelen rondar entre el 10% y el 15% del precio."),
+        ("¿El resultado es exacto?", "Es orientativo: los impuestos varían según la comunidad autónoma y si la vivienda es nueva o de segunda mano."),
+    ],
+    "calculadora-ahorro-objetivo": [
+        ("¿Cómo sé cuánto ahorrar al mes para una meta?", "Divide el objetivo entre los meses disponibles; si hay rentabilidad, la calculadora ajusta la cuota para tenerla en cuenta."),
+        ("¿Incluye impuestos o inflación?", "No. Es una simulación con rentabilidad constante."),
+    ],
+    "regla-de-tres": [
+        ("¿Qué es una regla de tres simple directa?", "Cuando al aumentar una magnitud aumenta la otra en la misma proporción: x = b × c / a."),
+        ("¿Y la inversa?", "Cuando al aumentar una magnitud la otra disminuye, como velocidad y tiempo: x = a × b / c."),
+    ],
+    "dias-entre-fechas": [
+        ("¿Se cuenta el día de inicio?", "Por defecto se calcula la diferencia entre ambas fechas, sin incluir el día inicial. Suma 1 si quieres contar ambos extremos."),
+        ("¿Cuenta solo días laborables?", "No, cuenta días naturales."),
+    ],
+    "calculadora-nota-media": [
+        ("¿Cómo se calcula la nota media ponderada?", "Se multiplica cada nota por su peso o créditos, se suman los resultados y se divide entre la suma de pesos."),
+        ("¿Sirve para la nota de acceso a la universidad?", "Para eso usa la calculadora específica de nota de acceso, que aplica las ponderaciones de la EBAU/PAU."),
+    ],
 }
