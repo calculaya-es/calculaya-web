@@ -112,4 +112,36 @@ FAQS = {
         ("¿Cómo se calcula la nota media ponderada?", "Se multiplica cada nota por su peso o créditos, se suman los resultados y se divide entre la suma de pesos."),
         ("¿Sirve para la nota de acceso a la universidad?", "Para eso usa la calculadora específica de nota de acceso, que aplica las ponderaciones de la EBAU/PAU."),
     ],
+    "calculadora-propinas": [
+        ("¿Cuánta propina se suele dejar en España?", "No es obligatoria. Es habitual dejar entre un 5% y un 10% si el servicio ha sido bueno, y muchos lo redondean al euro más cercano."),
+        ("¿Cómo divido la cuenta entre varias personas?", "Indica el número de comensales y la calculadora reparte el total con propina incluida a partes iguales."),
+    ],
+    "calculadora-pitagoras": [
+        ("¿Qué dice el teorema de Pitágoras?", "En un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a² + b² = c²."),
+        ("¿Puedo calcular un cateto si conozco la hipotenusa?", "Sí. Se resuelve restando: a = √(c² − b²)."),
+    ],
+    "calculadora-fracciones": [
+        ("¿Cómo se suman fracciones con distinto denominador?", "Se busca un denominador común, se convierten las fracciones y se suman los numeradores. Después se simplifica el resultado."),
+        ("¿Cómo se simplifica una fracción?", "Se dividen numerador y denominador entre su máximo común divisor."),
+    ],
+    "celsius-a-fahrenheit": [
+        ("¿Cuál es la fórmula de Celsius a Fahrenheit?", "°F = °C × 9/5 + 32. Por ejemplo, 20 °C equivalen a 68 °F."),
+        ("¿Y de Fahrenheit a Celsius?", "°C = (°F − 32) × 5/9."),
+    ],
+    "kilos-a-libras": [
+        ("¿Cuántas libras son un kilo?", "Un kilogramo equivale a unas 2,2046 libras."),
+        ("¿Cómo paso libras a kilos?", "Se multiplica por 0,4536 o se divide entre 2,2046."),
+    ],
+    "kmh-a-mph": [
+        ("¿Cuántas millas por hora son 100 km/h?", "Unas 62,14 mph. Un km/h equivale a 0,6214 mph."),
+        ("¿Cómo paso mph a km/h?", "Se multiplica por 1,609."),
+    ],
+    "numeros-romanos": [
+        ("¿Qué valor tiene cada símbolo romano?", "I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000."),
+        ("¿Hasta qué número se puede convertir?", "Con la notación estándar, hasta 3999 (MMMCMXCIX)."),
+    ],
+    "generador-contrasenas": [
+        ("¿Qué hace segura una contraseña?", "La longitud sobre todo: se recomiendan 14 caracteres o más, mezclando letras, números y símbolos, y una distinta para cada servicio."),
+        ("¿Se guarda la contraseña generada?", "No. Se genera en tu navegador y no se envía a ningún servidor."),
+    ],
 }
