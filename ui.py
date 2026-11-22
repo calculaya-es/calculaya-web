@@ -161,6 +161,15 @@ E = [
 ('aria-label="Color \'+','aria-label="Color \'+','aria-label="Color \'+','aria-label="Color \'+'),
 ("'Personalizar'","'Personalitza'","'Personalitza'","'Customize'"),
 ('aria-label="Idioma"','aria-label="Idioma"','aria-label="Idioma"','aria-label="Language"'),
+('📥 Exportar ▾','📥 Exporta ▾','📥 Exporta ▾','📥 Export ▾'),
+('📊 Archivo CSV (Excel)','📊 Fitxer CSV (Excel)','📊 Fitxer CSV (Excel)','📊 CSV file (Excel)'),
+('📄 Archivo de texto (.txt)','📄 Fitxer de text (.txt)','📄 Fitxer de text (.txt)','📄 Text file (.txt)'),
+('🖨️ PDF (guardar al imprimir)','🖨️ PDF (desa en imprimir)','🖨️ PDF (guarda en imprimir)','🖨️ PDF (save when printing)'),
+("'Herramienta'","'Eina'","'Eina'","'Tool'"),("'Fecha'","'Data'","'Data'","'Date'"),("'Web'","'Web'","'Web'","'Web'"),
+("'Datos introducidos'","'Dades introduïdes'","'Dades introduïdes'","'Data entered'"),("'Resultados'","'Resultats'","'Resultats'","'Results'"),("'Resultado'","'Resultat'","'Resultat'","'Result'"),
+("'Herramienta: '","'Eina: '","'Eina: '","'Tool: '"),("'Fecha: '","'Data: '","'Data: '","'Date: '"),("'Web: '","'Web: '","'Web: '","'Web: '"),
+("'DATOS INTRODUCIDOS'","'DADES INTRODUÏDES'","'DADES INTRODUÏDES'","'DATA ENTERED'"),("'RESULTADOS'","'RESULTATS'","'RESULTATS'","'RESULTS'"),
+('Archivo descargado ✔','Fitxer descarregat ✔','Fitxer descarregat ✔','File downloaded ✔'),
 ]
 LANGS = {'ca':1,'va':2,'en':3}
 def pairs(lang):
