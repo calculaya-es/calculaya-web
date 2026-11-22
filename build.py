@@ -110,6 +110,7 @@ const num=id=>parseFloat(String($(id).value).replace(',','.'));
 function show(items){return '<div class="res">'+items.map(i=>'<div><small>'+i[0]+'</small><b>'+i[1]+'</b></div>').join('')+'</div>'}
 """
 
+CSS += open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'extra.css'),encoding='utf-8').read()
 TOOLS = []
 
 def tool(slug, title, h1, desc, body, js, text):
@@ -483,7 +484,13 @@ if(all){
 })();
 """
 
-def footer():
+EXTRA_JS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'extra.js'),encoding='utf-8').read()
+def adv_script():
+    import json, advisor
+    d = advisor.DATA[CUR["lang"]]
+    return "window.ADV_S="+json.dumps({"loc":d["loc"],"t":d["t"],"journeys":[[j[0],j[1],j[2],j[3],j[4]] for j in d["journeys"]]},ensure_ascii=False)+";"
+
+def footer(pre=""):
     return f"""<footer><div class="w"><a href="/privacidad">Privacidad y cookies</a><a href="/aviso-legal">Aviso legal</a><a href="/sobre-nosotros">Sobre nosotros</a><a href="/contacto">Contacto</a><p>© {datetime.date.today().year} {SITE_NAME}. Las calculadoras son orientativas.</p></div></footer>
 <div id="cb"><div class="w"><p>Usamos cookies de terceros (publicidad) solo si las aceptas. <a href="/privacidad" style="color:#9db8ff">Más info</a></p><button id="ca">Aceptar</button><button id="cr" class="sec">Rechazar</button></div></div>
 <script>
@@ -492,7 +499,7 @@ function ads(){{{'' if not ADSENSE_ID else "var s=document.createElement('script
 if(v==='1')ads();else if(!v)b.style.display='block';
 document.getElementById('ca').onclick=function(){{localStorage.setItem(k,'1');b.style.display='none';ads()}};
 document.getElementById('cr').onclick=function(){{localStorage.setItem(k,'0');b.style.display='none'}};}})();
-</script><script>{SITE_JS}</script></body></html>"""
+</script><script>{adv_script()}</script>{pre}<script>{SITE_JS}</script><script>{EXTRA_JS}</script></body></html>"""
 
 def adslot():
     # Cuando tengas AdSense, pega aquí tu bloque <ins class="adsbygoogle"...> de "anuncio display"
@@ -574,7 +581,7 @@ def build_site(lang):
             faqhtml='<h2>Preguntas frecuentes</h2>'+"".join(f'<details><summary>{q}</summary><p>{a}</p></details>' for q,a in faq)
         crumbs=f'<nav class="bc"><a href="/">Inicio</a> › <a href="/categoria-{t["cat"]}">{cname[t["cat"]]}</a></nav>'
         html = (head(t["title"], t["desc"], t["slug"] + ".html").replace("</head>", "".join(jsonld(x) for x in ld)+"</head>").replace("<body>", '<body data-s="'+t["slug"]+'" data-n="'+t["h1"].replace('"','&quot;')+'">') + HEADER +
-          f'<main><div class="w">{crumbs}<h1>{t["h1"]}</h1><p class="lead">{t["desc"]}</p><div class="card">{t["body"]}</div>{adslot()}{affhtml}<div>{t["text"]}</div>{faqhtml}{adslot()}<h2>Otras herramientas</h2><div class="grid">{related}</div></div></main>'
+          f'<main><div class="w">{crumbs}<h1>{t["h1"]}</h1><p class="lead">{t["desc"]}</p><div class="card">{t["body"]}</div><div id="adv"></div>{adslot()}{affhtml}<div class="tx">{t["text"]}</div>{faqhtml}{adslot()}<h2>Otras herramientas</h2><div class="grid">{related}</div></div></main>'
           + footer().replace("</body></html>", f"<script>{COMMON_JS}\n{t['js']}</script></body></html>"))
         write(t["slug"] + ".html", html)
     # categorias
@@ -589,9 +596,9 @@ def build_site(lang):
         items=[t for t in TOOLS if t["cat"]==c]
         sections+=f'<h2>{ICON[c]} <a href="/categoria-{c}" style="text-decoration:none;color:inherit">{n}</a></h2><div class="grid">'+"".join(f'<a class="tool" data-c="{c}" href="/{t["slug"]}"><i>{ICON[c]}</i><b>{t["h1"]}</b><span>{t["desc"]}</span></a>' for t in items)+'</div>'
     chips='<button class="chip on" data-c="">Todas</button>'+"".join(f'<button class="chip" data-c="{c}">{ICON[c]} {n}</button>' for c,n,_ in CATS)
-    alljs="window.TOOLS_ALL="+json.dumps([[t["slug"],t["h1"],t["cat"],ICON[t["cat"]]] for t in TOOLS],ensure_ascii=False)+";"
+    alljs="window.TOOLS_ALL="+json.dumps([[t["slug"],t["h1"],t["cat"],ICON[t["cat"]],t["desc"]] for t in TOOLS],ensure_ascii=False)+";"
     idx = (head("Calculadoras y herramientas online gratis", "Calculadoras y herramientas online gratis en español: IVA, hipoteca, préstamos, conversor de unidades, letra del DNI y más.", "") + HEADER +
-      f'<main><div class="w"><div class="hero"><h1>Calculadoras online gratis</h1><p>Rápidas, sin registro y desde el móvil. Tus datos no salen de tu navegador.</p><input id="q" placeholder="🔍 Busca: IVA, hipoteca, DNI, km a millas…   (pulsa / para buscar)" autocomplete="off"><div class="stats"><span>🧰 {len(TOOLS)} herramientas</span><span>⚡ Resultado al instante</span><span>🔒 Privado</span></div></div><div id="day"></div><div id="favs"></div><div id="recs"></div><div class="chips">{chips}</div>{adslot()}<div id="all">{sections}</div><div class="none" id="none">😕 No hay resultados. Prueba con otra palabra.</div>{adslot()}</div></main>' + footer().replace("</body></html>", "<script>"+alljs+"</script><script>"+SITE_JS+"</script></body></html>"))
+      f'<main><div class="w"><div class="hero"><h1>Calculadoras online gratis</h1><p>Rápidas, sin registro y desde el móvil. Tus datos no salen de tu navegador.</p><input id="q" placeholder="🔍 Busca: IVA, hipoteca, DNI, km a millas…   (pulsa / para buscar)" autocomplete="off"><div class="stats"><span>🧰 {len(TOOLS)} herramientas</span><span>⚡ Resultado al instante</span><span>🔒 Privado</span></div></div><div id="ai"></div><div id="day"></div><div id="favs"></div><div id="recs"></div><div class="chips">{chips}</div>{adslot()}<div id="all">{sections}</div><div class="none" id="none">😕 No hay resultados. Prueba con otra palabra.</div>{adslot()}</div></main>' + footer("<script>"+alljs+"</script>"))
     write("index.html", idx)
     # legales y confianza
     priv = (head("Política de privacidad y cookies", "Política de privacidad y cookies de " + SITE_NAME, "privacidad.html") + HEADER +
