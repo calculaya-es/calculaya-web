@@ -240,4 +240,36 @@ FAQS = {
         ("¿Cómo sumo o resto días a una fecha?", "Indica la fecha de partida y el número de días; usa un valor negativo para restar."),
         ("¿Cuenta los días laborables?", "No, cuenta días naturales."),
     ],
+    "calculadora-calorias-tmb": [
+        ("¿Qué es el metabolismo basal?", "Son las calorías que tu cuerpo gasta en reposo para mantener funciones vitales como respirar o la circulación."),
+        ("¿Es exacto el resultado?", "Es una estimación con la ecuación de Mifflin-St Jeor. El gasto real varía de una persona a otra."),
+    ],
+    "calculadora-peso-ideal": [
+        ("¿Existe un único peso ideal?", "No. Se habla de un rango saludable, que depende de la altura, la constitución y la masa muscular."),
+        ("¿Qué IMC se considera normal?", "Según la OMS, entre 18,5 y 24,9."),
+    ],
+    "calculadora-ritmo-carrera": [
+        ("¿Qué es el ritmo en carrera?", "Es el tiempo que tardas en recorrer un kilómetro, expresado en minutos por kilómetro."),
+        ("¿Cómo paso de min/km a km/h?", "Divide 60 entre el ritmo en minutos. Por ejemplo, 5:00 min/km son 12 km/h."),
+    ],
+    "calculadora-fecha-probable-parto": [
+        ("¿Cómo se calcula la fecha probable de parto?", "Se suman 280 días (40 semanas) al primer día de la última regla, con la regla de Naegele."),
+        ("¿Es una fecha segura?", "No, es una estimación. Tu médico o matrona la ajustará con la ecografía."),
+    ],
+    "calculadora-vacaciones": [
+        ("¿Cuántas vacaciones me corresponden por ley en España?", "Un mínimo de 30 días naturales al año, que tu convenio o contrato pueden mejorar."),
+        ("¿Y si no trabajo el año completo?", "Se calculan en proporción al tiempo trabajado."),
+    ],
+    "calculadora-consumo-electrico": [
+        ("¿Cómo se calcula el coste de un electrodoméstico?", "Potencia en kW por horas de uso da los kWh consumidos, que se multiplican por el precio del kWh."),
+        ("¿Dónde veo la potencia del aparato?", "En la etiqueta del producto o en su manual, expresada en vatios (W)."),
+    ],
+    "calculadora-consumo-combustible": [
+        ("¿Cómo calculo el consumo real de mi coche?", "Llena el depósito, anota los kilómetros, circula y vuelve a llenarlo: litros repostados entre kilómetros por 100."),
+        ("¿Por qué difiere del consumo oficial?", "El oficial se mide en condiciones de laboratorio; el real depende de la conducción, la carga y el tráfico."),
+    ],
+    "calculadora-ecuacion-segundo-grado": [
+        ("¿Qué es el discriminante?", "Es b² − 4ac. Si es positivo hay dos soluciones reales, si es cero una doble y si es negativo ninguna real."),
+        ("¿Qué pasa si a vale 0?", "Deja de ser de segundo grado: es una ecuación lineal."),
+    ],
 }

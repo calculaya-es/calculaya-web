@@ -360,14 +360,15 @@ tool("calculadora-pintura", "Calculadora de pintura: cuántos litros necesito", 
 document.querySelectorAll('input').forEach(i=>i.oninput=c);c();""",
  """<p>En "largo de la pared total" suma el largo de todas las paredes que vas a pintar (el perímetro de la habitación). El rendimiento suele aparecer en el bote; lo habitual es entre 8 y 12 m² por litro. Se recomienda un 10% extra para retoques.</p>""")
 
-import more_tools, more_tools2, more_tools3
+import more_tools, more_tools2, more_tools3, more_tools4
 more_tools.add(tool)
 more_tools2.add(tool)
 more_tools3.add(tool)
+more_tools4.add(tool)
 from faqs import FAQS
 
 # ======================== PLANTILLAS ========================
-HEAD_JS = """try{var p=JSON.parse(localStorage.getItem("pz")||"{}"),r=document.documentElement,t=p.t||localStorage.getItem("th");if(!t||t==="auto")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";r.setAttribute("data-t",t);if(p.a){r.style.setProperty("--au",p.a);r.style.setProperty("--au2",p.b||p.a)}if(p.fs)r.style.setProperty("--fs",p.fs+"%");["d","w","f","rd","v","h","an"].forEach(function(k){if(p[k])r.setAttribute("data-"+k,p[k])})}catch(e){}"""
+HEAD_JS = """(function(){try{var p=JSON.parse(localStorage.getItem("pz")||"{}"),r=document.documentElement,t=p.t||localStorage.getItem("th");if(!t||t==="auto")t=matchMedia("(prefers-color-scheme:dark)").matches?"dark":"light";r.setAttribute("data-t",t);if(p.a){r.style.setProperty("--au",p.a);r.style.setProperty("--au2",p.b||p.a)}if(p.fs)r.style.setProperty("--fs",p.fs+"%");["d","w","f","rd","v","h","an"].forEach(function(k){if(p[k])r.setAttribute("data-"+k,p[k])})}catch(e){}})();"""
 
 def head(title, desc, path):
     canon = f"{SITE_URL}/{path[:-5] if path.endswith('.html') else path}"
@@ -376,7 +377,7 @@ def head(title, desc, path):
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:type" content="website"><meta property="og:url" content="{canon}">
 <script>{HEAD_JS}</script><style>{CSS}</style></head><body>"""
 
-HEADER = f"""<header><div class="w top"><a class="logo" href="/">Cuenta<span>lia</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button><button id="pz" title="Personalizar la web" aria-label="Personalizar">⚙️</button></nav></div></header>"""
+HEADER = f"""<header><div class="w top"><a class="logo" href="/">Cuenta<span>lia</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><a class="hide" href="/mis-herramientas">⭐ Mis herramientas</a><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button><button id="pz" title="Personalizar la web" aria-label="Personalizar">⚙️</button></nav></div></header>"""
 
 SITE_JS = """
 (function(){
@@ -476,6 +477,8 @@ CATS = [
  ("matematicas","Matemáticas","Porcentajes, fracciones, estadística y geometría."),
  ("espana","España y documentos","DNI, NIE, IBAN y notas de acceso."),
  ("texto","Texto y utilidades","Contadores, mayúsculas, contraseñas y sorteos."),
+ ("trabajo","Trabajo y nómina","Sueldo neto, pagas, despido, vacaciones y horas."),
+ ("salud","Salud y deporte","IMC, calorías, peso ideal, carrera y embarazo."),
  ("dia-a-dia","Día a día","Pintura, gasolina, IMC y más."),
 ]
 ASSIGN = {
@@ -487,7 +490,17 @@ ASSIGN = {
  "texto":"contador-palabras convertidor-mayusculas contador-caracteres-redes generador-contrasenas sorteo-aleatorio",
  "dia-a-dia":"calculadora-pintura coste-viaje-gasolina calculadora-imc",
 }
-ICON = {"finanzas":"💶","conversores":"🔄","fechas":"📅","matematicas":"🧮","espana":"🇪🇸","texto":"✍️","dia-a-dia":"🏠"}
+
+# Reasignaciones y herramientas nuevas
+def _move(slugs, dest):
+    for c in list(ASSIGN):
+        ASSIGN[c]=" ".join(x for x in ASSIGN[c].split() if x not in slugs)
+    ASSIGN[dest]=(ASSIGN.get(dest,"")+" "+" ".join(slugs)).strip()
+_move(["calculadora-indemnizacion-despido","calculadora-salario-bruto-neto","calculadora-pagas-extra","calculadora-horas-trabajadas","calculadora-vacaciones"],"trabajo")
+_move(["calculadora-imc","calculadora-calorias-tmb","calculadora-peso-ideal","calculadora-ritmo-carrera","calculadora-fecha-probable-parto"],"salud")
+_move(["calculadora-consumo-electrico","calculadora-consumo-combustible"],"dia-a-dia")
+_move(["calculadora-ecuacion-segundo-grado"],"matematicas")
+ICON = {"finanzas":"💶","conversores":"🔄","fechas":"📅","matematicas":"🧮","espana":"🇪🇸","texto":"✍️","dia-a-dia":"🏠","trabajo":"💼","salud":"💪"}
 
 def catof(slug):
     for c,l in ASSIGN.items():
@@ -562,13 +575,33 @@ def build():
 <h2>Cómo se financia</h2><p>El sitio es gratuito. Puede incluir publicidad y enlaces de afiliado, siempre señalados, que nos ayudan a mantenerlo.</p>
 <h2>Aviso</h2><p>Los resultados son orientativos y no sustituyen el consejo de un profesional.</p>
 <p>¿Echas en falta una herramienta o has detectado un error? <a href="/contacto">Escríbenos</a>.</p></div></main>''' + footer())
+    import json as _j
+    my_js="var ALL="+_j.dumps([[t["slug"],t["h1"],ICON[t["cat"]]] for t in TOOLS],ensure_ascii=False)+""";
+(function(){var by={};ALL.forEach(function(t){by[t[0]]=t});
+function L(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+function S(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function card(t,rm){return '<div class="mine"><a class="tool" href="/'+t[0]+'"><i>'+t[2]+'</i><b>'+t[1]+'</b></a>'+(rm?'<button class="sec x" data-s="'+t[0]+'" aria-label="Quitar">✕</button>':'')+'</div>'}
+function draw(){var f=L('fav',[]).filter(function(s){return by[s]}),r=L('rec',[]).filter(function(x){return by[x[0]]});
+document.getElementById('mf').innerHTML=f.length?'<div class="grid">'+f.map(function(s){return card(by[s],1)}).join('')+'</div>':'<p>Aún no tienes favoritas. Abre una herramienta y pulsa «☆ Favorita».</p>';
+document.getElementById('mr').innerHTML=r.length?'<div class="grid">'+r.map(function(x){return card(by[x[0]],0)}).join('')+'</div>':'<p>Todavía no has visitado ninguna herramienta.</p>';
+document.querySelectorAll('.x').forEach(function(b){b.onclick=function(){S('fav',L('fav',[]).filter(function(s){return s!==b.dataset.s}));draw()}})}
+document.getElementById('cl').onclick=function(){S('rec',[]);draw()};
+document.getElementById('ex').onclick=function(){var d={fav:L('fav',[]),pz:L('pz',{})};document.getElementById('bk').value=JSON.stringify(d)};
+document.getElementById('im').onclick=function(){try{var d=JSON.parse(document.getElementById('bk').value);if(d.fav)S('fav',d.fav);if(d.pz)S('pz',d.pz);location.reload()}catch(e){alert('Copia no válida')}};
+draw()})();"""
+    mine=(head("Mis herramientas: favoritas y recientes", "Tus herramientas favoritas y las vistas recientemente en "+SITE_NAME+".", "mis-herramientas.html").replace("</head>","<style>.mine{position:relative}.mine .x{position:absolute;top:8px;right:8px;margin:0;padding:2px 8px;font-size:.8rem}#bk{min-height:90px;font-size:.8rem}</style></head>")+HEADER+
+      '''<main><div class="w"><h1>⭐ Mis herramientas</h1><p class="lead">Tus favoritas y recientes. Se guardan solo en este navegador.</p>
+<h2>Favoritas</h2><div id="mf"></div><h2>Vistas recientemente</h2><div id="mr"></div><button id="cl" class="sec">Borrar historial</button>
+<h2>Copia de seguridad</h2><p>Exporta tus favoritas y tus ajustes de personalización para llevarlos a otro dispositivo: pulsa «Exportar», copia el texto y, en el otro dispositivo, pégalo aquí y pulsa «Importar».</p>
+<textarea id="bk" placeholder="Aquí aparece tu copia"></textarea><div class="acts"><button id="ex">Exportar</button><button id="im" class="sec">Importar</button></div></div></main>'''+footer().replace("</body></html>","<script>"+my_js+"</script></body></html>"))
+    write("mis-herramientas.html", mine)
     write("sobre-nosotros.html", sobre)
     cont = (head("Contacto", "Contacta con "+SITE_NAME+" para sugerir herramientas o comunicar errores.", "contacto.html") + HEADER +
       f'''<main><div class="w"><h1>Contacto</h1><p>Puedes escribirnos para sugerir una calculadora, avisar de un error o cualquier consulta:</p>
 <p><a href="mailto:{CONTACT}"><b>{CONTACT}</b></a></p><p>Respondemos en cuanto podemos, normalmente en pocos días.</p></div></main>''' + footer())
     write("contacto.html", cont)
     # SEO
-    urls = [""] + [t["slug"] + ".html" for t in TOOLS] + [f"categoria-{c}.html" for c,_,_ in CATS] + ["sobre-nosotros.html","contacto.html","privacidad.html", "aviso-legal.html"]
+    urls = [""] + [t["slug"] + ".html" for t in TOOLS] + [f"categoria-{c}.html" for c,_,_ in CATS] + ["mis-herramientas.html","sobre-nosotros.html","contacto.html","privacidad.html", "aviso-legal.html"]
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{SITE_URL}/{u[:-5] if u.endswith(".html") else u}</loc><lastmod>{TODAY}</lastmod></url>" for u in urls) + "</urlset>"
     write("sitemap.xml", sm)
     write("cy9k2m7q4x8w1v5b.txt","cy9k2m7q4x8w1v5b")
