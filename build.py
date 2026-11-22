@@ -484,14 +484,18 @@ if(all){
 })();
 """
 
-EXTRA_JS = open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'extra.js'),encoding='utf-8').read()
+_d=os.path.dirname(os.path.abspath(__file__))
+EXTRA_JS = open(os.path.join(_d,'extra.js'),encoding='utf-8').read()+"\n"+open(os.path.join(_d,'extra2.js'),encoding='utf-8').read()
+CF_TOKEN = ""   # token de Cloudflare Web Analytics (pégalo aquí cuando lo actives)
 def adv_script():
     import json, advisor
     d = advisor.DATA[CUR["lang"]]
-    return "window.ADV_S="+json.dumps({"loc":d["loc"],"t":d["t"],"journeys":[[j[0],j[1],j[2],j[3],j[4]] for j in d["journeys"]]},ensure_ascii=False)+";"
+    tl=[[t["slug"],t["h1"],ICON[catof(t["slug"])],t["desc"]] for t in TOOLS]
+    cf = ('<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon=\'{"token": "%s"}\'></script>' % CF_TOKEN) if CF_TOKEN else ""
+    return "window.ADV_S="+json.dumps({"loc":d["loc"],"t":d["t"],"journeys":[[j[0],j[1],j[2],j[3],j[4]] for j in d["journeys"]]},ensure_ascii=False)+";window.TL="+json.dumps(tl,ensure_ascii=False)+";</script>"+cf+"<script>"
 
 def footer(pre=""):
-    return f"""<footer><div class="w"><a href="/privacidad">Privacidad y cookies</a><a href="/aviso-legal">Aviso legal</a><a href="/sobre-nosotros">Sobre nosotros</a><a href="/contacto">Contacto</a><p>© {datetime.date.today().year} {SITE_NAME}. Las calculadoras son orientativas.</p></div></footer>
+    return f"""<footer><div class="w"><div class="fcats">{"".join(f'<a href="/categoria-{c}">{n}</a>' for c,n,_ in CATS)}</div><a href="/privacidad">Privacidad y cookies</a><a href="/aviso-legal">Aviso legal</a><a href="/sobre-nosotros">Sobre nosotros</a><a href="/contacto">Contacto</a><p>© {datetime.date.today().year} {SITE_NAME}. Las calculadoras son orientativas.</p></div></footer>
 <div id="cb"><div class="w"><p>Usamos cookies de terceros (publicidad) solo si las aceptas. <a href="/privacidad" style="color:#9db8ff">Más info</a></p><button id="ca">Aceptar</button><button id="cr" class="sec">Rechazar</button></div></div>
 <script>
 (function(){{var k='cc';var v=localStorage.getItem(k);var b=document.getElementById('cb');
@@ -650,6 +654,42 @@ draw()})();"""
         write("ads.txt", f"google.com, pub-{ADSENSE_ID.replace('ca-pub-','')}, DIRECT, f08c47fec0942fa0\n" if ADSENSE_ID else "# Rellena cuando tengas AdSense\n")
         write("google7462b51765c7efc9.html", "google-site-verification: google7462b51765c7efc9.html")
 
+def make_estado():
+    import glob, json as _j
+    files = glob.glob(os.path.join(OUT, "**", "*.html"), recursive=True)
+    broken = []; total_kb = 0; big = []
+    for f in files:
+        h = open(f, encoding="utf-8").read(); total_kb += len(h)/1024; big.append((len(h)/1024, os.path.relpath(f, OUT)))
+        for m in set(re.findall(r'href="(/[^"#?]*)"', h)):
+            if "'" in m or m == "/": continue
+            p = os.path.join(OUT, m.strip("/"))
+            if not (os.path.exists(p) or os.path.exists(p + ".html") or os.path.exists(os.path.join(p, "index.html"))): broken.append((os.path.relpath(f, OUT), m))
+    big.sort(reverse=True)
+    langs = {l: len(glob.glob(os.path.join(OUT, l, "*.html"))) for l in ("ca","va","en")}
+    facts = [("Herramientas", len(TOOLS)), ("Categorías", len(CATS)), ("Idiomas", 4), ("Páginas HTML", len(files)), ("Enlaces internos rotos", len(broken)),
+             ("Peso medio por página", f"{total_kb/len(files):.0f} KB"), ("Última compilación", TODAY), ("Páginas con FAQs", len(FAQS))]
+    cards = "".join(f'<div class="kp"><small>{k}</small><b>{v}</b></div>' for k, v in facts)
+    bigs = "".join(f"<li>{n} — {s:.0f} KB</li>" for s, n in big[:5])
+    br = "".join(f"<li>{a} → {m}</li>" for a, m in broken[:20]) or "<li>Ninguno ✔</li>"
+    css = "<style>.kps{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}.kp{background:var(--card);border:1px solid var(--bd);border-left:4px solid var(--acc);border-radius:14px;padding:14px}.kp small{color:var(--mut)}.kp b{display:block;font-size:1.6rem}.bar{height:10px;border-radius:6px;background:var(--acc2);overflow:hidden;margin:3px 0 10px}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--g1),var(--g2));border-radius:6px;transition:width 1s cubic-bezier(.2,.9,.3,1)}.spark{display:flex;gap:3px;align-items:flex-end;height:90px}.spark i{flex:1;background:linear-gradient(var(--g2),var(--g1));border-radius:4px 4px 0 0;min-height:3px;transform-origin:bottom;animation:grow .8s ease backwards}@keyframes grow{from{transform:scaleY(0)}}</style>"
+    js = """(function(){function L(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}}
+var v=L('vis',{}),d=L('vd',{}),ks=Object.keys(v).sort(function(a,b){return v[b]-v[a]}),tot=ks.reduce(function(s,k){return s+v[k]},0),mx=ks.length?v[ks[0]]:1;
+document.getElementById('lt').textContent=tot;document.getElementById('ln').textContent=ks.length;document.getElementById('lf').textContent=L('fav',[]).length;
+document.getElementById('lb').innerHTML=ks.slice(0,8).map(function(k){return '<div><span>'+k+' <b>'+v[k]+'</b></span><div class="bar"><i data-w="'+(v[k]/mx*100)+'"></i></div></div>'}).join('')||'<p>Aún no hay actividad registrada en este navegador.</p>';
+var days=[];for(var i=29;i>=0;i--){var t=new Date(Date.now()-i*864e5).toISOString().slice(0,10);days.push([t,d[t]||0])}var m=Math.max.apply(null,days.map(function(x){return x[1]}))||1;
+document.getElementById('sp30').innerHTML=days.map(function(x,i){return '<i title="'+x[0]+': '+x[1]+'" style="height:'+Math.max(3,x[1]/m*100)+'%;animation-delay:'+i*20+'ms"></i>'}).join('');
+setTimeout(function(){document.querySelectorAll('.bar i').forEach(function(e){e.style.width=e.dataset.w+'%'})},150)})();"""
+    html = (head("Estado de la web", "Panel interno de estado de la web.", "estado.html").replace("</head>", '<meta name="robots" content="noindex,nofollow">' + css + "</head>") + HEADER +
+      f'''<main><div class="w"><h1>📊 Estado de la web</h1><p class="lead">Panel interno (no aparece en Google). Datos de la última compilación y de tu actividad en este navegador.</p>
+<h2>Salud de la web</h2><div class="kps">{cards}</div>
+<h2>Enlaces rotos</h2><ul>{br}</ul><h2>Páginas más pesadas</h2><ul>{bigs}</ul>
+<h2>Tu actividad en este navegador</h2><div class="kps"><div class="kp"><small>Páginas vistas</small><b id="lt">0</b></div><div class="kp"><small>Páginas distintas</small><b id="ln">0</b></div><div class="kp"><small>Favoritas</small><b id="lf">0</b></div></div>
+<h2>Más visitadas (por ti)</h2><div id="lb"></div><h2>Últimos 30 días (por ti)</h2><div class="spark" id="sp30"></div>
+<h2>Visitas reales de todos los usuarios</h2><div class="card"><p><b>Todavía no se están midiendo.</b> Esta web no tiene servidor propio, así que para ver visitantes, países, páginas más vistas y buscadores hace falta activar una analítica:</p>
+<ol><li><b>Cloudflare Web Analytics</b> (gratis, sin cookies): en el panel de Cloudflare → Web Analytics → añadir el sitio. Copia el <i>token</i> y pégalo en <code>CF_TOKEN</code> de <code>build.py</code> (o pásaselo a Claude).</li>
+<li><b>Google Search Console</b> (gratis): muestra con qué búsquedas llega la gente y qué páginas indexa Google. Reenvía el sitemap <code>/sitemap.xml</code> para incluir los 4 idiomas.</li></ol></div></div></main>''' + footer().replace("</body></html>", "<script>"+js+"</script></body></html>"))
+    write("estado.html", html)
+
 PAGES = ["", "mis-herramientas","sobre-nosotros","contacto","privacidad","aviso-legal"]
 def localize(html, lang, path):
     if not html.lstrip().startswith("<!doctype html>"): return html
@@ -685,6 +725,7 @@ def build():
     loc = lambda pre,u: f"{SITE_URL}{pre}/{u}"
     sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{loc(pre,u)}</loc><lastmod>{TODAY}</lastmod></url>" for pre in ("","/ca","/va","/en") for u in urls) + "</urlset>"
     write("sitemap.xml", sm)
+    make_estado()
     print("OK:", len(TOOLS), "herramientas x 4 idiomas ->", os.path.abspath(OUT))
 
 if __name__ == "__main__":

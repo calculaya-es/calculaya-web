@@ -174,6 +174,6 @@ E = [
 LANGS = {'ca':1,'va':2,'en':3}
 def pairs(lang):
     i = LANGS[lang]
-    out = [(e[0], e[i]) for e in E]
+    out = [(e[0], e[i].replace('teues','teves').replace('meues','meves') if lang=='ca' else e[i]) for e in E]
     out.sort(key=lambda p: -len(p[0]))
     return out

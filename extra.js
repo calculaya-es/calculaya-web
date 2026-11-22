@@ -76,19 +76,21 @@ if(slug&&adv){
  doc.querySelectorAll('.card button').forEach(function(b){b.addEventListener('click',sch)});
  addEventListener('load',function(){render()});render();
 }
-/* ---------- asistente en portada ---------- */
-var ai=doc.getElementById('ai'),ALL=window.TOOLS_ALL;
-if(ai&&ALL){
- var by={};ALL.forEach(function(t){by[t[0]]=t});
+/* ---------- asistente (portada y panel flotante) ---------- */
+var TL=window.TL||[];
+function buildAssistant(el){
+ var by={};TL.forEach(function(t){by[t[0]]=t});
  var norm=function(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')};
- var idx=ALL.map(function(t){return{t:t,h:norm(t[1]),d:norm(t[4]||'')}});
- ai.innerHTML='<div class="aibox"><div class="advh"><span class="advi" aria-hidden="true">🤖</span><div><b>'+T('aiTitle')+'</b><small>'+T('aiHint')+'</small></div></div><input id="aiq" placeholder="'+esc(T('aiPh'))+'" autocomplete="off"><div class="jr"></div><div class="aout" aria-live="polite"></div></div>';
- var q=ai.querySelector('#aiq'),jr=ai.querySelector('.jr'),out=ai.querySelector('.aout');
- var link=function(s){var t=by[s];return t?'<a href="/'+t[0]+'"><span>'+t[3]+'</span> '+esc(t[1])+'</a>':''};
+ var idx=TL.map(function(t){return{t:t,h:norm(t[1]),d:norm(t[3]||'')}});
+ el.innerHTML='<div class="advh"><span class="advi" aria-hidden="true">🤖</span><div><b>'+T('aiTitle')+'</b><small>'+T('aiHint')+'</small></div></div><input class="aiq" placeholder="'+esc(T('aiPh'))+'" autocomplete="off"><div class="jr"></div><div class="aout" aria-live="polite"></div>';
+ var q=el.querySelector('.aiq'),jr=el.querySelector('.jr'),out=el.querySelector('.aout');
+ var link=function(s){var t=by[s];return t?'<a href="/'+t[0]+'"><span>'+t[2]+'</span> '+esc(t[1])+'</a>':''};
  (S.journeys||[]).forEach(function(j){var b=doc.createElement('button');b.type='button';b.textContent=j[1]+' '+j[2];b.onclick=function(){q.value='';[].forEach.call(jr.children,function(x){x.classList.toggle('on',x===b)});
-  out.innerHTML='<p><b>'+T('aiSteps')+'</b> '+esc(j[3])+'</p><ol>'+j[4].map(function(s){var t=by[s];return t?'<li>'+link(s)+'</li>':''}).join('')+'</ol>'};jr.appendChild(b)});
+  out.innerHTML='<p><b>'+T('aiSteps')+'</b> '+esc(j[3])+'</p><ol>'+j[4].map(function(s){return by[s]?'<li>'+link(s)+'</li>':''}).join('')+'</ol>'};jr.appendChild(b)});
  q.oninput=function(){[].forEach.call(jr.children,function(x){x.classList.remove('on')});var w=norm(q.value).split(/[^a-z0-9]+/).filter(function(x){return x.length>2});if(!w.length){out.innerHTML='';return}
   var sc=idx.map(function(o){var s=0;w.forEach(function(x){var st=x.length>5?x.slice(0,5):x;if(o.h.indexOf(st)>-1)s+=3;if(o.d.indexOf(st)>-1)s+=1});return[s,o.t]}).filter(function(x){return x[0]>0}).sort(function(a,b){return b[0]-a[0]}).slice(0,5);
   out.innerHTML=sc.length?'<p><b>'+T('aiBest')+'</b></p><div class="sg">'+sc.map(function(x){return link(x[1][0])}).join('')+'</div>':'<p>'+T('aiNone')+'</p>'};
-}
+ return q}
+window.__buildAssistant=buildAssistant;
+var ai=doc.getElementById('ai');if(ai){ai.className='aibox';buildAssistant(ai)}
 })();

@@ -190,3 +190,11 @@ EN = {
  ],
 }
 DATA = {"es":ES,"ca":CA,"va":VA,"en":EN}
+
+EXTRA = {
+ "es":{"dock_menu":"Menú rápido","dock_ai":"Asistente","dock_fav":"Mis herramientas","dock_pz":"Personalizar","dock_top":"Subir","fbar_up":"Volver a la calculadora","advGo":"Ver el asesor de esta herramienta","aiClose":"Cerrar","phs":"IVA|hipoteca|letra del DNI|km a millas|sueldo neto|días entre fechas|calorías"},
+ "ca":{"dock_menu":"Menú ràpid","dock_ai":"Assistent","dock_fav":"Les meves eines","dock_pz":"Personalitza","dock_top":"Amunt","fbar_up":"Tornar a la calculadora","advGo":"Veure l'assessor d'aquesta eina","aiClose":"Tanca","phs":"IVA|hipoteca|lletra del DNI|km a milles|sou net|dies entre dates|calories"},
+ "va":{"dock_menu":"Menú ràpid","dock_ai":"Assistent","dock_fav":"Les meues eines","dock_pz":"Personalitza","dock_top":"Amunt","fbar_up":"Tornar a la calculadora","advGo":"Vore l'assessor d'esta eina","aiClose":"Tanca","phs":"IVA|hipoteca|lletra del DNI|km a milles|sou net|dies entre dates|calories"},
+ "en":{"dock_menu":"Quick menu","dock_ai":"Assistant","dock_fav":"My tools","dock_pz":"Customize","dock_top":"Top","fbar_up":"Back to the calculator","advGo":"See this tool's advisor","aiClose":"Close","phs":"VAT|mortgage|Spanish ID letter|km to miles|net salary|days between dates|calories"},
+}
+for _k,_v in EXTRA.items(): DATA[_k]["t"].update(_v)
