@@ -74,10 +74,14 @@ if(slug&&adv){
  var sch=function(){clearTimeout(tm);tm=setTimeout(render,450)};
  doc.querySelectorAll('.card input,.card select,.card textarea').forEach(function(e){e.addEventListener('input',sch);e.addEventListener('change',sch)});
  doc.querySelectorAll('.card button').forEach(function(b){b.addEventListener('click',sch)});
- addEventListener('load',function(){render()});render();
+ window.__advTabs={1:t1,2:t2,3:t3};addEventListener('load',function(){render()});render();
 }
 /* ---------- asistente (portada y panel flotante) ---------- */
 var TL=window.TL||[];
+var _norm=function(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')},_idx=null;
+function find(q){if(!_idx)_idx=TL.map(function(t){return{t:t,h:_norm(t[1]),d:_norm(t[3]||'')}});var w=_norm(q).split(/[^a-z0-9]+/).filter(function(x){return x.length>2});if(!w.length)return[];
+ return _idx.map(function(o){var s=0;w.forEach(function(x){var st=x.length>5?x.slice(0,5):x;if(o.h.indexOf(st)>-1)s+=3;if(o.d.indexOf(st)>-1)s+=1});return[s,o.t]}).filter(function(x){return x[0]>0}).sort(function(a,b){return b[0]-a[0]}).slice(0,5).map(function(x){return x[1]})}
+window.__find=find;
 function buildAssistant(el){
  var by={};TL.forEach(function(t){by[t[0]]=t});
  var norm=function(s){return String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'')};
