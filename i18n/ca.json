@@ -1,0 +1,1220 @@
+{
+ "calculadora-iva": {
+  "title": "Calculadora d'IVA en línia (21%, 10%, 4%)",
+  "h1": "Calculadora d'IVA",
+  "desc": "Afegeix o treu l'IVA a qualsevol import. Tipus d'Espanya: 21%, 10% i 4%. Gratis i a l'instant.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Import (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"100\"></div>\n<div><label for=\"r\">Tipus d'IVA</label><select id=\"r\"><option value=\"21\">21% (general)</option><option value=\"10\">10% (reduït)</option><option value=\"4\">4% (superreduït)</option></select></div></div>\n<label for=\"m\">Què vols fer?</label><select id=\"m\"><option value=\"add\">Afegir IVA (tinc el preu sense IVA)</option><option value=\"rem\">Treure IVA (tinc el preu amb IVA)</option></select>\n<button id=\"go\">Calcular</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const a=num('a'),r=num('r')/100;let b,i,t;\nif($('m').value==='add'){b=a;i=a*r;t=a+i}else{t=a;b=a/(1+r);i=t-b}\n$('o').innerHTML=show([['Base imposable',eur(b)],['IVA',eur(i)],['Total amb IVA',eur(t)]])};$('go').click();",
+  "text": "<h2>Com es calcula l'IVA?</h2><p>Per <b>afegir</b> l'IVA es multiplica el preu sense IVA per 1,21 (si el tipus és el 21%). Per <b>treure'l</b> es divideix el preu final entre 1,21. A Espanya hi ha tres tipus: general (21%), reduït (10%) i superreduït (4%).</p>\n<p>Aquesta calculadora és orientativa. Per a factures o declaracions consulta el teu gestor.</p>",
+  "faq": [
+   [
+    "Quins tipus d'IVA hi ha a Espanya?",
+    "El tipus general és el 21%, el reduït el 10% i el superreduït el 4%. Alguns productes i serveis bàsics tenen tipus reduïts."
+   ],
+   [
+    "Com es treu l'IVA a un preu?",
+    "Es divideix el preu final entre 1,21 si l'IVA és del 21%. Per exemple, 121 € amb IVA són 100 € sense IVA."
+   ],
+   [
+    "Com s'afegeix l'IVA a un preu?",
+    "Es multiplica el preu sense IVA per 1,21 per al 21%, per 1,10 per al 10% i per 1,04 per al 4%."
+   ]
+  ]
+ },
+ "calculadora-porcentajes": {
+  "title": "Calculadora de percentatges: com calcular un % fàcilment",
+  "h1": "Calculadora de percentatges",
+  "desc": "Calcula el X% d'una quantitat, quin percentatge és un número d'un altre i la variació percentual.",
+  "body": "<h2>Quant és el X% de Y?</h2><div class=\"row\"><div><label for=\"p1\">Percentatge (%)</label><input id=\"p1\" inputmode=\"decimal\" value=\"15\"></div><div><label for=\"y1\">De la quantitat</label><input id=\"y1\" inputmode=\"decimal\" value=\"200\"></div></div><div id=\"o1\"></div>\n<h2>Quin percentatge és X de Y?</h2><div class=\"row\"><div><label for=\"x2\">Número X</label><input id=\"x2\" inputmode=\"decimal\" value=\"30\"></div><div><label for=\"y2\">Número Y</label><input id=\"y2\" inputmode=\"decimal\" value=\"120\"></div></div><div id=\"o2\"></div>\n<h2>Variació percentual</h2><div class=\"row\"><div><label for=\"v1\">Valor inicial</label><input id=\"v1\" inputmode=\"decimal\" value=\"80\"></div><div><label for=\"v2\">Valor final</label><input id=\"v2\" inputmode=\"decimal\" value=\"100\"></div></div><div id=\"o3\"></div>",
+  "js": "function c(){$('o1').innerHTML=show([['Resultat',fmt(num('p1')/100*num('y1'))]]);\n$('o2').innerHTML=show([['X és el',fmt(num('x2')/num('y2')*100)+' %']]);\nconst v=(num('v2')-num('v1'))/Math.abs(num('v1'))*100;$('o3').innerHTML=show([['Variació',(v>0?'+':'')+fmt(v)+' %']]);}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Fórmules bàsiques</h2><ul><li><b>X% de Y</b> = Y × X ÷ 100</li><li><b>Quin % és X de Y</b> = X ÷ Y × 100</li><li><b>Variació %</b> = (final − inicial) ÷ inicial × 100</li></ul>",
+  "faq": [
+   [
+    "Com calculo el 15% d'una quantitat?",
+    "Multiplica la quantitat per 15 i divideix entre 100. El 15% de 200 és 30."
+   ],
+   [
+    "Com calculo una variació percentual?",
+    "Resta el valor inicial al final, divideix entre l'inicial i multiplica per 100."
+   ]
+  ]
+ },
+ "calculadora-propinas": {
+  "title": "Calculadora de propines i dividir el compte",
+  "h1": "Calculadora de propines i compte compartit",
+  "desc": "Calcula la propina i quant paga cada persona en dividir el compte del restaurant.",
+  "body": "<div class=\"row\"><div><label for=\"b\">Total del compte (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"60\"></div><div><label for=\"t\">Propina (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"10\"></div></div>\n<label for=\"n\">Nombre de persones</label><input id=\"n\" inputmode=\"numeric\" value=\"4\"><div id=\"o\"></div>",
+  "js": "function c(){const b=num('b'),t=num('t')/100,n=Math.max(1,num('n'));const tip=b*t,tot=b+tip;\n$('o').innerHTML=show([['Propina',eur(tip)],['Total',eur(tot)],['Per persona',eur(tot/n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>A Espanya la propina no és obligatòria; el més habitual és deixar entre un 5% i un 10% si el servei ha estat bo. Per a altres països el percentatge habitual pot ser més alt.</p>",
+  "faq": [
+   [
+    "Quanta propina se sol deixar a Espanya?",
+    "No és obligatòria. És habitual deixar entre un 5% i un 10% si el servei ha estat bo, i molts l'arrodoneixen a l'euro més proper."
+   ],
+   [
+    "Com divideixo el compte entre diverses persones?",
+    "Indica el nombre de comensals i la calculadora reparteix el total amb propina inclosa a parts iguals."
+   ]
+  ]
+ },
+ "dias-entre-fechas": {
+  "title": "Calculadora de dies entre dues dates",
+  "h1": "Dies entre dues dates",
+  "desc": "Calcula quants dies, setmanes i dies laborables hi ha entre dues dates.",
+  "body": "<div class=\"row\"><div><label for=\"d1\">Data inicial</label><input id=\"d1\" type=\"date\"></div><div><label for=\"d2\">Data final</label><input id=\"d2\" type=\"date\"></div></div>\n<button id=\"go\">Calcular</button><div id=\"o\"></div>",
+  "js": "const t=new Date();$('d1').value=t.toISOString().slice(0,10);const f=new Date(t.getTime()+30*864e5);$('d2').value=f.toISOString().slice(0,10);\n$('go').onclick=()=>{let a=new Date($('d1').value),b=new Date($('d2').value);if(isNaN(a)||isNaN(b)){$('o').innerHTML='<p>Tria les dues dates.</p>';return}\nif(a>b)[a,b]=[b,a];const days=Math.round((b-a)/864e5);let w=0;for(let d=new Date(a);d<b;d.setDate(d.getDate()+1)){const g=d.getDay();if(g!==0&&g!==6)w++}\n$('o').innerHTML=show([['Dies',fmt(days,0)],['Setmanes',fmt(days/7,1)],['Mesos aprox.',fmt(days/30.44,1)],['Dies laborables (dl-dv)',fmt(w,0)]])};$('go').click();",
+  "text": "<p>Els dies laborables que es mostren són de dilluns a divendres i no descompten festius, que varien segons la comunitat autònoma i la localitat.</p>",
+  "faq": [
+   [
+    "Es compta el dia d'inici?",
+    "Per defecte es calcula la diferència entre ambdues dates, sense incloure el dia inicial. Suma 1 si vols comptar els dos extrems."
+   ],
+   [
+    "Només compta dies laborables?",
+    "No, compta dies naturals."
+   ]
+  ]
+ },
+ "calculadora-edad": {
+  "title": "Calculadora d'edat exacta: anys, mesos i dies",
+  "h1": "Calculadora d'edat",
+  "desc": "Descobreix la teva edat exacta en anys, mesos i dies i quant falta per al teu proper aniversari.",
+  "body": "<label for=\"n\">Data de naixement</label><input id=\"n\" type=\"date\" value=\"2000-01-01\"><button id=\"go\">Calcular</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const n=new Date($('n').value),h=new Date();if(isNaN(n)||n>h){$('o').innerHTML='<p>Introdueix una data vàlida.</p>';return}\nlet y=h.getFullYear()-n.getFullYear(),m=h.getMonth()-n.getMonth(),d=h.getDate()-n.getDate();\nif(d<0){m--;d+=new Date(h.getFullYear(),h.getMonth(),0).getDate()}if(m<0){y--;m+=12}\nlet nx=new Date(h.getFullYear(),n.getMonth(),n.getDate());if(nx<=new Date(h.getFullYear(),h.getMonth(),h.getDate()))nx=new Date(h.getFullYear()+1,n.getMonth(),n.getDate());\nconst tot=Math.floor((h-n)/864e5);\n$('o').innerHTML=show([['Edat',y+' anys, '+m+' mesos, '+d+' dies'],['Dies viscuts',fmt(tot,0)],['Proper aniversari en',Math.ceil((nx-h)/864e5)+' dies']])};$('go').click();",
+  "text": "",
+  "faq": [
+   [
+    "Com es calcula l'edat exacta?",
+    "Es resten anys, mesos i dies entre la teva data de naixement i avui, ajustant per la durada real de cada mes."
+   ],
+   [
+    "Es desa la meva data de naixement?",
+    "No. Tot es calcula al teu navegador."
+   ]
+  ]
+ },
+ "conversor-unidades": {
+  "title": "Convertidor d'unitats: longitud, pes, volum i temperatura",
+  "h1": "Convertidor d'unitats",
+  "desc": "Converteix quilòmetres a milles, quilos a lliures, litres a galons i graus Celsius a Fahrenheit.",
+  "body": "<label for=\"c\">Tipus</label><select id=\"c\"></select>\n<div class=\"row\"><div><label for=\"v\">Valor</label><input id=\"v\" inputmode=\"decimal\" value=\"1\"></div><div></div></div>\n<div class=\"row\"><div><label for=\"f\">De</label><select id=\"f\"></select></div><div><label for=\"t\">A</label><select id=\"t\"></select></div></div><div id=\"o\"></div>",
+  "js": "const U={'Longitud':{m:1,km:1000,cm:.01,mm:.001,milla:1609.344,iarda:.9144,peu:.3048,polzada:.0254},\n'Pes':{kg:1,g:.001,mg:1e-6,tona:1000,lliura:.45359237,unça:.028349523},\n'Volum':{litre:1,ml:.001,'m³':1000,'galó (US)':3.785411784,'tassa (US)':.2365882365},\n'Temperatura':{'°C':1,'°F':1,'K':1}};\nconst c=$('c'),f=$('f'),t=$('t');Object.keys(U).forEach(k=>c.add(new Option(k,k)));\nfunction fill(){const k=Object.keys(U[c.value]);f.innerHTML=t.innerHTML='';k.forEach(x=>{f.add(new Option(x,x));t.add(new Option(x,x))});t.selectedIndex=Math.min(1,k.length-1);calc()}\nfunction calc(){const v=num('v');let r;\nif(c.value==='Temperatura'){let C=f.value==='°C'?v:f.value==='°F'?(v-32)*5/9:v-273.15;r=t.value==='°C'?C:t.value==='°F'?C*9/5+32:C+273.15}\nelse r=v*U[c.value][f.value]/U[c.value][t.value];\n$('o').innerHTML=show([[fmt(v,6)+' '+f.value+' =',fmt(r,6)+' '+t.value]])}\nc.onchange=fill;[f,t,$('v')].forEach(e=>e.oninput=calc);f.onchange=t.onchange=calc;fill();",
+  "text": "",
+  "faq": [
+   [
+    "Quines unitats puc convertir?",
+    "Les de longitud, pes, volum i altres magnituds habituals que ofereix l'eina."
+   ],
+   [
+    "És exacte el resultat?",
+    "Fa servir factors de conversió estàndard i arrodoneix el resultat per facilitar-ne la lectura."
+   ]
+  ]
+ },
+ "generador-contrasenas": {
+  "title": "Generador de contrasenyes segures aleatòries",
+  "h1": "Generador de contrasenyes segures",
+  "desc": "Crea contrasenyes aleatòries i segures al teu navegador. No s'envien ni es desen enlloc.",
+  "body": "<label for=\"l\">Longitud: <b id=\"lv\">16</b></label><input id=\"l\" type=\"range\" min=\"8\" max=\"64\" value=\"16\">\n<label><input type=\"checkbox\" id=\"u\" checked style=\"width:auto\"> Majúscules</label><label><input type=\"checkbox\" id=\"n\" checked style=\"width:auto\"> Números</label><label><input type=\"checkbox\" id=\"s\" checked style=\"width:auto\"> Símbols</label>\n<button id=\"go\">Generar</button> <button id=\"cp\" class=\"sec\">Copiar</button><div class=\"card\" style=\"word-break:break-all;font:20px monospace\" id=\"o\"></div>",
+  "js": "function gen(){let s='abcdefghijkmnopqrstuvwxyz';if($('u').checked)s+='ABCDEFGHJKLMNPQRSTUVWXYZ';if($('n').checked)s+='23456789';if($('s').checked)s+='!@#$%&*?-_+=';\nconst L=+$('l').value,a=new Uint32Array(L);crypto.getRandomValues(a);$('o').textContent=Array.from(a,x=>s[x%s.length]).join('');$('lv').textContent=L}\n$('go').onclick=gen;$('l').oninput=gen;$('cp').onclick=()=>{navigator.clipboard.writeText($('o').textContent);$('cp').textContent='Copiada!';setTimeout(()=>$('cp').textContent='Copiar',1500)};gen();",
+  "text": "<p>Una contrasenya llarga (16 o més caràcters) i única per a cada servei és la millor defensa. Es genera amb el generador criptogràfic del teu navegador i mai surt del teu dispositiu.</p>",
+  "faq": [
+   [
+    "Què fa segura una contrasenya?",
+    "La longitud sobretot: es recomanen 14 caràcters o més, barrejant lletres, números i símbols, i una de diferent per a cada servei."
+   ],
+   [
+    "Es desa la contrasenya generada?",
+    "No. Es genera al teu navegador i no s'envia a cap servidor."
+   ]
+  ]
+ },
+ "contador-palabras": {
+  "title": "Comptador de paraules i caràcters en línia",
+  "h1": "Comptador de paraules i caràcters",
+  "desc": "Compta paraules, caràcters, frases i paràgrafs del teu text i calcula el temps de lectura.",
+  "body": "<label for=\"x\">Enganxa o escriu el teu text</label><textarea id=\"x\" placeholder=\"Escriu aquí...\"></textarea><div id=\"o\"></div>",
+  "js": "function c(){const x=$('x').value,w=(x.trim().match(/\\S+/g)||[]).length;\n$('o').innerHTML=show([['Paraules',fmt(w,0)],['Caràcters',fmt(x.length,0)],['Sense espais',fmt(x.replace(/\\s/g,'').length,0)],['Frases',fmt((x.match(/[.!?]+(\\s|$)/g)||[]).length,0)],['Paràgrafs',fmt(x.split(/\\n+/).filter(s=>s.trim()).length,0)],['Lectura',Math.max(w?1:0,Math.round(w/200))+' min']])}\n$('x').oninput=c;c();",
+  "text": "<p>El temps de lectura s'estima a 200 paraules per minut. Útil per a redaccions, límits de caràcters a xarxes socials, descripcions de vídeo o SEO.</p>",
+  "faq": [
+   [
+    "Com compta les paraules?",
+    "Separa el text per espais i salts de línia."
+   ],
+   [
+    "Es desa el meu text?",
+    "No. El recompte es fa al teu navegador i el text no s'envia a cap servidor."
+   ]
+  ]
+ },
+ "calculadora-descuentos": {
+  "title": "Calculadora de descomptes i rebaixes",
+  "h1": "Calculadora de descomptes",
+  "desc": "Calcula el preu final i quant estalvies amb un descompte o rebaixa (percentatge).",
+  "body": "<div class=\"row\"><div><label for=\"p\">Preu original (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"59,90\"></div><div><label for=\"d\">Descompte (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"30\"></div></div>\n<label for=\"d2\">Descompte addicional (%) — opcional</label><input id=\"d2\" inputmode=\"decimal\" value=\"0\"><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),a=num('d')/100,b=(num('d2')||0)/100;const f=p*(1-a)*(1-b);\n$('o').innerHTML=show([['Preu final',eur(f)],['Estalvies',eur(p-f)],['Descompte total',fmt((1-f/p)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Si apliques dos descomptes seguits, no se sumen: el segon s'aplica sobre el preu ja rebaixat. Per exemple, 30% + 10% equival a un 37% de descompte total.</p>",
+  "faq": [
+   [
+    "Com es calcula un descompte?",
+    "Preu final = preu original × (1 − descompte/100). Per exemple, 80 € amb un 25% de descompte són 60 €."
+   ],
+   [
+    "Dos descomptes del 20% i 10% sumen un 30%?",
+    "No. S'apliquen en cadena: 100 € → 80 € → 72 €, un 28% de descompte total."
+   ]
+  ]
+ },
+ "calculadora-hipoteca": {
+  "title": "Calculadora d'hipoteca: quota mensual i interessos",
+  "h1": "Calculadora d'hipoteca",
+  "desc": "Calcula la quota mensual i el total d'interessos d'una hipoteca a tipus fix.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Capital a finançar (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"i\">Interès anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Termini (anys)</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('y')*12;const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Quota mensual',eur(q)],['Total a pagar',eur(q*n)],['Total interessos',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Càlcul amb sistema d'amortització francès (quota constant) i tipus fix. No inclou comissions, assegurances ni despeses de formalització. És una simulació orientativa, no una oferta.</p>",
+  "faq": [
+   [
+    "Com es calcula la quota d'una hipoteca?",
+    "Amb la fórmula d'amortització francesa: quota = capital × i / (1 − (1 + i)^−n), on i és l'interès mensual i n el nombre de quotes."
+   ],
+   [
+    "Quina diferència hi ha entre hipoteca fixa i variable?",
+    "A la fixa l'interès no canvia durant tot el termini. A la variable depèn de l'Euríbor més un diferencial i es revisa periòdicament."
+   ],
+   [
+    "Inclou aquesta calculadora assegurances i comissions?",
+    "No. Calcula només capital i interessos. Les assegurances vinculades i les comissions augmenten el cost real."
+   ]
+  ]
+ },
+ "calculadora-imc": {
+  "title": "Calculadora d'IMC (índex de massa corporal)",
+  "h1": "Calculadora d'IMC",
+  "desc": "Calcula el teu índex de massa corporal a partir del teu pes i alçada i consulta la categoria segons l'OMS.",
+  "body": "<div class=\"row\"><div><label for=\"w\">Pes (kg)</label><input id=\"w\" inputmode=\"decimal\" value=\"70\"></div><div><label for=\"h\">Alçada (cm)</label><input id=\"h\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const w=num('w'),h=num('h')/100,i=w/(h*h);const k=i<18.5?'Pes baix':i<25?'Pes normal':i<30?'Sobrepès':'Obesitat';\n$('o').innerHTML=show([['El teu IMC',fmt(i,1)],['Categoria (OMS)',k]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Rangs de l'IMC segons l'OMS</h2><ul><li>Menys de 18,5: pes baix</li><li>18,5 a 24,9: pes normal</li><li>25 a 29,9: sobrepès</li><li>30 o més: obesitat</li></ul><p>L'IMC és només un indicador orientatiu: no distingeix entre múscul i greix. Per a qualsevol decisió sobre la teva salut consulta un professional sanitari.</p>",
+  "faq": [
+   [
+    "Què és l'IMC?",
+    "L'índex de massa corporal relaciona el teu pes amb la teva alçada: pes (kg) dividit entre alçada (m) al quadrat."
+   ],
+   [
+    "Quin IMC es considera normal?",
+    "Segons l'OMS, entre 18,5 i 24,9."
+   ],
+   [
+    "És fiable l'IMC?",
+    "És només un indicador general: no distingeix entre múscul i greix. Consulta un professional sanitari per valorar la teva salut."
+   ]
+  ]
+ },
+ "calculadora-interes-compuesto": {
+  "title": "Calculadora d'interès compost i estalvi",
+  "h1": "Calculadora d'interès compost",
+  "desc": "Simula quants diners tindràs estalviant una quantitat cada mes amb un interès anual durant diversos anys.",
+  "body": "<div class=\"row\"><div><label for=\"i0\">Capital inicial (€)</label><input id=\"i0\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"ap\">Aportació mensual (€)</label><input id=\"ap\" inputmode=\"decimal\" value=\"100\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Interès anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"4\"></div><div><label for=\"y\">Anys</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){let b=num('i0');const a=num('ap'),r=num('r')/100/12,n=Math.round(num('y')*12);for(let k=0;k<n;k++){b=b*(1+r)+a}\nconst put=num('i0')+a*n;$('o').innerHTML=show([['Capital final',eur(b)],['Total aportat',eur(put)],['Interessos guanyats',eur(b-put)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>L'interès compost significa que els interessos generen al seu torn nous interessos. Com abans comencis i més temps mantinguis l'estalvi, més gran és l'efecte. Aquesta simulació suposa una rendibilitat constant, cosa que a la realitat no està garantida, i no té en compte impostos ni inflació. No és assessorament financer.</p>",
+  "faq": [
+   [
+    "Què és l'interès compost?",
+    "És el que es calcula sobre el capital més els interessos ja generats, per la qual cosa els diners creixen cada vegada més de pressa."
+   ],
+   [
+    "Aquesta calculadora té en compte els impostos?",
+    "No. Tampoc la inflació ni les comissions. És una simulació amb rendibilitat constant."
+   ]
+  ]
+ },
+ "calculadora-prestamos": {
+  "title": "Calculadora de préstecs personals: quota mensual",
+  "h1": "Calculadora de préstecs",
+  "desc": "Calcula la quota mensual i els interessos totals d'un préstec personal o de cotxe.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Import (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"i\">Interès anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"7\"></div></div>\n<label for=\"m\">Termini (mesos)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('m');const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Quota mensual',eur(q)],['Total a retornar',eur(q*n)],['Interessos',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Càlcul amb quota constant. No inclou comissions d'obertura ni assegurances vinculades. Compara sempre la TAE que t'ofereixi cada entitat.</p>",
+  "faq": [
+   [
+    "Com calculo la quota d'un préstec personal?",
+    "Introdueix l'import, l'interès anual (TIN) i el termini en mesos. La calculadora aplica quota constant amb amortització francesa."
+   ],
+   [
+    "Què és millor, reduir quota o termini?",
+    "Reduir el termini estalvia més interessos; reduir la quota alleugereix el teu mes a mes. Depèn de la teva situació."
+   ],
+   [
+    "És el mateix TIN que TAE?",
+    "No. La TAE inclou a més les comissions i és la xifra adequada per comparar ofertes."
+   ]
+  ]
+ },
+ "calculadora-nota-media": {
+  "title": "Calculadora de nota mitjana i nota que necessito a l'examen",
+  "h1": "Calculadora de nota mitjana",
+  "desc": "Calcula la teva nota mitjana ponderada i la nota que necessites a l'examen final per aprovar.",
+  "body": "<h2>Mitjana ponderada</h2><div id=\"rows\"></div><div id=\"o1\"></div>\n<h2>Quina nota necessito a l'examen final?</h2><div class=\"row\"><div><label for=\"a\">Nota actual (0-10)</label><input id=\"a\" inputmode=\"decimal\" value=\"5,5\"></div><div><label for=\"wa\">Pes de la nota actual (%)</label><input id=\"wa\" inputmode=\"decimal\" value=\"60\"></div></div>\n<div class=\"row\"><div><label for=\"obj\">Nota que vols treure</label><input id=\"obj\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o2\"></div>",
+  "js": "const R=$('rows');for(let k=1;k<=6;k++)R.insertAdjacentHTML('beforeend','<div class=\"row\"><div><label>Nota '+k+'</label><input class=\"n\" inputmode=\"decimal\"></div><div><label>Pes '+k+' (%)</label><input class=\"p\" inputmode=\"decimal\"></div></div>');\nR.querySelectorAll('.n')[0].value='7';R.querySelectorAll('.p')[0].value='40';R.querySelectorAll('.n')[1].value='5';R.querySelectorAll('.p')[1].value='60';\nfunction c(){const n=[...R.querySelectorAll('.n')],p=[...R.querySelectorAll('.p')];let s=0,w=0;n.forEach((x,i)=>{const a=parseFloat(x.value.replace(',','.')),b=parseFloat(p[i].value.replace(',','.'));if(isFinite(a)&&isFinite(b)){s+=a*b;w+=b}});\n$('o1').innerHTML=show([['Nota mitjana',w?fmt(s/w,2):'—'],['Pes total',fmt(w,0)+' %']]);\nconst need=(num('obj')-num('a')*num('wa')/100)/((100-num('wa'))/100);\n$('o2').innerHTML=show([['Nota necessària a l\\'examen',need>10?fmt(need,2)+' (no és possible)':need<0?'0 (ja la tens)':fmt(need,2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "",
+  "faq": [
+   [
+    "Com es calcula la nota mitjana ponderada?",
+    "Es multiplica cada nota pel seu pes o crèdits, se sumen els resultats i es divideix entre la suma de pesos."
+   ],
+   [
+    "Serveix per a la nota d'accés a la universitat?",
+    "Per a això fes servir la calculadora específica de nota d'accés, que aplica les ponderacions de l'EBAU/PAU."
+   ]
+  ]
+ },
+ "regla-de-tres": {
+  "title": "Calculadora de regla de tres simple (directa i inversa)",
+  "h1": "Calculadora de regla de tres",
+  "desc": "Resol regles de tres simples directes i inverses pas a pas.",
+  "body": "<label for=\"t\">Tipus</label><select id=\"t\"><option value=\"d\">Directa (més → més)</option><option value=\"i\">Inversa (més → menys)</option></select>\n<div class=\"row\"><div><label for=\"a\">Si A</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"b\">equival a B</label><input id=\"b\" inputmode=\"decimal\" value=\"12\"></div></div>\n<div class=\"row\"><div><label for=\"c\">llavors C</label><input id=\"c\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),b=num('b'),cc=num('c');const x=$('t').value==='d'?b*cc/a:a*b/cc;$('o').innerHTML=show([['Resultat (X)',fmt(x,4)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<ul><li><b>Directa:</b> X = B × C ÷ A. Exemple: 3 kg costen 12 €, quant costen 5 kg? 20 €.</li><li><b>Inversa:</b> X = A × B ÷ C. Exemple: 3 obrers triguen 12 dies, quant triguen 6? 6 dies.</li></ul>",
+  "faq": [
+   [
+    "Què és una regla de tres simple directa?",
+    "Quan en augmentar una magnitud augmenta l'altra en la mateixa proporció: x = b × c / a."
+   ],
+   [
+    "I la inversa?",
+    "Quan en augmentar una magnitud l'altra disminueix, com velocitat i temps: x = a × b / c."
+   ]
+  ]
+ },
+ "sorteo-aleatorio": {
+  "title": "Sorteig aleatori: triar guanyador d'una llista de noms",
+  "h1": "Sorteig aleatori de noms",
+  "desc": "Enganxa una llista de noms (un per línia) i tria a l'atzar un o diversos guanyadors. Ideal per a sorteigs a xarxes socials.",
+  "body": "<label for=\"l\">Llista de participants (un per línia)</label><textarea id=\"l\" placeholder=\"Anna&#10;Lluís&#10;Marta\"></textarea>\n<label for=\"n\">Nombre de guanyadors</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Sortejar</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const L=[...new Set($('l').value.split('\\n').map(s=>s.trim()).filter(Boolean))];const n=Math.min(Math.max(1,num('n')||1),L.length);\nif(!L.length){$('o').innerHTML='<p>Afegeix almenys un nom.</p>';return}\nfor(let i=L.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[L[i],L[j]]=[L[j],L[i]]}\n$('o').innerHTML='<div class=\"card\"><b>🎉 Guanyador'+(n>1?'s':'')+':</b><ol>'+L.slice(0,n).map(x=>'<li style=\"font-size:20px\">'+x.replace(/</g,'&lt;')+'</li>').join('')+'</ol></div>'};",
+  "text": "<p>El sorteig fa servir el generador aleatori criptogràfic del teu navegador i elimina els noms repetits. Si ho fas a xarxes socials, grava la pantalla del sorteig com a prova i revisa les bases legals de la teva plataforma.</p>",
+  "faq": [
+   [
+    "Com funciona el sorteig?",
+    "Tria a l'atzar entre els noms o elements que introdueixis."
+   ],
+   [
+    "És vàlid per a sorteigs amb premis?",
+    "Per a sorteigs públics o amb premis convé seguir la normativa aplicable i les bases del sorteig."
+   ]
+  ]
+ },
+ "coste-viaje-gasolina": {
+  "title": "Calculadora del cost d'un viatge en cotxe (gasolina)",
+  "h1": "Cost d'un viatge en cotxe",
+  "desc": "Calcula quanta gasolina o dièsel gastaràs i quant costa un viatge, també per persona.",
+  "body": "<div class=\"row\"><div><label for=\"k\">Distància (km)</label><input id=\"k\" inputmode=\"decimal\" value=\"450\"></div><div><label for=\"c\">Consum (l/100 km)</label><input id=\"c\" inputmode=\"decimal\" value=\"6,5\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Preu del litre (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,60\"></div><div><label for=\"n\">Persones</label><input id=\"n\" inputmode=\"numeric\" value=\"3\"></div></div>\n<label><input type=\"checkbox\" id=\"rt\" style=\"width:auto\"> Anada i tornada</label><div id=\"o\"></div>",
+  "js": "function c(){let k=num('k');if($('rt').checked)k*=2;const l=k*num('c')/100,t=l*num('p');$('o').innerHTML=show([['Litres',fmt(l,1)+' l'],['Cost combustible',eur(t)],['Per persona',eur(t/Math.max(1,num('n')))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>No inclou peatges, aparcament ni desgast del vehicle. Compartir cotxe reparteix el cost del combustible entre tots els ocupants.</p>",
+  "faq": [
+   [
+    "Com es calcula el cost d'un viatge en cotxe?",
+    "Es multipliquen els quilòmetres pel consum (l/100 km) dividit entre 100 i pel preu del litre."
+   ],
+   [
+    "Inclou peatges o desgast?",
+    "No. Només calcula el combustible; els peatges, l'aparcament i el manteniment se sumen a part."
+   ]
+  ]
+ },
+ "calculadora-horas-trabajadas": {
+  "title": "Calculadora d'hores treballades entre dues hores",
+  "h1": "Calculadora d'hores treballades",
+  "desc": "Calcula les hores treballades entre l'hora d'entrada i de sortida, descomptant el descans.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Entrada</label><input id=\"a\" type=\"time\" value=\"09:00\"></div><div><label for=\"b\">Sortida</label><input id=\"b\" type=\"time\" value=\"17:30\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Descans (minuts)</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"r\">Preu per hora (€) — opcional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+  "js": "function tm(s){const p=s.split(':');return +p[0]*60+ +p[1]}\nfunction c(){let m=tm($('b').value)-tm($('a').value);if(m<0)m+=1440;m-=num('d')||0;m=Math.max(0,m);const h=m/60;\n$('o').innerHTML=show([['Temps treballat',Math.floor(m/60)+' h '+(m%60)+' min'],['En hores decimals',fmt(h,2)],['Import',eur(h*(num('r')||0))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Si l'hora de sortida és menor que la d'entrada s'entén que el torn creua la mitjanit.</p>",
+  "faq": [
+   [
+    "Com es calculen les hores treballades?",
+    "Es resta l'hora d'entrada a la de sortida i es descompten els descansos no remunerats."
+   ],
+   [
+    "Serveix per a torns que creuen la mitjanit?",
+    "Sí, sempre que indiquis correctament les hores d'entrada i sortida."
+   ]
+  ]
+ },
+ "convertidor-mayusculas": {
+  "title": "Convertir text a majúscules, minúscules i títol",
+  "h1": "Convertidor de majúscules i minúscules",
+  "desc": "Passa el teu text a MAJÚSCULES, minúscules, Tipus Títol o Tipus frase amb un clic.",
+  "body": "<textarea id=\"x\" placeholder=\"Escriu o enganxa el teu text...\"></textarea>\n<button data-m=\"u\">MAJÚSCULES</button> <button data-m=\"l\" class=\"sec\">minúscules</button> <button data-m=\"t\" class=\"sec\">Tipus Títol</button> <button data-m=\"s\" class=\"sec\">Tipus frase</button> <button id=\"cp\" class=\"sec\">Copiar</button>",
+  "js": "const x=$('x');document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=b.dataset.m,v=x.value;\nx.value=m==='u'?v.toUpperCase():m==='l'?v.toLowerCase():m==='t'?v.toLowerCase().replace(/(^|\\s)(\\S)/g,(a,s,c)=>s+c.toUpperCase()):v.toLowerCase().replace(/(^|[.!?¡¿]\\s*)(\\S)/g,(a,s,c)=>s+c.toUpperCase())});\n$('cp').onclick=()=>{navigator.clipboard.writeText(x.value);$('cp').textContent='Copiat!';setTimeout(()=>$('cp').textContent='Copiar',1500)};",
+  "text": "",
+  "faq": [
+   [
+    "Quins formats admet?",
+    "Converteix el text a MAJÚSCULES, minúscules i altres estils de capitalització."
+   ],
+   [
+    "Es desa el meu text?",
+    "No. La conversió es fa al teu navegador."
+   ]
+  ]
+ },
+ "calculadora-margen-beneficio": {
+  "title": "Calculadora de marge i benefici (i marge sobre cost)",
+  "h1": "Calculadora de marge de benefici",
+  "desc": "Calcula el benefici, el marge i el markup d'un producte, o el preu de venda per guanyar el marge que vulguis.",
+  "body": "<h2>Tinc cost i preu de venda</h2><div class=\"row\"><div><label for=\"c\">Cost del producte (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"v\">Preu de venda (€)</label><input id=\"v\" inputmode=\"decimal\" value=\"25\"></div></div><div id=\"o1\"></div>\n<h2>Vull un marge concret</h2><div class=\"row\"><div><label for=\"c2\">Cost (€)</label><input id=\"c2\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"m2\">Marge desitjat (%)</label><input id=\"m2\" inputmode=\"decimal\" value=\"40\"></div></div><div id=\"o2\"></div>",
+  "js": "function c(){const C=num('c'),V=num('v');$('o1').innerHTML=show([['Benefici',eur(V-C)],['Marge sobre venda',fmt((V-C)/V*100,1)+' %'],['Markup sobre cost',fmt((V-C)/C*100,1)+' %']]);\nconst C2=num('c2'),m=num('m2')/100;$('o2').innerHTML=show([['Preu de venda',eur(C2/(1-m))],['Benefici per unitat',eur(C2/(1-m)-C2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Marge i markup no són el mateix</h2><p>El <b>marge</b> és el benefici dividit entre el preu de venda. El <b>markup</b> és el benefici dividit entre el cost. Un producte que costa 12 € i es ven a 25 € té un 52% de marge i un 108% de markup. Recorda descomptar també l'enviament, les comissions de plataforma, les devolucions i la publicitat per saber el teu benefici real.</p>",
+  "faq": [
+   [
+    "Quina diferència hi ha entre marge i markup?",
+    "El marge es calcula sobre el preu de venda i el markup sobre el cost. Amb cost 60 € i venda 100 €, el marge és 40% i el markup 66,7%."
+   ],
+   [
+    "Com fixo el preu per a un marge concret?",
+    "Preu = cost / (1 − marge). Per a un 30% de marge amb cost 70 €, el preu és 100 €."
+   ]
+  ]
+ },
+ "calcular-letra-dni": {
+  "title": "Calcular la lletra del DNI a partir del número",
+  "h1": "Calculadora de la lletra del DNI",
+  "desc": "Introdueix els 8 números del teu DNI i descobreix la seva lletra. També serveix per comprovar si un DNI és vàlid.",
+  "body": "<label for=\"n\">Número del DNI (8 xifres)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"8\" value=\"12345678\"><div id=\"o\"></div>",
+  "js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const v=$('n').value.replace(/\\D/g,'');if(v.length<7||v.length>8){$('o').innerHTML='<p>Introdueix 7 o 8 xifres.</p>';return}\n$('o').innerHTML=show([['Lletra',L[parseInt(v,10)%23]],['DNI complet',v.padStart(8,'0')+L[parseInt(v,10)%23]]])}\n$('n').oninput=c;c();",
+  "text": "<h2>Com es calcula?</h2><p>La lletra del DNI s'obté dividint el número entre 23 i assignant una lletra segons el residu, de la sèrie TRWAGMYFPDXBNJZSQVHLCKE. Aquesta eina funciona al teu navegador i no desa ni envia cap dada.</p>",
+  "faq": [
+   [
+    "Com es calcula la lletra del DNI?",
+    "Es divideix el número entre 23 i el residu indica la lletra a la sèrie TRWAGMYFPDXBNJZSQVHLCKE."
+   ],
+   [
+    "Serveix per comprovar si un DNI és vàlid?",
+    "Sí. Si la lletra calculada coincideix amb la del document, el format és correcte. No confirma que el DNI existeixi."
+   ],
+   [
+    "Es desa el número que escric?",
+    "No. El càlcul es fa al teu navegador i no s'envia a cap servidor."
+   ]
+  ]
+ },
+ "dias-para-navidad": {
+  "title": "Quants dies falten per a Nadal, Cap d'Any i Reis?",
+  "h1": "Compte enrere: dies per a Nadal",
+  "desc": "Mira quants dies falten per a Nadal, Cap d'Any i el Dia de Reis.",
+  "body": "<div id=\"o\"></div>",
+  "js": "const h=new Date();const t0=new Date(h.getFullYear(),h.getMonth(),h.getDate());\nfunction nx(m,d){let f=new Date(h.getFullYear(),m,d);if(f<t0)f=new Date(h.getFullYear()+1,m,d);return Math.round((f-t0)/864e5)}\n$('o').innerHTML=show([['Nadal (25 des)',nx(11,25)+' dies'],['Cap d\\'Any (31 des)',nx(11,31)+' dies'],['Reis Mags (6 gen)',nx(0,6)+' dies']]);",
+  "text": "<p>El compte es calcula amb la data del teu dispositiu. Si avui és la data assenyalada, apareix 0 dies.</p>",
+  "faq": [
+   [
+    "Quin dia es compta com a Nadal?",
+    "El 25 de desembre."
+   ],
+   [
+    "S'actualitza sol el nombre de dies?",
+    "Sí. Es calcula al teu navegador amb la data d'avui cada vegada que obres la pàgina."
+   ]
+  ]
+ },
+ "calculadora-pintura": {
+  "title": "Calculadora de pintura: quants litres necessito",
+  "h1": "Calculadora de pintura",
+  "desc": "Calcula els litres de pintura que necessites per pintar una habitació segons parets, forats i capes.",
+  "body": "<div class=\"row\"><div><label for=\"l\">Llarg de la paret total (m)</label><input id=\"l\" inputmode=\"decimal\" value=\"14\"></div><div><label for=\"h\">Alçada (m)</label><input id=\"h\" inputmode=\"decimal\" value=\"2,5\"></div></div>\n<div class=\"row\"><div><label for=\"v\">Portes i finestres (m²)</label><input id=\"v\" inputmode=\"decimal\" value=\"5\"></div><div><label for=\"m\">Capes de pintura</label><input id=\"m\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"r\">Rendiment (m² per litre)</label><input id=\"r\" inputmode=\"decimal\" value=\"10\"><div id=\"o\"></div>",
+  "js": "function c(){const a=Math.max(0,num('l')*num('h')-num('v')),l=a*num('m')/num('r');$('o').innerHTML=show([['Superfície a pintar',fmt(a,1)+' m²'],['Pintura necessària',fmt(l,1)+' l'],['Recomanat comprar',Math.ceil(l*1.1)+' l']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>A \"llarg de la paret total\" suma el llarg de totes les parets que vas a pintar (el perímetre de l'habitació). El rendiment sol aparèixer al pot; el més habitual és entre 8 i 12 m² per litre. Es recomana un 10% extra per a retocs.</p>",
+  "faq": [
+   [
+    "Quanta pintura necessito per a una habitació?",
+    "Calcula la superfície de parets (i sostre si escau) i divideix-la entre el rendiment per litre indicat al pot, normalment 8-12 m²/l."
+   ],
+   [
+    "Quantes capes convé donar?",
+    "El més habitual són dues capes, per la qual cosa convé multiplicar la quantitat per dos."
+   ],
+   [
+    "Es descompten portes i finestres?",
+    "Per a un càlcul més ajustat, resta la seva superfície de la total."
+   ]
+  ]
+ },
+ "kilometros-a-millas": {
+  "title": "Convertir quilòmetres a milles (km a mi)",
+  "h1": "Quilòmetres a milles",
+  "desc": "Converteix quilòmetres a milles i milles a quilòmetres a l'instant, amb taula d'equivalències.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Quilòmetres</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Milles</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km';const UB='mi';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>1 milla equival a 1,609344 quilòmetres. Per passar de km a milles es divideix entre 1,609344 (o es multiplica per 0,621371).</p>",
+  "faq": [
+   [
+    "Quantes milles són 10 quilòmetres?",
+    "10 km equivalen a unes 6,21 milles."
+   ],
+   [
+    "Com passo de km a milles?",
+    "Multiplica els quilòmetres per 0,621371, o divideix-los entre 1,609344."
+   ]
+  ]
+ },
+ "kilos-a-libras": {
+  "title": "Convertir quilos a lliures (kg a lb)",
+  "h1": "Quilos a lliures",
+  "desc": "Converteix quilograms a lliures i lliures a quilograms amb taula d'equivalències.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Quilograms</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Lliures</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/0.45359237;const B=x=>x*0.45359237;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='kg';const UB='lb';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>1 lliura equival a 0,45359237 kg. Per passar de quilos a lliures es multiplica per 2,20462.</p>",
+  "faq": [
+   [
+    "Quantes lliures són un quilo?",
+    "Un quilogram equival a unes 2,2046 lliures."
+   ],
+   [
+    "Com passo lliures a quilos?",
+    "Es multiplica per 0,4536 o es divideix entre 2,2046."
+   ]
+  ]
+ },
+ "celsius-a-fahrenheit": {
+  "title": "Convertir graus Celsius a Fahrenheit (°C a °F)",
+  "h1": "Celsius a Fahrenheit",
+  "desc": "Converteix graus Celsius a Fahrenheit i Fahrenheit a Celsius amb taula d'equivalències.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Graus Celsius (°C)</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Graus Fahrenheit (°F)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x*9/5+32;const B=x=>(x-32)*5/9;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='°C';const UB='°F';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>Fórmula: °F = °C × 9/5 + 32. Per al camí invers: °C = (°F − 32) × 5/9. L'aigua bull a 100 °C (212 °F) i es congela a 0 °C (32 °F).</p>",
+  "faq": [
+   [
+    "Quina és la fórmula de Celsius a Fahrenheit?",
+    "°F = °C × 9/5 + 32. Per exemple, 20 °C equivalen a 68 °F."
+   ],
+   [
+    "I de Fahrenheit a Celsius?",
+    "°C = (°F − 32) × 5/9."
+   ]
+  ]
+ },
+ "litros-a-galones": {
+  "title": "Convertir litres a galons (US)",
+  "h1": "Litres a galons",
+  "desc": "Converteix litres a galons nord-americans i galons a litres amb taula d'equivalències.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Litres</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Galons (US)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/3.785411784;const B=x=>x*3.785411784;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='l';const UB='gal';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>Un galó nord-americà equival a 3,785411784 litres. El galó imperial (Regne Unit) és diferent: 4,54609 litres.</p>",
+  "faq": [
+   [
+    "Quants galons són 10 litres?",
+    "Uns 2,64 galons nord-americans. Un galó US són 3,785 litres."
+   ],
+   [
+    "El galó dels EUA i el britànic són iguals?",
+    "No. El galó imperial britànic equival a uns 4,546 litres, més gran que el nord-americà."
+   ]
+  ]
+ },
+ "centimetros-a-pulgadas": {
+  "title": "Convertir centímetres a polzades (cm a in)",
+  "h1": "Centímetres a polzades",
+  "desc": "Converteix centímetres a polzades i polzades a centímetres. Útil per a pantalles, talles i mesures.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Centímetres</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Polzades</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/2.54;const B=x=>x*2.54;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='cm';const UB='in';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>Una polzada equival exactament a 2,54 cm. Les pantalles de televisors i mòbils es mesuren en polzades en diagonal.</p>",
+  "faq": [
+   [
+    "Quantes polzades són 10 centímetres?",
+    "Unes 3,94 polzades. Una polzada equival exactament a 2,54 cm."
+   ],
+   [
+    "Com passo polzades a centímetres?",
+    "Multiplica les polzades per 2,54."
+   ]
+  ]
+ },
+ "kmh-a-mph": {
+  "title": "Convertir km/h a mph (milles per hora)",
+  "h1": "km/h a mph",
+  "desc": "Converteix quilòmetres per hora a milles per hora i viceversa.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Quilòmetres per hora</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Milles per hora</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km/h';const UB='mph';function tb(){$('o').innerHTML='<h2>Taula de conversió</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>100 km/h equivalen a unes 62,14 mph. És útil quan es condueix en països que fan servir milles, com els Estats Units o el Regne Unit.</p>",
+  "faq": [
+   [
+    "Quantes milles per hora són 100 km/h?",
+    "Unes 62,14 mph. Un km/h equival a 0,6214 mph."
+   ],
+   [
+    "Com passo mph a km/h?",
+    "Es multiplica per 1,609."
+   ]
+  ]
+ },
+ "calculadora-fracciones": {
+  "title": "Calculadora de fraccions: sumar, restar, multiplicar i dividir",
+  "h1": "Calculadora de fraccions",
+  "desc": "Suma, resta, multiplica i divideix fraccions i obtén el resultat simplificat i en decimal.",
+  "body": "<div class=\"row\"><div><label for=\"n1\">Numerador 1</label><input id=\"n1\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d1\">Denominador 1</label><input id=\"d1\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"op\">Operació</label><select id=\"op\"><option value=\"+\">Sumar (+)</option><option value=\"-\">Restar (−)</option><option value=\"*\">Multiplicar (×)</option><option value=\"/\">Dividir (÷)</option></select>\n<div class=\"row\"><div><label for=\"n2\">Numerador 2</label><input id=\"n2\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d2\">Denominador 2</label><input id=\"d2\" inputmode=\"numeric\" value=\"3\"></div></div><div id=\"o\"></div>",
+  "js": "function g(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a}\nfunction c(){const a=num('n1'),b=num('d1'),cc=num('n2'),d=num('d2'),o=$('op').value;let n,m;\nif(o==='+'){n=a*d+cc*b;m=b*d}else if(o==='-'){n=a*d-cc*b;m=b*d}else if(o==='*'){n=a*cc;m=b*d}else{n=a*d;m=b*cc}\nif(!m||!isFinite(n)||!isFinite(m)){$('o').innerHTML=show([['Resultat','No definit']]);return}\nconst k=g(n,m)||1;n/=k;m/=k;if(m<0){n=-n;m=-m}\n$('o').innerHTML=show([['Fracció simplificada',n+(m===1?'':'/'+m)],['Decimal',fmt(n/m,6)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Per sumar o restar s'iguala el denominador; per multiplicar es multipliquen numeradors i denominadors; per dividir es multiplica per la fracció inversa. El resultat se simplifica dividint entre el màxim comú divisor.</p>",
+  "faq": [
+   [
+    "Com se sumen fraccions amb diferent denominador?",
+    "Es busca un denominador comú, es converteixen les fraccions i se sumen els numeradors. Després se simplifica el resultat."
+   ],
+   [
+    "Com se simplifica una fracció?",
+    "Es divideixen numerador i denominador entre el seu màxim comú divisor."
+   ]
+  ]
+ },
+ "calculadora-media-mediana-moda": {
+  "title": "Calculadora de mitjana, mediana i moda",
+  "h1": "Mitjana, mediana i moda",
+  "desc": "Enganxa una llista de números i calcula la mitjana, la mediana, la moda, el rang i més.",
+  "body": "<label for=\"x\">Números (separats per espais, salts de línia o punt i coma)</label><textarea id=\"x\">4 8 15 16 23 42 8</textarea><div id=\"o\"></div>",
+  "js": "function c(){const a=$('x').value.replace(/,/g,'.').split(/[\\s;]+/).map(parseFloat).filter(isFinite);\nif(!a.length){$('o').innerHTML=show([['Resultat','—']]);return}\nconst s=[...a].sort((p,q)=>p-q),n=s.length,sum=a.reduce((p,q)=>p+q,0),med=n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;\nconst f={};a.forEach(v=>f[v]=(f[v]||0)+1);const mx=Math.max(...Object.values(f));const mo=Object.keys(f).filter(k=>f[k]===mx);\n$('o').innerHTML=show([['Quantitat',n],['Suma',fmt(sum,4)],['Mitjana',fmt(sum/n,4)],['Mediana',fmt(med,4)],['Moda',mx===1?'No hi ha moda':mo.join(', ')],['Mínim',fmt(s[0],4)],['Màxim',fmt(s[n-1],4)],['Rang',fmt(s[n-1]-s[0],4)]])}\n$('x').oninput=c;c();",
+  "text": "<p>La <b>mitjana</b> és la suma dividida entre la quantitat de dades; la <b>mediana</b> és el valor central en ordenar-los; la <b>moda</b> és el valor que més es repeteix.</p>",
+  "faq": [
+   [
+    "Quina diferència hi ha entre mitjana, mediana i moda?",
+    "La mitjana és el promig de tots els valors, la mediana és el valor central en ordenar-los i la moda és el que més es repeteix."
+   ],
+   [
+    "Quan és millor fer servir la mediana?",
+    "Quan hi ha valors extrems que distorsionen la mitjana, per exemple en salaris o preus d'habitatge."
+   ]
+  ]
+ },
+ "calculadora-pitagoras": {
+  "title": "Calculadora del teorema de Pitàgores: hipotenusa i catets",
+  "h1": "Calculadora del teorema de Pitàgores",
+  "desc": "Calcula la hipotenusa o un catet d'un triangle rectangle amb el teorema de Pitàgores.",
+  "body": "<label for=\"m\">Què vols calcular?</label><select id=\"m\"><option value=\"h\">La hipotenusa (c)</option><option value=\"c\">Un catet</option></select>\n<div class=\"row\"><div><label id=\"l1\" for=\"a\">Catet a</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label id=\"l2\" for=\"b\">Catet b</label><input id=\"b\" inputmode=\"decimal\" value=\"4\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const h=$('m').value==='h';$('l1').textContent=h?'Catet a':'Hipotenusa c';$('l2').textContent=h?'Catet b':'Catet a';\nconst a=num('a'),b=num('b');let r;if(h)r=Math.sqrt(a*a+b*b);else r=a>b?Math.sqrt(a*a-b*b):NaN;\n$('o').innerHTML=show([[h?'Hipotenusa':'Catet que falta',isFinite(r)?fmt(r,4):'No vàlid (la hipotenusa ha de ser més gran)']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El teorema diu que en un triangle rectangle a² + b² = c², on c és la hipotenusa (el costat més llarg, oposat a l'angle recte).</p>",
+  "faq": [
+   [
+    "Què diu el teorema de Pitàgores?",
+    "En un triangle rectangle, la suma dels quadrats dels catets és igual al quadrat de la hipotenusa: a² + b² = c²."
+   ],
+   [
+    "Puc calcular un catet si conec la hipotenusa?",
+    "Sí. Es resol restant: a = √(c² − b²)."
+   ]
+  ]
+ },
+ "calculadora-area-figuras": {
+  "title": "Calculadora d'àrea i perímetre: rectangle, triangle, cercle i trapezi",
+  "h1": "Calculadora d'àrees",
+  "desc": "Calcula l'àrea (i el perímetre quan escaigui) d'un rectangle, triangle, cercle o trapezi.",
+  "body": "<label for=\"f\">Figura</label><select id=\"f\"></select>\n<div id=\"wx\"><label id=\"lx\" for=\"x\">Base</label><input id=\"x\" inputmode=\"decimal\" value=\"5\"></div>\n<div id=\"wy\"><label id=\"ly\" for=\"y\">Alçada</label><input id=\"y\" inputmode=\"decimal\" value=\"3\"></div>\n<div id=\"wz\"><label id=\"lz\" for=\"z\">Alçada</label><input id=\"z\" inputmode=\"decimal\" value=\"2\"></div><div id=\"o\"></div>",
+  "js": "const F={'Rectangle':['Base','Alçada',null],'Triangle':['Base','Alçada',null],'Cercle':['Radi',null,null],'Trapezi':['Base major','Base menor','Alçada']};\nObject.keys(F).forEach(k=>$('f').add(new Option(k,k)));\nfunction c(){const f=$('f').value,L=F[f];['x','y','z'].forEach((id,i)=>{$('w'+id).style.display=L[i]?'':'none';if(L[i])$('l'+id).textContent=L[i]});\nconst x=num('x'),y=num('y'),z=num('z');let it;\nif(f==='Rectangle')it=[['Àrea',fmt(x*y)],['Perímetre',fmt(2*(x+y))]];\nelse if(f==='Triangle')it=[['Àrea',fmt(x*y/2)]];\nelse if(f==='Cercle')it=[['Àrea',fmt(Math.PI*x*x)],['Longitud (circumferència)',fmt(2*Math.PI*x)]];\nelse it=[['Àrea',fmt((x+y)/2*z)]];\n$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<ul><li>Rectangle: base × alçada</li><li>Triangle: base × alçada ÷ 2</li><li>Cercle: π × radi²</li><li>Trapezi: (base major + base menor) ÷ 2 × alçada</li></ul><p>Fes servir la mateixa unitat a totes les mesures; l'àrea sortirà en aquesta unitat al quadrat.</p>",
+  "faq": [
+   [
+    "Com es calcula l'àrea d'un cercle?",
+    "Amb la fórmula π × radi². Si coneixes el diàmetre, divideix-lo entre 2 per obtenir el radi."
+   ],
+   [
+    "I l'àrea d'un triangle?",
+    "Base × alçada / 2."
+   ],
+   [
+    "En quines unitats surt el resultat?",
+    "En les mateixes unitats que introdueixis, elevades al quadrat: si fas servir metres, l'àrea surt en m²."
+   ]
+  ]
+ },
+ "numeros-romanos": {
+  "title": "Convertidor de números romans a aràbics i viceversa",
+  "h1": "Convertidor de números romans",
+  "desc": "Converteix números normals a números romans i números romans a normals (de l'1 al 3999).",
+  "body": "<label for=\"x\">Escriu un número (ex. 1994) o un número romà (ex. MCMXCIV)</label><input id=\"x\" value=\"1994\"><div id=\"o\"></div>",
+  "js": "const M=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];\nfunction toR(n){let s='';M.forEach(p=>{while(n>=p[0]){s+=p[1];n-=p[0]}});return s}\nfunction fromR(s){s=s.toUpperCase();let i=0,n=0;M.forEach(p=>{while(s.substr(i,p[1].length)===p[1]){n+=p[0];i+=p[1].length}});return i===s.length&&s.length?n:NaN}\nfunction c(){const v=$('x').value.trim();let o;\nif(/^[0-9]+$/.test(v)){const n=parseInt(v,10);o=n>=1&&n<=3999?['Número romà',toR(n)]:['Número romà','Només entre 1 i 3999']}\nelse if(v){const n=fromR(v);o=isFinite(n)&&toR(n)===v.toUpperCase()?['Número',String(n)]:['Número','Número romà no vàlid']}\nelse o=['Resultat','—'];$('o').innerHTML=show([o])}\n$('x').oninput=c;c();",
+  "text": "<p>Valors bàsics: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Quan una lletra menor va davant d'una de major es resta (IV=4, IX=9, XC=90).</p>",
+  "faq": [
+   [
+    "Quin valor té cada símbol romà?",
+    "I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 i M = 1000."
+   ],
+   [
+    "Fins a quin número es pot convertir?",
+    "Amb la notació estàndard, fins a 3999 (MMMCMXCIX)."
+   ]
+  ]
+ },
+ "conversor-binario-decimal-hexadecimal": {
+  "title": "Convertidor de binari, decimal, octal i hexadecimal",
+  "h1": "Convertidor de bases numèriques",
+  "desc": "Converteix números entre binari, octal, decimal i hexadecimal.",
+  "body": "<div class=\"row\"><div><label for=\"x\">Número</label><input id=\"x\" value=\"255\"></div><div><label for=\"b\">Base del número</label><select id=\"b\"><option value=\"10\">Decimal (10)</option><option value=\"2\">Binari (2)</option><option value=\"8\">Octal (8)</option><option value=\"16\">Hexadecimal (16)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function c(){const v=$('x').value.trim().toLowerCase(),b=+$('b').value,n=parseInt(v,b);\nif(!v||isNaN(n)||n.toString(b)!==v.replace(/^0+(?=.)/,'')){$('o').innerHTML=show([['Resultat','Número no vàlid per a aquesta base']]);return}\n$('o').innerHTML=show([['Binari',n.toString(2)],['Octal',n.toString(8)],['Decimal',n.toString(10)],['Hexadecimal',n.toString(16).toUpperCase()]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El sistema binari fa servir només 0 i 1, i és la base de la informàtica. L'hexadecimal fa servir 0-9 i A-F, i s'empra molt per a colors i adreces de memòria.</p>",
+  "faq": [
+   [
+    "Com es passa de binari a decimal?",
+    "Cada dígit binari val una potència de 2 segons la seva posició, de dreta a esquerra; se sumen les dels dígits que són 1."
+   ],
+   [
+    "Què és el sistema hexadecimal?",
+    "És un sistema en base 16 que fa servir els dígits 0-9 i les lletres A-F. S'usa molt en informàtica, per exemple als colors web."
+   ]
+  ]
+ },
+ "numero-aleatorio": {
+  "title": "Generador de números aleatoris entre dos valors",
+  "h1": "Generador de números aleatoris",
+  "desc": "Genera un o diversos números aleatoris entre un mínim i un màxim.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Mínim</label><input id=\"a\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"b\">Màxim</label><input id=\"b\" inputmode=\"numeric\" value=\"100\"></div></div>\n<label for=\"n\">Quants números? (màx. 100)</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Generar</button><div id=\"o\"></div>",
+  "js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('go').onclick=()=>{let a=Math.round(num('a')),b=Math.round(num('b')),n=Math.min(100,Math.max(1,Math.round(num('n'))||1));if(a>b)[a,b]=[b,a];\nconst r=[];for(let i=0;i<n;i++)r.push(rnd(a,b));$('o').innerHTML='<div class=\"card\" style=\"font-size:24px;word-break:break-word\">'+r.join(', ')+'</div>'};$('go').click();",
+  "text": "<p>Els números es generen amb el generador aleatori del teu navegador. Poden repetir-se si en demanes diversos.</p>",
+  "faq": [
+   [
+    "Puc triar el rang?",
+    "Sí, indica el mínim i el màxim i es generarà un número entre tots dos."
+   ],
+   [
+    "Serveix per a sorteigs oficials o criptografia?",
+    "No. És aleatorietat pensada per a ús quotidià."
+   ]
+  ]
+ },
+ "lanzar-dado-moneda": {
+  "title": "Llançar un dau en línia o una moneda (cara o creu)",
+  "h1": "Llançar dau o moneda",
+  "desc": "Tira un o diversos daus de 6 cares o llança una moneda a l'aire: cara o creu.",
+  "body": "<label for=\"n\">Nombre de daus</label><select id=\"n\"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>\n<button id=\"d\">🎲 Llançar daus</button> <button id=\"m\" class=\"sec\">🪙 Llançar moneda</button><div id=\"o\"></div>",
+  "js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('d').onclick=()=>{const n=+$('n').value,r=[];for(let i=0;i<n;i++)r.push(rnd(1,6));$('o').innerHTML=show([['Resultat',r.join(' · ')],['Suma',r.reduce((a,b)=>a+b,0)]])};\n$('m').onclick=()=>{$('o').innerHTML=show([['Resultat',rnd(0,1)?'Cara':'Creu']])};$('d').click();",
+  "text": "<p>Cada llançament és independent i té les mateixes probabilitats: 1/6 per a cada cara del dau i 50% per a cara o creu.</p>",
+  "faq": [
+   [
+    "Són aleatoris els llançaments?",
+    "Fan servir números pseudoaleatoris del navegador, suficients per a jocs i decisions quotidianes."
+   ],
+   [
+    "Quina probabilitat té cada resultat?",
+    "En una moneda, 50 % cada cara; en un dau de sis cares, un 16,7 % cada número."
+   ]
+  ]
+ },
+ "calculadora-roi": {
+  "title": "Calculadora de ROI: retorn de la inversió",
+  "h1": "Calculadora de ROI",
+  "desc": "Calcula el retorn de la inversió (ROI) i la rendibilitat anualitzada de qualsevol inversió o negoci.",
+  "body": "<div class=\"row\"><div><label for=\"i\">Diners invertits (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"f\">Valor final (€)</label><input id=\"f\" inputmode=\"decimal\" value=\"1350\"></div></div>\n<label for=\"y\">Anys transcorreguts (opcional)</label><input id=\"y\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+  "js": "function c(){const i=num('i'),f=num('f'),y=num('y');const it=[['Benefici',eur(f-i)],['ROI',fmt((f-i)/i*100,2)+' %']];\nif(y>0&&f>0)it.push(['Rendibilitat anual (TAC)',fmt((Math.pow(f/i,1/y)-1)*100,2)+' %']);$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>ROI = (valor final − inversió) ÷ inversió × 100. La rendibilitat anual té en compte el temps: un 35% en 2 anys equival a un 16% anual. Els resultats passats no garanteixen resultats futurs; no és assessorament financer.</p>",
+  "faq": [
+   [
+    "Com es calcula el ROI?",
+    "ROI = (guany − inversió) / inversió × 100. Invertir 1.000 € i obtenir 1.200 € dona un ROI del 20%."
+   ],
+   [
+    "Té en compte el temps?",
+    "No. Un 20% en un any no és el mateix que en cinc; per comparar fes servir la rendibilitat anualitzada."
+   ]
+  ]
+ },
+ "calculadora-inflacion": {
+  "title": "Calculadora d'inflació: quant valen els teus diners amb el temps",
+  "h1": "Calculadora d'inflació",
+  "desc": "Calcula quant poder adquisitiu perden els teus diners amb una inflació anual durant diversos anys.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Quantitat (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"r\">Inflació anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Anys</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),r=num('r')/100,y=num('y');const k=Math.pow(1+r,y);\n$('o').innerHTML=show([['Necessitaràs per comprar el mateix',eur(a*k)],['Els teus '+fmt(a,0)+' € valdran en poder de compra',eur(a/k)],['Pèrdua de poder adquisitiu',fmt((1-1/k)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>La inflació fa que amb la mateixa quantitat compris menys coses cada any. Aquesta calculadora suposa una inflació constant, cosa que a la realitat varia.</p>",
+  "faq": [
+   [
+    "Què és la inflació?",
+    "És la pujada generalitzada i sostinguda dels preus, que redueix el poder adquisitiu dels diners amb el temps."
+   ],
+   [
+    "Com es calcula quant val avui un import del passat?",
+    "Es multiplica l'import per (1 + inflació) elevat al nombre d'anys. Amb una inflació mitjana del 3% anual, 100 € d'avui equivalen a uns 134 € d'aquí a 10 anys."
+   ],
+   [
+    "Fa servir dades oficials de l'IPC?",
+    "No. Aplica la taxa mitjana que tu indiquis, per la qual cosa és una estimació."
+   ]
+  ]
+ },
+ "calculadora-ahorro-objetivo": {
+  "title": "Calculadora d'estalvi: quant estalviar al mes per a una meta",
+  "h1": "Calculadora d'estalvi per a una meta",
+  "desc": "Calcula quant has d'estalviar cada mes per arribar a una quantitat objectiu en un termini.",
+  "body": "<div class=\"row\"><div><label for=\"g\">Meta (€)</label><input id=\"g\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"c\">Ja estalviat (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"500\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Termini (mesos)</label><input id=\"m\" inputmode=\"numeric\" value=\"18\"></div><div><label for=\"r\">Interès anual (%) — opcional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const g=num('g'),c0=num('c'),n=num('m'),r=(num('r')||0)/100/12;let p;\nif(r===0)p=(g-c0)/n;else{const k=Math.pow(1+r,n);p=(g-c0*k)*r/(k-1)}\n$('o').innerHTML=show([['Estalvi mensual necessari',eur(Math.max(0,p))],['Total que aportaràs',eur(Math.max(0,p)*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Divideix la teva meta entre els mesos disponibles i automatitza una transferència el dia que cobres: estalviar primer i gastar després ajuda a complir l'objectiu.</p>",
+  "faq": [
+   [
+    "Com sé quant estalviar al mes per a una meta?",
+    "Divideix l'objectiu entre els mesos disponibles; si hi ha rendibilitat, la calculadora ajusta la quota per tenir-la en compte."
+   ],
+   [
+    "Inclou impostos o inflació?",
+    "No. És una simulació amb rendibilitat constant."
+   ]
+  ]
+ },
+ "calculadora-rentabilidad-alquiler": {
+  "title": "Calculadora de rendibilitat d'un lloguer (bruta i neta)",
+  "h1": "Rendibilitat d'un lloguer",
+  "desc": "Calcula la rendibilitat bruta i neta de comprar un habitatge per llogar-lo.",
+  "body": "<div class=\"row\"><div><label for=\"p\">Preu de compra (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"gc\">Despeses de compra (%)</label><input id=\"gc\" inputmode=\"decimal\" value=\"10\"></div></div>\n<div class=\"row\"><div><label for=\"rf\">Reforma (€)</label><input id=\"rf\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"al\">Lloguer mensual (€)</label><input id=\"al\" inputmode=\"decimal\" value=\"750\"></div></div>\n<label for=\"ga\">Despeses anuals: IBI, comunitat, assegurança, manteniment (€)</label><input id=\"ga\" inputmode=\"decimal\" value=\"1800\"><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),gc=num('gc')/100,rf=num('rf')||0,al=num('al'),ga=num('ga')||0;const inv=p*(1+gc)+rf,anual=al*12;\n$('o').innerHTML=show([['Inversió total',eur(inv)],['Rendibilitat bruta',fmt(anual/(p+rf)*100,2)+' %'],['Benefici net anual',eur(anual-ga)],['Rendibilitat neta',fmt((anual-ga)/inv*100,2)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>La rendibilitat bruta divideix el lloguer anual entre el preu; la neta descompta les despeses i té en compte els costos de compra (impostos, notaria, registre). No inclou impostos sobre el lloguer, períodes sense llogater ni finançament. És orientativa.</p>",
+  "faq": [
+   [
+    "Què és la rendibilitat bruta d'un lloguer?",
+    "És el lloguer anual dividit entre el preu de compra, en percentatge. No descompta despeses ni impostos."
+   ],
+   [
+    "I la rendibilitat neta?",
+    "Resta despeses com l'IBI, la comunitat, les assegurances, el manteniment i els períodes buits, i és la xifra més realista."
+   ]
+  ]
+ },
+ "calculadora-nota-acceso-universidad": {
+  "title": "Calculadora de la nota d'accés a la universitat (EBAU/EvAU)",
+  "h1": "Nota d'accés a la universitat",
+  "desc": "Calcula la teva nota d'accés a la universitat a Espanya: 60% batxillerat i 40% prova d'accés.",
+  "body": "<div class=\"row\"><div><label for=\"b\">Nota mitjana de Batxillerat (0-10)</label><input id=\"b\" inputmode=\"decimal\" value=\"8,2\"></div><div><label for=\"e\">Nota de la prova d'accés (0-10)</label><input id=\"e\" inputmode=\"decimal\" value=\"7\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const b=num('b'),e=num('e');\n$('o').innerHTML=show([['Nota d\\'accés',e>=4?fmt(0.6*b+0.4*e,3):'La prova ha de ser ≥ 4'],['Aportació del Batxillerat (60%)',fmt(0.6*b,3)],['Aportació de la prova (40%)',fmt(0.4*e,3)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>La nota d'accés (sobre 10) és el 60% de la mitjana del Batxillerat més el 40% de la fase d'accés, que ha de tenir almenys un 4. Després es pot sumar la fase voluntària fins a arribar a 14 punts. Les condicions poden variar per comunitat i curs; consulta la normativa de la teva universitat.</p>",
+  "faq": [
+   [
+    "Com es calcula la nota d'accés?",
+    "Es combina la nota mitjana del batxillerat i la de la fase general de la prova d'accés, amb la ponderació que estableix la normativa vigent."
+   ],
+   [
+    "És una xifra oficial?",
+    "No, és una estimació orientativa. La nota oficial la publica la teva universitat o comunitat autònoma."
+   ]
+  ]
+ },
+ "calcular-letra-nie": {
+  "title": "Calcular la lletra del NIE a partir del número",
+  "h1": "Calculadora de la lletra del NIE",
+  "desc": "Descobreix la lletra de control del teu NIE (X, Y o Z seguida de 7 números).",
+  "body": "<div class=\"row\"><div><label for=\"p\">Lletra inicial</label><select id=\"p\"><option>X</option><option>Y</option><option>Z</option></select></div><div><label for=\"n\">Número (7 xifres)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"7\" value=\"1234567\"></div></div><div id=\"o\"></div>",
+  "js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const p=$('p').value,d=$('n').value.replace(/[^0-9]/g,'');if(d.length!==7){$('o').innerHTML='<p>Introdueix 7 xifres.</p>';return}\nconst n=parseInt({X:'0',Y:'1',Z:'2'}[p]+d,10);$('o').innerHTML=show([['Lletra de control',L[n%23]],['NIE complet',p+d+L[n%23]]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Per calcular la lletra del NIE se substitueix la X per 0, la Y per 1 i la Z per 2, es forma un número amb les 7 xifres i es divideix entre 23. El residu indica la lletra de la sèrie TRWAGMYFPDXBNJZSQVHLCKE. Funciona al teu navegador sense enviar dades.</p>",
+  "faq": [
+   [
+    "Com es calcula la lletra del NIE?",
+    "Se substitueix la X per 0, la Y per 1 i la Z per 2, es divideix el número resultant entre 23 i el residu dona la lletra."
+   ],
+   [
+    "Quantes xifres té un NIE?",
+    "Comença per X, Y o Z, continua amb 7 xifres i acaba amb una lletra de control."
+   ]
+  ]
+ },
+ "validador-iban": {
+  "title": "Validador d'IBAN: comprovar si un IBAN és correcte",
+  "h1": "Validador d'IBAN",
+  "desc": "Comprova si el format i els dígits de control d'un IBAN són correctes. No es desa res.",
+  "body": "<label for=\"x\">IBAN</label><input id=\"x\" value=\"ES91 2100 0418 4502 0005 1332\" autocomplete=\"off\"><div id=\"o\"></div>",
+  "js": "function c(){const s=$('x').value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();\nlet ok=/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(s);if(ok&&s.slice(0,2)==='ES'&&s.length!==24)ok=false;\nif(ok){let m=0;const t=s.slice(4)+s.slice(0,4);for(const ch of t){const v=ch>='A'?String(ch.charCodeAt(0)-55):ch;for(const d of v){m=(m*10+ +d)%97}}ok=m===1}\n$('o').innerHTML=show([['Resultat',s?(ok?'IBAN vàlid ✅':'IBAN no vàlid ❌'):'—'],['País',ok?s.slice(0,2):'—'],['Format',ok?s.replace(/(.{4})/g,'$1 ').trim():'—']])}\n$('x').oninput=c;c();",
+  "text": "<p>Aquesta eina només comprova que l'IBAN està ben format (longitud, país i dígits de control, algoritme mod 97). No verifica que el compte existeixi ni a qui pertany. Tot es calcula al teu navegador.</p>",
+  "faq": [
+   [
+    "Quants caràcters té un IBAN espanyol?",
+    "24: les lletres ES, dos dígits de control i 20 dígits del compte."
+   ],
+   [
+    "Aquesta eina comprova que el compte existeix?",
+    "No. Només verifica que l'IBAN està ben format i que els seus dígits de control són correctes."
+   ],
+   [
+    "És segur escriure el meu IBAN aquí?",
+    "El càlcul es fa al teu navegador i no s'envia ni es desa. Tot i això, no comparteixis dades bancàries innecessàriament."
+   ]
+  ]
+ },
+ "contador-caracteres-redes": {
+  "title": "Comptador de caràcters per a X, Instagram, TikTok i YouTube",
+  "h1": "Comptador de caràcters per a xarxes",
+  "desc": "Compta els caràcters del teu text i comprova els límits de X, Instagram, TikTok, YouTube i meta descripció.",
+  "body": "<label for=\"x\">El teu text</label><textarea id=\"x\" placeholder=\"Escriu o enganxa la teva descripció, títol o publicació...\"></textarea><div id=\"o\"></div>",
+  "js": "const LM=[['X (tuit)',280],['Instagram (peu)',2200],['TikTok (descripció)',4000],['YouTube (títol)',100],['YouTube (descripció)',5000],['Meta descripció SEO',160]];\nfunction c(){const n=$('x').value.length;$('o').innerHTML=show([['Caràcters',fmt(n,0)]].concat(LM.map(l=>[l[0],n+' / '+l[1]+(n>l[1]?' ⚠️ et passes':' ✅')])))}\n$('x').oninput=c;c();",
+  "text": "<p>Els límits són orientatius i les plataformes els poden canviar. Els emojis poden comptar com més d'un caràcter en algunes xarxes.</p>",
+  "faq": [
+   [
+    "Quants caràcters admet cada xarxa social?",
+    "Varia segons la plataforma i canvia amb el temps. Comprova el límit vigent a la mateixa xarxa abans de publicar."
+   ],
+   [
+    "Compten els espais i els emojis?",
+    "Els espais compten com a caràcters. Els emojis poden comptar com a més d'un segons la plataforma."
+   ]
+  ]
+ },
+ "sumar-dias-a-fecha": {
+  "title": "Calculadora de dates: sumar o restar dies, setmanes, mesos i anys",
+  "h1": "Sumar o restar temps a una data",
+  "desc": "Suma o resta dies, setmanes, mesos o anys a una data i descobreix quin dia de la setmana serà.",
+  "body": "<div class=\"row\"><div><label for=\"d\">Data de partida</label><input id=\"d\" type=\"date\"></div><div><label for=\"op\">Operació</label><select id=\"op\"><option value=\"+\">Sumar</option><option value=\"-\">Restar</option></select></div></div>\n<div class=\"row\"><div><label for=\"n\">Quantitat</label><input id=\"n\" inputmode=\"numeric\" value=\"90\"></div><div><label for=\"u\">Unitat</label><select id=\"u\"><option value=\"d\">Dies</option><option value=\"w\">Setmanes</option><option value=\"m\">Mesos</option><option value=\"y\">Anys</option></select></div></div><div id=\"o\"></div>",
+  "js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const d=new Date($('d').value+'T12:00:00');if(isNaN(d)){$('o').innerHTML='<p>Tria una data.</p>';return}\nconst n=num('n')*($('op').value==='-'?-1:1),u=$('u').value;\nif(u==='d')d.setDate(d.getDate()+n);else if(u==='w')d.setDate(d.getDate()+7*n);else if(u==='m')d.setMonth(d.getMonth()+n);else d.setFullYear(d.getFullYear()+n);\n$('o').innerHTML=show([['Data resultant',d.toLocaleDateString('es-ES')],['Dia de la setmana',d.toLocaleDateString('es-ES',{weekday:'long'})],['Completa',d.toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+  "text": "<p>Útil per calcular terminis, dates de venciment, períodes de prova o quants dies falten per a un esdeveniment.</p>",
+  "faq": [
+   [
+    "Com sumo o resto dies a una data?",
+    "Indica la data de partida i el nombre de dies; fes servir un valor negatiu per restar."
+   ],
+   [
+    "Compta els dies laborables?",
+    "No, compta dies naturals."
+   ]
+  ]
+ },
+ "numero-de-semana": {
+  "title": "En quina setmana de l'any som? Número de setmana d'una data",
+  "h1": "Número de setmana de l'any",
+  "desc": "Consulta el número de setmana ISO, el dia de l'any i el dia de la setmana de qualsevol data.",
+  "body": "<label for=\"d\">Data</label><input id=\"d\" type=\"date\"><div id=\"o\"></div>",
+  "js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const p=$('d').value.split('-').map(Number);if(p.length<3||p.some(isNaN)){$('o').innerHTML='<p>Tria una data.</p>';return}\nconst t=Date.UTC(p[0],p[1]-1,p[2]),d=new Date(t);const dn=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()+4-dn);\nconst ys=Date.UTC(d.getUTCFullYear(),0,1),wk=Math.ceil(((d-ys)/864e5+1)/7);\n$('o').innerHTML=show([['Setmana ISO',wk],['Dia de l\\'any',Math.round((t-Date.UTC(p[0],0,0))/864e5)],['Dia de la setmana',new Date(t).toLocaleDateString('es-ES',{weekday:'long',timeZone:'UTC'})]])}\n$('d').oninput=$('d').onchange=c;c();",
+  "text": "<p>Es fa servir la numeració ISO 8601: les setmanes comencen en dilluns i la setmana 1 és la que conté el primer dijous de l'any. És el sistema habitual a Europa.</p>",
+  "faq": [
+   [
+    "Què és el número de setmana ISO?",
+    "És la numeració estàndard ISO 8601: les setmanes comencen en dilluns i la setmana 1 és la que conté el primer dijous de l'any."
+   ],
+   [
+    "Quantes setmanes té un any?",
+    "52 o 53, segons l'any."
+   ]
+  ]
+ },
+ "conversor-zonas-horarias": {
+  "title": "Convertidor de zones horàries: hora d'Espanya en altres països",
+  "h1": "Convertidor de zones horàries",
+  "desc": "Converteix una hora entre ciutats del món: Espanya, Canàries, Londres, Nova York, Mèxic, Argentina, Tòquio i més.",
+  "body": "<label for=\"t\">Data i hora</label><input id=\"t\" type=\"datetime-local\">\n<div class=\"row\"><div><label for=\"a\">De</label><select id=\"a\"></select></div><div><label for=\"b\">A</label><select id=\"b\"></select></div></div><div id=\"o\"></div>",
+  "js": "const Z=[['Espanya peninsular','Europe/Madrid'],['Canàries','Atlantic/Canary'],['Londres','Europe/London'],['Nova York','America/New_York'],['Chicago','America/Chicago'],['Los Angeles','America/Los_Angeles'],['Ciutat de Mèxic','America/Mexico_City'],['Bogotà','America/Bogota'],['Buenos Aires','America/Argentina/Buenos_Aires'],['Santiago de Xile','America/Santiago'],['Dubai','Asia/Dubai'],['Delhi','Asia/Kolkata'],['Tòquio','Asia/Tokyo'],['Sydney','Australia/Sydney']];\nZ.forEach(z=>{$('a').add(new Option(z[0],z[1]));$('b').add(new Option(z[0],z[1]))});$('a').value='Europe/Madrid';$('b').value='America/Mexico_City';\nconst n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());$('t').value=n.toISOString().slice(0,16);\nfunction off(z,ms){const p=new Intl.DateTimeFormat('en-US',{timeZone:z,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(ms)),o={};p.forEach(x=>o[x.type]=x.value);return Date.UTC(o.year,o.month-1,o.day,o.hour,o.minute,o.second)-ms}\nfunction c(){const v=$('t').value;if(!v){return}const q=v.split(/[-T:]/).map(Number),t0=Date.UTC(q[0],q[1]-1,q[2],q[3],q[4]);\nconst za=$('a').value,zb=$('b').value;const inst=t0-off(za,t0-off(za,t0));\n$('o').innerHTML=show([['Hora a la destinació',new Date(inst).toLocaleString('es-ES',{timeZone:zb,dateStyle:'full',timeStyle:'short'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+  "text": "<p>La conversió té en compte l'horari d'estiu de cada zona. Espanya peninsular fa servir CET (UTC+1) a l'hivern i CEST (UTC+2) a l'estiu; Canàries va una hora per darrere.</p>",
+  "faq": [
+   [
+    "Té en compte el canvi d'hora d'estiu?",
+    "Sí, el càlcul fa servir les regles de zones horàries del teu navegador, que inclouen l'horari d'estiu."
+   ],
+   [
+    "Quina diferència hi ha entre Espanya peninsular i Canàries?",
+    "Canàries va una hora per darrere de la península durant tot l'any."
+   ]
+  ]
+ },
+ "capacidad-endeudamiento-hipoteca": {
+  "title": "Quanta hipoteca em poden donar? Calculadora de capacitat d'endeutament",
+  "h1": "Quanta hipoteca em poden donar?",
+  "desc": "Calcula la quota màxima, el préstec màxim i el preu aproximat d'habitatge que podries permetre't segons els teus ingressos.",
+  "body": "<div class=\"row\"><div><label for=\"i\">Ingressos nets mensuals (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"2500\"></div><div><label for=\"d\">Altres quotes de deutes al mes (€)</label><input id=\"d\" inputmode=\"decimal\" value=\"150\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Interès anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"y\">Termini (anys)</label><input id=\"y\" inputmode=\"numeric\" value=\"30\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Endeutament màxim (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"35\"></div><div><label for=\"f\">Finançament sobre el preu (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"80\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const ing=num('i'),deu=num('d')||0,r=num('r')/100/12,n=num('y')*12,e=num('e')/100,f=num('f')/100;\nconst q=Math.max(0,ing*e-deu);const P=r===0?q*n:q*(1-Math.pow(1+r,-n))/r;const precio=f>0?P/f:0;\n$('o').innerHTML=show([['Quota màxima mensual',eur(q)],['Préstec màxim aproximat',eur(P)],['Preu d\\'habitatge aproximat',eur(precio)],['Estalvi necessari (entrada + ~10% despeses)',eur(precio*(1-f)+precio*0.1)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>La regla del 35%</h2><p>Els bancs solen limitar la quota de la hipoteca, sumada a les teves altres deutes, a un 30-35% dels teus ingressos nets. A més solen finançar fins al 80% del valor de taxació, per la qual cosa hauràs d'aportar l'entrada i les despeses de compra amb estalvis propis.</p><p>És una estimació orientativa: cada entitat estudia el teu cas (tipus de contracte, antiguitat, avaladors, historial) i pot aprovar més o menys.</p>",
+  "faq": [
+   [
+    "Quin percentatge dels meus ingressos puc destinar a la hipoteca?",
+    "Els bancs solen acceptar entre un 30% i un 35% dels teus ingressos nets, comptant també altres deutes."
+   ],
+   [
+    "Quant finança un banc del preu de l'habitatge?",
+    "Habitualment fins al 80% del valor de taxació, per la qual cosa necessites estalviar la resta i les despeses de compra."
+   ]
+  ]
+ },
+ "amortizacion-anticipada-hipoteca": {
+  "title": "Calculadora d'amortització anticipada: reduir quota o termini",
+  "h1": "Amortització anticipada d'hipoteca",
+  "desc": "Compara què estalvies en interessos en amortitzar part de la teva hipoteca reduint la quota o reduint el termini.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Capital pendent (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"120000\"></div><div><label for=\"r\">Interès anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<div class=\"row\"><div><label for=\"y\">Anys restants</label><input id=\"y\" inputmode=\"numeric\" value=\"22\"></div><div><label for=\"x\">Quantitat a amortitzar (€)</label><input id=\"x\" inputmode=\"decimal\" value=\"10000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('r')/100/12,n=Math.round(num('y')*12),x=num('x');const pm=(cap,m)=>r===0?cap/m:cap*r/(1-Math.pow(1+r,-m));\nconst q=pm(C,n),int0=q*n-C,C2=C-x;if(C2<=0||!isFinite(q)){$('o').innerHTML=show([['Resultat','La quantitat ha de ser menor que el capital']]);return}\nconst q2=pm(C2,n),intA=q2*n-C2;const n2=r===0?C2/q:-Math.log(1-C2*r/q)/Math.log(1+r);const intB=q*n2-C2;\n$('o').innerHTML=show([['Quota actual',eur(q)],['Opció A: nova quota',eur(q2)],['A: estalvi en interessos',eur(int0-intA)],['Opció B: nou termini',Math.floor(n2/12)+' anys i '+Math.round(n2%12)+' mesos'],['B: estalvi en interessos',eur(int0-intB)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Amortitzar reduint el <b>termini</b> sol estalviar més interessos totals, perquè continues pagant la mateixa quota. Reduir la <b>quota</b> et dona més folgança mensual. Comprova la comissió d'amortització anticipada del teu contracte, que pot restar part de l'estalvi.</p>",
+  "faq": [
+   [
+    "Què és amortitzar anticipadament una hipoteca?",
+    "És avançar diners al banc per reduir el deute pendent abans del previst, ja sigui escurçant el termini o baixant la quota."
+   ],
+   [
+    "És millor reduir termini o quota?",
+    "Reduir el termini sol estalviar més interessos en total; reduir la quota dona més folgança mensual. Depèn de la teva situació."
+   ],
+   [
+    "Hi ha comissió per amortització anticipada?",
+    "Pot haver-n'hi segons el contracte i la data de signatura. Consulta la teva escriptura o pregunta al teu banc."
+   ]
+  ]
+ },
+ "revision-hipoteca-variable-euribor": {
+  "title": "Calculadora de revisió d'hipoteca variable: nova quota amb l'Euríbor",
+  "h1": "Revisió d'hipoteca variable",
+  "desc": "Calcula la quota de la teva hipoteca variable amb l'Euríbor i el diferencial, i simula com canvia si l'Euríbor puja o baixa.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Capital pendent (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"140000\"></div><div><label for=\"y\">Anys restants</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Euríbor (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"2,5\"></div><div><label for=\"d\">Diferencial (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"0,8\"></div></div><div id=\"o\"></div>",
+  "js": "function pm(C,i,n){const r=i/100/12;return r===0?C/n:C*r/(1-Math.pow(1+r,-n))}\nfunction c(){const C=num('c'),n=Math.round(num('y')*12),e=num('e'),d=num('d');const q=pm(C,e+d,n);\nconst rows=[-1,-0.5,0.5,1].map(s=>[(s>0?'Euríbor +':'Euríbor ')+fmt(s,1)+' pts',eur(pm(C,Math.max(0,e+s)+d,n))]);\n$('o').innerHTML=show([['Interès aplicat',fmt(e+d,2)+' %'],['Quota mensual',eur(q)]].concat(rows))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>En una hipoteca variable l'interès és l'Euríbor més un diferencial fix. Es revisa cada 6 o 12 mesos segons el teu contracte; fes servir el valor que figuri a la notificació del teu banc. El càlcul suposa quota constant fins a la següent revisió.</p>",
+  "faq": [
+   [
+    "Com afecta l'Euríbor a la meva quota?",
+    "En una hipoteca variable l'interès és l'Euríbor més un diferencial; si l'Euríbor puja o baixa en la revisió, la teva quota canvia."
+   ],
+   [
+    "Cada quant es revisa?",
+    "El més habitual és cada 6 o 12 mesos, segons indiqui el teu contracte."
+   ],
+   [
+    "És el resultat definitiu?",
+    "No, és una simulació. La quota real la fixa el teu banc."
+   ]
+  ]
+ },
+ "calculadora-tae": {
+  "title": "Calculadora de TAE: cost real d'un préstec o hipoteca",
+  "h1": "Calculadora de TAE",
+  "desc": "Calcula la TAE aproximada d'un préstec a partir del TIN, la comissió d'obertura i el termini.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Import (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"t\">TIN (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"6\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Termini (mesos)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"></div><div><label for=\"f\">Comissió d'obertura (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"1\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('t')/100/12,n=Math.round(num('m')),f=num('f')/100;\nconst q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));const rec=C*(1-f);\nfunction v(i){let s=0;for(let k=1;k<=n;k++)s+=q/Math.pow(1+i,k);return s-rec}\nlet lo=0,hi=1;for(let k=0;k<80;k++){const mid=(lo+hi)/2;if(v(mid)>0)lo=mid;else hi=mid}\nconst tae=Math.pow(1+lo,12)-1;\n$('o').innerHTML=show([['TAE aproximada',fmt(tae*100,2)+' %'],['TIN',fmt(num('t'),2)+' %'],['Quota mensual',eur(q)],['Cost total (interessos + comissió)',eur(q*n-rec)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El <b>TIN</b> és l'interès nominal; la <b>TAE</b> inclou a més les comissions i la freqüència de pagament, per això permet comparar ofertes. Aquesta calculadora inclou la comissió d'obertura; no recull assegurances vinculades ni altres comissions, que elevarien la TAE real.</p>",
+  "faq": [
+   [
+    "Per a què serveix la TAE?",
+    "Per comparar el cost real de préstecs diferents, perquè inclou interessos, comissions i la freqüència de pagament."
+   ],
+   [
+    "Per què la TAE és més gran que el TIN?",
+    "Perquè suma l'efecte de les comissions (com la d'obertura) i de pagar interessos mensualment."
+   ]
+  ]
+ },
+ "calculadora-gastos-compra-vivienda": {
+  "title": "Calculadora de despeses de compra d'un habitatge (impostos, notaria i registre)",
+  "h1": "Despeses de compra d'un habitatge",
+  "desc": "Estima els diners extra que necessites, a més del preu, per comprar un habitatge: impostos, notaria, registre, gestoria i taxació.",
+  "body": "<div class=\"row\"><div><label for=\"p\">Preu de l'habitatge (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"180000\"></div><div><label for=\"t\">Impost aplicable (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"8\"></div></div>\n<div class=\"row\"><div><label for=\"o1\">Notaria, registre i gestoria (% del preu)</label><input id=\"o1\" inputmode=\"decimal\" value=\"1,5\"></div><div><label for=\"ta\">Taxació (€)</label><input id=\"ta\" inputmode=\"decimal\" value=\"400\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),imp=p*num('t')/100,not=p*num('o1')/100,ta=num('ta')||0;const tot=imp+not+ta;\n$('o').innerHTML=show([['Impost',eur(imp)],['Notaria, registre i gestoria',eur(not)],['Taxació',eur(ta)],['Total despeses',eur(tot)],['Despeses sobre el preu',fmt(tot/p*100,1)+' %'],['Si finances el 80%: estalvi necessari',eur(p*0.2+tot)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Quin impost poso?</h2><p>En habitatge de <b>segona mà</b> es paga l'ITP, que fixa cada comunitat autònoma (sol estar entre el 6% i l'11%). En <b>obra nova</b> es paga IVA (10%) més l'impost d'Actes Jurídics Documentats, també variable per comunitat. Consulta el tipus de la teva comunitat. És una estimació; els imports reals depenen de cada operació.</p>",
+  "faq": [
+   [
+    "Quines despeses hi ha en comprar un habitatge?",
+    "Impostos (ITP o IVA i AJD segons el cas), notaria, registre, gestoria i taxació. Solen rondar entre el 10% i el 15% del preu."
+   ],
+   [
+    "El resultat és exacte?",
+    "És orientatiu: els impostos varien segons la comunitat autònoma i si l'habitatge és nou o de segona mà."
+   ]
+  ]
+ },
+ "cuanto-tardo-en-pagar-un-prestamo": {
+  "title": "Quant trigo a pagar un deute o préstec? Calculadora de termini",
+  "h1": "Quant trigo a pagar un préstec?",
+  "desc": "Calcula en quant de temps liquidaràs un deute (préstec, targeta, finançament) pagant una quota fixa mensual, i quants interessos pagaràs.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Deute pendent (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"i\">Interès anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"15\"></div></div>\n<label for=\"q\">Quota que pagues al mes (€)</label><input id=\"q\" inputmode=\"decimal\" value=\"200\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,q=num('q');\nif(q<=C*r){$('o').innerHTML=show([['Resultat','La quota no cobreix ni els interessos: el deute no es paga']]);return}\nconst n=r===0?C/q:-Math.log(1-C*r/q)/Math.log(1+r);\n$('o').innerHTML=show([['Temps per liquidar',Math.floor(n/12)+' anys i '+Math.ceil(n%12)+' mesos'],['Nombre de quotes',Math.ceil(n)],['Interessos totals',eur(q*n-C)],['Total pagat',eur(q*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Pagar només el mínim allarga molt un deute amb interès alt, com una targeta revolving. Pujar una mica la quota mensual pot reduir de manera notable el termini i els interessos.</p>",
+  "faq": [
+   [
+    "Com es calcula el temps per pagar un préstec?",
+    "A partir del capital, l'interès i la quota que pots pagar al mes s'obté el nombre de quotes necessàries."
+   ],
+   [
+    "Què passa si la quota és menor que els interessos?",
+    "El deute no s'amortitza mai: necessites una quota més gran que els interessos mensuals."
+   ]
+  ]
+ },
+ "calculadora-indemnizacion-despido": {
+  "title": "Calculadora d'indemnització per acomiadament (improcedent i objectiu)",
+  "h1": "Indemnització per acomiadament",
+  "desc": "Calcula la indemnització aproximada per acomiadament improcedent (33 dies per any) o objectiu (20 dies per any) a partir del teu salari i antiguitat.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Salari brut anual (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div><div><label for=\"y\">Anys treballats</label><input id=\"y\" inputmode=\"numeric\" value=\"5\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Mesos solts addicionals</label><input id=\"m\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"t\">Tipus d'acomiadament</label><select id=\"t\"><option value=\"imp\">Improcedent (33 dies/any, màx. 24 mensualitats)</option><option value=\"obj\">Objectiu (20 dies/any, màx. 12 mensualitats)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function c(){const s=num('s'),a=(num('y')||0)+(num('m')||0)/12,imp=$('t').value==='imp';const d=s/365,dias=imp?33:20,tope=(imp?24:12)*s/12;\nconst bruta=d*dias*a,ind=Math.min(bruta,tope);\n$('o').innerHTML=show([['Salari diari',eur(d)],['Antiguitat',fmt(a,2)+' anys'],['Indemnització calculada',eur(bruta)],['Indemnització (amb topall)',eur(ind)],['Topall aplicat',bruta>tope?'Sí ('+eur(tope)+')':'No']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Com es calcula</h2><p>Per a contractes posteriors a febrer de 2012, l'acomiadament improcedent s'indemnitza amb 33 dies de salari per any treballat (els mesos es prorrategen) amb un màxim de 24 mensualitats. En l'acomiadament objectiu són 20 dies per any amb un màxim de 12 mensualitats.</p><p>Si la teva relació laboral va començar abans del 12 de febrer de 2012, aquest període es calcula a 45 dies per any, així que aquesta calculadora no seria exacta. És una estimació orientativa: consulta amb un advocat laboralista o amb el teu sindicat abans de signar un finiquit.</p>",
+  "faq": [
+   [
+    "Quants dies per any es paguen en un acomiadament improcedent?",
+    "33 dies de salari per any treballat, amb un màxim de 24 mensualitats, per a contractes posteriors a febrer de 2012."
+   ],
+   [
+    "I en un acomiadament objectiu?",
+    "20 dies de salari per any treballat, amb un màxim de 12 mensualitats."
+   ],
+   [
+    "Aquesta calculadora és exacta?",
+    "És orientativa. Si el teu contracte és anterior a 2012 s'apliquen 45 dies per any al període previ. Consulta un professional."
+   ]
+  ]
+ },
+ "calculadora-salario-bruto-neto": {
+  "title": "Calculadora de sou net: de brut anual a net mensual (Espanya)",
+  "h1": "Sou brut a net",
+  "desc": "Estima el teu sou net mensual a Espanya a partir del brut anual, descomptant Seguretat Social i IRPF de manera aproximada.",
+  "body": "<div class=\"row\"><div><label for=\"b\">Salari brut anual (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"30000\"></div><div><label for=\"p\">Nombre de pagues</label><select id=\"p\"><option value=\"14\">14 pagues</option><option value=\"12\">12 pagues (prorratejades)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function irpf(x){const t=[[12450,.19],[20200,.24],[35200,.30],[60000,.37],[1e12,.45]];let r=0,prev=0;for(const[l,p]of t){if(x>prev)r+=(Math.min(x,l)-prev)*p;prev=l}return r}\nfunction c(){const b=num('b'),n=parseInt($('p').value);const ss=Math.min(b,58914)*0.065;const base=Math.max(0,b-ss-2000);\nconst cuota=Math.max(0,irpf(base)-irpf(5550));const neto=b-ss-cuota;\n$('o').innerHTML=show([['Seguretat Social (aprox.)',eur(ss)],['IRPF (aprox.)',eur(cuota)],['Tipus mitjà IRPF',fmt(cuota/b*100,1)+' %'],['Net anual',eur(neto)],['Net al mes ('+n+' pagues)',eur(neto/n)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Aquesta calculadora aplica una escala d'IRPF mitjana estatal més autonòmica, el mínim personal de 5.550 € i una cotització d'empleat d'aproximadament el 6,5%, sense fills ni altres circumstàncies personals. La teva nòmina real pot variar segons la teva comunitat autònoma, la teva situació familiar, el tipus de contracte i la retenció que indiqui la teva empresa.</p><p>Fes-la servir només com a referència per comparar ofertes.</p>",
+  "faq": [
+   [
+    "És exacte el sou net que surt?",
+    "No. És una estimació amb una escala mitjana d'IRPF i una cotització del 6,5% aprox. La teva nòmina real depèn de la teva comunitat, la teva situació familiar i la retenció de la teva empresa."
+   ],
+   [
+    "Quina diferència hi ha entre 12 i 14 pagues?",
+    "El net anual és el mateix; amb 14 pagues cobres dues extres i cada mensualitat és menor."
+   ]
+  ]
+ },
+ "calculadora-pagas-extra": {
+  "title": "Calculadora de pagues extra: sou mensual amb 12 o 14 pagues",
+  "h1": "Pagues extra: 12 o 14 pagues",
+  "desc": "Converteix un salari anual en mensual amb 12 pagues (prorratejades) o amb 14 pagues, i descobreix quant cobres a cada paga.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Salari anual (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"21000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a');$('o').innerHTML=show([['Amb 12 pagues',eur(a/12)+' al mes'],['Amb 14 pagues: cada mensual',eur(a/14)],['Amb 14 pagues: cada extra',eur(a/14)],['Diferència mes normal',eur(a/12-a/14)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El salari anual és el mateix amb 12 que amb 14 pagues: canvia com es reparteix. Amb 14 pagues cobres dues pagues extra (normalment a l'estiu i Nadal) i cada mes és menor; amb pagues prorratejades les extres es reparteixen entre els 12 mesos.</p>",
+  "faq": [
+   [
+    "Cobro més amb 14 pagues que amb 12?",
+    "No. El salari anual és el mateix; només canvia com es reparteix entre els mesos."
+   ],
+   [
+    "Què són les pagues prorratejades?",
+    "Les pagues extra repartides en les 12 nòmines mensuals, de manera que cobres el mateix cada mes."
+   ]
+  ]
+ },
+ "calculadora-calorias-tmb": {
+  "title": "Calculadora de calories diàries i metabolisme basal (TMB)",
+  "h1": "Calories diàries i metabolisme basal",
+  "desc": "Estima el teu metabolisme basal i les calories que gastes al dia segons la teva edat, pes, alçada i nivell d'activitat.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Sexe</label><select id=\"s\"><option value=\"h\">Home</option><option value=\"m\">Dona</option></select></div><div><label for=\"e\">Edat (anys)</label><input id=\"e\" inputmode=\"numeric\" value=\"35\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Pes (kg)</label><input id=\"p\" inputmode=\"decimal\" value=\"72\"></div><div><label for=\"a\">Alçada (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"172\"></div></div>\n<label for=\"f\">Nivell d'activitat</label><select id=\"f\"><option value=\"1.2\">Sedentari (poc o cap exercici)</option><option value=\"1.375\">Lleuger (1-3 dies/setmana)</option><option value=\"1.55\" selected>Moderat (3-5 dies/setmana)</option><option value=\"1.725\">Intens (6-7 dies/setmana)</option><option value=\"1.9\">Molt intens (feina física o doble sessió)</option></select><div id=\"o\"></div>",
+  "js": "function c(){const t=10*num('p')+6.25*num('a')-5*num('e')+($('s').value==='h'?5:-161),m=t*num('f');\n$('o').innerHTML=show([['Metabolisme basal (TMB)',fmt(t,0)+' kcal'],['Despesa diària total',fmt(m,0)+' kcal'],['Per perdre pes (-15%)',fmt(m*.85,0)+' kcal'],['Per guanyar pes (+10%)',fmt(m*1.1,0)+' kcal']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Com es calcula</h2><p>Es fa servir l'equació de Mifflin-St Jeor: 10 × pes (kg) + 6,25 × alçada (cm) − 5 × edat + 5 (homes) o − 161 (dones). El resultat és el metabolisme basal, les calories que gasta el teu cos en repòs, i es multiplica per un factor segons la teva activitat.</p><p>És una estimació general i no substitueix el consell d'un metge o dietista.</p>",
+  "faq": [
+   [
+    "Què és el metabolisme basal?",
+    "Són les calories que el teu cos gasta en repòs per mantenir funcions vitals com respirar o la circulació."
+   ],
+   [
+    "És exacte el resultat?",
+    "És una estimació amb l'equació de Mifflin-St Jeor. La despesa real varia d'una persona a una altra."
+   ]
+  ]
+ },
+ "calculadora-peso-ideal": {
+  "title": "Calculadora de pes ideal segons alçada i sexe",
+  "h1": "Pes ideal",
+  "desc": "Calcula un rang de pes saludable segons la teva alçada mitjançant l'IMC i la fórmula de Devine.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Sexe</label><select id=\"s\"><option value=\"h\">Home</option><option value=\"m\">Dona</option></select></div><div><label for=\"a\">Alçada (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),m=a/100,i=Math.max(0,a/2.54-60),dv=($('s').value==='h'?50:45.5)+2.3*i;\n$('o').innerHTML=show([['Rang saludable (IMC 18,5-24,9)',fmt(18.5*m*m,1)+' - '+fmt(24.9*m*m,1)+' kg'],['Fórmula de Devine',fmt(dv,1)+' kg']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El rang saludable s'obté amb l'IMC recomanat per l'OMS (entre 18,5 i 24,9). La fórmula de Devine és una referència clàssica basada només en alçada i sexe. Cap de les dues té en compte la teva massa muscular ni la teva constitució, així que són orientatives.</p>",
+  "faq": [
+   [
+    "Existeix un únic pes ideal?",
+    "No. Es parla d'un rang saludable, que depèn de l'alçada, la constitució i la massa muscular."
+   ],
+   [
+    "Quin IMC es considera normal?",
+    "Segons l'OMS, entre 18,5 i 24,9."
+   ]
+  ]
+ },
+ "calculadora-ritmo-carrera": {
+  "title": "Calculadora de ritme de cursa: min/km, km/h i temps final",
+  "h1": "Ritme de cursa",
+  "desc": "Calcula el teu ritme per quilòmetre i la teva velocitat mitjana a partir de la distància i el temps.",
+  "body": "<label for=\"d\">Distància (km)</label><input id=\"d\" inputmode=\"decimal\" value=\"10\">\n<div class=\"row\"><div><label for=\"h\">Hores</label><input id=\"h\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"mi\">Minuts</label><input id=\"mi\" inputmode=\"numeric\" value=\"55\"></div></div>\n<label for=\"se\">Segons</label><input id=\"se\" inputmode=\"numeric\" value=\"0\"><div id=\"o\"></div>",
+  "js": "function c(){const d=num('d'),t=(num('h')||0)*3600+(num('mi')||0)*60+(num('se')||0),p=t/d,pm=Math.floor(p/60),ps=Math.round(p%60);\nconst pad=n=>String(n).padStart(2,'0');const f=(x,n)=>{const s=Math.round(x*n);return Math.floor(s/3600)+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)};\n$('o').innerHTML=show([['Ritme',pm+':'+pad(ps===60?0:ps)+' min/km'],['Velocitat',fmt(d/(t/3600),2)+' km/h'],['Temps en 5 km',f(p,5)],['Temps en 10 km',f(p,10)],['Mitja marató',f(p,21.0975)],['Marató',f(p,42.195)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>El ritme és el temps que tardes a recórrer un quilòmetre. Els temps de 5 km, 10 km, mitja marató i marató es calculen suposant que mantens el mateix ritme, cosa que en distàncies llargues no sempre passa.</p>",
+  "faq": [
+   [
+    "Què és el ritme en cursa?",
+    "És el temps que tardes a recórrer un quilòmetre, expressat en minuts per quilòmetre."
+   ],
+   [
+    "Com passo de min/km a km/h?",
+    "Divideix 60 entre el ritme en minuts. Per exemple, 5:00 min/km són 12 km/h."
+   ]
+  ]
+ },
+ "calculadora-fecha-probable-parto": {
+  "title": "Calculadora de data probable de part i setmanes d'embaràs",
+  "h1": "Data probable de part",
+  "desc": "Calcula la data probable de part i les setmanes d'embaràs a partir de la data de la teva última menstruació.",
+  "body": "<label for=\"f\">Primer dia de l'última menstruació</label><input id=\"f\" type=\"date\"><button id=\"go\">Calcular</button><div id=\"o\"></div>",
+  "js": "const t=new Date();t.setDate(t.getDate()-70);$('f').value=t.toISOString().slice(0,10);\n$('go').onclick=()=>{const a=new Date($('f').value);if(isNaN(a)){$('o').innerHTML='<p>Tria una data.</p>';return}\nconst p=new Date(a.getTime()+280*864e5),d=Math.floor((new Date()-a)/864e5),fm=x=>x.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});\n$('o').innerHTML=show([['Data probable de part',fm(p)],['Setmanes d\\'embaràs',d>=0?Math.floor(d/7)+' setmanes i '+(d%7)+' dies':'—'],['Final del primer trimestre',fm(new Date(a.getTime()+91*864e5))]])};$('go').click();",
+  "text": "<p>S'aplica la regla de Naegele: data de l'última menstruació més 280 dies (40 setmanes), suposant cicles de 28 dies. Només una petita part dels nadons neix exactament en aquesta data. És una estimació: el teu metge o llevadora la confirmarà amb l'ecografia.</p>",
+  "faq": [
+   [
+    "Com es calcula la data probable de part?",
+    "Se sumen 280 dies (40 setmanes) al primer dia de l'última menstruació, amb la regla de Naegele."
+   ],
+   [
+    "És una data segura?",
+    "No, és una estimació. El teu metge o llevadora l'ajustarà amb l'ecografia."
+   ]
+  ]
+ },
+ "calculadora-vacaciones": {
+  "title": "Calculadora de vacances: dies meritats segons el teu contracte",
+  "h1": "Vacances meritades",
+  "desc": "Calcula quants dies de vacances et corresponen segons els dies treballats durant l'any.",
+  "body": "<div class=\"row\"><div><label for=\"v\">Dies de vacances a l'any</label><input id=\"v\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"d\">Dies treballats durant l'any</label><input id=\"d\" inputmode=\"numeric\" value=\"200\"></div></div>\n<div class=\"row\"><div><label for=\"u\">Dies ja gaudits</label><input id=\"u\" inputmode=\"numeric\" value=\"5\"></div><div><label for=\"s\">Salari brut anual (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const g=num('v')*Math.min(num('d'),365)/365,r=g-num('u'),dia=num('s')/365;\n$('o').innerHTML=show([['Vacances meritades',fmt(g,2)+' dies'],['Pendents de gaudir',fmt(r,2)+' dies'],['Valor aprox. pendents',eur(Math.max(r,0)*dia)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>L'Estatut dels Treballadors fixa un mínim de 30 dies naturals de vacances a l'any (uns 22 laborables). Si no has treballat l'any complet, es calculen en proporció. El teu conveni col·lectiu o contracte poden millorar aquests dies, així que revisa tots dos. El valor en euros fa servir el salari diari brut i és només orientatiu.</p>",
+  "faq": [
+   [
+    "Quantes vacances em corresponen per llei a Espanya?",
+    "Un mínim de 30 dies naturals a l'any, que el teu conveni o contracte poden millorar."
+   ],
+   [
+    "I si no treballo l'any complet?",
+    "Es calculen en proporció al temps treballat."
+   ]
+  ]
+ },
+ "calculadora-consumo-electrico": {
+  "title": "Calculadora de consum elèctric d'electrodomèstics (kWh i €)",
+  "h1": "Consum elèctric d'un aparell",
+  "desc": "Calcula quanta electricitat gasta un electrodomèstic i quant costa al mes segons la seva potència, hores d'ús i preu del kWh.",
+  "body": "<div class=\"row\"><div><label for=\"w\">Potència (watts)</label><input id=\"w\" inputmode=\"decimal\" value=\"1500\"></div><div><label for=\"h\">Hores d'ús al dia</label><input id=\"h\" inputmode=\"decimal\" value=\"2\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Dies d'ús al mes</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"p\">Preu del kWh (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"0,15\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const k=num('w')/1000*num('h'),m=k*num('d');$('o').innerHTML=show([['Consum diari',fmt(k,2)+' kWh'],['Consum mensual',fmt(m,1)+' kWh'],['Cost al mes',eur(m*num('p'))],['Cost a l\\'any',eur(m*num('p')*12)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>L'energia es mesura en quilowatts hora (kWh): potència en kW multiplicada per les hores d'ús. La potència figura a l'etiqueta de l'aparell. Posa el preu del kWh de la teva factura i recorda que el cost real també inclou el terme de potència, impostos i lloguer del comptador.</p>",
+  "faq": [
+   [
+    "Com es calcula el cost d'un electrodomèstic?",
+    "Potència en kW per hores d'ús dona els kWh consumits, que es multipliquen pel preu del kWh."
+   ],
+   [
+    "On veig la potència de l'aparell?",
+    "A l'etiqueta del producte o al seu manual, expressada en watts (W)."
+   ]
+  ]
+ },
+ "calculadora-consumo-combustible": {
+  "title": "Calculadora de consum de combustible (l/100 km)",
+  "h1": "Consum del cotxe en l/100 km",
+  "desc": "Calcula el consum mitjà del teu cotxe en litres cada 100 km i el que gastes per quilòmetre.",
+  "body": "<div class=\"row\"><div><label for=\"k\">Quilòmetres recorreguts</label><input id=\"k\" inputmode=\"decimal\" value=\"520\"></div><div><label for=\"l\">Litres repostats</label><input id=\"l\" inputmode=\"decimal\" value=\"31\"></div></div>\n<label for=\"p\">Preu del litre (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,55\"><div id=\"o\"></div>",
+  "js": "function c(){const k=num('k'),l=num('l'),p=num('p');$('o').innerHTML=show([['Consum',fmt(l/k*100,2)+' l/100 km'],['Quilòmetres per litre',fmt(k/l,2)+' km/l'],['Cost per 100 km',eur(l/k*100*p)],['Cost per km',eur(l/k*p)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Per a una dada fiable, omple el dipòsit, anota el comptaquilòmetres, recorre un bon tram i torna a omplir-lo fins al límit: els litres que hi entrin són els consumits en aquests quilòmetres.</p>",
+  "faq": [
+   [
+    "Com calculo el consum real del meu cotxe?",
+    "Omple el dipòsit, anota els quilòmetres, circula i torna a omplir-lo: litres repostats entre quilòmetres per 100."
+   ],
+   [
+    "Per què difereix del consum oficial?",
+    "L'oficial es mesura en condicions de laboratori; el real depèn de la conducció, la càrrega i el trànsit."
+   ]
+  ]
+ },
+ "calculadora-ecuacion-segundo-grado": {
+  "title": "Calculadora d'equacions de segon grau (pas a pas)",
+  "h1": "Equació de segon grau",
+  "desc": "Resol ax² + bx + c = 0 i obté les solucions i el discriminant.",
+  "body": "<div class=\"row\"><div><label for=\"a\">a</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">b</label><input id=\"b\" inputmode=\"decimal\" value=\"-3\"></div></div>\n<label for=\"c\">c</label><input id=\"c\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),b=num('b'),cc=num('c');if(!a){$('o').innerHTML='<p>El coeficient a no pot ser 0.</p>';return}\nconst D=b*b-4*a*cc;let r;if(D>0){r=[['x₁',fmt((-b+Math.sqrt(D))/(2*a),4)],['x₂',fmt((-b-Math.sqrt(D))/(2*a),4)]]}else if(D===0){r=[['Solució doble',fmt(-b/(2*a),4)]]}else{const re=fmt(-b/(2*a),4),im=fmt(Math.sqrt(-D)/(2*a),4);r=[['x₁',re+' + '+im+'i'],['x₂',re+' − '+im+'i']]}\n$('o').innerHTML=show([['Discriminant',fmt(D,4)]].concat(r))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Fórmula general</h2><p>Per a ax² + bx + c = 0 les solucions són x = (−b ± √(b² − 4ac)) / 2a. El discriminant b² − 4ac indica quantes solucions reals hi ha: dues si és positiu, una de doble si és zero i cap de real (dues de complexes) si és negatiu.</p>",
+  "faq": [
+   [
+    "Què és el discriminant?",
+    "És b² − 4ac. Si és positiu hi ha dues solucions reals, si és zero una de doble i si és negatiu cap de real."
+   ],
+   [
+    "Què passa si a val 0?",
+    "Deixa de ser de segon grau: és una equació lineal."
+   ]
+  ]
+ }
+}

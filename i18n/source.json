@@ -1,0 +1,1220 @@
+{
+"calculadora-iva": {
+"title": "Calculadora de IVA online (21%, 10%, 4%)",
+"h1": "Calculadora de IVA",
+"desc": "Añade o quita el IVA a cualquier importe. Tipos de España: 21%, 10% y 4%. Gratis y al instante.",
+"body": "<div class=\"row\"><div><label for=\"a\">Importe (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"100\"></div>\n<div><label for=\"r\">Tipo de IVA</label><select id=\"r\"><option value=\"21\">21% (general)</option><option value=\"10\">10% (reducido)</option><option value=\"4\">4% (superreducido)</option></select></div></div>\n<label for=\"m\">¿Qué quieres hacer?</label><select id=\"m\"><option value=\"add\">Añadir IVA (tengo el precio sin IVA)</option><option value=\"rem\">Quitar IVA (tengo el precio con IVA)</option></select>\n<button id=\"go\">Calcular</button><div id=\"o\"></div>",
+"js": "$('go').onclick=()=>{const a=num('a'),r=num('r')/100;let b,i,t;\nif($('m').value==='add'){b=a;i=a*r;t=a+i}else{t=a;b=a/(1+r);i=t-b}\n$('o').innerHTML=show([['Base imponible',eur(b)],['IVA',eur(i)],['Total con IVA',eur(t)]])};$('go').click();",
+"text": "<h2>¿Cómo se calcula el IVA?</h2><p>Para <b>añadir</b> el IVA se multiplica el precio sin IVA por 1,21 (si el tipo es el 21%). Para <b>quitarlo</b> se divide el precio final entre 1,21. En España hay tres tipos: general (21%), reducido (10%) y superreducido (4%).</p>\n<p>Esta calculadora es orientativa. Para facturas o declaraciones consulta a tu gestor.</p>",
+"faq": [
+[
+"¿Qué tipos de IVA hay en España?",
+"El tipo general es el 21%, el reducido el 10% y el superreducido el 4%. Algunos productos y servicios básicos tienen tipos reducidos."
+],
+[
+"¿Cómo se quita el IVA a un precio?",
+"Se divide el precio final entre 1,21 si el IVA es del 21%. Por ejemplo, 121 € con IVA son 100 € sin IVA."
+],
+[
+"¿Cómo se añade el IVA a un precio?",
+"Se multiplica el precio sin IVA por 1,21 para el 21%, por 1,10 para el 10% y por 1,04 para el 4%."
+]
+]
+},
+"calculadora-porcentajes": {
+"title": "Calculadora de porcentajes: cómo calcular un % fácil",
+"h1": "Calculadora de porcentajes",
+"desc": "Calcula el X% de una cantidad, qué porcentaje es un número de otro y la variación porcentual.",
+"body": "<h2>¿Cuánto es el X% de Y?</h2><div class=\"row\"><div><label for=\"p1\">Porcentaje (%)</label><input id=\"p1\" inputmode=\"decimal\" value=\"15\"></div><div><label for=\"y1\">De la cantidad</label><input id=\"y1\" inputmode=\"decimal\" value=\"200\"></div></div><div id=\"o1\"></div>\n<h2>¿Qué porcentaje es X de Y?</h2><div class=\"row\"><div><label for=\"x2\">Número X</label><input id=\"x2\" inputmode=\"decimal\" value=\"30\"></div><div><label for=\"y2\">Número Y</label><input id=\"y2\" inputmode=\"decimal\" value=\"120\"></div></div><div id=\"o2\"></div>\n<h2>Variación porcentual</h2><div class=\"row\"><div><label for=\"v1\">Valor inicial</label><input id=\"v1\" inputmode=\"decimal\" value=\"80\"></div><div><label for=\"v2\">Valor final</label><input id=\"v2\" inputmode=\"decimal\" value=\"100\"></div></div><div id=\"o3\"></div>",
+"js": "function c(){$('o1').innerHTML=show([['Resultado',fmt(num('p1')/100*num('y1'))]]);\n$('o2').innerHTML=show([['X es el',fmt(num('x2')/num('y2')*100)+' %']]);\nconst v=(num('v2')-num('v1'))/Math.abs(num('v1'))*100;$('o3').innerHTML=show([['Variación',(v>0?'+':'')+fmt(v)+' %']]);}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Fórmulas básicas</h2><ul><li><b>X% de Y</b> = Y × X ÷ 100</li><li><b>Qué % es X de Y</b> = X ÷ Y × 100</li><li><b>Variación %</b> = (final − inicial) ÷ inicial × 100</li></ul>",
+"faq": [
+[
+"¿Cómo calculo el 15% de una cantidad?",
+"Multiplica la cantidad por 15 y divide entre 100. El 15% de 200 es 30."
+],
+[
+"¿Cómo calculo una variación porcentual?",
+"Resta el valor inicial al final, divide entre el inicial y multiplica por 100."
+]
+]
+},
+"calculadora-propinas": {
+"title": "Calculadora de propinas y dividir la cuenta",
+"h1": "Calculadora de propinas y cuenta compartida",
+"desc": "Calcula la propina y cuánto paga cada persona al dividir la cuenta del restaurante.",
+"body": "<div class=\"row\"><div><label for=\"b\">Total de la cuenta (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"60\"></div><div><label for=\"t\">Propina (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"10\"></div></div>\n<label for=\"n\">Número de personas</label><input id=\"n\" inputmode=\"numeric\" value=\"4\"><div id=\"o\"></div>",
+"js": "function c(){const b=num('b'),t=num('t')/100,n=Math.max(1,num('n'));const tip=b*t,tot=b+tip;\n$('o').innerHTML=show([['Propina',eur(tip)],['Total',eur(tot)],['Por persona',eur(tot/n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>En España la propina no es obligatoria; lo habitual es dejar entre un 5% y un 10% si el servicio ha sido bueno. Para otros países el porcentaje habitual puede ser mayor.</p>",
+"faq": [
+[
+"¿Cuánta propina se suele dejar en España?",
+"No es obligatoria. Es habitual dejar entre un 5% y un 10% si el servicio ha sido bueno, y muchos lo redondean al euro más cercano."
+],
+[
+"¿Cómo divido la cuenta entre varias personas?",
+"Indica el número de comensales y la calculadora reparte el total con propina incluida a partes iguales."
+]
+]
+},
+"dias-entre-fechas": {
+"title": "Calculadora de días entre dos fechas",
+"h1": "Días entre dos fechas",
+"desc": "Calcula cuántos días, semanas y días laborables hay entre dos fechas.",
+"body": "<div class=\"row\"><div><label for=\"d1\">Fecha inicial</label><input id=\"d1\" type=\"date\"></div><div><label for=\"d2\">Fecha final</label><input id=\"d2\" type=\"date\"></div></div>\n<button id=\"go\">Calcular</button><div id=\"o\"></div>",
+"js": "const t=new Date();$('d1').value=t.toISOString().slice(0,10);const f=new Date(t.getTime()+30*864e5);$('d2').value=f.toISOString().slice(0,10);\n$('go').onclick=()=>{let a=new Date($('d1').value),b=new Date($('d2').value);if(isNaN(a)||isNaN(b)){$('o').innerHTML='<p>Elige las dos fechas.</p>';return}\nif(a>b)[a,b]=[b,a];const days=Math.round((b-a)/864e5);let w=0;for(let d=new Date(a);d<b;d.setDate(d.getDate()+1)){const g=d.getDay();if(g!==0&&g!==6)w++}\n$('o').innerHTML=show([['Días',fmt(days,0)],['Semanas',fmt(days/7,1)],['Meses aprox.',fmt(days/30.44,1)],['Días laborables (L-V)',fmt(w,0)]])};$('go').click();",
+"text": "<p>Los días laborables que se muestran son de lunes a viernes y no descuentan festivos, que varían según la comunidad autónoma y la localidad.</p>",
+"faq": [
+[
+"¿Se cuenta el día de inicio?",
+"Por defecto se calcula la diferencia entre ambas fechas, sin incluir el día inicial. Suma 1 si quieres contar ambos extremos."
+],
+[
+"¿Cuenta solo días laborables?",
+"No, cuenta días naturales."
+]
+]
+},
+"calculadora-edad": {
+"title": "Calculadora de edad exacta: años, meses y días",
+"h1": "Calculadora de edad",
+"desc": "Descubre tu edad exacta en años, meses y días y cuánto falta para tu próximo cumpleaños.",
+"body": "<label for=\"n\">Fecha de nacimiento</label><input id=\"n\" type=\"date\" value=\"2000-01-01\"><button id=\"go\">Calcular</button><div id=\"o\"></div>",
+"js": "$('go').onclick=()=>{const n=new Date($('n').value),h=new Date();if(isNaN(n)||n>h){$('o').innerHTML='<p>Introduce una fecha válida.</p>';return}\nlet y=h.getFullYear()-n.getFullYear(),m=h.getMonth()-n.getMonth(),d=h.getDate()-n.getDate();\nif(d<0){m--;d+=new Date(h.getFullYear(),h.getMonth(),0).getDate()}if(m<0){y--;m+=12}\nlet nx=new Date(h.getFullYear(),n.getMonth(),n.getDate());if(nx<=new Date(h.getFullYear(),h.getMonth(),h.getDate()))nx=new Date(h.getFullYear()+1,n.getMonth(),n.getDate());\nconst tot=Math.floor((h-n)/864e5);\n$('o').innerHTML=show([['Edad',y+' años, '+m+' meses, '+d+' días'],['Días vividos',fmt(tot,0)],['Próximo cumpleaños en',Math.ceil((nx-h)/864e5)+' días']])};$('go').click();",
+"text": "",
+"faq": [
+[
+"¿Cómo se calcula la edad exacta?",
+"Se restan años, meses y días entre tu fecha de nacimiento y hoy, ajustando por la duración real de cada mes."
+],
+[
+"¿Se guarda mi fecha de nacimiento?",
+"No. Todo se calcula en tu navegador."
+]
+]
+},
+"conversor-unidades": {
+"title": "Conversor de unidades: longitud, peso, volumen y temperatura",
+"h1": "Conversor de unidades",
+"desc": "Convierte kilómetros a millas, kilos a libras, litros a galones y grados Celsius a Fahrenheit.",
+"body": "<label for=\"c\">Tipo</label><select id=\"c\"></select>\n<div class=\"row\"><div><label for=\"v\">Valor</label><input id=\"v\" inputmode=\"decimal\" value=\"1\"></div><div></div></div>\n<div class=\"row\"><div><label for=\"f\">De</label><select id=\"f\"></select></div><div><label for=\"t\">A</label><select id=\"t\"></select></div></div><div id=\"o\"></div>",
+"js": "const U={'Longitud':{m:1,km:1000,cm:.01,mm:.001,milla:1609.344,yarda:.9144,pie:.3048,pulgada:.0254},\n'Peso':{kg:1,g:.001,mg:1e-6,tonelada:1000,libra:.45359237,onza:.028349523},\n'Volumen':{litro:1,ml:.001,'m³':1000,'galón (US)':3.785411784,'taza (US)':.2365882365},\n'Temperatura':{'°C':1,'°F':1,'K':1}};\nconst c=$('c'),f=$('f'),t=$('t');Object.keys(U).forEach(k=>c.add(new Option(k,k)));\nfunction fill(){const k=Object.keys(U[c.value]);f.innerHTML=t.innerHTML='';k.forEach(x=>{f.add(new Option(x,x));t.add(new Option(x,x))});t.selectedIndex=Math.min(1,k.length-1);calc()}\nfunction calc(){const v=num('v');let r;\nif(c.value==='Temperatura'){let C=f.value==='°C'?v:f.value==='°F'?(v-32)*5/9:v-273.15;r=t.value==='°C'?C:t.value==='°F'?C*9/5+32:C+273.15}\nelse r=v*U[c.value][f.value]/U[c.value][t.value];\n$('o').innerHTML=show([[fmt(v,6)+' '+f.value+' =',fmt(r,6)+' '+t.value]])}\nc.onchange=fill;[f,t,$('v')].forEach(e=>e.oninput=calc);f.onchange=t.onchange=calc;fill();",
+"text": "",
+"faq": [
+[
+"¿Qué unidades puedo convertir?",
+"Las de longitud, peso, volumen y otras magnitudes habituales que ofrece la herramienta."
+],
+[
+"¿Es exacto el resultado?",
+"Usa factores de conversión estándar y redondea el resultado para facilitar la lectura."
+]
+]
+},
+"generador-contrasenas": {
+"title": "Generador de contraseñas seguras aleatorias",
+"h1": "Generador de contraseñas seguras",
+"desc": "Crea contraseñas aleatorias y seguras en tu navegador. No se envían ni se guardan en ningún sitio.",
+"body": "<label for=\"l\">Longitud: <b id=\"lv\">16</b></label><input id=\"l\" type=\"range\" min=\"8\" max=\"64\" value=\"16\">\n<label><input type=\"checkbox\" id=\"u\" checked style=\"width:auto\"> Mayúsculas</label><label><input type=\"checkbox\" id=\"n\" checked style=\"width:auto\"> Números</label><label><input type=\"checkbox\" id=\"s\" checked style=\"width:auto\"> Símbolos</label>\n<button id=\"go\">Generar</button> <button id=\"cp\" class=\"sec\">Copiar</button><div class=\"card\" style=\"word-break:break-all;font:20px monospace\" id=\"o\"></div>",
+"js": "function gen(){let s='abcdefghijkmnopqrstuvwxyz';if($('u').checked)s+='ABCDEFGHJKLMNPQRSTUVWXYZ';if($('n').checked)s+='23456789';if($('s').checked)s+='!@#$%&*?-_+=';\nconst L=+$('l').value,a=new Uint32Array(L);crypto.getRandomValues(a);$('o').textContent=Array.from(a,x=>s[x%s.length]).join('');$('lv').textContent=L}\n$('go').onclick=gen;$('l').oninput=gen;$('cp').onclick=()=>{navigator.clipboard.writeText($('o').textContent);$('cp').textContent='¡Copiada!';setTimeout(()=>$('cp').textContent='Copiar',1500)};gen();",
+"text": "<p>Una contraseña larga (16 o más caracteres) y única para cada servicio es la mejor defensa. Se genera con el generador criptográfico de tu navegador y nunca sale de tu dispositivo.</p>",
+"faq": [
+[
+"¿Qué hace segura una contraseña?",
+"La longitud sobre todo: se recomiendan 14 caracteres o más, mezclando letras, números y símbolos, y una distinta para cada servicio."
+],
+[
+"¿Se guarda la contraseña generada?",
+"No. Se genera en tu navegador y no se envía a ningún servidor."
+]
+]
+},
+"contador-palabras": {
+"title": "Contador de palabras y caracteres online",
+"h1": "Contador de palabras y caracteres",
+"desc": "Cuenta palabras, caracteres, frases y párrafos de tu texto y calcula el tiempo de lectura.",
+"body": "<label for=\"x\">Pega o escribe tu texto</label><textarea id=\"x\" placeholder=\"Escribe aquí...\"></textarea><div id=\"o\"></div>",
+"js": "function c(){const x=$('x').value,w=(x.trim().match(/\\S+/g)||[]).length;\n$('o').innerHTML=show([['Palabras',fmt(w,0)],['Caracteres',fmt(x.length,0)],['Sin espacios',fmt(x.replace(/\\s/g,'').length,0)],['Frases',fmt((x.match(/[.!?]+(\\s|$)/g)||[]).length,0)],['Párrafos',fmt(x.split(/\\n+/).filter(s=>s.trim()).length,0)],['Lectura',Math.max(w?1:0,Math.round(w/200))+' min']])}\n$('x').oninput=c;c();",
+"text": "<p>El tiempo de lectura se estima a 200 palabras por minuto. Útil para redacciones, límites de caracteres en redes sociales, descripciones de vídeo o SEO.</p>",
+"faq": [
+[
+"¿Cómo cuenta las palabras?",
+"Separa el texto por espacios y saltos de línea."
+],
+[
+"¿Se guarda mi texto?",
+"No. El recuento se hace en tu navegador y el texto no se envía a ningún servidor."
+]
+]
+},
+"calculadora-descuentos": {
+"title": "Calculadora de descuentos y rebajas",
+"h1": "Calculadora de descuentos",
+"desc": "Calcula el precio final y cuánto ahorras con un descuento o rebaja (porcentaje).",
+"body": "<div class=\"row\"><div><label for=\"p\">Precio original (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"59,90\"></div><div><label for=\"d\">Descuento (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"30\"></div></div>\n<label for=\"d2\">Descuento adicional (%) — opcional</label><input id=\"d2\" inputmode=\"decimal\" value=\"0\"><div id=\"o\"></div>",
+"js": "function c(){const p=num('p'),a=num('d')/100,b=(num('d2')||0)/100;const f=p*(1-a)*(1-b);\n$('o').innerHTML=show([['Precio final',eur(f)],['Ahorras',eur(p-f)],['Descuento total',fmt((1-f/p)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Si aplicas dos descuentos seguidos, no se suman: el segundo se aplica sobre el precio ya rebajado. Por ejemplo, 30% + 10% equivale a un 37% de descuento total.</p>",
+"faq": [
+[
+"¿Cómo se calcula un descuento?",
+"Precio final = precio original × (1 − descuento/100). Por ejemplo, 80 € con un 25% de descuento son 60 €."
+],
+[
+"¿Dos descuentos del 20% y 10% suman un 30%?",
+"No. Se aplican en cadena: 100 € → 80 € → 72 €, un 28% de descuento total."
+]
+]
+},
+"calculadora-hipoteca": {
+"title": "Calculadora de hipoteca: cuota mensual e intereses",
+"h1": "Calculadora de hipoteca",
+"desc": "Calcula la cuota mensual y el total de intereses de una hipoteca a tipo fijo.",
+"body": "<div class=\"row\"><div><label for=\"c\">Capital a financiar (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"i\">Interés anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Plazo (años)</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"><div id=\"o\"></div>",
+"js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('y')*12;const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Cuota mensual',eur(q)],['Total a pagar',eur(q*n)],['Total intereses',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Cálculo con sistema de amortización francés (cuota constante) y tipo fijo. No incluye comisiones, seguros ni gastos de formalización. Es una simulación orientativa, no una oferta.</p>",
+"faq": [
+[
+"¿Cómo se calcula la cuota de una hipoteca?",
+"Con la fórmula de amortización francesa: cuota = capital × i / (1 − (1 + i)^−n), donde i es el interés mensual y n el número de cuotas."
+],
+[
+"¿Qué diferencia hay entre hipoteca fija y variable?",
+"En la fija el interés no cambia durante todo el plazo. En la variable depende del Euríbor más un diferencial y se revisa periódicamente."
+],
+[
+"¿Incluye esta calculadora seguros y comisiones?",
+"No. Calcula solo capital e intereses. Los seguros vinculados y las comisiones aumentan el coste real."
+]
+]
+},
+"calculadora-imc": {
+"title": "Calculadora de IMC (índice de masa corporal)",
+"h1": "Calculadora de IMC",
+"desc": "Calcula tu índice de masa corporal a partir de tu peso y altura y consulta la categoría según la OMS.",
+"body": "<div class=\"row\"><div><label for=\"w\">Peso (kg)</label><input id=\"w\" inputmode=\"decimal\" value=\"70\"></div><div><label for=\"h\">Altura (cm)</label><input id=\"h\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const w=num('w'),h=num('h')/100,i=w/(h*h);const k=i<18.5?'Bajo peso':i<25?'Peso normal':i<30?'Sobrepeso':'Obesidad';\n$('o').innerHTML=show([['Tu IMC',fmt(i,1)],['Categoría (OMS)',k]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Rangos del IMC según la OMS</h2><ul><li>Menos de 18,5: bajo peso</li><li>18,5 a 24,9: peso normal</li><li>25 a 29,9: sobrepeso</li><li>30 o más: obesidad</li></ul><p>El IMC es solo un indicador orientativo: no distingue entre músculo y grasa. Para cualquier decisión sobre tu salud consulta a un profesional sanitario.</p>",
+"faq": [
+[
+"¿Qué es el IMC?",
+"El índice de masa corporal relaciona tu peso con tu altura: peso (kg) dividido entre altura (m) al cuadrado."
+],
+[
+"¿Qué IMC se considera normal?",
+"Según la OMS, entre 18,5 y 24,9."
+],
+[
+"¿Es fiable el IMC?",
+"Es solo un indicador general: no distingue entre músculo y grasa. Consulta a un profesional sanitario para valorar tu salud."
+]
+]
+},
+"calculadora-interes-compuesto": {
+"title": "Calculadora de interés compuesto y ahorro",
+"h1": "Calculadora de interés compuesto",
+"desc": "Simula cuánto dinero tendrás ahorrando una cantidad cada mes con un interés anual durante varios años.",
+"body": "<div class=\"row\"><div><label for=\"i0\">Capital inicial (€)</label><input id=\"i0\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"ap\">Aportación mensual (€)</label><input id=\"ap\" inputmode=\"decimal\" value=\"100\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Interés anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"4\"></div><div><label for=\"y\">Años</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"></div></div><div id=\"o\"></div>",
+"js": "function c(){let b=num('i0');const a=num('ap'),r=num('r')/100/12,n=Math.round(num('y')*12);for(let k=0;k<n;k++){b=b*(1+r)+a}\nconst put=num('i0')+a*n;$('o').innerHTML=show([['Capital final',eur(b)],['Total aportado',eur(put)],['Intereses ganados',eur(b-put)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>El interés compuesto significa que los intereses generan a su vez nuevos intereses. Cuanto antes empieces y más tiempo mantengas el ahorro, mayor es el efecto. Esta simulación supone una rentabilidad constante, algo que en la realidad no está garantizado, y no tiene en cuenta impuestos ni inflación. No es asesoramiento financiero.</p>",
+"faq": [
+[
+"¿Qué es el interés compuesto?",
+"Es el que se calcula sobre el capital más los intereses ya generados, por lo que el dinero crece cada vez más rápido."
+],
+[
+"¿Esta calculadora tiene en cuenta los impuestos?",
+"No. Tampoco la inflación ni las comisiones. Es una simulación con rentabilidad constante."
+]
+]
+},
+"calculadora-prestamos": {
+"title": "Calculadora de préstamos personales: cuota mensual",
+"h1": "Calculadora de préstamos",
+"desc": "Calcula la cuota mensual y los intereses totales de un préstamo personal o de coche.",
+"body": "<div class=\"row\"><div><label for=\"c\">Importe (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"i\">Interés anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"7\"></div></div>\n<label for=\"m\">Plazo (meses)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"><div id=\"o\"></div>",
+"js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('m');const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Cuota mensual',eur(q)],['Total a devolver',eur(q*n)],['Intereses',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Cálculo con cuota constante. No incluye comisiones de apertura ni seguros vinculados. Compara siempre la TAE que te ofrezca cada entidad.</p>",
+"faq": [
+[
+"¿Cómo calculo la cuota de un préstamo personal?",
+"Introduce el importe, el interés anual (TIN) y el plazo en meses. La calculadora aplica cuota constante con amortización francesa."
+],
+[
+"¿Qué es mejor, reducir cuota o plazo?",
+"Reducir el plazo ahorra más intereses; reducir la cuota alivia tu mes a mes. Depende de tu situación."
+],
+[
+"¿Es lo mismo TIN que TAE?",
+"No. La TAE incluye además las comisiones y es la cifra adecuada para comparar ofertas."
+]
+]
+},
+"calculadora-nota-media": {
+"title": "Calculadora de nota media y nota que necesito en el examen",
+"h1": "Calculadora de nota media",
+"desc": "Calcula tu nota media ponderada y la nota que necesitas en el examen final para aprobar.",
+"body": "<h2>Media ponderada</h2><div id=\"rows\"></div><div id=\"o1\"></div>\n<h2>¿Qué nota necesito en el examen final?</h2><div class=\"row\"><div><label for=\"a\">Nota actual (0-10)</label><input id=\"a\" inputmode=\"decimal\" value=\"5,5\"></div><div><label for=\"wa\">Peso de la nota actual (%)</label><input id=\"wa\" inputmode=\"decimal\" value=\"60\"></div></div>\n<div class=\"row\"><div><label for=\"obj\">Nota que quieres sacar</label><input id=\"obj\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o2\"></div>",
+"js": "const R=$('rows');for(let k=1;k<=6;k++)R.insertAdjacentHTML('beforeend','<div class=\"row\"><div><label>Nota '+k+'</label><input class=\"n\" inputmode=\"decimal\"></div><div><label>Peso '+k+' (%)</label><input class=\"p\" inputmode=\"decimal\"></div></div>');\nR.querySelectorAll('.n')[0].value='7';R.querySelectorAll('.p')[0].value='40';R.querySelectorAll('.n')[1].value='5';R.querySelectorAll('.p')[1].value='60';\nfunction c(){const n=[...R.querySelectorAll('.n')],p=[...R.querySelectorAll('.p')];let s=0,w=0;n.forEach((x,i)=>{const a=parseFloat(x.value.replace(',','.')),b=parseFloat(p[i].value.replace(',','.'));if(isFinite(a)&&isFinite(b)){s+=a*b;w+=b}});\n$('o1').innerHTML=show([['Nota media',w?fmt(s/w,2):'—'],['Peso total',fmt(w,0)+' %']]);\nconst need=(num('obj')-num('a')*num('wa')/100)/((100-num('wa'))/100);\n$('o2').innerHTML=show([['Nota necesaria en el examen',need>10?fmt(need,2)+' (no es posible)':need<0?'0 (ya la tienes)':fmt(need,2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "",
+"faq": [
+[
+"¿Cómo se calcula la nota media ponderada?",
+"Se multiplica cada nota por su peso o créditos, se suman los resultados y se divide entre la suma de pesos."
+],
+[
+"¿Sirve para la nota de acceso a la universidad?",
+"Para eso usa la calculadora específica de nota de acceso, que aplica las ponderaciones de la EBAU/PAU."
+]
+]
+},
+"regla-de-tres": {
+"title": "Calculadora de regla de tres simple (directa e inversa)",
+"h1": "Calculadora de regla de tres",
+"desc": "Resuelve reglas de tres simples directas e inversas paso a paso.",
+"body": "<label for=\"t\">Tipo</label><select id=\"t\"><option value=\"d\">Directa (más → más)</option><option value=\"i\">Inversa (más → menos)</option></select>\n<div class=\"row\"><div><label for=\"a\">Si A</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"b\">equivale a B</label><input id=\"b\" inputmode=\"decimal\" value=\"12\"></div></div>\n<div class=\"row\"><div><label for=\"c\">entonces C</label><input id=\"c\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o\"></div>",
+"js": "function c(){const a=num('a'),b=num('b'),cc=num('c');const x=$('t').value==='d'?b*cc/a:a*b/cc;$('o').innerHTML=show([['Resultado (X)',fmt(x,4)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<ul><li><b>Directa:</b> X = B × C ÷ A. Ejemplo: 3 kg cuestan 12 €, ¿cuánto cuestan 5 kg? 20 €.</li><li><b>Inversa:</b> X = A × B ÷ C. Ejemplo: 3 obreros tardan 12 días, ¿cuánto tardan 6? 6 días.</li></ul>",
+"faq": [
+[
+"¿Qué es una regla de tres simple directa?",
+"Cuando al aumentar una magnitud aumenta la otra en la misma proporción: x = b × c / a."
+],
+[
+"¿Y la inversa?",
+"Cuando al aumentar una magnitud la otra disminuye, como velocidad y tiempo: x = a × b / c."
+]
+]
+},
+"sorteo-aleatorio": {
+"title": "Sorteo aleatorio: elegir ganador de una lista de nombres",
+"h1": "Sorteo aleatorio de nombres",
+"desc": "Pega una lista de nombres (uno por línea) y elige al azar uno o varios ganadores. Ideal para sorteos en redes sociales.",
+"body": "<label for=\"l\">Lista de participantes (uno por línea)</label><textarea id=\"l\" placeholder=\"Ana&#10;Luis&#10;Marta\"></textarea>\n<label for=\"n\">Número de ganadores</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Sortear</button><div id=\"o\"></div>",
+"js": "$('go').onclick=()=>{const L=[...new Set($('l').value.split('\\n').map(s=>s.trim()).filter(Boolean))];const n=Math.min(Math.max(1,num('n')||1),L.length);\nif(!L.length){$('o').innerHTML='<p>Añade al menos un nombre.</p>';return}\nfor(let i=L.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[L[i],L[j]]=[L[j],L[i]]}\n$('o').innerHTML='<div class=\"card\"><b>🎉 Ganador'+(n>1?'es':'')+':</b><ol>'+L.slice(0,n).map(x=>'<li style=\"font-size:20px\">'+x.replace(/</g,'&lt;')+'</li>').join('')+'</ol></div>'};",
+"text": "<p>El sorteo usa el generador aleatorio criptográfico de tu navegador y elimina nombres repetidos. Si lo haces en redes sociales, graba la pantalla del sorteo como prueba y revisa las bases legales de tu plataforma.</p>",
+"faq": [
+[
+"¿Cómo funciona el sorteo?",
+"Elige al azar entre los nombres o elementos que introduzcas."
+],
+[
+"¿Es válido para sorteos con premios?",
+"Para sorteos públicos o con premios conviene seguir la normativa aplicable y las bases del sorteo."
+]
+]
+},
+"coste-viaje-gasolina": {
+"title": "Calculadora de coste de un viaje en coche (gasolina)",
+"h1": "Coste de un viaje en coche",
+"desc": "Calcula cuánta gasolina o diésel gastarás y cuánto cuesta un viaje, también por persona.",
+"body": "<div class=\"row\"><div><label for=\"k\">Distancia (km)</label><input id=\"k\" inputmode=\"decimal\" value=\"450\"></div><div><label for=\"c\">Consumo (l/100 km)</label><input id=\"c\" inputmode=\"decimal\" value=\"6,5\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Precio del litro (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,60\"></div><div><label for=\"n\">Personas</label><input id=\"n\" inputmode=\"numeric\" value=\"3\"></div></div>\n<label><input type=\"checkbox\" id=\"rt\" style=\"width:auto\"> Ida y vuelta</label><div id=\"o\"></div>",
+"js": "function c(){let k=num('k');if($('rt').checked)k*=2;const l=k*num('c')/100,t=l*num('p');$('o').innerHTML=show([['Litros',fmt(l,1)+' l'],['Coste combustible',eur(t)],['Por persona',eur(t/Math.max(1,num('n')))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>No incluye peajes, aparcamiento ni desgaste del vehículo. Compartir coche reparte el coste del combustible entre todos los ocupantes.</p>",
+"faq": [
+[
+"¿Cómo se calcula el coste de un viaje en coche?",
+"Se multiplican los kilómetros por el consumo (l/100 km) dividido entre 100 y por el precio del litro."
+],
+[
+"¿Incluye peajes o desgaste?",
+"No. Solo calcula el combustible; los peajes, aparcamiento y mantenimiento se suman aparte."
+]
+]
+},
+"calculadora-horas-trabajadas": {
+"title": "Calculadora de horas trabajadas entre dos horas",
+"h1": "Calculadora de horas trabajadas",
+"desc": "Calcula las horas trabajadas entre la hora de entrada y de salida, descontando el descanso.",
+"body": "<div class=\"row\"><div><label for=\"a\">Entrada</label><input id=\"a\" type=\"time\" value=\"09:00\"></div><div><label for=\"b\">Salida</label><input id=\"b\" type=\"time\" value=\"17:30\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Descanso (minutos)</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"r\">Precio por hora (€) — opcional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+"js": "function tm(s){const p=s.split(':');return +p[0]*60+ +p[1]}\nfunction c(){let m=tm($('b').value)-tm($('a').value);if(m<0)m+=1440;m-=num('d')||0;m=Math.max(0,m);const h=m/60;\n$('o').innerHTML=show([['Tiempo trabajado',Math.floor(m/60)+' h '+(m%60)+' min'],['En horas decimales',fmt(h,2)],['Importe',eur(h*(num('r')||0))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Si la hora de salida es menor que la de entrada se entiende que el turno cruza la medianoche.</p>",
+"faq": [
+[
+"¿Cómo se calculan las horas trabajadas?",
+"Se resta la hora de entrada a la de salida y se descuentan los descansos no remunerados."
+],
+[
+"¿Sirve para turnos que cruzan la medianoche?",
+"Sí, siempre que indiques correctamente las horas de entrada y salida."
+]
+]
+},
+"convertidor-mayusculas": {
+"title": "Convertir texto a mayúsculas, minúsculas y título",
+"h1": "Convertidor de mayúsculas y minúsculas",
+"desc": "Pasa tu texto a MAYÚSCULAS, minúsculas, Tipo Título o Tipo frase con un clic.",
+"body": "<textarea id=\"x\" placeholder=\"Escribe o pega tu texto...\"></textarea>\n<button data-m=\"u\">MAYÚSCULAS</button> <button data-m=\"l\" class=\"sec\">minúsculas</button> <button data-m=\"t\" class=\"sec\">Tipo Título</button> <button data-m=\"s\" class=\"sec\">Tipo frase</button> <button id=\"cp\" class=\"sec\">Copiar</button>",
+"js": "const x=$('x');document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=b.dataset.m,v=x.value;\nx.value=m==='u'?v.toUpperCase():m==='l'?v.toLowerCase():m==='t'?v.toLowerCase().replace(/(^|\\s)(\\S)/g,(a,s,c)=>s+c.toUpperCase()):v.toLowerCase().replace(/(^|[.!?¡¿]\\s*)(\\S)/g,(a,s,c)=>s+c.toUpperCase())});\n$('cp').onclick=()=>{navigator.clipboard.writeText(x.value);$('cp').textContent='¡Copiado!';setTimeout(()=>$('cp').textContent='Copiar',1500)};",
+"text": "",
+"faq": [
+[
+"¿Qué formatos admite?",
+"Convierte el texto a MAYÚSCULAS, minúsculas y otros estilos de capitalización."
+],
+[
+"¿Se guarda mi texto?",
+"No. La conversión se hace en tu navegador."
+]
+]
+},
+"calculadora-margen-beneficio": {
+"title": "Calculadora de margen y beneficio (y margen sobre coste)",
+"h1": "Calculadora de margen de beneficio",
+"desc": "Calcula el beneficio, el margen y el markup de un producto, o el precio de venta para ganar el margen que quieras.",
+"body": "<h2>Tengo coste y precio de venta</h2><div class=\"row\"><div><label for=\"c\">Coste del producto (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"v\">Precio de venta (€)</label><input id=\"v\" inputmode=\"decimal\" value=\"25\"></div></div><div id=\"o1\"></div>\n<h2>Quiero un margen concreto</h2><div class=\"row\"><div><label for=\"c2\">Coste (€)</label><input id=\"c2\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"m2\">Margen deseado (%)</label><input id=\"m2\" inputmode=\"decimal\" value=\"40\"></div></div><div id=\"o2\"></div>",
+"js": "function c(){const C=num('c'),V=num('v');$('o1').innerHTML=show([['Beneficio',eur(V-C)],['Margen sobre venta',fmt((V-C)/V*100,1)+' %'],['Markup sobre coste',fmt((V-C)/C*100,1)+' %']]);\nconst C2=num('c2'),m=num('m2')/100;$('o2').innerHTML=show([['Precio de venta',eur(C2/(1-m))],['Beneficio por unidad',eur(C2/(1-m)-C2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Margen y markup no son lo mismo</h2><p>El <b>margen</b> es el beneficio dividido entre el precio de venta. El <b>markup</b> es el beneficio dividido entre el coste. Un producto que cuesta 12 € y se vende a 25 € tiene un 52% de margen y un 108% de markup. Recuerda descontar también envío, comisiones de plataforma, devoluciones y publicidad para saber tu beneficio real.</p>",
+"faq": [
+[
+"¿Qué diferencia hay entre margen y markup?",
+"El margen se calcula sobre el precio de venta y el markup sobre el coste. Con coste 60 € y venta 100 €, el margen es 40% y el markup 66,7%."
+],
+[
+"¿Cómo fijo el precio para un margen concreto?",
+"Precio = coste / (1 − margen). Para un 30% de margen con coste 70 €, el precio es 100 €."
+]
+]
+},
+"calcular-letra-dni": {
+"title": "Calcular la letra del DNI a partir del número",
+"h1": "Calculadora de la letra del DNI",
+"desc": "Introduce los 8 números de tu DNI y descubre su letra. También sirve para comprobar si un DNI es válido.",
+"body": "<label for=\"n\">Número del DNI (8 cifras)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"8\" value=\"12345678\"><div id=\"o\"></div>",
+"js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const v=$('n').value.replace(/\\D/g,'');if(v.length<7||v.length>8){$('o').innerHTML='<p>Introduce 7 u 8 cifras.</p>';return}\n$('o').innerHTML=show([['Letra',L[parseInt(v,10)%23]],['DNI completo',v.padStart(8,'0')+L[parseInt(v,10)%23]]])}\n$('n').oninput=c;c();",
+"text": "<h2>¿Cómo se calcula?</h2><p>La letra del DNI se obtiene dividiendo el número entre 23 y asignando una letra según el resto, de la serie TRWAGMYFPDXBNJZSQVHLCKE. Esta herramienta funciona en tu navegador y no guarda ni envía ningún dato.</p>",
+"faq": [
+[
+"¿Cómo se calcula la letra del DNI?",
+"Se divide el número entre 23 y el resto indica la letra en la serie TRWAGMYFPDXBNJZSQVHLCKE."
+],
+[
+"¿Sirve para comprobar si un DNI es válido?",
+"Sí. Si la letra calculada coincide con la del documento, el formato es correcto. No confirma que el DNI exista."
+],
+[
+"¿Se guarda el número que escribo?",
+"No. El cálculo se hace en tu navegador y no se envía a ningún servidor."
+]
+]
+},
+"dias-para-navidad": {
+"title": "¿Cuántos días faltan para Navidad, Nochevieja y Reyes?",
+"h1": "Cuenta atrás: días para Navidad",
+"desc": "Mira cuántos días faltan para Navidad, Nochevieja y el Día de Reyes.",
+"body": "<div id=\"o\"></div>",
+"js": "const h=new Date();const t0=new Date(h.getFullYear(),h.getMonth(),h.getDate());\nfunction nx(m,d){let f=new Date(h.getFullYear(),m,d);if(f<t0)f=new Date(h.getFullYear()+1,m,d);return Math.round((f-t0)/864e5)}\n$('o').innerHTML=show([['Navidad (25 dic)',nx(11,25)+' días'],['Nochevieja (31 dic)',nx(11,31)+' días'],['Reyes Magos (6 ene)',nx(0,6)+' días']]);",
+"text": "<p>La cuenta se calcula con la fecha de tu dispositivo. Si hoy es la fecha señalada, aparece 0 días.</p>",
+"faq": [
+[
+"¿Qué día se cuenta como Navidad?",
+"El 25 de diciembre."
+],
+[
+"¿Se actualiza solo el número de días?",
+"Sí. Se calcula en tu navegador con la fecha de hoy cada vez que abres la página."
+]
+]
+},
+"calculadora-pintura": {
+"title": "Calculadora de pintura: cuántos litros necesito",
+"h1": "Calculadora de pintura",
+"desc": "Calcula los litros de pintura que necesitas para pintar una habitación según paredes, huecos y manos.",
+"body": "<div class=\"row\"><div><label for=\"l\">Largo de la pared total (m)</label><input id=\"l\" inputmode=\"decimal\" value=\"14\"></div><div><label for=\"h\">Altura (m)</label><input id=\"h\" inputmode=\"decimal\" value=\"2,5\"></div></div>\n<div class=\"row\"><div><label for=\"v\">Puertas y ventanas (m²)</label><input id=\"v\" inputmode=\"decimal\" value=\"5\"></div><div><label for=\"m\">Manos de pintura</label><input id=\"m\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"r\">Rendimiento (m² por litro)</label><input id=\"r\" inputmode=\"decimal\" value=\"10\"><div id=\"o\"></div>",
+"js": "function c(){const a=Math.max(0,num('l')*num('h')-num('v')),l=a*num('m')/num('r');$('o').innerHTML=show([['Superficie a pintar',fmt(a,1)+' m²'],['Pintura necesaria',fmt(l,1)+' l'],['Recomendado comprar',Math.ceil(l*1.1)+' l']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>En \"largo de la pared total\" suma el largo de todas las paredes que vas a pintar (el perímetro de la habitación). El rendimiento suele aparecer en el bote; lo habitual es entre 8 y 12 m² por litro. Se recomienda un 10% extra para retoques.</p>",
+"faq": [
+[
+"¿Cuánta pintura necesito para una habitación?",
+"Calcula la superficie de paredes (y techo si procede) y divídela entre el rendimiento por litro indicado en el bote, normalmente 8-12 m²/l."
+],
+[
+"¿Cuántas manos conviene dar?",
+"Lo habitual son dos manos, por lo que conviene multiplicar la cantidad por dos."
+],
+[
+"¿Se descuentan puertas y ventanas?",
+"Para un cálculo más ajustado, resta su superficie de la total."
+]
+]
+},
+"kilometros-a-millas": {
+"title": "Convertir kilómetros a millas (km a mi)",
+"h1": "Kilómetros a millas",
+"desc": "Convierte kilómetros a millas y millas a kilómetros al instante, con tabla de equivalencias.",
+"body": "<div class=\"row\"><div><label for=\"a\">Kilómetros</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Millas</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km',UB='mi';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>1 milla equivale a 1,609344 kilómetros. Para pasar de km a millas se divide entre 1,609344 (o se multiplica por 0,621371).</p>",
+"faq": [
+[
+"¿Cuántas millas son 10 kilómetros?",
+"10 km equivalen a unas 6,21 millas."
+],
+[
+"¿Cómo paso de km a millas?",
+"Multiplica los kilómetros por 0,621371, o divídelos entre 1,609344."
+]
+]
+},
+"kilos-a-libras": {
+"title": "Convertir kilos a libras (kg a lb)",
+"h1": "Kilos a libras",
+"desc": "Convierte kilogramos a libras y libras a kilogramos con tabla de equivalencias.",
+"body": "<div class=\"row\"><div><label for=\"a\">Kilogramos</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Libras</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x/0.45359237;const B=x=>x*0.45359237;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='kg',UB='lb';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>1 libra equivale a 0,45359237 kg. Para pasar de kilos a libras se multiplica por 2,20462.</p>",
+"faq": [
+[
+"¿Cuántas libras son un kilo?",
+"Un kilogramo equivale a unas 2,2046 libras."
+],
+[
+"¿Cómo paso libras a kilos?",
+"Se multiplica por 0,4536 o se divide entre 2,2046."
+]
+]
+},
+"celsius-a-fahrenheit": {
+"title": "Convertir grados Celsius a Fahrenheit (°C a °F)",
+"h1": "Celsius a Fahrenheit",
+"desc": "Convierte grados Celsius a Fahrenheit y Fahrenheit a Celsius con tabla de equivalencias.",
+"body": "<div class=\"row\"><div><label for=\"a\">Grados Celsius (°C)</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Grados Fahrenheit (°F)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x*9/5+32;const B=x=>(x-32)*5/9;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='°C',UB='°F';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>Fórmula: °F = °C × 9/5 + 32. Para el camino inverso: °C = (°F − 32) × 5/9. El agua hierve a 100 °C (212 °F) y se congela a 0 °C (32 °F).</p>",
+"faq": [
+[
+"¿Cuál es la fórmula de Celsius a Fahrenheit?",
+"°F = °C × 9/5 + 32. Por ejemplo, 20 °C equivalen a 68 °F."
+],
+[
+"¿Y de Fahrenheit a Celsius?",
+"°C = (°F − 32) × 5/9."
+]
+]
+},
+"litros-a-galones": {
+"title": "Convertir litros a galones (US)",
+"h1": "Litros a galones",
+"desc": "Convierte litros a galones estadounidenses y galones a litros con tabla de equivalencias.",
+"body": "<div class=\"row\"><div><label for=\"a\">Litros</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Galones (US)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x/3.785411784;const B=x=>x*3.785411784;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='l',UB='gal';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>Un galón estadounidense equivale a 3,785411784 litros. El galón imperial (Reino Unido) es distinto: 4,54609 litros.</p>",
+"faq": [
+[
+"¿Cuántos galones son 10 litros?",
+"Unos 2,64 galones estadounidenses. Un galón US son 3,785 litros."
+],
+[
+"¿El galón de EE. UU. y el británico son iguales?",
+"No. El galón imperial británico equivale a unos 4,546 litros, más grande que el estadounidense."
+]
+]
+},
+"centimetros-a-pulgadas": {
+"title": "Convertir centímetros a pulgadas (cm a in)",
+"h1": "Centímetros a pulgadas",
+"desc": "Convierte centímetros a pulgadas y pulgadas a centímetros. Útil para pantallas, tallas y medidas.",
+"body": "<div class=\"row\"><div><label for=\"a\">Centímetros</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Pulgadas</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x/2.54;const B=x=>x*2.54;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='cm',UB='in';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>Una pulgada equivale exactamente a 2,54 cm. Las pantallas de televisores y móviles se miden en pulgadas en diagonal.</p>",
+"faq": [
+[
+"¿Cuántas pulgadas son 10 centímetros?",
+"Unas 3,94 pulgadas. Una pulgada equivale exactamente a 2,54 cm."
+],
+[
+"¿Cómo paso pulgadas a centímetros?",
+"Multiplica las pulgadas por 2,54."
+]
+]
+},
+"kmh-a-mph": {
+"title": "Convertir km/h a mph (millas por hora)",
+"h1": "km/h a mph",
+"desc": "Convierte kilómetros por hora a millas por hora y viceversa.",
+"body": "<div class=\"row\"><div><label for=\"a\">Kilómetros por hora</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Millas por hora</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+"js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km/h',UB='mph';function tb(){$('o').innerHTML='<h2>Tabla de conversión</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+"text": "<p>100 km/h equivalen a unas 62,14 mph. Es útil al conducir en países que usan millas, como Estados Unidos o Reino Unido.</p>",
+"faq": [
+[
+"¿Cuántas millas por hora son 100 km/h?",
+"Unas 62,14 mph. Un km/h equivale a 0,6214 mph."
+],
+[
+"¿Cómo paso mph a km/h?",
+"Se multiplica por 1,609."
+]
+]
+},
+"calculadora-fracciones": {
+"title": "Calculadora de fracciones: sumar, restar, multiplicar y dividir",
+"h1": "Calculadora de fracciones",
+"desc": "Suma, resta, multiplica y divide fracciones y obtén el resultado simplificado y en decimal.",
+"body": "<div class=\"row\"><div><label for=\"n1\">Numerador 1</label><input id=\"n1\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d1\">Denominador 1</label><input id=\"d1\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"op\">Operación</label><select id=\"op\"><option value=\"+\">Sumar (+)</option><option value=\"-\">Restar (−)</option><option value=\"*\">Multiplicar (×)</option><option value=\"/\">Dividir (÷)</option></select>\n<div class=\"row\"><div><label for=\"n2\">Numerador 2</label><input id=\"n2\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d2\">Denominador 2</label><input id=\"d2\" inputmode=\"numeric\" value=\"3\"></div></div><div id=\"o\"></div>",
+"js": "function g(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a}\nfunction c(){const a=num('n1'),b=num('d1'),cc=num('n2'),d=num('d2'),o=$('op').value;let n,m;\nif(o==='+'){n=a*d+cc*b;m=b*d}else if(o==='-'){n=a*d-cc*b;m=b*d}else if(o==='*'){n=a*cc;m=b*d}else{n=a*d;m=b*cc}\nif(!m||!isFinite(n)||!isFinite(m)){$('o').innerHTML=show([['Resultado','No definido']]);return}\nconst k=g(n,m)||1;n/=k;m/=k;if(m<0){n=-n;m=-m}\n$('o').innerHTML=show([['Fracción simplificada',n+(m===1?'':'/'+m)],['Decimal',fmt(n/m,6)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>Para sumar o restar se iguala el denominador; para multiplicar se multiplican numeradores y denominadores; para dividir se multiplica por la fracción inversa. El resultado se simplifica dividiendo entre el máximo común divisor.</p>",
+"faq": [
+[
+"¿Cómo se suman fracciones con distinto denominador?",
+"Se busca un denominador común, se convierten las fracciones y se suman los numeradores. Después se simplifica el resultado."
+],
+[
+"¿Cómo se simplifica una fracción?",
+"Se dividen numerador y denominador entre su máximo común divisor."
+]
+]
+},
+"calculadora-media-mediana-moda": {
+"title": "Calculadora de media, mediana y moda",
+"h1": "Media, mediana y moda",
+"desc": "Pega una lista de números y calcula la media, la mediana, la moda, el rango y más.",
+"body": "<label for=\"x\">Números (separados por espacios, saltos de línea o punto y coma)</label><textarea id=\"x\">4 8 15 16 23 42 8</textarea><div id=\"o\"></div>",
+"js": "function c(){const a=$('x').value.replace(/,/g,'.').split(/[\\s;]+/).map(parseFloat).filter(isFinite);\nif(!a.length){$('o').innerHTML=show([['Resultado','—']]);return}\nconst s=[...a].sort((p,q)=>p-q),n=s.length,sum=a.reduce((p,q)=>p+q,0),med=n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;\nconst f={};a.forEach(v=>f[v]=(f[v]||0)+1);const mx=Math.max(...Object.values(f));const mo=Object.keys(f).filter(k=>f[k]===mx);\n$('o').innerHTML=show([['Cantidad',n],['Suma',fmt(sum,4)],['Media',fmt(sum/n,4)],['Mediana',fmt(med,4)],['Moda',mx===1?'No hay moda':mo.join(', ')],['Mínimo',fmt(s[0],4)],['Máximo',fmt(s[n-1],4)],['Rango',fmt(s[n-1]-s[0],4)]])}\n$('x').oninput=c;c();",
+"text": "<p>La <b>media</b> es la suma dividida entre la cantidad de datos; la <b>mediana</b> es el valor central al ordenarlos; la <b>moda</b> es el valor que más se repite.</p>",
+"faq": [
+[
+"¿Qué diferencia hay entre media, mediana y moda?",
+"La media es el promedio de todos los valores, la mediana es el valor central al ordenarlos y la moda es el que más se repite."
+],
+[
+"¿Cuándo es mejor usar la mediana?",
+"Cuando hay valores extremos que distorsionan la media, por ejemplo en salarios o precios de vivienda."
+]
+]
+},
+"calculadora-pitagoras": {
+"title": "Calculadora del teorema de Pitágoras: hipotenusa y catetos",
+"h1": "Calculadora del teorema de Pitágoras",
+"desc": "Calcula la hipotenusa o un cateto de un triángulo rectángulo con el teorema de Pitágoras.",
+"body": "<label for=\"m\">¿Qué quieres calcular?</label><select id=\"m\"><option value=\"h\">La hipotenusa (c)</option><option value=\"c\">Un cateto</option></select>\n<div class=\"row\"><div><label id=\"l1\" for=\"a\">Cateto a</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label id=\"l2\" for=\"b\">Cateto b</label><input id=\"b\" inputmode=\"decimal\" value=\"4\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const h=$('m').value==='h';$('l1').textContent=h?'Cateto a':'Hipotenusa c';$('l2').textContent=h?'Cateto b':'Cateto a';\nconst a=num('a'),b=num('b');let r;if(h)r=Math.sqrt(a*a+b*b);else r=a>b?Math.sqrt(a*a-b*b):NaN;\n$('o').innerHTML=show([[h?'Hipotenusa':'Cateto que falta',isFinite(r)?fmt(r,4):'No válido (la hipotenusa debe ser mayor)']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>El teorema dice que en un triángulo rectángulo a² + b² = c², donde c es la hipotenusa (el lado más largo, opuesto al ángulo recto).</p>",
+"faq": [
+[
+"¿Qué dice el teorema de Pitágoras?",
+"En un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a² + b² = c²."
+],
+[
+"¿Puedo calcular un cateto si conozco la hipotenusa?",
+"Sí. Se resuelve restando: a = √(c² − b²)."
+]
+]
+},
+"calculadora-area-figuras": {
+"title": "Calculadora de área y perímetro: rectángulo, triángulo, círculo y trapecio",
+"h1": "Calculadora de áreas",
+"desc": "Calcula el área (y el perímetro cuando procede) de un rectángulo, triángulo, círculo o trapecio.",
+"body": "<label for=\"f\">Figura</label><select id=\"f\"></select>\n<div id=\"wx\"><label id=\"lx\" for=\"x\">Base</label><input id=\"x\" inputmode=\"decimal\" value=\"5\"></div>\n<div id=\"wy\"><label id=\"ly\" for=\"y\">Altura</label><input id=\"y\" inputmode=\"decimal\" value=\"3\"></div>\n<div id=\"wz\"><label id=\"lz\" for=\"z\">Altura</label><input id=\"z\" inputmode=\"decimal\" value=\"2\"></div><div id=\"o\"></div>",
+"js": "const F={'Rectángulo':['Base','Altura',null],'Triángulo':['Base','Altura',null],'Círculo':['Radio',null,null],'Trapecio':['Base mayor','Base menor','Altura']};\nObject.keys(F).forEach(k=>$('f').add(new Option(k,k)));\nfunction c(){const f=$('f').value,L=F[f];['x','y','z'].forEach((id,i)=>{$('w'+id).style.display=L[i]?'':'none';if(L[i])$('l'+id).textContent=L[i]});\nconst x=num('x'),y=num('y'),z=num('z');let it;\nif(f==='Rectángulo')it=[['Área',fmt(x*y)],['Perímetro',fmt(2*(x+y))]];\nelse if(f==='Triángulo')it=[['Área',fmt(x*y/2)]];\nelse if(f==='Círculo')it=[['Área',fmt(Math.PI*x*x)],['Longitud (circunferencia)',fmt(2*Math.PI*x)]];\nelse it=[['Área',fmt((x+y)/2*z)]];\n$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<ul><li>Rectángulo: base × altura</li><li>Triángulo: base × altura ÷ 2</li><li>Círculo: π × radio²</li><li>Trapecio: (base mayor + base menor) ÷ 2 × altura</li></ul><p>Usa la misma unidad en todas las medidas; el área saldrá en esa unidad al cuadrado.</p>",
+"faq": [
+[
+"¿Cómo se calcula el área de un círculo?",
+"Con la fórmula π × radio². Si conoces el diámetro, divídelo entre 2 para obtener el radio."
+],
+[
+"¿Y el área de un triángulo?",
+"Base × altura / 2."
+],
+[
+"¿En qué unidades sale el resultado?",
+"En las mismas unidades que introduzcas, elevadas al cuadrado: si usas metros, el área sale en m²."
+]
+]
+},
+"numeros-romanos": {
+"title": "Convertidor de números romanos a arábigos y viceversa",
+"h1": "Convertidor de números romanos",
+"desc": "Convierte números normales a números romanos y números romanos a normales (del 1 al 3999).",
+"body": "<label for=\"x\">Escribe un número (ej. 1994) o un número romano (ej. MCMXCIV)</label><input id=\"x\" value=\"1994\"><div id=\"o\"></div>",
+"js": "const M=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];\nfunction toR(n){let s='';M.forEach(p=>{while(n>=p[0]){s+=p[1];n-=p[0]}});return s}\nfunction fromR(s){s=s.toUpperCase();let i=0,n=0;M.forEach(p=>{while(s.substr(i,p[1].length)===p[1]){n+=p[0];i+=p[1].length}});return i===s.length&&s.length?n:NaN}\nfunction c(){const v=$('x').value.trim();let o;\nif(/^[0-9]+$/.test(v)){const n=parseInt(v,10);o=n>=1&&n<=3999?['Número romano',toR(n)]:['Número romano','Solo entre 1 y 3999']}\nelse if(v){const n=fromR(v);o=isFinite(n)&&toR(n)===v.toUpperCase()?['Número',String(n)]:['Número','Número romano no válido']}\nelse o=['Resultado','—'];$('o').innerHTML=show([o])}\n$('x').oninput=c;c();",
+"text": "<p>Valores básicos: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. Cuando una letra menor va delante de una mayor se resta (IV=4, IX=9, XC=90).</p>",
+"faq": [
+[
+"¿Qué valor tiene cada símbolo romano?",
+"I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000."
+],
+[
+"¿Hasta qué número se puede convertir?",
+"Con la notación estándar, hasta 3999 (MMMCMXCIX)."
+]
+]
+},
+"conversor-binario-decimal-hexadecimal": {
+"title": "Conversor de binario, decimal, octal y hexadecimal",
+"h1": "Conversor de bases numéricas",
+"desc": "Convierte números entre binario, octal, decimal y hexadecimal.",
+"body": "<div class=\"row\"><div><label for=\"x\">Número</label><input id=\"x\" value=\"255\"></div><div><label for=\"b\">Base del número</label><select id=\"b\"><option value=\"10\">Decimal (10)</option><option value=\"2\">Binario (2)</option><option value=\"8\">Octal (8)</option><option value=\"16\">Hexadecimal (16)</option></select></div></div><div id=\"o\"></div>",
+"js": "function c(){const v=$('x').value.trim().toLowerCase(),b=+$('b').value,n=parseInt(v,b);\nif(!v||isNaN(n)||n.toString(b)!==v.replace(/^0+(?=.)/,'')){$('o').innerHTML=show([['Resultado','Número no válido para esa base']]);return}\n$('o').innerHTML=show([['Binario',n.toString(2)],['Octal',n.toString(8)],['Decimal',n.toString(10)],['Hexadecimal',n.toString(16).toUpperCase()]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>El sistema binario usa solo 0 y 1, y es la base de la informática. El hexadecimal usa 0-9 y A-F, y se emplea mucho para colores y direcciones de memoria.</p>",
+"faq": [
+[
+"¿Cómo se pasa de binario a decimal?",
+"Cada dígito binario vale una potencia de 2 según su posición, de derecha a izquierda; se suman las de los dígitos que son 1."
+],
+[
+"¿Qué es el sistema hexadecimal?",
+"Es un sistema en base 16 que usa los dígitos 0-9 y las letras A-F. Se usa mucho en informática, por ejemplo en los colores web."
+]
+]
+},
+"numero-aleatorio": {
+"title": "Generador de números aleatorios entre dos valores",
+"h1": "Generador de números aleatorios",
+"desc": "Genera uno o varios números aleatorios entre un mínimo y un máximo.",
+"body": "<div class=\"row\"><div><label for=\"a\">Mínimo</label><input id=\"a\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"b\">Máximo</label><input id=\"b\" inputmode=\"numeric\" value=\"100\"></div></div>\n<label for=\"n\">¿Cuántos números? (máx. 100)</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Generar</button><div id=\"o\"></div>",
+"js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('go').onclick=()=>{let a=Math.round(num('a')),b=Math.round(num('b')),n=Math.min(100,Math.max(1,Math.round(num('n'))||1));if(a>b)[a,b]=[b,a];\nconst r=[];for(let i=0;i<n;i++)r.push(rnd(a,b));$('o').innerHTML='<div class=\"card\" style=\"font-size:24px;word-break:break-word\">'+r.join(', ')+'</div>'};$('go').click();",
+"text": "<p>Los números se generan con el generador aleatorio de tu navegador. Pueden repetirse si pides varios.</p>",
+"faq": [
+[
+"¿Puedo elegir el rango?",
+"Sí, indica el mínimo y el máximo y se generará un número entre ambos."
+],
+[
+"¿Sirve para sorteos oficiales o criptografía?",
+"No. Es aleatoriedad pensada para uso cotidiano."
+]
+]
+},
+"lanzar-dado-moneda": {
+"title": "Lanzar un dado online o una moneda (cara o cruz)",
+"h1": "Lanzar dado o moneda",
+"desc": "Tira uno o varios dados de 6 caras o lanza una moneda al aire: cara o cruz.",
+"body": "<label for=\"n\">Número de dados</label><select id=\"n\"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>\n<button id=\"d\">🎲 Lanzar dados</button> <button id=\"m\" class=\"sec\">🪙 Lanzar moneda</button><div id=\"o\"></div>",
+"js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('d').onclick=()=>{const n=+$('n').value,r=[];for(let i=0;i<n;i++)r.push(rnd(1,6));$('o').innerHTML=show([['Resultado',r.join(' · ')],['Suma',r.reduce((a,b)=>a+b,0)]])};\n$('m').onclick=()=>{$('o').innerHTML=show([['Resultado',rnd(0,1)?'Cara':'Cruz']])};$('d').click();",
+"text": "<p>Cada lanzamiento es independiente y tiene las mismas probabilidades: 1/6 para cada cara del dado y 50% para cara o cruz.</p>",
+"faq": [
+[
+"¿Son aleatorios los lanzamientos?",
+"Usan números pseudoaleatorios del navegador, suficientes para juegos y decisiones cotidianas."
+],
+[
+"¿Qué probabilidad tiene cada resultado?",
+"En una moneda, 50 % cada cara; en un dado de seis caras, un 16,7 % cada número."
+]
+]
+},
+"calculadora-roi": {
+"title": "Calculadora de ROI: retorno de la inversión",
+"h1": "Calculadora de ROI",
+"desc": "Calcula el retorno de la inversión (ROI) y la rentabilidad anualizada de cualquier inversión o negocio.",
+"body": "<div class=\"row\"><div><label for=\"i\">Dinero invertido (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"f\">Valor final (€)</label><input id=\"f\" inputmode=\"decimal\" value=\"1350\"></div></div>\n<label for=\"y\">Años transcurridos (opcional)</label><input id=\"y\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+"js": "function c(){const i=num('i'),f=num('f'),y=num('y');const it=[['Beneficio',eur(f-i)],['ROI',fmt((f-i)/i*100,2)+' %']];\nif(y>0&&f>0)it.push(['Rentabilidad anual (TAC)',fmt((Math.pow(f/i,1/y)-1)*100,2)+' %']);$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>ROI = (valor final − inversión) ÷ inversión × 100. La rentabilidad anual tiene en cuenta el tiempo: un 35% en 2 años equivale a un 16% anual. Resultados pasados no garantizan resultados futuros; no es asesoramiento financiero.</p>",
+"faq": [
+[
+"¿Cómo se calcula el ROI?",
+"ROI = (ganancia − inversión) / inversión × 100. Invertir 1.000 € y obtener 1.200 € da un ROI del 20%."
+],
+[
+"¿Tiene en cuenta el tiempo?",
+"No. Un 20% en un año no es lo mismo que en cinco; para comparar usa la rentabilidad anualizada."
+]
+]
+},
+"calculadora-inflacion": {
+"title": "Calculadora de inflación: cuánto vale tu dinero con el tiempo",
+"h1": "Calculadora de inflación",
+"desc": "Calcula cuánto poder adquisitivo pierde tu dinero con una inflación anual durante varios años.",
+"body": "<div class=\"row\"><div><label for=\"a\">Cantidad (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"r\">Inflación anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Años</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"><div id=\"o\"></div>",
+"js": "function c(){const a=num('a'),r=num('r')/100,y=num('y');const k=Math.pow(1+r,y);\n$('o').innerHTML=show([['Necesitarás para comprar lo mismo',eur(a*k)],['Tus '+fmt(a,0)+' € valdrán en poder de compra',eur(a/k)],['Pérdida de poder adquisitivo',fmt((1-1/k)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>La inflación hace que con la misma cantidad compres menos cosas cada año. Esta calculadora supone una inflación constante, algo que en la realidad varía.</p>",
+"faq": [
+[
+"¿Qué es la inflación?",
+"Es la subida generalizada y sostenida de los precios, que reduce el poder adquisitivo del dinero con el tiempo."
+],
+[
+"¿Cómo se calcula cuánto vale hoy un importe del pasado?",
+"Se multiplica el importe por (1 + inflación) elevado al número de años. Con una inflación media del 3% anual, 100 € de hoy equivalen a unos 134 € dentro de 10 años."
+],
+[
+"¿Usa datos oficiales del IPC?",
+"No. Aplica la tasa media que tú indiques, por lo que es una estimación."
+]
+]
+},
+"calculadora-ahorro-objetivo": {
+"title": "Calculadora de ahorro: cuánto ahorrar al mes para una meta",
+"h1": "Calculadora de ahorro para una meta",
+"desc": "Calcula cuánto debes ahorrar cada mes para llegar a una cantidad objetivo en un plazo.",
+"body": "<div class=\"row\"><div><label for=\"g\">Meta (€)</label><input id=\"g\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"c\">Ya ahorrado (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"500\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Plazo (meses)</label><input id=\"m\" inputmode=\"numeric\" value=\"18\"></div><div><label for=\"r\">Interés anual (%) — opcional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const g=num('g'),c0=num('c'),n=num('m'),r=(num('r')||0)/100/12;let p;\nif(r===0)p=(g-c0)/n;else{const k=Math.pow(1+r,n);p=(g-c0*k)*r/(k-1)}\n$('o').innerHTML=show([['Ahorro mensual necesario',eur(Math.max(0,p))],['Total que aportarás',eur(Math.max(0,p)*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Divide tu meta entre los meses disponibles y automatiza una transferencia el día que cobras: ahorrar primero y gastar después ayuda a cumplir el objetivo.</p>",
+"faq": [
+[
+"¿Cómo sé cuánto ahorrar al mes para una meta?",
+"Divide el objetivo entre los meses disponibles; si hay rentabilidad, la calculadora ajusta la cuota para tenerla en cuenta."
+],
+[
+"¿Incluye impuestos o inflación?",
+"No. Es una simulación con rentabilidad constante."
+]
+]
+},
+"calculadora-rentabilidad-alquiler": {
+"title": "Calculadora de rentabilidad de un alquiler (bruta y neta)",
+"h1": "Rentabilidad de un alquiler",
+"desc": "Calcula la rentabilidad bruta y neta de comprar una vivienda para alquilarla.",
+"body": "<div class=\"row\"><div><label for=\"p\">Precio de compra (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"gc\">Gastos de compra (%)</label><input id=\"gc\" inputmode=\"decimal\" value=\"10\"></div></div>\n<div class=\"row\"><div><label for=\"rf\">Reforma (€)</label><input id=\"rf\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"al\">Alquiler mensual (€)</label><input id=\"al\" inputmode=\"decimal\" value=\"750\"></div></div>\n<label for=\"ga\">Gastos anuales: IBI, comunidad, seguro, mantenimiento (€)</label><input id=\"ga\" inputmode=\"decimal\" value=\"1800\"><div id=\"o\"></div>",
+"js": "function c(){const p=num('p'),gc=num('gc')/100,rf=num('rf')||0,al=num('al'),ga=num('ga')||0;const inv=p*(1+gc)+rf,anual=al*12;\n$('o').innerHTML=show([['Inversión total',eur(inv)],['Rentabilidad bruta',fmt(anual/(p+rf)*100,2)+' %'],['Beneficio neto anual',eur(anual-ga)],['Rentabilidad neta',fmt((anual-ga)/inv*100,2)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>La rentabilidad bruta divide el alquiler anual entre el precio; la neta descuenta los gastos y tiene en cuenta los costes de compra (impuestos, notaría, registro). No incluye impuestos sobre el alquiler, periodos sin inquilino ni financiación. Es orientativa.</p>",
+"faq": [
+[
+"¿Qué es la rentabilidad bruta de un alquiler?",
+"Es el alquiler anual dividido entre el precio de compra, en porcentaje. No descuenta gastos ni impuestos."
+],
+[
+"¿Y la rentabilidad neta?",
+"Resta gastos como IBI, comunidad, seguros, mantenimiento y periodos vacíos, y es la cifra más realista."
+]
+]
+},
+"calculadora-nota-acceso-universidad": {
+"title": "Calculadora de la nota de acceso a la universidad (EBAU/EvAU)",
+"h1": "Nota de acceso a la universidad",
+"desc": "Calcula tu nota de acceso a la universidad en España: 60% bachillerato y 40% prueba de acceso.",
+"body": "<div class=\"row\"><div><label for=\"b\">Nota media de Bachillerato (0-10)</label><input id=\"b\" inputmode=\"decimal\" value=\"8,2\"></div><div><label for=\"e\">Nota de la prueba de acceso (0-10)</label><input id=\"e\" inputmode=\"decimal\" value=\"7\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const b=num('b'),e=num('e');\n$('o').innerHTML=show([['Nota de acceso',e>=4?fmt(0.6*b+0.4*e,3):'La prueba debe ser ≥ 4'],['Aporte del Bachillerato (60%)',fmt(0.6*b,3)],['Aporte de la prueba (40%)',fmt(0.4*e,3)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>La nota de acceso (sobre 10) es el 60% de la media del Bachillerato más el 40% de la fase de acceso, que debe tener al menos un 4. Después se puede sumar la fase voluntaria hasta llegar a 14 puntos. Las condiciones pueden variar por comunidad y curso; consulta la normativa de tu universidad.</p>",
+"faq": [
+[
+"¿Cómo se calcula la nota de acceso?",
+"Se combina la nota media del bachillerato y la de la fase general de la prueba de acceso, con la ponderación que establece la normativa vigente."
+],
+[
+"¿Es una cifra oficial?",
+"No, es una estimación orientativa. La nota oficial la publica tu universidad o comunidad autónoma."
+]
+]
+},
+"calcular-letra-nie": {
+"title": "Calcular la letra del NIE a partir del número",
+"h1": "Calculadora de la letra del NIE",
+"desc": "Descubre la letra de control de tu NIE (X, Y o Z seguida de 7 números).",
+"body": "<div class=\"row\"><div><label for=\"p\">Letra inicial</label><select id=\"p\"><option>X</option><option>Y</option><option>Z</option></select></div><div><label for=\"n\">Número (7 cifras)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"7\" value=\"1234567\"></div></div><div id=\"o\"></div>",
+"js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const p=$('p').value,d=$('n').value.replace(/[^0-9]/g,'');if(d.length!==7){$('o').innerHTML='<p>Introduce 7 cifras.</p>';return}\nconst n=parseInt({X:'0',Y:'1',Z:'2'}[p]+d,10);$('o').innerHTML=show([['Letra de control',L[n%23]],['NIE completo',p+d+L[n%23]]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>Para calcular la letra del NIE se sustituye la X por 0, la Y por 1 y la Z por 2, se forma un número con las 7 cifras y se divide entre 23. El resto indica la letra de la serie TRWAGMYFPDXBNJZSQVHLCKE. Funciona en tu navegador sin enviar datos.</p>",
+"faq": [
+[
+"¿Cómo se calcula la letra del NIE?",
+"Se sustituye la X por 0, la Y por 1 y la Z por 2, se divide el número resultante entre 23 y el resto da la letra."
+],
+[
+"¿Cuántas cifras tiene un NIE?",
+"Empieza por X, Y o Z, sigue con 7 cifras y termina con una letra de control."
+]
+]
+},
+"validador-iban": {
+"title": "Validador de IBAN: comprobar si un IBAN es correcto",
+"h1": "Validador de IBAN",
+"desc": "Comprueba si el formato y los dígitos de control de un IBAN son correctos. No se guarda nada.",
+"body": "<label for=\"x\">IBAN</label><input id=\"x\" value=\"ES91 2100 0418 4502 0005 1332\" autocomplete=\"off\"><div id=\"o\"></div>",
+"js": "function c(){const s=$('x').value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();\nlet ok=/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(s);if(ok&&s.slice(0,2)==='ES'&&s.length!==24)ok=false;\nif(ok){let m=0;const t=s.slice(4)+s.slice(0,4);for(const ch of t){const v=ch>='A'?String(ch.charCodeAt(0)-55):ch;for(const d of v){m=(m*10+ +d)%97}}ok=m===1}\n$('o').innerHTML=show([['Resultado',s?(ok?'IBAN válido ✅':'IBAN no válido ❌'):'—'],['País',ok?s.slice(0,2):'—'],['Formato',ok?s.replace(/(.{4})/g,'$1 ').trim():'—']])}\n$('x').oninput=c;c();",
+"text": "<p>Esta herramienta solo comprueba que el IBAN está bien formado (longitud, país y dígitos de control, algoritmo mod 97). No verifica que la cuenta exista ni a quién pertenece. Todo se calcula en tu navegador.</p>",
+"faq": [
+[
+"¿Cuántos caracteres tiene un IBAN español?",
+"24: las letras ES, dos dígitos de control y 20 dígitos de la cuenta."
+],
+[
+"¿Esta herramienta comprueba que la cuenta existe?",
+"No. Solo verifica que el IBAN está bien formado y que sus dígitos de control son correctos."
+],
+[
+"¿Es seguro escribir mi IBAN aquí?",
+"El cálculo se hace en tu navegador y no se envía ni guarda. Aun así, no compartas datos bancarios innecesariamente."
+]
+]
+},
+"contador-caracteres-redes": {
+"title": "Contador de caracteres para X, Instagram, TikTok y YouTube",
+"h1": "Contador de caracteres para redes",
+"desc": "Cuenta los caracteres de tu texto y comprueba los límites de X, Instagram, TikTok, YouTube y meta descripción.",
+"body": "<label for=\"x\">Tu texto</label><textarea id=\"x\" placeholder=\"Escribe o pega tu descripción, título o publicación...\"></textarea><div id=\"o\"></div>",
+"js": "const LM=[['X (tuit)',280],['Instagram (pie)',2200],['TikTok (descripción)',4000],['YouTube (título)',100],['YouTube (descripción)',5000],['Meta descripción SEO',160]];\nfunction c(){const n=$('x').value.length;$('o').innerHTML=show([['Caracteres',fmt(n,0)]].concat(LM.map(l=>[l[0],n+' / '+l[1]+(n>l[1]?' ⚠️ te pasas':' ✅')])))}\n$('x').oninput=c;c();",
+"text": "<p>Los límites son orientativos y las plataformas pueden cambiarlos. Los emojis pueden contar como más de un carácter en algunas redes.</p>",
+"faq": [
+[
+"¿Cuántos caracteres admite cada red social?",
+"Varía según la plataforma y cambia con el tiempo. Comprueba el límite vigente en la propia red antes de publicar."
+],
+[
+"¿Cuentan los espacios y los emojis?",
+"Los espacios cuentan como caracteres. Los emojis pueden contar como más de uno según la plataforma."
+]
+]
+},
+"sumar-dias-a-fecha": {
+"title": "Calculadora de fechas: sumar o restar días, semanas, meses y años",
+"h1": "Sumar o restar tiempo a una fecha",
+"desc": "Suma o resta días, semanas, meses o años a una fecha y descubre qué día de la semana será.",
+"body": "<div class=\"row\"><div><label for=\"d\">Fecha de partida</label><input id=\"d\" type=\"date\"></div><div><label for=\"op\">Operación</label><select id=\"op\"><option value=\"+\">Sumar</option><option value=\"-\">Restar</option></select></div></div>\n<div class=\"row\"><div><label for=\"n\">Cantidad</label><input id=\"n\" inputmode=\"numeric\" value=\"90\"></div><div><label for=\"u\">Unidad</label><select id=\"u\"><option value=\"d\">Días</option><option value=\"w\">Semanas</option><option value=\"m\">Meses</option><option value=\"y\">Años</option></select></div></div><div id=\"o\"></div>",
+"js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const d=new Date($('d').value+'T12:00:00');if(isNaN(d)){$('o').innerHTML='<p>Elige una fecha.</p>';return}\nconst n=num('n')*($('op').value==='-'?-1:1),u=$('u').value;\nif(u==='d')d.setDate(d.getDate()+n);else if(u==='w')d.setDate(d.getDate()+7*n);else if(u==='m')d.setMonth(d.getMonth()+n);else d.setFullYear(d.getFullYear()+n);\n$('o').innerHTML=show([['Fecha resultante',d.toLocaleDateString('es-ES')],['Día de la semana',d.toLocaleDateString('es-ES',{weekday:'long'})],['Completa',d.toLocaleDateString('es-ES',{year:'numeric',month:'long',day:'numeric'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+"text": "<p>Útil para calcular plazos, fechas de vencimiento, periodos de prueba o cuántos días faltan para un evento.</p>",
+"faq": [
+[
+"¿Cómo sumo o resto días a una fecha?",
+"Indica la fecha de partida y el número de días; usa un valor negativo para restar."
+],
+[
+"¿Cuenta los días laborables?",
+"No, cuenta días naturales."
+]
+]
+},
+"numero-de-semana": {
+"title": "¿En qué semana del año estamos? Número de semana de una fecha",
+"h1": "Número de semana del año",
+"desc": "Consulta el número de semana ISO, el día del año y el día de la semana de cualquier fecha.",
+"body": "<label for=\"d\">Fecha</label><input id=\"d\" type=\"date\"><div id=\"o\"></div>",
+"js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const p=$('d').value.split('-').map(Number);if(p.length<3||p.some(isNaN)){$('o').innerHTML='<p>Elige una fecha.</p>';return}\nconst t=Date.UTC(p[0],p[1]-1,p[2]),d=new Date(t);const dn=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()+4-dn);\nconst ys=Date.UTC(d.getUTCFullYear(),0,1),wk=Math.ceil(((d-ys)/864e5+1)/7);\n$('o').innerHTML=show([['Semana ISO',wk],['Día del año',Math.round((t-Date.UTC(p[0],0,0))/864e5)],['Día de la semana',new Date(t).toLocaleDateString('es-ES',{weekday:'long',timeZone:'UTC'})]])}\n$('d').oninput=$('d').onchange=c;c();",
+"text": "<p>Se usa la numeración ISO 8601: las semanas empiezan en lunes y la semana 1 es la que contiene el primer jueves del año. Es el sistema habitual en Europa.</p>",
+"faq": [
+[
+"¿Qué es el número de semana ISO?",
+"Es la numeración estándar ISO 8601: las semanas empiezan en lunes y la semana 1 es la que contiene el primer jueves del año."
+],
+[
+"¿Cuántas semanas tiene un año?",
+"52 o 53, según el año."
+]
+]
+},
+"conversor-zonas-horarias": {
+"title": "Conversor de zonas horarias: hora de España en otros países",
+"h1": "Conversor de zonas horarias",
+"desc": "Convierte una hora entre ciudades del mundo: España, Canarias, Londres, Nueva York, México, Argentina, Tokio y más.",
+"body": "<label for=\"t\">Fecha y hora</label><input id=\"t\" type=\"datetime-local\">\n<div class=\"row\"><div><label for=\"a\">De</label><select id=\"a\"></select></div><div><label for=\"b\">A</label><select id=\"b\"></select></div></div><div id=\"o\"></div>",
+"js": "const Z=[['España peninsular','Europe/Madrid'],['Canarias','Atlantic/Canary'],['Londres','Europe/London'],['Nueva York','America/New_York'],['Chicago','America/Chicago'],['Los Ángeles','America/Los_Angeles'],['Ciudad de México','America/Mexico_City'],['Bogotá','America/Bogota'],['Buenos Aires','America/Argentina/Buenos_Aires'],['Santiago de Chile','America/Santiago'],['Dubái','Asia/Dubai'],['Delhi','Asia/Kolkata'],['Tokio','Asia/Tokyo'],['Sídney','Australia/Sydney']];\nZ.forEach(z=>{$('a').add(new Option(z[0],z[1]));$('b').add(new Option(z[0],z[1]))});$('a').value='Europe/Madrid';$('b').value='America/Mexico_City';\nconst n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());$('t').value=n.toISOString().slice(0,16);\nfunction off(z,ms){const p=new Intl.DateTimeFormat('en-US',{timeZone:z,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(ms)),o={};p.forEach(x=>o[x.type]=x.value);return Date.UTC(o.year,o.month-1,o.day,o.hour,o.minute,o.second)-ms}\nfunction c(){const v=$('t').value;if(!v){return}const q=v.split(/[-T:]/).map(Number),t0=Date.UTC(q[0],q[1]-1,q[2],q[3],q[4]);\nconst za=$('a').value,zb=$('b').value;const inst=t0-off(za,t0-off(za,t0));\n$('o').innerHTML=show([['Hora en destino',new Date(inst).toLocaleString('es-ES',{timeZone:zb,dateStyle:'full',timeStyle:'short'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+"text": "<p>La conversión tiene en cuenta el horario de verano de cada zona. España peninsular usa CET (UTC+1) en invierno y CEST (UTC+2) en verano; Canarias va una hora por detrás.</p>",
+"faq": [
+[
+"¿Tiene en cuenta el cambio de hora de verano?",
+"Sí, el cálculo usa las reglas de zonas horarias de tu navegador, que incluyen el horario de verano."
+],
+[
+"¿Qué diferencia hay entre España peninsular y Canarias?",
+"Canarias va una hora por detrás de la península durante todo el año."
+]
+]
+},
+"capacidad-endeudamiento-hipoteca": {
+"title": "¿Cuánta hipoteca me pueden dar? Calculadora de capacidad de endeudamiento",
+"h1": "¿Cuánta hipoteca me pueden dar?",
+"desc": "Calcula la cuota máxima, el préstamo máximo y el precio aproximado de vivienda que podrías permitirte según tus ingresos.",
+"body": "<div class=\"row\"><div><label for=\"i\">Ingresos netos mensuales (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"2500\"></div><div><label for=\"d\">Otras cuotas de deudas al mes (€)</label><input id=\"d\" inputmode=\"decimal\" value=\"150\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Interés anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"y\">Plazo (años)</label><input id=\"y\" inputmode=\"numeric\" value=\"30\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Endeudamiento máximo (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"35\"></div><div><label for=\"f\">Financiación sobre el precio (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"80\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const ing=num('i'),deu=num('d')||0,r=num('r')/100/12,n=num('y')*12,e=num('e')/100,f=num('f')/100;\nconst q=Math.max(0,ing*e-deu);const P=r===0?q*n:q*(1-Math.pow(1+r,-n))/r;const precio=f>0?P/f:0;\n$('o').innerHTML=show([['Cuota máxima mensual',eur(q)],['Préstamo máximo aproximado',eur(P)],['Precio de vivienda aproximado',eur(precio)],['Ahorro necesario (entrada + ~10% gastos)',eur(precio*(1-f)+precio*0.1)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>La regla del 35%</h2><p>Los bancos suelen limitar la cuota de la hipoteca, sumada a tus otras deudas, a un 30-35% de tus ingresos netos. Además suelen financiar hasta el 80% del valor de tasación, por lo que tendrás que aportar la entrada y los gastos de compra con ahorros propios.</p><p>Es una estimación orientativa: cada entidad estudia tu caso (tipo de contrato, antigüedad, avalistas, historial) y puede aprobar más o menos.</p>",
+"faq": [
+[
+"¿Qué porcentaje de mis ingresos puedo destinar a la hipoteca?",
+"Los bancos suelen aceptar entre un 30% y un 35% de tus ingresos netos, contando también otras deudas."
+],
+[
+"¿Cuánto financia un banco del precio de la vivienda?",
+"Habitualmente hasta el 80% del valor de tasación, por lo que necesitas ahorrar el resto y los gastos de compra."
+]
+]
+},
+"amortizacion-anticipada-hipoteca": {
+"title": "Calculadora de amortización anticipada: reducir cuota o plazo",
+"h1": "Amortización anticipada de hipoteca",
+"desc": "Compara qué ahorras en intereses al amortizar parte de tu hipoteca reduciendo la cuota o reduciendo el plazo.",
+"body": "<div class=\"row\"><div><label for=\"c\">Capital pendiente (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"120000\"></div><div><label for=\"r\">Interés anual (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<div class=\"row\"><div><label for=\"y\">Años restantes</label><input id=\"y\" inputmode=\"numeric\" value=\"22\"></div><div><label for=\"x\">Cantidad a amortizar (€)</label><input id=\"x\" inputmode=\"decimal\" value=\"10000\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const C=num('c'),r=num('r')/100/12,n=Math.round(num('y')*12),x=num('x');const pm=(cap,m)=>r===0?cap/m:cap*r/(1-Math.pow(1+r,-m));\nconst q=pm(C,n),int0=q*n-C,C2=C-x;if(C2<=0||!isFinite(q)){$('o').innerHTML=show([['Resultado','La cantidad debe ser menor que el capital']]);return}\nconst q2=pm(C2,n),intA=q2*n-C2;const n2=r===0?C2/q:-Math.log(1-C2*r/q)/Math.log(1+r);const intB=q*n2-C2;\n$('o').innerHTML=show([['Cuota actual',eur(q)],['Opción A: nueva cuota',eur(q2)],['A: ahorro en intereses',eur(int0-intA)],['Opción B: nuevo plazo',Math.floor(n2/12)+' años y '+Math.round(n2%12)+' meses'],['B: ahorro en intereses',eur(int0-intB)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Amortizar reduciendo el <b>plazo</b> suele ahorrar más intereses totales, porque sigues pagando la misma cuota. Reducir la <b>cuota</b> te da más holgura mensual. Comprueba la comisión de amortización anticipada de tu contrato, que puede restar parte del ahorro.</p>",
+"faq": [
+[
+"¿Qué es amortizar anticipadamente una hipoteca?",
+"Es adelantar dinero al banco para reducir la deuda pendiente antes de lo previsto, ya sea acortando el plazo o bajando la cuota."
+],
+[
+"¿Es mejor reducir plazo o cuota?",
+"Reducir el plazo suele ahorrar más intereses en total; reducir la cuota da más holgura mensual. Depende de tu situación."
+],
+[
+"¿Hay comisión por amortización anticipada?",
+"Puede haberla según el contrato y la fecha de firma. Consulta tu escritura o pregunta a tu banco."
+]
+]
+},
+"revision-hipoteca-variable-euribor": {
+"title": "Calculadora de revisión de hipoteca variable: nueva cuota con el Euríbor",
+"h1": "Revisión de hipoteca variable",
+"desc": "Calcula la cuota de tu hipoteca variable con el Euríbor y el diferencial, y simula cómo cambia si el Euríbor sube o baja.",
+"body": "<div class=\"row\"><div><label for=\"c\">Capital pendiente (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"140000\"></div><div><label for=\"y\">Años restantes</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Euríbor (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"2,5\"></div><div><label for=\"d\">Diferencial (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"0,8\"></div></div><div id=\"o\"></div>",
+"js": "function pm(C,i,n){const r=i/100/12;return r===0?C/n:C*r/(1-Math.pow(1+r,-n))}\nfunction c(){const C=num('c'),n=Math.round(num('y')*12),e=num('e'),d=num('d');const q=pm(C,e+d,n);\nconst rows=[-1,-0.5,0.5,1].map(s=>[(s>0?'Euríbor +':'Euríbor ')+fmt(s,1)+' pts',eur(pm(C,Math.max(0,e+s)+d,n))]);\n$('o').innerHTML=show([['Interés aplicado',fmt(e+d,2)+' %'],['Cuota mensual',eur(q)]].concat(rows))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>En una hipoteca variable el interés es el Euríbor más un diferencial fijo. Se revisa cada 6 o 12 meses según tu contrato; usa el valor que figure en la notificación de tu banco. El cálculo supone cuota constante hasta la siguiente revisión.</p>",
+"faq": [
+[
+"¿Cómo afecta el Euríbor a mi cuota?",
+"En una hipoteca variable el interés es el Euríbor más un diferencial; si el Euríbor sube o baja en la revisión, tu cuota cambia."
+],
+[
+"¿Cada cuánto se revisa?",
+"Lo habitual es cada 6 o 12 meses, según indique tu contrato."
+],
+[
+"¿Es el resultado definitivo?",
+"No, es una simulación. La cuota real la fija tu banco."
+]
+]
+},
+"calculadora-tae": {
+"title": "Calculadora de TAE: coste real de un préstamo o hipoteca",
+"h1": "Calculadora de TAE",
+"desc": "Calcula la TAE aproximada de un préstamo a partir del TIN, la comisión de apertura y el plazo.",
+"body": "<div class=\"row\"><div><label for=\"c\">Importe (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"t\">TIN (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"6\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Plazo (meses)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"></div><div><label for=\"f\">Comisión de apertura (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"1\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const C=num('c'),r=num('t')/100/12,n=Math.round(num('m')),f=num('f')/100;\nconst q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));const rec=C*(1-f);\nfunction v(i){let s=0;for(let k=1;k<=n;k++)s+=q/Math.pow(1+i,k);return s-rec}\nlet lo=0,hi=1;for(let k=0;k<80;k++){const mid=(lo+hi)/2;if(v(mid)>0)lo=mid;else hi=mid}\nconst tae=Math.pow(1+lo,12)-1;\n$('o').innerHTML=show([['TAE aproximada',fmt(tae*100,2)+' %'],['TIN',fmt(num('t'),2)+' %'],['Cuota mensual',eur(q)],['Coste total (intereses + comisión)',eur(q*n-rec)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>El <b>TIN</b> es el interés nominal; la <b>TAE</b> incluye además las comisiones y la frecuencia de pago, por eso permite comparar ofertas. Esta calculadora incluye la comisión de apertura; no recoge seguros vinculados ni otras comisiones, que elevarían la TAE real.</p>",
+"faq": [
+[
+"¿Para qué sirve la TAE?",
+"Para comparar el coste real de préstamos distintos, porque incluye intereses, comisiones y la frecuencia de pago."
+],
+[
+"¿Por qué la TAE es mayor que el TIN?",
+"Porque suma el efecto de las comisiones (como la de apertura) y de pagar intereses mensualmente."
+]
+]
+},
+"calculadora-gastos-compra-vivienda": {
+"title": "Calculadora de gastos de compra de una vivienda (impuestos, notaría y registro)",
+"h1": "Gastos de compra de una vivienda",
+"desc": "Estima el dinero extra que necesitas, además del precio, para comprar una vivienda: impuestos, notaría, registro, gestoría y tasación.",
+"body": "<div class=\"row\"><div><label for=\"p\">Precio de la vivienda (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"180000\"></div><div><label for=\"t\">Impuesto aplicable (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"8\"></div></div>\n<div class=\"row\"><div><label for=\"o1\">Notaría, registro y gestoría (% del precio)</label><input id=\"o1\" inputmode=\"decimal\" value=\"1,5\"></div><div><label for=\"ta\">Tasación (€)</label><input id=\"ta\" inputmode=\"decimal\" value=\"400\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const p=num('p'),imp=p*num('t')/100,not=p*num('o1')/100,ta=num('ta')||0;const tot=imp+not+ta;\n$('o').innerHTML=show([['Impuesto',eur(imp)],['Notaría, registro y gestoría',eur(not)],['Tasación',eur(ta)],['Total gastos',eur(tot)],['Gastos sobre el precio',fmt(tot/p*100,1)+' %'],['Si financias el 80%: ahorro necesario',eur(p*0.2+tot)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>¿Qué impuesto pongo?</h2><p>En vivienda de <b>segunda mano</b> se paga el ITP, que fija cada comunidad autónoma (suele estar entre el 6% y el 11%). En <b>obra nueva</b> se paga IVA (10%) más el impuesto de Actos Jurídicos Documentados, también variable por comunidad. Consulta el tipo de tu comunidad. Es una estimación; los importes reales dependen de cada operación.</p>",
+"faq": [
+[
+"¿Qué gastos hay al comprar una vivienda?",
+"Impuestos (ITP o IVA y AJD según el caso), notaría, registro, gestoría y tasación. Suelen rondar entre el 10% y el 15% del precio."
+],
+[
+"¿El resultado es exacto?",
+"Es orientativo: los impuestos varían según la comunidad autónoma y si la vivienda es nueva o de segunda mano."
+]
+]
+},
+"cuanto-tardo-en-pagar-un-prestamo": {
+"title": "¿Cuánto tardo en pagar una deuda o préstamo? Calculadora de plazo",
+"h1": "¿Cuánto tardo en pagar un préstamo?",
+"desc": "Calcula en cuánto tiempo liquidarás una deuda (préstamo, tarjeta, financiación) pagando una cuota fija mensual, y cuántos intereses pagarás.",
+"body": "<div class=\"row\"><div><label for=\"c\">Deuda pendiente (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"i\">Interés anual (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"15\"></div></div>\n<label for=\"q\">Cuota que pagas al mes (€)</label><input id=\"q\" inputmode=\"decimal\" value=\"200\"><div id=\"o\"></div>",
+"js": "function c(){const C=num('c'),r=num('i')/100/12,q=num('q');\nif(q<=C*r){$('o').innerHTML=show([['Resultado','La cuota no cubre ni los intereses: la deuda no se paga']]);return}\nconst n=r===0?C/q:-Math.log(1-C*r/q)/Math.log(1+r);\n$('o').innerHTML=show([['Tiempo para liquidar',Math.floor(n/12)+' años y '+Math.ceil(n%12)+' meses'],['Número de cuotas',Math.ceil(n)],['Intereses totales',eur(q*n-C)],['Total pagado',eur(q*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Pagar solo el mínimo alarga mucho una deuda con interés alto, como una tarjeta revolving. Subir un poco la cuota mensual puede reducir de forma notable el plazo y los intereses.</p>",
+"faq": [
+[
+"¿Cómo se calcula el tiempo para pagar un préstamo?",
+"A partir del capital, el interés y la cuota que puedes pagar al mes se obtiene el número de cuotas necesarias."
+],
+[
+"¿Qué pasa si la cuota es menor que los intereses?",
+"La deuda no se amortiza nunca: necesitas una cuota mayor que los intereses mensuales."
+]
+]
+},
+"calculadora-indemnizacion-despido": {
+"title": "Calculadora de indemnización por despido (improcedente y objetivo)",
+"h1": "Indemnización por despido",
+"desc": "Calcula la indemnización aproximada por despido improcedente (33 días por año) u objetivo (20 días por año) a partir de tu salario y antigüedad.",
+"body": "<div class=\"row\"><div><label for=\"s\">Salario bruto anual (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div><div><label for=\"y\">Años trabajados</label><input id=\"y\" inputmode=\"numeric\" value=\"5\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Meses sueltos adicionales</label><input id=\"m\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"t\">Tipo de despido</label><select id=\"t\"><option value=\"imp\">Improcedente (33 días/año, máx. 24 mensualidades)</option><option value=\"obj\">Objetivo (20 días/año, máx. 12 mensualidades)</option></select></div></div><div id=\"o\"></div>",
+"js": "function c(){const s=num('s'),a=(num('y')||0)+(num('m')||0)/12,imp=$('t').value==='imp';const d=s/365,dias=imp?33:20,tope=(imp?24:12)*s/12;\nconst bruta=d*dias*a,ind=Math.min(bruta,tope);\n$('o').innerHTML=show([['Salario diario',eur(d)],['Antigüedad',fmt(a,2)+' años'],['Indemnización calculada',eur(bruta)],['Indemnización (con tope)',eur(ind)],['Tope aplicado',bruta>tope?'Sí ('+eur(tope)+')':'No']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Cómo se calcula</h2><p>Para contratos posteriores a febrero de 2012, el despido improcedente se indemniza con 33 días de salario por año trabajado (los meses se prorratean) con un máximo de 24 mensualidades. En el despido objetivo son 20 días por año con un máximo de 12 mensualidades.</p><p>Si tu relación laboral empezó antes del 12 de febrero de 2012, ese periodo se calcula a 45 días por año, así que esta calculadora no sería exacta. Es una estimación orientativa: consulta con un abogado laboralista o con tu sindicato antes de firmar un finiquito.</p>",
+"faq": [
+[
+"¿Cuántos días por año se pagan en un despido improcedente?",
+"33 días de salario por año trabajado, con un máximo de 24 mensualidades, para contratos posteriores a febrero de 2012."
+],
+[
+"¿Y en un despido objetivo?",
+"20 días de salario por año trabajado, con un máximo de 12 mensualidades."
+],
+[
+"¿Esta calculadora es exacta?",
+"Es orientativa. Si tu contrato es anterior a 2012 se aplican 45 días por año al periodo previo. Consulta a un profesional."
+]
+]
+},
+"calculadora-salario-bruto-neto": {
+"title": "Calculadora de sueldo neto: de bruto anual a neto mensual (España)",
+"h1": "Sueldo bruto a neto",
+"desc": "Estima tu sueldo neto mensual en España a partir del bruto anual, descontando Seguridad Social e IRPF de forma aproximada.",
+"body": "<div class=\"row\"><div><label for=\"b\">Salario bruto anual (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"30000\"></div><div><label for=\"p\">Número de pagas</label><select id=\"p\"><option value=\"14\">14 pagas</option><option value=\"12\">12 pagas (prorrateadas)</option></select></div></div><div id=\"o\"></div>",
+"js": "function irpf(x){const t=[[12450,.19],[20200,.24],[35200,.30],[60000,.37],[1e12,.45]];let r=0,prev=0;for(const[l,p]of t){if(x>prev)r+=(Math.min(x,l)-prev)*p;prev=l}return r}\nfunction c(){const b=num('b'),n=parseInt($('p').value);const ss=Math.min(b,58914)*0.065;const base=Math.max(0,b-ss-2000);\nconst cuota=Math.max(0,irpf(base)-irpf(5550));const neto=b-ss-cuota;\n$('o').innerHTML=show([['Seguridad Social (aprox.)',eur(ss)],['IRPF (aprox.)',eur(cuota)],['Tipo medio IRPF',fmt(cuota/b*100,1)+' %'],['Neto anual',eur(neto)],['Neto al mes ('+n+' pagas)',eur(neto/n)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>Esta calculadora aplica una escala de IRPF media estatal más autonómica, el mínimo personal de 5.550 € y una cotización de empleado de aproximadamente el 6,5%, sin hijos ni otras circunstancias personales. Tu nómina real puede variar según tu comunidad autónoma, tu situación familiar, el tipo de contrato y la retención que indique tu empresa.</p><p>Úsala solo como referencia para comparar ofertas.</p>",
+"faq": [
+[
+"¿Es exacto el sueldo neto que sale?",
+"No. Es una estimación con una escala media de IRPF y una cotización del 6,5% aprox. Tu nómina real depende de tu comunidad, tu situación familiar y la retención de tu empresa."
+],
+[
+"¿Qué diferencia hay entre 12 y 14 pagas?",
+"El neto anual es el mismo; con 14 pagas cobras dos extras y cada mensualidad es menor."
+]
+]
+},
+"calculadora-pagas-extra": {
+"title": "Calculadora de pagas extra: sueldo mensual con 12 o 14 pagas",
+"h1": "Pagas extra: 12 o 14 pagas",
+"desc": "Convierte un salario anual en mensual con 12 pagas (prorrateadas) o con 14 pagas, y descubre cuánto cobras en cada paga.",
+"body": "<div class=\"row\"><div><label for=\"a\">Salario anual (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"21000\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const a=num('a');$('o').innerHTML=show([['Con 12 pagas',eur(a/12)+' al mes'],['Con 14 pagas: cada mensual',eur(a/14)],['Con 14 pagas: cada extra',eur(a/14)],['Diferencia mes normal',eur(a/12-a/14)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>El salario anual es el mismo con 12 que con 14 pagas: cambia cómo se reparte. Con 14 pagas cobras dos pagas extra (normalmente en verano y Navidad) y cada mes es menor; con pagas prorrateadas las extras se reparten entre los 12 meses.</p>",
+"faq": [
+[
+"¿Cobro más con 14 pagas que con 12?",
+"No. El salario anual es el mismo; solo cambia cómo se reparte entre los meses."
+],
+[
+"¿Qué son las pagas prorrateadas?",
+"Las pagas extra repartidas en las 12 nóminas mensuales, de modo que cobras lo mismo cada mes."
+]
+]
+},
+"calculadora-calorias-tmb": {
+"title": "Calculadora de calorías diarias y metabolismo basal (TMB)",
+"h1": "Calorías diarias y metabolismo basal",
+"desc": "Estima tu metabolismo basal y las calorías que gastas al día según tu edad, peso, altura y nivel de actividad.",
+"body": "<div class=\"row\"><div><label for=\"s\">Sexo</label><select id=\"s\"><option value=\"h\">Hombre</option><option value=\"m\">Mujer</option></select></div><div><label for=\"e\">Edad (años)</label><input id=\"e\" inputmode=\"numeric\" value=\"35\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Peso (kg)</label><input id=\"p\" inputmode=\"decimal\" value=\"72\"></div><div><label for=\"a\">Altura (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"172\"></div></div>\n<label for=\"f\">Nivel de actividad</label><select id=\"f\"><option value=\"1.2\">Sedentario (poco o ningún ejercicio)</option><option value=\"1.375\">Ligero (1-3 días/semana)</option><option value=\"1.55\" selected>Moderado (3-5 días/semana)</option><option value=\"1.725\">Intenso (6-7 días/semana)</option><option value=\"1.9\">Muy intenso (trabajo físico o doble sesión)</option></select><div id=\"o\"></div>",
+"js": "function c(){const t=10*num('p')+6.25*num('a')-5*num('e')+($('s').value==='h'?5:-161),m=t*num('f');\n$('o').innerHTML=show([['Metabolismo basal (TMB)',fmt(t,0)+' kcal'],['Gasto diario total',fmt(m,0)+' kcal'],['Para perder peso (-15%)',fmt(m*.85,0)+' kcal'],['Para ganar peso (+10%)',fmt(m*1.1,0)+' kcal']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Cómo se calcula</h2><p>Se usa la ecuación de Mifflin-St Jeor: 10 × peso (kg) + 6,25 × altura (cm) − 5 × edad + 5 (hombres) o − 161 (mujeres). El resultado es el metabolismo basal, las calorías que gasta tu cuerpo en reposo, y se multiplica por un factor según tu actividad.</p><p>Es una estimación general y no sustituye el consejo de un médico o dietista.</p>",
+"faq": [
+[
+"¿Qué es el metabolismo basal?",
+"Son las calorías que tu cuerpo gasta en reposo para mantener funciones vitales como respirar o la circulación."
+],
+[
+"¿Es exacto el resultado?",
+"Es una estimación con la ecuación de Mifflin-St Jeor. El gasto real varía de una persona a otra."
+]
+]
+},
+"calculadora-peso-ideal": {
+"title": "Calculadora de peso ideal según altura y sexo",
+"h1": "Peso ideal",
+"desc": "Calcula un rango de peso saludable según tu altura mediante el IMC y la fórmula de Devine.",
+"body": "<div class=\"row\"><div><label for=\"s\">Sexo</label><select id=\"s\"><option value=\"h\">Hombre</option><option value=\"m\">Mujer</option></select></div><div><label for=\"a\">Altura (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const a=num('a'),m=a/100,i=Math.max(0,a/2.54-60),dv=($('s').value==='h'?50:45.5)+2.3*i;\n$('o').innerHTML=show([['Rango saludable (IMC 18,5-24,9)',fmt(18.5*m*m,1)+' - '+fmt(24.9*m*m,1)+' kg'],['Fórmula de Devine',fmt(dv,1)+' kg']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+"text": "<p>El rango saludable se obtiene con el IMC recomendado por la OMS (entre 18,5 y 24,9). La fórmula de Devine es una referencia clásica basada solo en altura y sexo. Ninguna tiene en cuenta tu masa muscular ni tu constitución, así que son orientativas.</p>",
+"faq": [
+[
+"¿Existe un único peso ideal?",
+"No. Se habla de un rango saludable, que depende de la altura, la constitución y la masa muscular."
+],
+[
+"¿Qué IMC se considera normal?",
+"Según la OMS, entre 18,5 y 24,9."
+]
+]
+},
+"calculadora-ritmo-carrera": {
+"title": "Calculadora de ritmo de carrera: min/km, km/h y tiempo final",
+"h1": "Ritmo de carrera",
+"desc": "Calcula tu ritmo por kilómetro y tu velocidad media a partir de la distancia y el tiempo.",
+"body": "<label for=\"d\">Distancia (km)</label><input id=\"d\" inputmode=\"decimal\" value=\"10\">\n<div class=\"row\"><div><label for=\"h\">Horas</label><input id=\"h\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"mi\">Minutos</label><input id=\"mi\" inputmode=\"numeric\" value=\"55\"></div></div>\n<label for=\"se\">Segundos</label><input id=\"se\" inputmode=\"numeric\" value=\"0\"><div id=\"o\"></div>",
+"js": "function c(){const d=num('d'),t=(num('h')||0)*3600+(num('mi')||0)*60+(num('se')||0),p=t/d,pm=Math.floor(p/60),ps=Math.round(p%60);\nconst pad=n=>String(n).padStart(2,'0');const f=(x,n)=>{const s=Math.round(x*n);return Math.floor(s/3600)+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)};\n$('o').innerHTML=show([['Ritmo',pm+':'+pad(ps===60?0:ps)+' min/km'],['Velocidad',fmt(d/(t/3600),2)+' km/h'],['Tiempo en 5 km',f(p,5)],['Tiempo en 10 km',f(p,10)],['Media maratón',f(p,21.0975)],['Maratón',f(p,42.195)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>El ritmo es el tiempo que tardas en recorrer un kilómetro. Los tiempos de 5 km, 10 km, media maratón y maratón se calculan suponiendo que mantienes el mismo ritmo, algo que en distancias largas no siempre ocurre.</p>",
+"faq": [
+[
+"¿Qué es el ritmo en carrera?",
+"Es el tiempo que tardas en recorrer un kilómetro, expresado en minutos por kilómetro."
+],
+[
+"¿Cómo paso de min/km a km/h?",
+"Divide 60 entre el ritmo en minutos. Por ejemplo, 5:00 min/km son 12 km/h."
+]
+]
+},
+"calculadora-fecha-probable-parto": {
+"title": "Calculadora de fecha probable de parto y semanas de embarazo",
+"h1": "Fecha probable de parto",
+"desc": "Calcula la fecha probable de parto y las semanas de embarazo a partir de la fecha de tu última regla.",
+"body": "<label for=\"f\">Primer día de la última regla</label><input id=\"f\" type=\"date\"><button id=\"go\">Calcular</button><div id=\"o\"></div>",
+"js": "const t=new Date();t.setDate(t.getDate()-70);$('f').value=t.toISOString().slice(0,10);\n$('go').onclick=()=>{const a=new Date($('f').value);if(isNaN(a)){$('o').innerHTML='<p>Elige una fecha.</p>';return}\nconst p=new Date(a.getTime()+280*864e5),d=Math.floor((new Date()-a)/864e5),fm=x=>x.toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'});\n$('o').innerHTML=show([['Fecha probable de parto',fm(p)],['Semanas de embarazo',d>=0?Math.floor(d/7)+' semanas y '+(d%7)+' días':'—'],['Fin del primer trimestre',fm(new Date(a.getTime()+91*864e5))]])};$('go').click();",
+"text": "<p>Se aplica la regla de Naegele: fecha de la última regla más 280 días (40 semanas), suponiendo ciclos de 28 días. Solo una pequeña parte de los bebés nace exactamente en esa fecha. Es una estimación: tu médico o matrona la confirmará con la ecografía.</p>",
+"faq": [
+[
+"¿Cómo se calcula la fecha probable de parto?",
+"Se suman 280 días (40 semanas) al primer día de la última regla, con la regla de Naegele."
+],
+[
+"¿Es una fecha segura?",
+"No, es una estimación. Tu médico o matrona la ajustará con la ecografía."
+]
+]
+},
+"calculadora-vacaciones": {
+"title": "Calculadora de vacaciones: días devengados según tu contrato",
+"h1": "Vacaciones devengadas",
+"desc": "Calcula cuántos días de vacaciones te corresponden según los días trabajados en el año.",
+"body": "<div class=\"row\"><div><label for=\"v\">Días de vacaciones al año</label><input id=\"v\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"d\">Días trabajados en el año</label><input id=\"d\" inputmode=\"numeric\" value=\"200\"></div></div>\n<div class=\"row\"><div><label for=\"u\">Días ya disfrutados</label><input id=\"u\" inputmode=\"numeric\" value=\"5\"></div><div><label for=\"s\">Salario bruto anual (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const g=num('v')*Math.min(num('d'),365)/365,r=g-num('u'),dia=num('s')/365;\n$('o').innerHTML=show([['Vacaciones devengadas',fmt(g,2)+' días'],['Pendientes de disfrutar',fmt(r,2)+' días'],['Valor aprox. pendientes',eur(Math.max(r,0)*dia)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>El Estatuto de los Trabajadores fija un mínimo de 30 días naturales de vacaciones al año (unos 22 laborables). Si no has trabajado el año completo, se calculan en proporción. Tu convenio colectivo o contrato pueden mejorar esos días, así que revisa ambos. El valor en euros usa el salario diario bruto y es solo orientativo.</p>",
+"faq": [
+[
+"¿Cuántas vacaciones me corresponden por ley en España?",
+"Un mínimo de 30 días naturales al año, que tu convenio o contrato pueden mejorar."
+],
+[
+"¿Y si no trabajo el año completo?",
+"Se calculan en proporción al tiempo trabajado."
+]
+]
+},
+"calculadora-consumo-electrico": {
+"title": "Calculadora de consumo eléctrico de electrodomésticos (kWh y €)",
+"h1": "Consumo eléctrico de un aparato",
+"desc": "Calcula cuánta electricidad gasta un electrodoméstico y cuánto cuesta al mes según su potencia, horas de uso y precio del kWh.",
+"body": "<div class=\"row\"><div><label for=\"w\">Potencia (vatios)</label><input id=\"w\" inputmode=\"decimal\" value=\"1500\"></div><div><label for=\"h\">Horas de uso al día</label><input id=\"h\" inputmode=\"decimal\" value=\"2\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Días de uso al mes</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"p\">Precio del kWh (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"0,15\"></div></div><div id=\"o\"></div>",
+"js": "function c(){const k=num('w')/1000*num('h'),m=k*num('d');$('o').innerHTML=show([['Consumo diario',fmt(k,2)+' kWh'],['Consumo mensual',fmt(m,1)+' kWh'],['Coste al mes',eur(m*num('p'))],['Coste al año',eur(m*num('p')*12)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>La energía se mide en kilovatios hora (kWh): potencia en kW multiplicada por las horas de uso. La potencia figura en la etiqueta del aparato. Pon el precio del kWh de tu factura y recuerda que el coste real también incluye el término de potencia, impuestos y alquiler del contador.</p>",
+"faq": [
+[
+"¿Cómo se calcula el coste de un electrodoméstico?",
+"Potencia en kW por horas de uso da los kWh consumidos, que se multiplican por el precio del kWh."
+],
+[
+"¿Dónde veo la potencia del aparato?",
+"En la etiqueta del producto o en su manual, expresada en vatios (W)."
+]
+]
+},
+"calculadora-consumo-combustible": {
+"title": "Calculadora de consumo de combustible (l/100 km)",
+"h1": "Consumo del coche en l/100 km",
+"desc": "Calcula el consumo medio de tu coche en litros cada 100 km y lo que gastas por kilómetro.",
+"body": "<div class=\"row\"><div><label for=\"k\">Kilómetros recorridos</label><input id=\"k\" inputmode=\"decimal\" value=\"520\"></div><div><label for=\"l\">Litros repostados</label><input id=\"l\" inputmode=\"decimal\" value=\"31\"></div></div>\n<label for=\"p\">Precio del litro (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,55\"><div id=\"o\"></div>",
+"js": "function c(){const k=num('k'),l=num('l'),p=num('p');$('o').innerHTML=show([['Consumo',fmt(l/k*100,2)+' l/100 km'],['Kilómetros por litro',fmt(k/l,2)+' km/l'],['Coste por 100 km',eur(l/k*100*p)],['Coste por km',eur(l/k*p)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<p>Para un dato fiable, llena el depósito, anota el cuentakilómetros, recorre un buen tramo y vuelve a llenarlo hasta el tope: los litros que entren son los consumidos en esos kilómetros.</p>",
+"faq": [
+[
+"¿Cómo calculo el consumo real de mi coche?",
+"Llena el depósito, anota los kilómetros, circula y vuelve a llenarlo: litros repostados entre kilómetros por 100."
+],
+[
+"¿Por qué difiere del consumo oficial?",
+"El oficial se mide en condiciones de laboratorio; el real depende de la conducción, la carga y el tráfico."
+]
+]
+},
+"calculadora-ecuacion-segundo-grado": {
+"title": "Calculadora de ecuaciones de segundo grado (paso a paso)",
+"h1": "Ecuación de segundo grado",
+"desc": "Resuelve ax² + bx + c = 0 y obtiene las soluciones y el discriminante.",
+"body": "<div class=\"row\"><div><label for=\"a\">a</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">b</label><input id=\"b\" inputmode=\"decimal\" value=\"-3\"></div></div>\n<label for=\"c\">c</label><input id=\"c\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+"js": "function c(){const a=num('a'),b=num('b'),cc=num('c');if(!a){$('o').innerHTML='<p>El coeficiente a no puede ser 0.</p>';return}\nconst D=b*b-4*a*cc;let r;if(D>0){r=[['x₁',fmt((-b+Math.sqrt(D))/(2*a),4)],['x₂',fmt((-b-Math.sqrt(D))/(2*a),4)]]}else if(D===0){r=[['Solución doble',fmt(-b/(2*a),4)]]}else{const re=fmt(-b/(2*a),4),im=fmt(Math.sqrt(-D)/(2*a),4);r=[['x₁',re+' + '+im+'i'],['x₂',re+' − '+im+'i']]}\n$('o').innerHTML=show([['Discriminante',fmt(D,4)]].concat(r))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+"text": "<h2>Fórmula general</h2><p>Para ax² + bx + c = 0 las soluciones son x = (−b ± √(b² − 4ac)) / 2a. El discriminante b² − 4ac indica cuántas soluciones reales hay: dos si es positivo, una doble si es cero y ninguna real (dos complejas) si es negativo.</p>",
+"faq": [
+[
+"¿Qué es el discriminante?",
+"Es b² − 4ac. Si es positivo hay dos soluciones reales, si es cero una doble y si es negativo ninguna real."
+],
+[
+"¿Qué pasa si a vale 0?",
+"Deja de ser de segundo grado: es una ecuación lineal."
+]
+]
+}
+}

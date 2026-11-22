@@ -1,0 +1,1220 @@
+{
+ "calculadora-iva": {
+  "title": "VAT Calculator (Spain IVA 21%, 10%, 4%)",
+  "h1": "VAT (IVA) Calculator",
+  "desc": "Add or remove VAT (IVA) on any amount. Spanish rates: 21%, 10% and 4%. Free and instant.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Amount (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"100\"></div>\n<div><label for=\"r\">VAT (IVA) rate</label><select id=\"r\"><option value=\"21\">21% (standard)</option><option value=\"10\">10% (reduced)</option><option value=\"4\">4% (super-reduced)</option></select></div></div>\n<label for=\"m\">What do you want to do?</label><select id=\"m\"><option value=\"add\">Add VAT (I have the price without VAT)</option><option value=\"rem\">Remove VAT (I have the price including VAT)</option></select>\n<button id=\"go\">Calculate</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const a=num('a'),r=num('r')/100;let b,i,t;\nif($('m').value==='add'){b=a;i=a*r;t=a+i}else{t=a;b=a/(1+r);i=t-b}\n$('o').innerHTML=show([['Net amount (before VAT)',eur(b)],['VAT',eur(i)],['Total incl. VAT',eur(t)]])};$('go').click();",
+  "text": "<h2>How is VAT (IVA) calculated?</h2><p>To <b>add</b> VAT, multiply the price without VAT by 1.21 (if the rate is 21%). To <b>remove</b> it, divide the final price by 1.21. Spain has three rates: standard (21%), reduced (10%) and super-reduced (4%).</p>\n<p>This calculator is for guidance only. For invoices or tax returns, consult your accountant.</p>",
+  "faq": [
+   [
+    "What VAT (IVA) rates are there in Spain?",
+    "The standard rate is 21%, the reduced rate is 10% and the super-reduced rate is 4%. Some basic goods and services have reduced rates."
+   ],
+   [
+    "How do I remove VAT from a price?",
+    "Divide the final price by 1.21 if VAT is 21%. For example, €121 including VAT is €100 without VAT."
+   ],
+   [
+    "How do I add VAT to a price?",
+    "Multiply the price without VAT by 1.21 for 21%, by 1.10 for 10% and by 1.04 for 4%."
+   ]
+  ]
+ },
+ "calculadora-porcentajes": {
+  "title": "Percentage Calculator: How to Calculate a % Easily",
+  "h1": "Percentage Calculator",
+  "desc": "Calculate X% of an amount, what percentage one number is of another, and percentage change.",
+  "body": "<h2>What is X% of Y?</h2><div class=\"row\"><div><label for=\"p1\">Percentage (%)</label><input id=\"p1\" inputmode=\"decimal\" value=\"15\"></div><div><label for=\"y1\">Of the amount</label><input id=\"y1\" inputmode=\"decimal\" value=\"200\"></div></div><div id=\"o1\"></div>\n<h2>What percentage is X of Y?</h2><div class=\"row\"><div><label for=\"x2\">Number X</label><input id=\"x2\" inputmode=\"decimal\" value=\"30\"></div><div><label for=\"y2\">Number Y</label><input id=\"y2\" inputmode=\"decimal\" value=\"120\"></div></div><div id=\"o2\"></div>\n<h2>Percentage change</h2><div class=\"row\"><div><label for=\"v1\">Starting value</label><input id=\"v1\" inputmode=\"decimal\" value=\"80\"></div><div><label for=\"v2\">Final value</label><input id=\"v2\" inputmode=\"decimal\" value=\"100\"></div></div><div id=\"o3\"></div>",
+  "js": "function c(){$('o1').innerHTML=show([['Result',fmt(num('p1')/100*num('y1'))]]);\n$('o2').innerHTML=show([['X is',fmt(num('x2')/num('y2')*100)+' %']]);\nconst v=(num('v2')-num('v1'))/Math.abs(num('v1'))*100;$('o3').innerHTML=show([['Change',(v>0?'+':'')+fmt(v)+' %']]);}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Basic formulas</h2><ul><li><b>X% de Y</b> = Y × X ÷ 100</li><li><b>What % X is of Y</b> = X ÷ Y × 100</li><li><b>Change %</b> = (final − initial) ÷ initial × 100</li></ul>",
+  "faq": [
+   [
+    "How do I calculate 15% of an amount?",
+    "Multiply the amount by 15 and divide by 100. 15% of 200 is 30."
+   ],
+   [
+    "How do I calculate a percentage change?",
+    "Subtract the starting value from the final value, divide by the starting value and multiply by 100."
+   ]
+  ]
+ },
+ "calculadora-propinas": {
+  "title": "Tip Calculator and Bill Splitter",
+  "h1": "Tip Calculator and Bill Splitter",
+  "desc": "Calculate the tip and how much each person pays when splitting the restaurant bill.",
+  "body": "<div class=\"row\"><div><label for=\"b\">Bill total (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"60\"></div><div><label for=\"t\">Tip (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"10\"></div></div>\n<label for=\"n\">Number of people</label><input id=\"n\" inputmode=\"numeric\" value=\"4\"><div id=\"o\"></div>",
+  "js": "function c(){const b=num('b'),t=num('t')/100,n=Math.max(1,num('n'));const tip=b*t,tot=b+tip;\n$('o').innerHTML=show([['Tip',eur(tip)],['Total',eur(tot)],['Per person',eur(tot/n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>In Spain tipping is not mandatory; it is usual to leave between 5% and 10% if the service was good. In other countries the usual percentage may be higher.</p>",
+  "faq": [
+   [
+    "How much do people usually tip in Spain?",
+    "It is not mandatory. It is common to leave between 5% and 10% if the service was good, and many people just round up to the nearest euro."
+   ],
+   [
+    "How do I split the bill between several people?",
+    "Enter the number of diners and the calculator splits the total, tip included, equally."
+   ]
+  ]
+ },
+ "dias-entre-fechas": {
+  "title": "Days Between Two Dates Calculator",
+  "h1": "Days Between Two Dates",
+  "desc": "Calculate how many days, weeks and working days there are between two dates.",
+  "body": "<div class=\"row\"><div><label for=\"d1\">Start date</label><input id=\"d1\" type=\"date\"></div><div><label for=\"d2\">End date</label><input id=\"d2\" type=\"date\"></div></div>\n<button id=\"go\">Calculate</button><div id=\"o\"></div>",
+  "js": "const t=new Date();$('d1').value=t.toISOString().slice(0,10);const f=new Date(t.getTime()+30*864e5);$('d2').value=f.toISOString().slice(0,10);\n$('go').onclick=()=>{let a=new Date($('d1').value),b=new Date($('d2').value);if(isNaN(a)||isNaN(b)){$('o').innerHTML='<p>Choose both dates.</p>';return}\nif(a>b)[a,b]=[b,a];const days=Math.round((b-a)/864e5);let w=0;for(let d=new Date(a);d<b;d.setDate(d.getDate()+1)){const g=d.getDay();if(g!==0&&g!==6)w++}\n$('o').innerHTML=show([['Days',fmt(days,0)],['Weeks',fmt(days/7,1)],['Months (approx.)',fmt(days/30.44,1)],['Working days (Mon-Fri)',fmt(w,0)]])};$('go').click();",
+  "text": "<p>The working days shown are Monday to Friday and do not subtract public holidays, which vary by region and town.</p>",
+  "faq": [
+   [
+    "Is the start day counted?",
+    "By default the difference between the two dates is calculated, not including the start day. Add 1 if you want to count both ends."
+   ],
+   [
+    "Does it count only working days?",
+    "No, it counts calendar days."
+   ]
+  ]
+ },
+ "calculadora-edad": {
+  "title": "Exact Age Calculator: Years, Months and Days",
+  "h1": "Age Calculator",
+  "desc": "Find out your exact age in years, months and days and how long until your next birthday.",
+  "body": "<label for=\"n\">Date of birth</label><input id=\"n\" type=\"date\" value=\"2000-01-01\"><button id=\"go\">Calculate</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const n=new Date($('n').value),h=new Date();if(isNaN(n)||n>h){$('o').innerHTML='<p>Enter a valid date.</p>';return}\nlet y=h.getFullYear()-n.getFullYear(),m=h.getMonth()-n.getMonth(),d=h.getDate()-n.getDate();\nif(d<0){m--;d+=new Date(h.getFullYear(),h.getMonth(),0).getDate()}if(m<0){y--;m+=12}\nlet nx=new Date(h.getFullYear(),n.getMonth(),n.getDate());if(nx<=new Date(h.getFullYear(),h.getMonth(),h.getDate()))nx=new Date(h.getFullYear()+1,n.getMonth(),n.getDate());\nconst tot=Math.floor((h-n)/864e5);\n$('o').innerHTML=show([['Age',y+' years, '+m+' months, '+d+' days'],['Days lived',fmt(tot,0)],['Next birthday in',Math.ceil((nx-h)/864e5)+' days']])};$('go').click();",
+  "text": "",
+  "faq": [
+   [
+    "How is exact age calculated?",
+    "Years, months and days are subtracted between your date of birth and today, adjusting for the real length of each month."
+   ],
+   [
+    "Is my date of birth saved?",
+    "No. Everything is calculated in your browser."
+   ]
+  ]
+ },
+ "conversor-unidades": {
+  "title": "Unit Converter: Length, Weight, Volume and Temperature",
+  "h1": "Unit Converter",
+  "desc": "Convert kilometers to miles, kilograms to pounds, liters to gallons and degrees Celsius to Fahrenheit.",
+  "body": "<label for=\"c\">Type</label><select id=\"c\"></select>\n<div class=\"row\"><div><label for=\"v\">Value</label><input id=\"v\" inputmode=\"decimal\" value=\"1\"></div><div></div></div>\n<div class=\"row\"><div><label for=\"f\">From</label><select id=\"f\"></select></div><div><label for=\"t\">To</label><select id=\"t\"></select></div></div><div id=\"o\"></div>",
+  "js": "const U={'Length':{m:1,km:1000,cm:.01,mm:.001,mile:1609.344,yard:.9144,foot:.3048,inch:.0254},\n'Weight':{kg:1,g:.001,mg:1e-6,tonne:1000,pound:.45359237,ounce:.028349523},\n'Volume':{liter:1,ml:.001,'m³':1000,'gallon (US)':3.785411784,'cup (US)':.2365882365},\n'Temperature':{'°C':1,'°F':1,'K':1}};\nconst c=$('c'),f=$('f'),t=$('t');Object.keys(U).forEach(k=>c.add(new Option(k,k)));\nfunction fill(){const k=Object.keys(U[c.value]);f.innerHTML=t.innerHTML='';k.forEach(x=>{f.add(new Option(x,x));t.add(new Option(x,x))});t.selectedIndex=Math.min(1,k.length-1);calc()}\nfunction calc(){const v=num('v');let r;\nif(c.value==='Temperature'){let C=f.value==='°C'?v:f.value==='°F'?(v-32)*5/9:v-273.15;r=t.value==='°C'?C:t.value==='°F'?C*9/5+32:C+273.15}\nelse r=v*U[c.value][f.value]/U[c.value][t.value];\n$('o').innerHTML=show([[fmt(v,6)+' '+f.value+' =',fmt(r,6)+' '+t.value]])}\nc.onchange=fill;[f,t,$('v')].forEach(e=>e.oninput=calc);f.onchange=t.onchange=calc;fill();",
+  "text": "",
+  "faq": [
+   [
+    "Which units can I convert?",
+    "Length, weight, volume and other common quantities offered by the tool."
+   ],
+   [
+    "Is the result exact?",
+    "It uses standard conversion factors and rounds the result to make it easier to read."
+   ]
+  ]
+ },
+ "generador-contrasenas": {
+  "title": "Random Strong Password Generator",
+  "h1": "Strong Password Generator",
+  "desc": "Create strong random passwords in your browser. They are not sent or stored anywhere.",
+  "body": "<label for=\"l\">Length: <b id=\"lv\">16</b></label><input id=\"l\" type=\"range\" min=\"8\" max=\"64\" value=\"16\">\n<label><input type=\"checkbox\" id=\"u\" checked style=\"width:auto\"> Uppercase</label><label><input type=\"checkbox\" id=\"n\" checked style=\"width:auto\"> Numbers</label><label><input type=\"checkbox\" id=\"s\" checked style=\"width:auto\"> Symbols</label>\n<button id=\"go\">Generate</button> <button id=\"cp\" class=\"sec\">Copy</button><div class=\"card\" style=\"word-break:break-all;font:20px monospace\" id=\"o\"></div>",
+  "js": "function gen(){let s='abcdefghijkmnopqrstuvwxyz';if($('u').checked)s+='ABCDEFGHJKLMNPQRSTUVWXYZ';if($('n').checked)s+='23456789';if($('s').checked)s+='!@#$%&*?-_+=';\nconst L=+$('l').value,a=new Uint32Array(L);crypto.getRandomValues(a);$('o').textContent=Array.from(a,x=>s[x%s.length]).join('');$('lv').textContent=L}\n$('go').onclick=gen;$('l').oninput=gen;$('cp').onclick=()=>{navigator.clipboard.writeText($('o').textContent);$('cp').textContent='Copied!';setTimeout(()=>$('cp').textContent='Copy',1500)};gen();",
+  "text": "<p>A long password (16 or more characters) that is unique to each service is the best defence. It is generated with your browser's cryptographic generator and never leaves your device.</p>",
+  "faq": [
+   [
+    "What makes a password strong?",
+    "Above all, length: 14 characters or more is recommended, mixing letters, numbers and symbols, with a different one for each service."
+   ],
+   [
+    "Is the generated password saved?",
+    "No. It is generated in your browser and is not sent to any server."
+   ]
+  ]
+ },
+ "contador-palabras": {
+  "title": "Online Word and Character Counter",
+  "h1": "Word and Character Counter",
+  "desc": "Count the words, characters, sentences and paragraphs in your text and calculate reading time.",
+  "body": "<label for=\"x\">Paste or type your text</label><textarea id=\"x\" placeholder=\"Type here...\"></textarea><div id=\"o\"></div>",
+  "js": "function c(){const x=$('x').value,w=(x.trim().match(/\\S+/g)||[]).length;\n$('o').innerHTML=show([['Words',fmt(w,0)],['Characters',fmt(x.length,0)],['Without spaces',fmt(x.replace(/\\s/g,'').length,0)],['Sentences',fmt((x.match(/[.!?]+(\\s|$)/g)||[]).length,0)],['Paragraphs',fmt(x.split(/\\n+/).filter(s=>s.trim()).length,0)],['Reading time',Math.max(w?1:0,Math.round(w/200))+' min']])}\n$('x').oninput=c;c();",
+  "text": "<p>Reading time is estimated at 200 words per minute. Useful for essays, social media character limits, video descriptions or SEO.</p>",
+  "faq": [
+   [
+    "How does it count words?",
+    "It splits the text by spaces and line breaks."
+   ],
+   [
+    "Is my text saved?",
+    "No. The count is done in your browser and the text is not sent to any server."
+   ]
+  ]
+ },
+ "calculadora-descuentos": {
+  "title": "Discount and Sale Price Calculator",
+  "h1": "Discount Calculator",
+  "desc": "Calculate the final price and how much you save with a discount or sale (percentage).",
+  "body": "<div class=\"row\"><div><label for=\"p\">Original price (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"59,90\"></div><div><label for=\"d\">Discount (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"30\"></div></div>\n<label for=\"d2\">Additional discount (%) — optional</label><input id=\"d2\" inputmode=\"decimal\" value=\"0\"><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),a=num('d')/100,b=(num('d2')||0)/100;const f=p*(1-a)*(1-b);\n$('o').innerHTML=show([['Final price',eur(f)],['You save',eur(p-f)],['Total discount',fmt((1-f/p)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>If you apply two discounts in a row, they are not added together: the second one is applied to the already reduced price. For example, 30% + 10% equals a 37% total discount.</p>",
+  "faq": [
+   [
+    "How is a discount calculated?",
+    "Final price = original price × (1 − discount/100). For example, €80 with a 25% discount is €60."
+   ],
+   [
+    "Do two discounts of 20% and 10% add up to 30%?",
+    "No. They are applied one after the other: €100 → €80 → €72, a 28% total discount."
+   ]
+  ]
+ },
+ "calculadora-hipoteca": {
+  "title": "Mortgage Calculator (Spain): Monthly Payment and Interest",
+  "h1": "Mortgage Calculator",
+  "desc": "Calculate the monthly payment and total interest of a fixed-rate mortgage in Spain (hipoteca).",
+  "body": "<div class=\"row\"><div><label for=\"c\">Amount to borrow (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"i\">Annual interest (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Term (years)</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('y')*12;const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Monthly payment',eur(q)],['Total to pay',eur(q*n)],['Total interest',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Calculated with the French amortization system (constant payment) and a fixed rate. It does not include fees, insurance or closing costs. This is an indicative simulation, not an offer.</p>",
+  "faq": [
+   [
+    "How is a mortgage payment calculated?",
+    "With the French amortization formula: payment = principal × i / (1 − (1 + i)^−n), where i is the monthly interest rate and n is the number of payments."
+   ],
+   [
+    "What is the difference between a fixed and a variable mortgage?",
+    "With a fixed mortgage the interest rate does not change for the whole term. With a variable one it depends on the Euribor plus a spread and is reviewed periodically."
+   ],
+   [
+    "Does this calculator include insurance and fees?",
+    "No. It only calculates principal and interest. Tied insurance products and fees increase the real cost."
+   ]
+  ]
+ },
+ "calculadora-imc": {
+  "title": "BMI Calculator (Body Mass Index)",
+  "h1": "BMI Calculator",
+  "desc": "Calculate your body mass index from your weight and height and check your category according to the WHO.",
+  "body": "<div class=\"row\"><div><label for=\"w\">Weight (kg)</label><input id=\"w\" inputmode=\"decimal\" value=\"70\"></div><div><label for=\"h\">Height (cm)</label><input id=\"h\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const w=num('w'),h=num('h')/100,i=w/(h*h);const k=i<18.5?'Underweight':i<25?'Normal weight':i<30?'Overweight':'Obesity';\n$('o').innerHTML=show([['Your BMI',fmt(i,1)],['Category (WHO)',k]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>BMI ranges according to the WHO</h2><ul><li>Less than 18.5: underweight</li><li>18.5 to 24.9: normal weight</li><li>25 to 29.9: overweight</li><li>30 or more: obesity</li></ul><p>BMI is only an indicative measure: it does not distinguish between muscle and fat. For any decision about your health, consult a healthcare professional.</p>",
+  "faq": [
+   [
+    "What is BMI?",
+    "Body mass index relates your weight to your height: weight (kg) divided by height (m) squared."
+   ],
+   [
+    "What BMI is considered normal?",
+    "According to the WHO, between 18.5 and 24.9."
+   ],
+   [
+    "Is BMI reliable?",
+    "It is only a general indicator: it does not distinguish between muscle and fat. Consult a healthcare professional to assess your health."
+   ]
+  ]
+ },
+ "calculadora-interes-compuesto": {
+  "title": "Compound Interest and Savings Calculator",
+  "h1": "Compound Interest Calculator",
+  "desc": "Simulate how much money you will have by saving a set amount each month at an annual interest rate for several years.",
+  "body": "<div class=\"row\"><div><label for=\"i0\">Initial capital (€)</label><input id=\"i0\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"ap\">Monthly contribution (€)</label><input id=\"ap\" inputmode=\"decimal\" value=\"100\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Annual interest (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"4\"></div><div><label for=\"y\">Years</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){let b=num('i0');const a=num('ap'),r=num('r')/100/12,n=Math.round(num('y')*12);for(let k=0;k<n;k++){b=b*(1+r)+a}\nconst put=num('i0')+a*n;$('o').innerHTML=show([['Final balance',eur(b)],['Total contributed',eur(put)],['Interest earned',eur(b-put)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Compound interest means that interest in turn generates new interest. The sooner you start and the longer you keep saving, the greater the effect. This simulation assumes a constant return, which is not guaranteed in real life, and does not take taxes or inflation into account. It is not financial advice.</p>",
+  "faq": [
+   [
+    "What is compound interest?",
+    "It is interest calculated on the principal plus the interest already earned, so the money grows faster and faster."
+   ],
+   [
+    "Does this calculator take taxes into account?",
+    "No. Nor inflation or fees. It is a simulation with a constant return."
+   ]
+  ]
+ },
+ "calculadora-prestamos": {
+  "title": "Personal Loan Calculator: Monthly Payment",
+  "h1": "Loan Calculator",
+  "desc": "Calculate the monthly payment and total interest of a personal loan or car loan.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Amount (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"i\">Annual interest (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"7\"></div></div>\n<label for=\"m\">Term (months)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,n=num('m');const q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));\n$('o').innerHTML=show([['Monthly payment',eur(q)],['Total to repay',eur(q*n)],['Interest',eur(q*n-C)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Calculated with a constant payment. It does not include arrangement fees or tied insurance. Always compare the APR (TAE) offered by each lender.</p>",
+  "faq": [
+   [
+    "How do I calculate a personal loan payment?",
+    "Enter the amount, the annual interest rate (TIN) and the term in months. The calculator applies a constant payment with French amortization."
+   ],
+   [
+    "Which is better, reducing the payment or the term?",
+    "Reducing the term saves more interest; reducing the payment eases your monthly budget. It depends on your situation."
+   ],
+   [
+    "Is the TIN the same as the APR (TAE)?",
+    "No. The APR (TAE) also includes fees and is the right figure for comparing offers."
+   ]
+  ]
+ },
+ "calculadora-nota-media": {
+  "title": "Grade Average Calculator and Final Exam Grade Needed",
+  "h1": "Grade Average Calculator",
+  "desc": "Calculate your weighted grade average and the grade you need on the final exam to pass.",
+  "body": "<h2>Weighted average</h2><div id=\"rows\"></div><div id=\"o1\"></div>\n<h2>What grade do I need on the final exam?</h2><div class=\"row\"><div><label for=\"a\">Current grade (0-10)</label><input id=\"a\" inputmode=\"decimal\" value=\"5,5\"></div><div><label for=\"wa\">Weight of the current grade (%)</label><input id=\"wa\" inputmode=\"decimal\" value=\"60\"></div></div>\n<div class=\"row\"><div><label for=\"obj\">Grade you want to get</label><input id=\"obj\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o2\"></div>",
+  "js": "const R=$('rows');for(let k=1;k<=6;k++)R.insertAdjacentHTML('beforeend','<div class=\"row\"><div><label>Grade '+k+'</label><input class=\"n\" inputmode=\"decimal\"></div><div><label>Weight '+k+' (%)</label><input class=\"p\" inputmode=\"decimal\"></div></div>');\nR.querySelectorAll('.n')[0].value='7';R.querySelectorAll('.p')[0].value='40';R.querySelectorAll('.n')[1].value='5';R.querySelectorAll('.p')[1].value='60';\nfunction c(){const n=[...R.querySelectorAll('.n')],p=[...R.querySelectorAll('.p')];let s=0,w=0;n.forEach((x,i)=>{const a=parseFloat(x.value.replace(',','.')),b=parseFloat(p[i].value.replace(',','.'));if(isFinite(a)&&isFinite(b)){s+=a*b;w+=b}});\n$('o1').innerHTML=show([['Average grade',w?fmt(s/w,2):'—'],['Total weight',fmt(w,0)+' %']]);\nconst need=(num('obj')-num('a')*num('wa')/100)/((100-num('wa'))/100);\n$('o2').innerHTML=show([['Grade needed on the exam',need>10?fmt(need,2)+' (not possible)':need<0?'0 (you already have it)':fmt(need,2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "",
+  "faq": [
+   [
+    "How is the weighted grade average calculated?",
+    "Multiply each grade by its weight or credits, add up the results and divide by the sum of the weights."
+   ],
+   [
+    "Does it work for the university entrance grade?",
+    "For that, use the specific entrance grade calculator, which applies the EBAU/PAU weightings."
+   ]
+  ]
+ },
+ "regla-de-tres": {
+  "title": "Rule of Three Calculator (Direct and Inverse Proportion)",
+  "h1": "Rule of Three Calculator",
+  "desc": "Solve direct and inverse rule of three (proportion) problems step by step.",
+  "body": "<label for=\"t\">Type</label><select id=\"t\"><option value=\"d\">Direct (more → more)</option><option value=\"i\">Inverse (more → less)</option></select>\n<div class=\"row\"><div><label for=\"a\">If A</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"b\">equals B</label><input id=\"b\" inputmode=\"decimal\" value=\"12\"></div></div>\n<div class=\"row\"><div><label for=\"c\">then C</label><input id=\"c\" inputmode=\"decimal\" value=\"5\"></div><div></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),b=num('b'),cc=num('c');const x=$('t').value==='d'?b*cc/a:a*b/cc;$('o').innerHTML=show([['Result (X)',fmt(x,4)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<ul><li><b>Direct:</b> X = B × C ÷ A. Example: 3 kg cost €12, how much do 5 kg cost? €20.</li><li><b>Inverse:</b> X = A × B ÷ C. Example: 3 workers take 12 days, how long do 6 take? 6 days.</li></ul>",
+  "faq": [
+   [
+    "What is a simple direct rule of three?",
+    "It applies when increasing one quantity increases the other in the same proportion: x = b × c / a."
+   ],
+   [
+    "And the inverse one?",
+    "It applies when increasing one quantity decreases the other, such as speed and time: x = a × b / c."
+   ]
+  ]
+ },
+ "sorteo-aleatorio": {
+  "title": "Random Name Picker: Choose a Winner from a List",
+  "h1": "Random Name Picker",
+  "desc": "Paste a list of names (one per line) and pick one or several winners at random. Ideal for social media giveaways.",
+  "body": "<label for=\"l\">List of participants (one per line)</label><textarea id=\"l\" placeholder=\"Anna&#10;Luke&#10;Martha\"></textarea>\n<label for=\"n\">Number of winners</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Draw</button><div id=\"o\"></div>",
+  "js": "$('go').onclick=()=>{const L=[...new Set($('l').value.split('\\n').map(s=>s.trim()).filter(Boolean))];const n=Math.min(Math.max(1,num('n')||1),L.length);\nif(!L.length){$('o').innerHTML='<p>Add at least one name.</p>';return}\nfor(let i=L.length-1;i>0;i--){const a=new Uint32Array(1);crypto.getRandomValues(a);const j=a[0]%(i+1);[L[i],L[j]]=[L[j],L[i]]}\n$('o').innerHTML='<div class=\"card\"><b>🎉 Winner'+(n>1?'s':'')+':</b><ol>'+L.slice(0,n).map(x=>'<li style=\"font-size:20px\">'+x.replace(/</g,'&lt;')+'</li>').join('')+'</ol></div>'};",
+  "text": "<p>The draw uses your browser's cryptographic random generator and removes duplicate names. If you run it for a social media giveaway, record your screen during the draw as proof and check the legal terms of your platform.</p>",
+  "faq": [
+   [
+    "How does the draw work?",
+    "It picks at random among the names or items you enter."
+   ],
+   [
+    "Is it valid for prize draws?",
+    "For public draws or draws with prizes, you should follow the applicable regulations and the draw's official rules."
+   ]
+  ]
+ },
+ "coste-viaje-gasolina": {
+  "title": "Road Trip Cost Calculator (Fuel)",
+  "h1": "Road Trip Cost",
+  "desc": "Calculate how much petrol or diesel you will use and how much a trip costs, also per person.",
+  "body": "<div class=\"row\"><div><label for=\"k\">Distance (km)</label><input id=\"k\" inputmode=\"decimal\" value=\"450\"></div><div><label for=\"c\">Consumption (l/100 km)</label><input id=\"c\" inputmode=\"decimal\" value=\"6,5\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Price per liter (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,60\"></div><div><label for=\"n\">People</label><input id=\"n\" inputmode=\"numeric\" value=\"3\"></div></div>\n<label><input type=\"checkbox\" id=\"rt\" style=\"width:auto\"> Round trip</label><div id=\"o\"></div>",
+  "js": "function c(){let k=num('k');if($('rt').checked)k*=2;const l=k*num('c')/100,t=l*num('p');$('o').innerHTML=show([['Liters',fmt(l,1)+' l'],['Fuel cost',eur(t)],['Per person',eur(t/Math.max(1,num('n')))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>It does not include tolls, parking or vehicle wear and tear. Carpooling splits the fuel cost among all the passengers.</p>",
+  "faq": [
+   [
+    "How is the cost of a car trip calculated?",
+    "Multiply the kilometers by the consumption (l/100 km) divided by 100 and by the price per liter."
+   ],
+   [
+    "Does it include tolls or wear and tear?",
+    "No. It only calculates fuel; tolls, parking and maintenance are added separately."
+   ]
+  ]
+ },
+ "calculadora-horas-trabajadas": {
+  "title": "Hours Worked Calculator Between Two Times",
+  "h1": "Hours Worked Calculator",
+  "desc": "Calculate the hours worked between clock-in and clock-out times, deducting the break.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Start</label><input id=\"a\" type=\"time\" value=\"09:00\"></div><div><label for=\"b\">End</label><input id=\"b\" type=\"time\" value=\"17:30\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Break (minutes)</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"r\">Hourly rate (€) — optional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+  "js": "function tm(s){const p=s.split(':');return +p[0]*60+ +p[1]}\nfunction c(){let m=tm($('b').value)-tm($('a').value);if(m<0)m+=1440;m-=num('d')||0;m=Math.max(0,m);const h=m/60;\n$('o').innerHTML=show([['Time worked',Math.floor(m/60)+' h '+(m%60)+' min'],['In decimal hours',fmt(h,2)],['Amount',eur(h*(num('r')||0))]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>If the end time is earlier than the start time, the shift is assumed to cross midnight.</p>",
+  "faq": [
+   [
+    "How are hours worked calculated?",
+    "The start time is subtracted from the end time and unpaid breaks are deducted."
+   ],
+   [
+    "Does it work for shifts that cross midnight?",
+    "Yes, as long as you enter the start and end times correctly."
+   ]
+  ]
+ },
+ "convertidor-mayusculas": {
+  "title": "Convert Text to Uppercase, Lowercase and Title Case",
+  "h1": "Uppercase and Lowercase Converter",
+  "desc": "Change your text to UPPERCASE, lowercase, Title Case or Sentence case with one click.",
+  "body": "<textarea id=\"x\" placeholder=\"Type or paste your text...\"></textarea>\n<button data-m=\"u\">UPPERCASE</button> <button data-m=\"l\" class=\"sec\">lowercase</button> <button data-m=\"t\" class=\"sec\">Title Case</button> <button data-m=\"s\" class=\"sec\">Sentence case</button> <button id=\"cp\" class=\"sec\">Copy</button>",
+  "js": "const x=$('x');document.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{const m=b.dataset.m,v=x.value;\nx.value=m==='u'?v.toUpperCase():m==='l'?v.toLowerCase():m==='t'?v.toLowerCase().replace(/(^|\\s)(\\S)/g,(a,s,c)=>s+c.toUpperCase()):v.toLowerCase().replace(/(^|[.!?¡¿]\\s*)(\\S)/g,(a,s,c)=>s+c.toUpperCase())});\n$('cp').onclick=()=>{navigator.clipboard.writeText(x.value);$('cp').textContent='Copied!';setTimeout(()=>$('cp').textContent='Copy',1500)};",
+  "text": "",
+  "faq": [
+   [
+    "Which formats does it support?",
+    "It converts text to UPPERCASE, lowercase and other capitalization styles."
+   ],
+   [
+    "Is my text saved?",
+    "No. The conversion is done in your browser."
+   ]
+  ]
+ },
+ "calculadora-margen-beneficio": {
+  "title": "Profit Margin and Markup Calculator",
+  "h1": "Profit Margin Calculator",
+  "desc": "Calculate the profit, margin and markup of a product, or the selling price needed to earn the margin you want.",
+  "body": "<h2>I have cost and selling price</h2><div class=\"row\"><div><label for=\"c\">Product cost (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"v\">Selling price (€)</label><input id=\"v\" inputmode=\"decimal\" value=\"25\"></div></div><div id=\"o1\"></div>\n<h2>I want a specific margin</h2><div class=\"row\"><div><label for=\"c2\">Cost (€)</label><input id=\"c2\" inputmode=\"decimal\" value=\"12\"></div><div><label for=\"m2\">Desired margin (%)</label><input id=\"m2\" inputmode=\"decimal\" value=\"40\"></div></div><div id=\"o2\"></div>",
+  "js": "function c(){const C=num('c'),V=num('v');$('o1').innerHTML=show([['Profit',eur(V-C)],['Margin on sales',fmt((V-C)/V*100,1)+' %'],['Markup on cost',fmt((V-C)/C*100,1)+' %']]);\nconst C2=num('c2'),m=num('m2')/100;$('o2').innerHTML=show([['Selling price',eur(C2/(1-m))],['Profit per unit',eur(C2/(1-m)-C2)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Margin and markup are not the same thing</h2><p><b>Margin</b> is profit divided by the selling price. <b>Markup</b> is profit divided by cost. A product that costs €12 and sells for €25 has a 52% margin and a 108% markup. Remember to also deduct shipping, platform fees, returns and advertising to know your real profit.</p>",
+  "faq": [
+   [
+    "What is the difference between margin and markup?",
+    "Margin is calculated on the selling price and markup on the cost. With a cost of €60 and a selling price of €100, the margin is 40% and the markup is 66.7%."
+   ],
+   [
+    "How do I set the price for a specific margin?",
+    "Price = cost / (1 − margin). For a 30% margin with a cost of €70, the price is €100."
+   ]
+  ]
+ },
+ "calcular-letra-dni": {
+  "title": "Spanish ID (DNI) Letter Calculator: Find the Letter from the Number",
+  "h1": "Spanish DNI Letter Calculator",
+  "desc": "Enter the 8 digits of a Spanish national ID (DNI) and find its letter. Also works to check whether a DNI is valid.",
+  "body": "<label for=\"n\">DNI number (8 digits)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"8\" value=\"12345678\"><div id=\"o\"></div>",
+  "js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const v=$('n').value.replace(/\\D/g,'');if(v.length<7||v.length>8){$('o').innerHTML='<p>Enter 7 or 8 digits.</p>';return}\n$('o').innerHTML=show([['Letter',L[parseInt(v,10)%23]],['Full DNI',v.padStart(8,'0')+L[parseInt(v,10)%23]]])}\n$('n').oninput=c;c();",
+  "text": "<h2>How is it calculated?</h2><p>The letter of the Spanish DNI (Documento Nacional de Identidad) is obtained by dividing the number by 23 and assigning a letter according to the remainder, from the series TRWAGMYFPDXBNJZSQVHLCKE. This tool works in your browser and does not store or send any data.</p>",
+  "faq": [
+   [
+    "How is the Spanish DNI letter calculated?",
+    "The number is divided by 23 and the remainder gives the letter in the series TRWAGMYFPDXBNJZSQVHLCKE."
+   ],
+   [
+    "Can it be used to check whether a DNI is valid?",
+    "Yes. If the calculated letter matches the one on the document, the format is correct. It does not confirm that the DNI exists."
+   ],
+   [
+    "Is the number I type saved?",
+    "No. The calculation is done in your browser and nothing is sent to any server."
+   ]
+  ]
+ },
+ "dias-para-navidad": {
+  "title": "How Many Days Until Christmas, New Year's Eve and Three Kings Day?",
+  "h1": "Countdown: Days Until Christmas",
+  "desc": "See how many days are left until Christmas, New Year's Eve and Three Kings Day (Epiphany, a Spanish holiday).",
+  "body": "<div id=\"o\"></div>",
+  "js": "const h=new Date();const t0=new Date(h.getFullYear(),h.getMonth(),h.getDate());\nfunction nx(m,d){let f=new Date(h.getFullYear(),m,d);if(f<t0)f=new Date(h.getFullYear()+1,m,d);return Math.round((f-t0)/864e5)}\n$('o').innerHTML=show([['Christmas (Dec 25)',nx(11,25)+' days'],['New Year\\'s Eve (Dec 31)',nx(11,31)+' days'],['Three Kings Day (Jan 6)',nx(0,6)+' days']]);",
+  "text": "<p>The count is calculated using your device's date. If today is the date in question, it shows 0 days.</p>",
+  "faq": [
+   [
+    "Which day counts as Christmas?",
+    "December 25."
+   ],
+   [
+    "Does the number of days update by itself?",
+    "Yes. It is calculated in your browser with today's date every time you open the page."
+   ]
+  ]
+ },
+ "calculadora-pintura": {
+  "title": "Paint Calculator: How Many Liters Do I Need",
+  "h1": "Paint Calculator",
+  "desc": "Calculate the liters of paint you need to paint a room based on walls, openings and coats.",
+  "body": "<div class=\"row\"><div><label for=\"l\">Total wall length (m)</label><input id=\"l\" inputmode=\"decimal\" value=\"14\"></div><div><label for=\"h\">Height (m)</label><input id=\"h\" inputmode=\"decimal\" value=\"2,5\"></div></div>\n<div class=\"row\"><div><label for=\"v\">Doors and windows (m²)</label><input id=\"v\" inputmode=\"decimal\" value=\"5\"></div><div><label for=\"m\">Coats of paint</label><input id=\"m\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"r\">Coverage (m² per liter)</label><input id=\"r\" inputmode=\"decimal\" value=\"10\"><div id=\"o\"></div>",
+  "js": "function c(){const a=Math.max(0,num('l')*num('h')-num('v')),l=a*num('m')/num('r');$('o').innerHTML=show([['Area to paint',fmt(a,1)+' m²'],['Paint needed',fmt(l,1)+' l'],['Recommended to buy',Math.ceil(l*1.1)+' l']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>In \"total wall length\", add up the length of all the walls you are going to paint (the perimeter of the room). The coverage is usually printed on the can; it is typically between 8 and 12 m² per liter. An extra 10% is recommended for touch-ups.</p>",
+  "faq": [
+   [
+    "How much paint do I need for a room?",
+    "Calculate the wall area (and ceiling if applicable) and divide it by the coverage per liter shown on the can, usually 8-12 m²/l."
+   ],
+   [
+    "How many coats should I apply?",
+    "Two coats are usual, so you should multiply the quantity by two."
+   ],
+   [
+    "Are doors and windows subtracted?",
+    "For a tighter estimate, subtract their area from the total."
+   ]
+  ]
+ },
+ "kilometros-a-millas": {
+  "title": "Convert Kilometers to Miles (km to mi)",
+  "h1": "Kilometers to Miles",
+  "desc": "Convert kilometers to miles and miles to kilometers instantly, with a conversion table.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Kilometers</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Miles</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km',UB='mi';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>1 mile equals 1.609344 kilometers. To convert km to miles, divide by 1.609344 (or multiply by 0.621371).</p>",
+  "faq": [
+   [
+    "How many miles is 10 kilometers?",
+    "10 km is about 6.21 miles."
+   ],
+   [
+    "How do I convert km to miles?",
+    "Multiply the kilometers by 0.621371, or divide them by 1.609344."
+   ]
+  ]
+ },
+ "kilos-a-libras": {
+  "title": "Convert Kilograms to Pounds (kg to lb)",
+  "h1": "Kilograms to Pounds",
+  "desc": "Convert kilograms to pounds and pounds to kilograms with a conversion table.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Kilograms</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Pounds</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/0.45359237;const B=x=>x*0.45359237;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='kg',UB='lb';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>1 pound equals 0.45359237 kg. To convert kilograms to pounds, multiply by 2.20462.</p>",
+  "faq": [
+   [
+    "How many pounds is one kilogram?",
+    "One kilogram is about 2.2046 pounds."
+   ],
+   [
+    "How do I convert pounds to kilograms?",
+    "Multiply by 0.4536 or divide by 2.2046."
+   ]
+  ]
+ },
+ "celsius-a-fahrenheit": {
+  "title": "Convert Celsius to Fahrenheit (°C to °F)",
+  "h1": "Celsius to Fahrenheit",
+  "desc": "Convert degrees Celsius to Fahrenheit and Fahrenheit to Celsius with a conversion table.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Degrees Celsius (°C)</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Degrees Fahrenheit (°F)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x*9/5+32;const B=x=>(x-32)*5/9;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='°C',UB='°F';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>Formula: °F = °C × 9/5 + 32. For the reverse: °C = (°F − 32) × 5/9. Water boils at 100 °C (212 °F) and freezes at 0 °C (32 °F).</p>",
+  "faq": [
+   [
+    "What is the formula to convert Celsius to Fahrenheit?",
+    "°F = °C × 9/5 + 32. For example, 20 °C is 68 °F."
+   ],
+   [
+    "And from Fahrenheit to Celsius?",
+    "°C = (°F − 32) × 5/9."
+   ]
+  ]
+ },
+ "litros-a-galones": {
+  "title": "Convert Liters to Gallons (US)",
+  "h1": "Liters to Gallons",
+  "desc": "Convert liters to US gallons and gallons to liters with a conversion table.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Liters</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Gallons (US)</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/3.785411784;const B=x=>x*3.785411784;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='l',UB='gal';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>One US gallon equals 3.785411784 liters. The imperial gallon (United Kingdom) is different: 4.54609 liters.</p>",
+  "faq": [
+   [
+    "How many gallons is 10 liters?",
+    "About 2.64 US gallons. One US gallon is 3.785 liters."
+   ],
+   [
+    "Are the US and British gallons the same?",
+    "No. The British imperial gallon is about 4.546 liters, larger than the US gallon."
+   ]
+  ]
+ },
+ "centimetros-a-pulgadas": {
+  "title": "Convert Centimeters to Inches (cm to in)",
+  "h1": "Centimeters to Inches",
+  "desc": "Convert centimeters to inches and inches to centimeters. Useful for screens, sizes and measurements.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Centimeters</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Inches</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/2.54;const B=x=>x*2.54;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='cm',UB='in';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>One inch is exactly 2.54 cm. TV and phone screens are measured in inches diagonally.</p>",
+  "faq": [
+   [
+    "How many inches is 10 centimeters?",
+    "About 3.94 inches. One inch is exactly 2.54 cm."
+   ],
+   [
+    "How do I convert inches to centimeters?",
+    "Multiply the inches by 2.54."
+   ]
+  ]
+ },
+ "kmh-a-mph": {
+  "title": "Convert km/h to mph (Miles per Hour)",
+  "h1": "km/h to mph",
+  "desc": "Convert kilometers per hour to miles per hour and vice versa.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Kilometers per hour</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">Miles per hour</label><input id=\"b\" inputmode=\"decimal\"></div></div><div id=\"o\"></div>",
+  "js": "const A=x=>x/1.609344;const B=x=>x*1.609344;const r=n=>isFinite(n)?String(+n.toFixed(6)).replace('.',','):'';const UA='km/h',UB='mph';function tb(){$('o').innerHTML='<h2>Conversion table</h2>'+show([1,5,10,20,50,100].map(v=>[v+' '+UA,r(A(v))+' '+UB]))}$('a').oninput=()=>{$('b').value=r(A(num('a')))};$('b').oninput=()=>{$('a').value=r(B(num('b')))};$('b').value=r(A(num('a')));tb();",
+  "text": "<p>100 km/h is about 62.14 mph. It is useful when driving in countries that use miles, such as the United States or the United Kingdom.</p>",
+  "faq": [
+   [
+    "How many miles per hour is 100 km/h?",
+    "About 62.14 mph. One km/h equals 0.6214 mph."
+   ],
+   [
+    "How do I convert mph to km/h?",
+    "Multiply by 1.609."
+   ]
+  ]
+ },
+ "calculadora-fracciones": {
+  "title": "Fraction Calculator: Add, Subtract, Multiply and Divide",
+  "h1": "Fraction Calculator",
+  "desc": "Add, subtract, multiply and divide fractions and get the simplified and decimal result.",
+  "body": "<div class=\"row\"><div><label for=\"n1\">Numerator 1</label><input id=\"n1\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d1\">Denominator 1</label><input id=\"d1\" inputmode=\"numeric\" value=\"2\"></div></div>\n<label for=\"op\">Operation</label><select id=\"op\"><option value=\"+\">Add (+)</option><option value=\"-\">Subtract (−)</option><option value=\"*\">Multiply (×)</option><option value=\"/\">Divide (÷)</option></select>\n<div class=\"row\"><div><label for=\"n2\">Numerator 2</label><input id=\"n2\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"d2\">Denominator 2</label><input id=\"d2\" inputmode=\"numeric\" value=\"3\"></div></div><div id=\"o\"></div>",
+  "js": "function g(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a}\nfunction c(){const a=num('n1'),b=num('d1'),cc=num('n2'),d=num('d2'),o=$('op').value;let n,m;\nif(o==='+'){n=a*d+cc*b;m=b*d}else if(o==='-'){n=a*d-cc*b;m=b*d}else if(o==='*'){n=a*cc;m=b*d}else{n=a*d;m=b*cc}\nif(!m||!isFinite(n)||!isFinite(m)){$('o').innerHTML=show([['Result','Undefined']]);return}\nconst k=g(n,m)||1;n/=k;m/=k;if(m<0){n=-n;m=-m}\n$('o').innerHTML=show([['Simplified fraction',n+(m===1?'':'/'+m)],['Decimal',fmt(n/m,6)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>To add or subtract, the denominators are made equal; to multiply, numerators and denominators are multiplied; to divide, multiply by the reciprocal fraction. The result is simplified by dividing by the greatest common divisor.</p>",
+  "faq": [
+   [
+    "How do you add fractions with different denominators?",
+    "Find a common denominator, convert the fractions and add the numerators. Then simplify the result."
+   ],
+   [
+    "How do you simplify a fraction?",
+    "Divide the numerator and denominator by their greatest common divisor."
+   ]
+  ]
+ },
+ "calculadora-media-mediana-moda": {
+  "title": "Mean, Median and Mode Calculator",
+  "h1": "Mean, Median and Mode",
+  "desc": "Paste a list of numbers and calculate the mean, median, mode, range and more.",
+  "body": "<label for=\"x\">Numbers (separated by spaces, line breaks or semicolons)</label><textarea id=\"x\">4 8 15 16 23 42 8</textarea><div id=\"o\"></div>",
+  "js": "function c(){const a=$('x').value.replace(/,/g,'.').split(/[\\s;]+/).map(parseFloat).filter(isFinite);\nif(!a.length){$('o').innerHTML=show([['Result','—']]);return}\nconst s=[...a].sort((p,q)=>p-q),n=s.length,sum=a.reduce((p,q)=>p+q,0),med=n%2?s[(n-1)/2]:(s[n/2-1]+s[n/2])/2;\nconst f={};a.forEach(v=>f[v]=(f[v]||0)+1);const mx=Math.max(...Object.values(f));const mo=Object.keys(f).filter(k=>f[k]===mx);\n$('o').innerHTML=show([['Count',n],['Sum',fmt(sum,4)],['Mean',fmt(sum/n,4)],['Median',fmt(med,4)],['Mode',mx===1?'No mode':mo.join(', ')],['Minimum',fmt(s[0],4)],['Maximum',fmt(s[n-1],4)],['Range',fmt(s[n-1]-s[0],4)]])}\n$('x').oninput=c;c();",
+  "text": "<p>The <b>mean</b> is the sum divided by the number of data points; the <b>median</b> is the middle value when they are sorted; the <b>mode</b> is the value that appears most often.</p>",
+  "faq": [
+   [
+    "What is the difference between mean, median and mode?",
+    "The mean is the average of all the values, the median is the middle value when sorted and the mode is the one that appears most often."
+   ],
+   [
+    "When is it better to use the median?",
+    "When there are extreme values that distort the mean, for example in salaries or housing prices."
+   ]
+  ]
+ },
+ "calculadora-pitagoras": {
+  "title": "Pythagorean Theorem Calculator: Hypotenuse and Legs",
+  "h1": "Pythagorean Theorem Calculator",
+  "desc": "Calculate the hypotenuse or a leg of a right triangle using the Pythagorean theorem.",
+  "body": "<label for=\"m\">What do you want to calculate?</label><select id=\"m\"><option value=\"h\">The hypotenuse (c)</option><option value=\"c\">A leg</option></select>\n<div class=\"row\"><div><label id=\"l1\" for=\"a\">Leg a</label><input id=\"a\" inputmode=\"decimal\" value=\"3\"></div><div><label id=\"l2\" for=\"b\">Leg b</label><input id=\"b\" inputmode=\"decimal\" value=\"4\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const h=$('m').value==='h';$('l1').textContent=h?'Leg a':'Hypotenuse c';$('l2').textContent=h?'Leg b':'Leg a';\nconst a=num('a'),b=num('b');let r;if(h)r=Math.sqrt(a*a+b*b);else r=a>b?Math.sqrt(a*a-b*b):NaN;\n$('o').innerHTML=show([[h?'Hypotenuse':'Missing leg',isFinite(r)?fmt(r,4):'Not valid (the hypotenuse must be longer)']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The theorem states that in a right triangle a² + b² = c², where c is the hypotenuse (the longest side, opposite the right angle).</p>",
+  "faq": [
+   [
+    "What does the Pythagorean theorem say?",
+    "In a right triangle, the sum of the squares of the legs equals the square of the hypotenuse: a² + b² = c²."
+   ],
+   [
+    "Can I calculate a leg if I know the hypotenuse?",
+    "Yes. It is solved by subtracting: a = √(c² − b²)."
+   ]
+  ]
+ },
+ "calculadora-area-figuras": {
+  "title": "Area and Perimeter Calculator: Rectangle, Triangle, Circle and Trapezoid",
+  "h1": "Area Calculator",
+  "desc": "Calculate the area (and the perimeter where applicable) of a rectangle, triangle, circle or trapezoid.",
+  "body": "<label for=\"f\">Shape</label><select id=\"f\"></select>\n<div id=\"wx\"><label id=\"lx\" for=\"x\">Base</label><input id=\"x\" inputmode=\"decimal\" value=\"5\"></div>\n<div id=\"wy\"><label id=\"ly\" for=\"y\">Height</label><input id=\"y\" inputmode=\"decimal\" value=\"3\"></div>\n<div id=\"wz\"><label id=\"lz\" for=\"z\">Height</label><input id=\"z\" inputmode=\"decimal\" value=\"2\"></div><div id=\"o\"></div>",
+  "js": "const F={'Rectangle':['Base','Height',null],'Triangle':['Base','Height',null],'Circle':['Radius',null,null],'Trapezoid':['Longer base','Shorter base','Height']};\nObject.keys(F).forEach(k=>$('f').add(new Option(k,k)));\nfunction c(){const f=$('f').value,L=F[f];['x','y','z'].forEach((id,i)=>{$('w'+id).style.display=L[i]?'':'none';if(L[i])$('l'+id).textContent=L[i]});\nconst x=num('x'),y=num('y'),z=num('z');let it;\nif(f==='Rectangle')it=[['Area',fmt(x*y)],['Perimeter',fmt(2*(x+y))]];\nelse if(f==='Triangle')it=[['Area',fmt(x*y/2)]];\nelse if(f==='Circle')it=[['Area',fmt(Math.PI*x*x)],['Circumference',fmt(2*Math.PI*x)]];\nelse it=[['Area',fmt((x+y)/2*z)]];\n$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<ul><li>Rectangle: base × height</li><li>Triangle: base × height ÷ 2</li><li>Circle: π × radius²</li><li>Trapezoid: (longer base + shorter base) ÷ 2 × height</li></ul><p>Use the same unit for all measurements; the area will come out in that unit squared.</p>",
+  "faq": [
+   [
+    "How is the area of a circle calculated?",
+    "With the formula π × radius². If you know the diameter, divide it by 2 to get the radius."
+   ],
+   [
+    "And the area of a triangle?",
+    "Base × height / 2."
+   ],
+   [
+    "What units is the result in?",
+    "In the same units you enter, squared: if you use meters, the area is in m²."
+   ]
+  ]
+ },
+ "numeros-romanos": {
+  "title": "Roman Numeral Converter: Roman to Arabic and Back",
+  "h1": "Roman Numeral Converter",
+  "desc": "Convert regular numbers to Roman numerals and Roman numerals to regular numbers (1 to 3999).",
+  "body": "<label for=\"x\">Type a number (e.g. 1994) or a Roman numeral (e.g. MCMXCIV)</label><input id=\"x\" value=\"1994\"><div id=\"o\"></div>",
+  "js": "const M=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],[50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];\nfunction toR(n){let s='';M.forEach(p=>{while(n>=p[0]){s+=p[1];n-=p[0]}});return s}\nfunction fromR(s){s=s.toUpperCase();let i=0,n=0;M.forEach(p=>{while(s.substr(i,p[1].length)===p[1]){n+=p[0];i+=p[1].length}});return i===s.length&&s.length?n:NaN}\nfunction c(){const v=$('x').value.trim();let o;\nif(/^[0-9]+$/.test(v)){const n=parseInt(v,10);o=n>=1&&n<=3999?['Roman numeral',toR(n)]:['Roman numeral','Only between 1 and 3999']}\nelse if(v){const n=fromR(v);o=isFinite(n)&&toR(n)===v.toUpperCase()?['Number',String(n)]:['Number','Invalid Roman numeral']}\nelse o=['Result','—'];$('o').innerHTML=show([o])}\n$('x').oninput=c;c();",
+  "text": "<p>Basic values: I=1, V=5, X=10, L=50, C=100, D=500, M=1000. When a smaller letter comes before a larger one it is subtracted (IV=4, IX=9, XC=90).</p>",
+  "faq": [
+   [
+    "What is the value of each Roman symbol?",
+    "I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 and M = 1000."
+   ],
+   [
+    "Up to which number can it convert?",
+    "With standard notation, up to 3999 (MMMCMXCIX)."
+   ]
+  ]
+ },
+ "conversor-binario-decimal-hexadecimal": {
+  "title": "Binary, Decimal, Octal and Hexadecimal Converter",
+  "h1": "Number Base Converter",
+  "desc": "Convert numbers between binary, octal, decimal and hexadecimal.",
+  "body": "<div class=\"row\"><div><label for=\"x\">Number</label><input id=\"x\" value=\"255\"></div><div><label for=\"b\">Number base</label><select id=\"b\"><option value=\"10\">Decimal (10)</option><option value=\"2\">Binary (2)</option><option value=\"8\">Octal (8)</option><option value=\"16\">Hexadecimal (16)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function c(){const v=$('x').value.trim().toLowerCase(),b=+$('b').value,n=parseInt(v,b);\nif(!v||isNaN(n)||n.toString(b)!==v.replace(/^0+(?=.)/,'')){$('o').innerHTML=show([['Result','Number not valid for that base']]);return}\n$('o').innerHTML=show([['Binary',n.toString(2)],['Octal',n.toString(8)],['Decimal',n.toString(10)],['Hexadecimal',n.toString(16).toUpperCase()]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The binary system uses only 0 and 1, and is the foundation of computing. Hexadecimal uses 0-9 and A-F, and is widely used for colors and memory addresses.</p>",
+  "faq": [
+   [
+    "How do you convert binary to decimal?",
+    "Each binary digit is worth a power of 2 according to its position, from right to left; you add up the ones for the digits that are 1."
+   ],
+   [
+    "What is the hexadecimal system?",
+    "It is a base-16 system that uses the digits 0-9 and the letters A-F. It is widely used in computing, for example in web colors."
+   ]
+  ]
+ },
+ "numero-aleatorio": {
+  "title": "Random Number Generator Between Two Values",
+  "h1": "Random Number Generator",
+  "desc": "Generate one or several random numbers between a minimum and a maximum.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Minimum</label><input id=\"a\" inputmode=\"numeric\" value=\"1\"></div><div><label for=\"b\">Maximum</label><input id=\"b\" inputmode=\"numeric\" value=\"100\"></div></div>\n<label for=\"n\">How many numbers? (max. 100)</label><input id=\"n\" inputmode=\"numeric\" value=\"1\"><button id=\"go\">Generate</button><div id=\"o\"></div>",
+  "js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('go').onclick=()=>{let a=Math.round(num('a')),b=Math.round(num('b')),n=Math.min(100,Math.max(1,Math.round(num('n'))||1));if(a>b)[a,b]=[b,a];\nconst r=[];for(let i=0;i<n;i++)r.push(rnd(a,b));$('o').innerHTML='<div class=\"card\" style=\"font-size:24px;word-break:break-word\">'+r.join(', ')+'</div>'};$('go').click();",
+  "text": "<p>The numbers are generated with your browser's random generator. They may repeat if you ask for several.</p>",
+  "faq": [
+   [
+    "Can I choose the range?",
+    "Yes, enter the minimum and the maximum and a number between the two will be generated."
+   ],
+   [
+    "Is it suitable for official draws or cryptography?",
+    "No. It is randomness intended for everyday use."
+   ]
+  ]
+ },
+ "lanzar-dado-moneda": {
+  "title": "Roll a Dice Online or Flip a Coin (Heads or Tails)",
+  "h1": "Roll Dice or Flip a Coin",
+  "desc": "Roll one or several 6-sided dice or flip a coin: heads or tails.",
+  "body": "<label for=\"n\">Number of dice</label><select id=\"n\"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>\n<button id=\"d\">🎲 Roll dice</button> <button id=\"m\" class=\"sec\">🪙 Flip coin</button><div id=\"o\"></div>",
+  "js": "function rnd(a,b){const u=new Uint32Array(1);crypto.getRandomValues(u);return a+Math.floor(u[0]/4294967296*(b-a+1))}\n$('d').onclick=()=>{const n=+$('n').value,r=[];for(let i=0;i<n;i++)r.push(rnd(1,6));$('o').innerHTML=show([['Result',r.join(' · ')],['Sum',r.reduce((a,b)=>a+b,0)]])};\n$('m').onclick=()=>{$('o').innerHTML=show([['Result',rnd(0,1)?'Heads':'Tails']])};$('d').click();",
+  "text": "<p>Each roll is independent and has the same odds: 1/6 for each face of the die and 50% for heads or tails.</p>",
+  "faq": [
+   [
+    "Are the rolls random?",
+    "They use pseudo-random numbers from the browser, which are enough for games and everyday decisions."
+   ],
+   [
+    "What is the probability of each result?",
+    "On a coin, 50% for each side; on a six-sided die, 16.7% for each number."
+   ]
+  ]
+ },
+ "calculadora-roi": {
+  "title": "ROI Calculator: Return on Investment",
+  "h1": "ROI Calculator",
+  "desc": "Calculate the return on investment (ROI) and annualized return of any investment or business.",
+  "body": "<div class=\"row\"><div><label for=\"i\">Money invested (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"1000\"></div><div><label for=\"f\">Final value (€)</label><input id=\"f\" inputmode=\"decimal\" value=\"1350\"></div></div>\n<label for=\"y\">Years elapsed (optional)</label><input id=\"y\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+  "js": "function c(){const i=num('i'),f=num('f'),y=num('y');const it=[['Profit',eur(f-i)],['ROI',fmt((f-i)/i*100,2)+' %']];\nif(y>0&&f>0)it.push(['Annualized return (CAGR)',fmt((Math.pow(f/i,1/y)-1)*100,2)+' %']);$('o').innerHTML=show(it)}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>ROI = (final value − investment) ÷ investment × 100. The annualized return takes time into account: 35% over 2 years equals about 16% per year. Past results do not guarantee future results; this is not financial advice.</p>",
+  "faq": [
+   [
+    "How is ROI calculated?",
+    "ROI = (gain − investment) / investment × 100. Investing €1,000 and getting back €1,200 gives an ROI of 20%."
+   ],
+   [
+    "Does it take time into account?",
+    "No. 20% in one year is not the same as in five; to compare, use the annualized return."
+   ]
+  ]
+ },
+ "calculadora-inflacion": {
+  "title": "Inflation Calculator: What Your Money Is Worth Over Time",
+  "h1": "Inflation Calculator",
+  "desc": "Calculate how much purchasing power your money loses with an annual inflation rate over several years.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Amount (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"r\">Annual inflation (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<label for=\"y\">Years</label><input id=\"y\" inputmode=\"numeric\" value=\"10\"><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),r=num('r')/100,y=num('y');const k=Math.pow(1+r,y);\n$('o').innerHTML=show([['You will need to buy the same',eur(a*k)],['Your '+fmt(a,0)+' € will be worth in purchasing power',eur(a/k)],['Loss of purchasing power',fmt((1-1/k)*100,1)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Inflation means that the same amount of money buys fewer things each year. This calculator assumes constant inflation, which in reality varies.</p>",
+  "faq": [
+   [
+    "What is inflation?",
+    "It is the general and sustained rise in prices, which reduces the purchasing power of money over time."
+   ],
+   [
+    "How do I calculate what a past amount is worth today?",
+    "Multiply the amount by (1 + inflation) raised to the number of years. With an average inflation of 3% per year, €100 today is equivalent to about €134 in 10 years."
+   ],
+   [
+    "Does it use official CPI data?",
+    "No. It applies the average rate you enter, so it is an estimate."
+   ]
+  ]
+ },
+ "calculadora-ahorro-objetivo": {
+  "title": "Savings Goal Calculator: How Much to Save per Month",
+  "h1": "Savings Goal Calculator",
+  "desc": "Calculate how much you need to save each month to reach a target amount within a set time.",
+  "body": "<div class=\"row\"><div><label for=\"g\">Goal (€)</label><input id=\"g\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"c\">Already saved (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"500\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Term (months)</label><input id=\"m\" inputmode=\"numeric\" value=\"18\"></div><div><label for=\"r\">Annual interest (%) — optional</label><input id=\"r\" inputmode=\"decimal\" value=\"0\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const g=num('g'),c0=num('c'),n=num('m'),r=(num('r')||0)/100/12;let p;\nif(r===0)p=(g-c0)/n;else{const k=Math.pow(1+r,n);p=(g-c0*k)*r/(k-1)}\n$('o').innerHTML=show([['Monthly saving needed',eur(Math.max(0,p))],['Total you will contribute',eur(Math.max(0,p)*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Divide your goal by the months available and automate a transfer on payday: saving first and spending afterwards helps you reach your target.</p>",
+  "faq": [
+   [
+    "How do I know how much to save per month for a goal?",
+    "Divide the target by the months available; if there is a return, the calculator adjusts the payment to take it into account."
+   ],
+   [
+    "Does it include taxes or inflation?",
+    "No. It is a simulation with a constant return."
+   ]
+  ]
+ },
+ "calculadora-rentabilidad-alquiler": {
+  "title": "Rental Yield Calculator (Gross and Net)",
+  "h1": "Rental Yield Calculator",
+  "desc": "Calculate the gross and net yield of buying a property to rent it out.",
+  "body": "<div class=\"row\"><div><label for=\"p\">Purchase price (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"150000\"></div><div><label for=\"gc\">Purchase costs (%)</label><input id=\"gc\" inputmode=\"decimal\" value=\"10\"></div></div>\n<div class=\"row\"><div><label for=\"rf\">Renovation (€)</label><input id=\"rf\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"al\">Monthly rent (€)</label><input id=\"al\" inputmode=\"decimal\" value=\"750\"></div></div>\n<label for=\"ga\">Annual costs: IBI (property tax), community fees, insurance, maintenance (€)</label><input id=\"ga\" inputmode=\"decimal\" value=\"1800\"><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),gc=num('gc')/100,rf=num('rf')||0,al=num('al'),ga=num('ga')||0;const inv=p*(1+gc)+rf,anual=al*12;\n$('o').innerHTML=show([['Total investment',eur(inv)],['Gross yield',fmt(anual/(p+rf)*100,2)+' %'],['Annual net profit',eur(anual-ga)],['Net yield',fmt((anual-ga)/inv*100,2)+' %']])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Gross yield divides the annual rent by the price; net yield deducts the costs and takes purchase costs into account (taxes, notary, registry). It does not include taxes on rental income, vacant periods or financing. It is indicative only.</p>",
+  "faq": [
+   [
+    "What is the gross yield of a rental property?",
+    "It is the annual rent divided by the purchase price, as a percentage. It does not deduct costs or taxes."
+   ],
+   [
+    "And the net yield?",
+    "It subtracts costs such as IBI (property tax), community fees, insurance, maintenance and vacant periods, and is the more realistic figure."
+   ]
+  ]
+ },
+ "calculadora-nota-acceso-universidad": {
+  "title": "Spain University Entrance Grade Calculator (EBAU/PAU)",
+  "h1": "University Entrance Grade (Spain)",
+  "desc": "Calculate your university entrance grade (nota de acceso) in Spain: 60% Bachillerato and 40% entrance exam (EBAU/PAU/EvAU).",
+  "body": "<div class=\"row\"><div><label for=\"b\">Bachillerato (Spanish upper secondary) average grade (0-10)</label><input id=\"b\" inputmode=\"decimal\" value=\"8,2\"></div><div><label for=\"e\">University entrance exam grade (0-10)</label><input id=\"e\" inputmode=\"decimal\" value=\"7\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const b=num('b'),e=num('e');\n$('o').innerHTML=show([['Entrance grade',e>=4?fmt(0.6*b+0.4*e,3):'The exam grade must be ≥ 4'],['Bachillerato contribution (60%)',fmt(0.6*b,3)],['Exam contribution (40%)',fmt(0.4*e,3)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The entrance grade (out of 10) is 60% of the Bachillerato average plus 40% of the access phase, which must score at least 4. Afterwards the voluntary phase can be added, up to a maximum of 14 points. Conditions may vary by region and academic year; check the regulations of your university.</p>",
+  "faq": [
+   [
+    "How is the university entrance grade calculated?",
+    "The Bachillerato average grade is combined with the grade of the general phase of the entrance exam, using the weighting set by current regulations."
+   ],
+   [
+    "Is it an official figure?",
+    "No, it is an indicative estimate. The official grade is published by your university or regional government."
+   ]
+  ]
+ },
+ "calcular-letra-nie": {
+  "title": "Spanish NIE Letter Calculator: Find the Letter from the Number",
+  "h1": "Spanish NIE Letter Calculator",
+  "desc": "Find the check letter of your Spanish foreigner ID number (NIE): X, Y or Z followed by 7 digits.",
+  "body": "<div class=\"row\"><div><label for=\"p\">Starting letter</label><select id=\"p\"><option>X</option><option>Y</option><option>Z</option></select></div><div><label for=\"n\">Number (7 digits)</label><input id=\"n\" inputmode=\"numeric\" maxlength=\"7\" value=\"1234567\"></div></div><div id=\"o\"></div>",
+  "js": "const L='TRWAGMYFPDXBNJZSQVHLCKE';\nfunction c(){const p=$('p').value,d=$('n').value.replace(/[^0-9]/g,'');if(d.length!==7){$('o').innerHTML='<p>Enter 7 digits.</p>';return}\nconst n=parseInt({X:'0',Y:'1',Z:'2'}[p]+d,10);$('o').innerHTML=show([['Check letter',L[n%23]],['Full NIE',p+d+L[n%23]]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>To calculate the letter of the NIE (Número de Identidad de Extranjero, the Spanish foreigner ID number), replace X with 0, Y with 1 and Z with 2, form a number with the 7 digits and divide it by 23. The remainder indicates the letter from the series TRWAGMYFPDXBNJZSQVHLCKE. It works in your browser without sending any data.</p>",
+  "faq": [
+   [
+    "How is the NIE letter calculated?",
+    "X is replaced by 0, Y by 1 and Z by 2, the resulting number is divided by 23 and the remainder gives the letter."
+   ],
+   [
+    "How many digits does a NIE have?",
+    "It starts with X, Y or Z, continues with 7 digits and ends with a check letter."
+   ]
+  ]
+ },
+ "validador-iban": {
+  "title": "IBAN Validator (Spanish IBAN Checker): Is Your IBAN Correct?",
+  "h1": "IBAN Validator",
+  "desc": "Check whether the format and check digits of an IBAN (including Spanish IBANs) are correct. Nothing is stored.",
+  "body": "<label for=\"x\">IBAN</label><input id=\"x\" value=\"ES91 2100 0418 4502 0005 1332\" autocomplete=\"off\"><div id=\"o\"></div>",
+  "js": "function c(){const s=$('x').value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();\nlet ok=/^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/.test(s);if(ok&&s.slice(0,2)==='ES'&&s.length!==24)ok=false;\nif(ok){let m=0;const t=s.slice(4)+s.slice(0,4);for(const ch of t){const v=ch>='A'?String(ch.charCodeAt(0)-55):ch;for(const d of v){m=(m*10+ +d)%97}}ok=m===1}\n$('o').innerHTML=show([['Result',s?(ok?'Valid IBAN ✅':'Invalid IBAN ❌'):'—'],['Country',ok?s.slice(0,2):'—'],['Format',ok?s.replace(/(.{4})/g,'$1 ').trim():'—']])}\n$('x').oninput=c;c();",
+  "text": "<p>This tool only checks that the IBAN is well formed (length, country and check digits, mod 97 algorithm). It does not verify that the account exists or who it belongs to. Everything is calculated in your browser.</p>",
+  "faq": [
+   [
+    "How many characters does a Spanish IBAN have?",
+    "24: the letters ES, two check digits and 20 digits for the account."
+   ],
+   [
+    "Does this tool check that the account exists?",
+    "No. It only verifies that the IBAN is well formed and that its check digits are correct."
+   ],
+   [
+    "Is it safe to type my IBAN here?",
+    "The calculation is done in your browser and is not sent or stored. Even so, do not share bank details unnecessarily."
+   ]
+  ]
+ },
+ "contador-caracteres-redes": {
+  "title": "Character Counter for X, Instagram, TikTok and YouTube",
+  "h1": "Character Counter for Social Media",
+  "desc": "Count the characters in your text and check the limits for X, Instagram, TikTok, YouTube and SEO meta descriptions.",
+  "body": "<label for=\"x\">Your text</label><textarea id=\"x\" placeholder=\"Type or paste your description, title or post...\"></textarea><div id=\"o\"></div>",
+  "js": "const LM=[['X (post)',280],['Instagram (caption)',2200],['TikTok (description)',4000],['YouTube (title)',100],['YouTube (description)',5000],['SEO meta description',160]];\nfunction c(){const n=$('x').value.length;$('o').innerHTML=show([['Characters',fmt(n,0)]].concat(LM.map(l=>[l[0],n+' / '+l[1]+(n>l[1]?' ⚠️ over the limit':' ✅')])))}\n$('x').oninput=c;c();",
+  "text": "<p>The limits are indicative and platforms may change them. Emojis may count as more than one character on some networks.</p>",
+  "faq": [
+   [
+    "How many characters does each social network allow?",
+    "It varies by platform and changes over time. Check the current limit on the network itself before posting."
+   ],
+   [
+    "Do spaces and emojis count?",
+    "Spaces count as characters. Emojis may count as more than one depending on the platform."
+   ]
+  ]
+ },
+ "sumar-dias-a-fecha": {
+  "title": "Date Calculator: Add or Subtract Days, Weeks, Months and Years",
+  "h1": "Add or Subtract Time from a Date",
+  "desc": "Add or subtract days, weeks, months or years to a date and find out what day of the week it will be.",
+  "body": "<div class=\"row\"><div><label for=\"d\">Starting date</label><input id=\"d\" type=\"date\"></div><div><label for=\"op\">Operation</label><select id=\"op\"><option value=\"+\">Add</option><option value=\"-\">Subtract</option></select></div></div>\n<div class=\"row\"><div><label for=\"n\">Amount</label><input id=\"n\" inputmode=\"numeric\" value=\"90\"></div><div><label for=\"u\">Unit</label><select id=\"u\"><option value=\"d\">Days</option><option value=\"w\">Weeks</option><option value=\"m\">Months</option><option value=\"y\">Years</option></select></div></div><div id=\"o\"></div>",
+  "js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const d=new Date($('d').value+'T12:00:00');if(isNaN(d)){$('o').innerHTML='<p>Choose a date.</p>';return}\nconst n=num('n')*($('op').value==='-'?-1:1),u=$('u').value;\nif(u==='d')d.setDate(d.getDate()+n);else if(u==='w')d.setDate(d.getDate()+7*n);else if(u==='m')d.setMonth(d.getMonth()+n);else d.setFullYear(d.getFullYear()+n);\n$('o').innerHTML=show([['Resulting date',d.toLocaleDateString('en-US')],['Day of the week',d.toLocaleDateString('en-US',{weekday:'long'})],['Full date',d.toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+  "text": "<p>Useful for calculating deadlines, due dates, trial periods or how many days are left until an event.</p>",
+  "faq": [
+   [
+    "How do I add or subtract days from a date?",
+    "Enter the starting date and the number of days; use a negative value to subtract."
+   ],
+   [
+    "Does it count working days?",
+    "No, it counts calendar days."
+   ]
+  ]
+ },
+ "numero-de-semana": {
+  "title": "What Week of the Year Is It? Week Number of a Date",
+  "h1": "Week Number of the Year",
+  "desc": "Check the ISO week number, the day of the year and the day of the week for any date.",
+  "body": "<label for=\"d\">Date</label><input id=\"d\" type=\"date\"><div id=\"o\"></div>",
+  "js": "$('d').value=new Date().toISOString().slice(0,10);\nfunction c(){const p=$('d').value.split('-').map(Number);if(p.length<3||p.some(isNaN)){$('o').innerHTML='<p>Choose a date.</p>';return}\nconst t=Date.UTC(p[0],p[1]-1,p[2]),d=new Date(t);const dn=d.getUTCDay()||7;d.setUTCDate(d.getUTCDate()+4-dn);\nconst ys=Date.UTC(d.getUTCFullYear(),0,1),wk=Math.ceil(((d-ys)/864e5+1)/7);\n$('o').innerHTML=show([['ISO week',wk],['Day of the year',Math.round((t-Date.UTC(p[0],0,0))/864e5)],['Day of the week',new Date(t).toLocaleDateString('en-US',{weekday:'long',timeZone:'UTC'})]])}\n$('d').oninput=$('d').onchange=c;c();",
+  "text": "<p>The ISO 8601 numbering is used: weeks start on Monday and week 1 is the one containing the first Thursday of the year. It is the usual system in Europe.</p>",
+  "faq": [
+   [
+    "What is the ISO week number?",
+    "It is the ISO 8601 standard numbering: weeks start on Monday and week 1 is the one containing the first Thursday of the year."
+   ],
+   [
+    "How many weeks does a year have?",
+    "52 or 53, depending on the year."
+   ]
+  ]
+ },
+ "conversor-zonas-horarias": {
+  "title": "Time Zone Converter: Spain Time in Other Countries",
+  "h1": "Time Zone Converter",
+  "desc": "Convert a time between cities around the world: Spain, Canary Islands, London, New York, Mexico, Argentina, Tokyo and more.",
+  "body": "<label for=\"t\">Date and time</label><input id=\"t\" type=\"datetime-local\">\n<div class=\"row\"><div><label for=\"a\">From</label><select id=\"a\"></select></div><div><label for=\"b\">To</label><select id=\"b\"></select></div></div><div id=\"o\"></div>",
+  "js": "const Z=[['Mainland Spain','Europe/Madrid'],['Canary Islands','Atlantic/Canary'],['London','Europe/London'],['New York','America/New_York'],['Chicago','America/Chicago'],['Los Angeles','America/Los_Angeles'],['Mexico City','America/Mexico_City'],['Bogotá','America/Bogota'],['Buenos Aires','America/Argentina/Buenos_Aires'],['Santiago (Chile)','America/Santiago'],['Dubai','Asia/Dubai'],['Delhi','Asia/Kolkata'],['Tokyo','Asia/Tokyo'],['Sydney','Australia/Sydney']];\nZ.forEach(z=>{$('a').add(new Option(z[0],z[1]));$('b').add(new Option(z[0],z[1]))});$('a').value='Europe/Madrid';$('b').value='America/Mexico_City';\nconst n=new Date();n.setMinutes(n.getMinutes()-n.getTimezoneOffset());$('t').value=n.toISOString().slice(0,16);\nfunction off(z,ms){const p=new Intl.DateTimeFormat('en-US',{timeZone:z,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}).formatToParts(new Date(ms)),o={};p.forEach(x=>o[x.type]=x.value);return Date.UTC(o.year,o.month-1,o.day,o.hour,o.minute,o.second)-ms}\nfunction c(){const v=$('t').value;if(!v){return}const q=v.split(/[-T:]/).map(Number),t0=Date.UTC(q[0],q[1]-1,q[2],q[3],q[4]);\nconst za=$('a').value,zb=$('b').value;const inst=t0-off(za,t0-off(za,t0));\n$('o').innerHTML=show([['Time at destination',new Date(inst).toLocaleString('en-US',{timeZone:zb,dateStyle:'full',timeStyle:'short'})]])}\ndocument.querySelectorAll('input,select').forEach(i=>{i.oninput=c;i.onchange=c});c();",
+  "text": "<p>The conversion takes each zone's daylight saving time into account. Mainland Spain uses CET (UTC+1) in winter and CEST (UTC+2) in summer; the Canary Islands are one hour behind.</p>",
+  "faq": [
+   [
+    "Does it account for daylight saving time?",
+    "Yes, the calculation uses your browser's time zone rules, which include daylight saving time."
+   ],
+   [
+    "What is the difference between mainland Spain and the Canary Islands?",
+    "The Canary Islands are one hour behind the mainland all year round."
+   ]
+  ]
+ },
+ "capacidad-endeudamiento-hipoteca": {
+  "title": "How Much Mortgage Can I Get in Spain? Borrowing Capacity Calculator",
+  "h1": "How Much Mortgage Can I Get?",
+  "desc": "Calculate the maximum monthly payment, maximum loan and approximate home price you could afford based on your income (Spain mortgage).",
+  "body": "<div class=\"row\"><div><label for=\"i\">Monthly net income (€)</label><input id=\"i\" inputmode=\"decimal\" value=\"2500\"></div><div><label for=\"d\">Other monthly debt payments (€)</label><input id=\"d\" inputmode=\"decimal\" value=\"150\"></div></div>\n<div class=\"row\"><div><label for=\"r\">Annual interest (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div><div><label for=\"y\">Term (years)</label><input id=\"y\" inputmode=\"numeric\" value=\"30\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Maximum debt ratio (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"35\"></div><div><label for=\"f\">Financing on the price (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"80\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const ing=num('i'),deu=num('d')||0,r=num('r')/100/12,n=num('y')*12,e=num('e')/100,f=num('f')/100;\nconst q=Math.max(0,ing*e-deu);const P=r===0?q*n:q*(1-Math.pow(1+r,-n))/r;const precio=f>0?P/f:0;\n$('o').innerHTML=show([['Maximum monthly payment',eur(q)],['Approximate maximum loan',eur(P)],['Approximate home price',eur(precio)],['Savings needed (down payment + ~10% costs)',eur(precio*(1-f)+precio*0.1)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>The 35% rule</h2><p>Banks usually limit the mortgage payment, added to your other debts, to 30-35% of your net income. They also usually finance up to 80% of the appraisal value, so you will have to provide the down payment and the purchase costs from your own savings.</p><p>This is an indicative estimate: each lender assesses your case (type of contract, length of employment, guarantors, credit history) and may approve more or less.</p>",
+  "faq": [
+   [
+    "What percentage of my income can I put toward a mortgage?",
+    "Banks usually accept between 30% and 35% of your net income, also counting other debts."
+   ],
+   [
+    "How much of the home price does a bank finance?",
+    "Usually up to 80% of the appraisal value, so you need to save the rest plus the purchase costs."
+   ]
+  ]
+ },
+ "amortizacion-anticipada-hipoteca": {
+  "title": "Early Mortgage Repayment Calculator: Reduce Payment or Term",
+  "h1": "Early Mortgage Repayment",
+  "desc": "Compare how much interest you save by making a partial early repayment of your mortgage, either reducing the payment or reducing the term.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Outstanding balance (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"120000\"></div><div><label for=\"r\">Annual interest (%)</label><input id=\"r\" inputmode=\"decimal\" value=\"3\"></div></div>\n<div class=\"row\"><div><label for=\"y\">Years remaining</label><input id=\"y\" inputmode=\"numeric\" value=\"22\"></div><div><label for=\"x\">Amount to repay early (€)</label><input id=\"x\" inputmode=\"decimal\" value=\"10000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('r')/100/12,n=Math.round(num('y')*12),x=num('x');const pm=(cap,m)=>r===0?cap/m:cap*r/(1-Math.pow(1+r,-m));\nconst q=pm(C,n),int0=q*n-C,C2=C-x;if(C2<=0||!isFinite(q)){$('o').innerHTML=show([['Result','The amount must be less than the balance']]);return}\nconst q2=pm(C2,n),intA=q2*n-C2;const n2=r===0?C2/q:-Math.log(1-C2*r/q)/Math.log(1+r);const intB=q*n2-C2;\n$('o').innerHTML=show([['Current payment',eur(q)],['Option A: new payment',eur(q2)],['A: interest saved',eur(int0-intA)],['Option B: new term',Math.floor(n2/12)+' years and '+Math.round(n2%12)+' months'],['B: interest saved',eur(int0-intB)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Repaying early by reducing the <b>term</b> usually saves more total interest, because you keep paying the same installment. Reducing the <b>payment</b> gives you more monthly breathing room. Check the early repayment fee in your contract, which can eat into part of the savings.</p>",
+  "faq": [
+   [
+    "What does it mean to repay a mortgage early?",
+    "It means paying the bank ahead of schedule to reduce the outstanding debt sooner than planned, either by shortening the term or lowering the payment."
+   ],
+   [
+    "Is it better to reduce the term or the payment?",
+    "Reducing the term usually saves more interest overall; reducing the payment gives more monthly breathing room. It depends on your situation."
+   ],
+   [
+    "Is there a fee for early repayment?",
+    "There may be, depending on the contract and the signing date. Check your deed or ask your bank."
+   ]
+  ]
+ },
+ "revision-hipoteca-variable-euribor": {
+  "title": "Variable Mortgage Review Calculator: New Payment with the Euribor",
+  "h1": "Variable Mortgage Review",
+  "desc": "Calculate your variable mortgage payment with the Euribor and the spread, and simulate how it changes if the Euribor rises or falls.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Outstanding balance (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"140000\"></div><div><label for=\"y\">Years remaining</label><input id=\"y\" inputmode=\"numeric\" value=\"25\"></div></div>\n<div class=\"row\"><div><label for=\"e\">Euribor (%)</label><input id=\"e\" inputmode=\"decimal\" value=\"2,5\"></div><div><label for=\"d\">Spread (%)</label><input id=\"d\" inputmode=\"decimal\" value=\"0,8\"></div></div><div id=\"o\"></div>",
+  "js": "function pm(C,i,n){const r=i/100/12;return r===0?C/n:C*r/(1-Math.pow(1+r,-n))}\nfunction c(){const C=num('c'),n=Math.round(num('y')*12),e=num('e'),d=num('d');const q=pm(C,e+d,n);\nconst rows=[-1,-0.5,0.5,1].map(s=>[(s>0?'Euribor +':'Euribor ')+fmt(s,1)+' pts',eur(pm(C,Math.max(0,e+s)+d,n))]);\n$('o').innerHTML=show([['Applied interest',fmt(e+d,2)+' %'],['Monthly payment',eur(q)]].concat(rows))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>In a variable mortgage the interest rate is the Euribor plus a fixed spread. It is reviewed every 6 or 12 months depending on your contract; use the value shown in your bank's notification. The calculation assumes a constant payment until the next review.</p>",
+  "faq": [
+   [
+    "How does the Euribor affect my payment?",
+    "In a variable mortgage the interest rate is the Euribor plus a spread; if the Euribor rises or falls at the review, your payment changes."
+   ],
+   [
+    "How often is it reviewed?",
+    "Usually every 6 or 12 months, as stated in your contract."
+   ],
+   [
+    "Is the result final?",
+    "No, it is a simulation. The real payment is set by your bank."
+   ]
+  ]
+ },
+ "calculadora-tae": {
+  "title": "APR (TAE) Calculator: Real Cost of a Loan or Mortgage",
+  "h1": "APR (TAE) Calculator",
+  "desc": "Calculate the approximate APR (TAE) of a loan from the nominal rate (TIN), the arrangement fee and the term.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Amount (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"10000\"></div><div><label for=\"t\">TIN, nominal rate (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"6\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Term (months)</label><input id=\"m\" inputmode=\"numeric\" value=\"48\"></div><div><label for=\"f\">Arrangement fee (%)</label><input id=\"f\" inputmode=\"decimal\" value=\"1\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('t')/100/12,n=Math.round(num('m')),f=num('f')/100;\nconst q=r===0?C/n:C*r/(1-Math.pow(1+r,-n));const rec=C*(1-f);\nfunction v(i){let s=0;for(let k=1;k<=n;k++)s+=q/Math.pow(1+i,k);return s-rec}\nlet lo=0,hi=1;for(let k=0;k<80;k++){const mid=(lo+hi)/2;if(v(mid)>0)lo=mid;else hi=mid}\nconst tae=Math.pow(1+lo,12)-1;\n$('o').innerHTML=show([['Approximate APR (TAE)',fmt(tae*100,2)+' %'],['TIN (nominal rate)',fmt(num('t'),2)+' %'],['Monthly payment',eur(q)],['Total cost (interest + fee)',eur(q*n-rec)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The <b>TIN</b> is the nominal interest rate; the <b>TAE</b> (APR) also includes fees and the payment frequency, which is why it allows offers to be compared. This calculator includes the arrangement fee; it does not include tied insurance or other fees, which would raise the real APR.</p>",
+  "faq": [
+   [
+    "What is the APR (TAE) for?",
+    "To compare the real cost of different loans, because it includes interest, fees and payment frequency."
+   ],
+   [
+    "Why is the APR higher than the TIN?",
+    "Because it adds the effect of fees (such as the arrangement fee) and of paying interest monthly."
+   ]
+  ]
+ },
+ "calculadora-gastos-compra-vivienda": {
+  "title": "Home Purchase Costs Calculator in Spain (Taxes, Notary and Registry)",
+  "h1": "Home Purchase Costs (Spain)",
+  "desc": "Estimate the extra money you need on top of the price to buy a home in Spain: taxes, notary, registry, legal agent and appraisal.",
+  "body": "<div class=\"row\"><div><label for=\"p\">Home price (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"180000\"></div><div><label for=\"t\">Applicable tax (%)</label><input id=\"t\" inputmode=\"decimal\" value=\"8\"></div></div>\n<div class=\"row\"><div><label for=\"o1\">Notary, registry and legal agent (% of price)</label><input id=\"o1\" inputmode=\"decimal\" value=\"1,5\"></div><div><label for=\"ta\">Appraisal (€)</label><input id=\"ta\" inputmode=\"decimal\" value=\"400\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const p=num('p'),imp=p*num('t')/100,not=p*num('o1')/100,ta=num('ta')||0;const tot=imp+not+ta;\n$('o').innerHTML=show([['Tax',eur(imp)],['Notary, registry and legal agent',eur(not)],['Appraisal',eur(ta)],['Total costs',eur(tot)],['Costs as % of price',fmt(tot/p*100,1)+' %'],['If you finance 80%: savings needed',eur(p*0.2+tot)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Which tax should I enter?</h2><p>For a <b>resale (second-hand)</b> home you pay the ITP (property transfer tax), which is set by each autonomous community (usually between 6% and 11%). For a <b>new build</b> you pay VAT (IVA, 10%) plus the Documented Legal Acts tax (AJD, stamp duty), which also varies by region. Check the rate in your region. This is an estimate; the actual amounts depend on each transaction.</p>",
+  "faq": [
+   [
+    "What costs are there when buying a home?",
+    "Taxes (ITP or VAT (IVA) and AJD depending on the case), notary, registry, legal agent and appraisal. They usually amount to between 10% and 15% of the price."
+   ],
+   [
+    "Is the result exact?",
+    "It is indicative: taxes vary by autonomous community and depending on whether the home is new or second-hand."
+   ]
+  ]
+ },
+ "cuanto-tardo-en-pagar-un-prestamo": {
+  "title": "How Long Will It Take to Pay Off a Debt or Loan? Payoff Time Calculator",
+  "h1": "How Long Will It Take to Pay Off a Loan?",
+  "desc": "Calculate how long it will take to pay off a debt (loan, credit card, financing) with a fixed monthly payment, and how much interest you will pay.",
+  "body": "<div class=\"row\"><div><label for=\"c\">Outstanding debt (€)</label><input id=\"c\" inputmode=\"decimal\" value=\"5000\"></div><div><label for=\"i\">Annual interest (%)</label><input id=\"i\" inputmode=\"decimal\" value=\"15\"></div></div>\n<label for=\"q\">Monthly payment (€)</label><input id=\"q\" inputmode=\"decimal\" value=\"200\"><div id=\"o\"></div>",
+  "js": "function c(){const C=num('c'),r=num('i')/100/12,q=num('q');\nif(q<=C*r){$('o').innerHTML=show([['Result','The payment does not even cover the interest: the debt will never be paid off']]);return}\nconst n=r===0?C/q:-Math.log(1-C*r/q)/Math.log(1+r);\n$('o').innerHTML=show([['Time to pay off',Math.floor(n/12)+' years and '+Math.ceil(n%12)+' months'],['Number of payments',Math.ceil(n)],['Total interest',eur(q*n-C)],['Total paid',eur(q*n)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Paying only the minimum greatly extends a high-interest debt, such as a revolving credit card. Raising the monthly payment a little can significantly reduce the time and the interest.</p>",
+  "faq": [
+   [
+    "How is the time needed to pay off a loan calculated?",
+    "From the principal, the interest rate and the payment you can make each month, the number of payments needed is obtained."
+   ],
+   [
+    "What happens if the payment is lower than the interest?",
+    "The debt is never paid off: you need a payment higher than the monthly interest."
+   ]
+  ]
+ },
+ "calculadora-indemnizacion-despido": {
+  "title": "Spain Severance Pay Calculator (Unfair and Objective Dismissal)",
+  "h1": "Severance Pay (Spain)",
+  "desc": "Calculate the approximate severance pay (indemnización por despido) in Spain for unfair dismissal (33 days per year) or objective dismissal (20 days per year) based on your salary and length of service.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Annual gross salary (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div><div><label for=\"y\">Years worked</label><input id=\"y\" inputmode=\"numeric\" value=\"5\"></div></div>\n<div class=\"row\"><div><label for=\"m\">Additional extra months</label><input id=\"m\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"t\">Type of dismissal</label><select id=\"t\"><option value=\"imp\">Unfair (improcedente) (33 days/year, max. 24 monthly salaries)</option><option value=\"obj\">Objective (objetivo) (20 days/year, max. 12 monthly salaries)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function c(){const s=num('s'),a=(num('y')||0)+(num('m')||0)/12,imp=$('t').value==='imp';const d=s/365,dias=imp?33:20,tope=(imp?24:12)*s/12;\nconst bruta=d*dias*a,ind=Math.min(bruta,tope);\n$('o').innerHTML=show([['Daily salary',eur(d)],['Length of service',fmt(a,2)+' years'],['Calculated severance',eur(bruta)],['Severance (with cap)',eur(ind)],['Cap applied',bruta>tope?'Yes ('+eur(tope)+')':'No']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>How it is calculated</h2><p>For contracts after February 2012, unfair dismissal (despido improcedente) is compensated with 33 days of salary per year worked (months are prorated) up to a maximum of 24 monthly salaries. For objective dismissal (despido objetivo) it is 20 days per year up to a maximum of 12 monthly salaries.</p><p>If your employment began before February 12, 2012, that period is calculated at 45 days per year, so this calculator would not be exact. This is an indicative estimate: consult an employment lawyer or your union before signing a settlement (finiquito).</p>",
+  "faq": [
+   [
+    "How many days per year are paid for unfair dismissal?",
+    "33 days of salary per year worked, up to a maximum of 24 monthly salaries, for contracts after February 2012."
+   ],
+   [
+    "And for objective dismissal?",
+    "20 days of salary per year worked, up to a maximum of 12 monthly salaries."
+   ],
+   [
+    "Is this calculator exact?",
+    "It is indicative. If your contract predates 2012, 45 days per year apply to the earlier period. Consult a professional."
+   ]
+  ]
+ },
+ "calculadora-salario-bruto-neto": {
+  "title": "Spain Net Salary Calculator: Gross Annual to Net Monthly Pay",
+  "h1": "Gross to Net Salary (Spain)",
+  "desc": "Estimate your monthly net salary in Spain from your annual gross pay, roughly deducting Social Security (Seguridad Social) and income tax (IRPF).",
+  "body": "<div class=\"row\"><div><label for=\"b\">Annual gross salary (€)</label><input id=\"b\" inputmode=\"decimal\" value=\"30000\"></div><div><label for=\"p\">Number of payments</label><select id=\"p\"><option value=\"14\">14 payments</option><option value=\"12\">12 payments (prorated)</option></select></div></div><div id=\"o\"></div>",
+  "js": "function irpf(x){const t=[[12450,.19],[20200,.24],[35200,.30],[60000,.37],[1e12,.45]];let r=0,prev=0;for(const[l,p]of t){if(x>prev)r+=(Math.min(x,l)-prev)*p;prev=l}return r}\nfunction c(){const b=num('b'),n=parseInt($('p').value);const ss=Math.min(b,58914)*0.065;const base=Math.max(0,b-ss-2000);\nconst cuota=Math.max(0,irpf(base)-irpf(5550));const neto=b-ss-cuota;\n$('o').innerHTML=show([['Social Security (approx.)',eur(ss)],['Income tax, IRPF (approx.)',eur(cuota)],['Average IRPF rate',fmt(cuota/b*100,1)+' %'],['Annual net',eur(neto)],['Net per month ('+n+' payments)',eur(neto/n)]])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>This calculator applies an average national plus regional IRPF (personal income tax) scale, the personal allowance of €5,550 and an employee contribution of approximately 6.5%, with no children or other personal circumstances. Your actual payslip may vary depending on your autonomous community, your family situation, the type of contract and the withholding your employer applies.</p><p>Use it only as a reference to compare offers.</p>",
+  "faq": [
+   [
+    "Is the net salary shown exact?",
+    "No. It is an estimate using an average IRPF (income tax) scale and a contribution of about 6.5%. Your actual payslip depends on your region, your family situation and your employer's withholding."
+   ],
+   [
+    "What is the difference between 12 and 14 payments?",
+    "The annual net is the same; with 14 payments you receive two extra payments (pagas extra) and each monthly payment is smaller."
+   ]
+  ]
+ },
+ "calculadora-pagas-extra": {
+  "title": "Extra Pay (Pagas Extra) Calculator: Monthly Salary with 12 or 14 Payments",
+  "h1": "Extra Pay: 12 or 14 Payments (Spain)",
+  "desc": "Convert an annual salary into monthly pay with 12 payments (prorated) or 14 payments (pagas extra, as is common in Spain), and find out how much you receive in each payment.",
+  "body": "<div class=\"row\"><div><label for=\"a\">Annual salary (€)</label><input id=\"a\" inputmode=\"decimal\" value=\"21000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a');$('o').innerHTML=show([['With 12 payments',eur(a/12)+' per month'],['With 14 payments: each monthly payment',eur(a/14)],['With 14 payments: each extra payment',eur(a/14)],['Difference in a regular month',eur(a/12-a/14)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The annual salary is the same with 12 or 14 payments: what changes is how it is spread out. With 14 payments you receive two extra payments (pagas extra, usually in summer and at Christmas) and each regular month is smaller; with prorated payments the extras are spread over the 12 months.</p>",
+  "faq": [
+   [
+    "Do I earn more with 14 payments than with 12?",
+    "No. The annual salary is the same; only how it is spread across the months changes."
+   ],
+   [
+    "What are prorated payments?",
+    "The extra payments spread across the 12 monthly payslips, so that you receive the same amount every month."
+   ]
+  ]
+ },
+ "calculadora-calorias-tmb": {
+  "title": "Daily Calorie and Basal Metabolic Rate (BMR) Calculator",
+  "h1": "Daily Calories and Basal Metabolic Rate",
+  "desc": "Estimate your basal metabolic rate and the calories you burn per day based on your age, weight, height and activity level.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Sex</label><select id=\"s\"><option value=\"h\">Male</option><option value=\"m\">Female</option></select></div><div><label for=\"e\">Age (years)</label><input id=\"e\" inputmode=\"numeric\" value=\"35\"></div></div>\n<div class=\"row\"><div><label for=\"p\">Weight (kg)</label><input id=\"p\" inputmode=\"decimal\" value=\"72\"></div><div><label for=\"a\">Height (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"172\"></div></div>\n<label for=\"f\">Activity level</label><select id=\"f\"><option value=\"1.2\">Sedentary (little or no exercise)</option><option value=\"1.375\">Light (1-3 days/week)</option><option value=\"1.55\" selected>Moderate (3-5 days/week)</option><option value=\"1.725\">Intense (6-7 days/week)</option><option value=\"1.9\">Very intense (physical work or double sessions)</option></select><div id=\"o\"></div>",
+  "js": "function c(){const t=10*num('p')+6.25*num('a')-5*num('e')+($('s').value==='h'?5:-161),m=t*num('f');\n$('o').innerHTML=show([['Basal metabolic rate (BMR)',fmt(t,0)+' kcal'],['Total daily expenditure',fmt(m,0)+' kcal'],['To lose weight (-15%)',fmt(m*.85,0)+' kcal'],['To gain weight (+10%)',fmt(m*1.1,0)+' kcal']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>How it is calculated</h2><p>The Mifflin-St Jeor equation is used: 10 × weight (kg) + 6.25 × height (cm) − 5 × age + 5 (men) or − 161 (women). The result is the basal metabolic rate, the calories your body burns at rest, and it is multiplied by a factor according to your activity.</p><p>This is a general estimate and does not replace the advice of a doctor or dietitian.</p>",
+  "faq": [
+   [
+    "What is the basal metabolic rate?",
+    "It is the calories your body burns at rest to maintain vital functions such as breathing or circulation."
+   ],
+   [
+    "Is the result exact?",
+    "It is an estimate using the Mifflin-St Jeor equation. Actual expenditure varies from person to person."
+   ]
+  ]
+ },
+ "calculadora-peso-ideal": {
+  "title": "Ideal Weight Calculator by Height and Sex",
+  "h1": "Ideal Weight",
+  "desc": "Calculate a healthy weight range for your height using BMI and the Devine formula.",
+  "body": "<div class=\"row\"><div><label for=\"s\">Sex</label><select id=\"s\"><option value=\"h\">Male</option><option value=\"m\">Female</option></select></div><div><label for=\"a\">Height (cm)</label><input id=\"a\" inputmode=\"decimal\" value=\"170\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),m=a/100,i=Math.max(0,a/2.54-60),dv=($('s').value==='h'?50:45.5)+2.3*i;\n$('o').innerHTML=show([['Healthy range (BMI 18.5-24.9)',fmt(18.5*m*m,1)+' - '+fmt(24.9*m*m,1)+' kg'],['Devine formula',fmt(dv,1)+' kg']])}\ndocument.querySelectorAll('input,select').forEach(i=>i.oninput=c);c();",
+  "text": "<p>The healthy range is obtained using the BMI recommended by the WHO (between 18.5 and 24.9). The Devine formula is a classic reference based only on height and sex. Neither takes your muscle mass or body frame into account, so they are indicative only.</p>",
+  "faq": [
+   [
+    "Is there a single ideal weight?",
+    "No. We talk about a healthy range, which depends on height, body frame and muscle mass."
+   ],
+   [
+    "What BMI is considered normal?",
+    "According to the WHO, between 18.5 and 24.9."
+   ]
+  ]
+ },
+ "calculadora-ritmo-carrera": {
+  "title": "Running Pace Calculator: min/km, km/h and Finish Time",
+  "h1": "Running Pace",
+  "desc": "Calculate your pace per kilometer and your average speed from the distance and time.",
+  "body": "<label for=\"d\">Distance (km)</label><input id=\"d\" inputmode=\"decimal\" value=\"10\">\n<div class=\"row\"><div><label for=\"h\">Hours</label><input id=\"h\" inputmode=\"numeric\" value=\"0\"></div><div><label for=\"mi\">Minutes</label><input id=\"mi\" inputmode=\"numeric\" value=\"55\"></div></div>\n<label for=\"se\">Seconds</label><input id=\"se\" inputmode=\"numeric\" value=\"0\"><div id=\"o\"></div>",
+  "js": "function c(){const d=num('d'),t=(num('h')||0)*3600+(num('mi')||0)*60+(num('se')||0),p=t/d,pm=Math.floor(p/60),ps=Math.round(p%60);\nconst pad=n=>String(n).padStart(2,'0');const f=(x,n)=>{const s=Math.round(x*n);return Math.floor(s/3600)+':'+pad(Math.floor(s%3600/60))+':'+pad(s%60)};\n$('o').innerHTML=show([['Pace',pm+':'+pad(ps===60?0:ps)+' min/km'],['Speed',fmt(d/(t/3600),2)+' km/h'],['Time for 5 km',f(p,5)],['Time for 10 km',f(p,10)],['Half marathon',f(p,21.0975)],['Marathon',f(p,42.195)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Pace is the time it takes you to cover one kilometer. The times for 5 km, 10 km, half marathon and marathon are calculated assuming you keep the same pace, which does not always happen over long distances.</p>",
+  "faq": [
+   [
+    "What is running pace?",
+    "It is the time it takes you to cover one kilometer, expressed in minutes per kilometer."
+   ],
+   [
+    "How do I convert min/km to km/h?",
+    "Divide 60 by the pace in minutes. For example, 5:00 min/km is 12 km/h."
+   ]
+  ]
+ },
+ "calculadora-fecha-probable-parto": {
+  "title": "Due Date Calculator and Weeks of Pregnancy",
+  "h1": "Due Date Calculator",
+  "desc": "Calculate your estimated due date and weeks of pregnancy from the date of your last period.",
+  "body": "<label for=\"f\">First day of your last period</label><input id=\"f\" type=\"date\"><button id=\"go\">Calculate</button><div id=\"o\"></div>",
+  "js": "const t=new Date();t.setDate(t.getDate()-70);$('f').value=t.toISOString().slice(0,10);\n$('go').onclick=()=>{const a=new Date($('f').value);if(isNaN(a)){$('o').innerHTML='<p>Choose a date.</p>';return}\nconst p=new Date(a.getTime()+280*864e5),d=Math.floor((new Date()-a)/864e5),fm=x=>x.toLocaleDateString('en-US',{day:'numeric',month:'long',year:'numeric'});\n$('o').innerHTML=show([['Estimated due date',fm(p)],['Weeks of pregnancy',d>=0?Math.floor(d/7)+' weeks and '+(d%7)+' days':'—'],['End of the first trimester',fm(new Date(a.getTime()+91*864e5))]])};$('go').click();",
+  "text": "<p>Naegele's rule is applied: date of the last period plus 280 days (40 weeks), assuming 28-day cycles. Only a small proportion of babies are born exactly on that date. It is an estimate: your doctor or midwife will confirm it with an ultrasound.</p>",
+  "faq": [
+   [
+    "How is the due date calculated?",
+    "280 days (40 weeks) are added to the first day of the last period, using Naegele's rule."
+   ],
+   [
+    "Is it a certain date?",
+    "No, it is an estimate. Your doctor or midwife will adjust it with an ultrasound."
+   ]
+  ]
+ },
+ "calculadora-vacaciones": {
+  "title": "Vacation Days Calculator (Spain): Accrued Days by Contract",
+  "h1": "Accrued Vacation Days",
+  "desc": "Calculate how many vacation days you are entitled to based on the days worked during the year (Spain).",
+  "body": "<div class=\"row\"><div><label for=\"v\">Vacation days per year</label><input id=\"v\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"d\">Days worked in the year</label><input id=\"d\" inputmode=\"numeric\" value=\"200\"></div></div>\n<div class=\"row\"><div><label for=\"u\">Days already taken</label><input id=\"u\" inputmode=\"numeric\" value=\"5\"></div><div><label for=\"s\">Annual gross salary (€)</label><input id=\"s\" inputmode=\"decimal\" value=\"24000\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const g=num('v')*Math.min(num('d'),365)/365,r=g-num('u'),dia=num('s')/365;\n$('o').innerHTML=show([['Accrued vacation',fmt(g,2)+' days'],['Remaining to take',fmt(r,2)+' days'],['Approx. value of remaining days',eur(Math.max(r,0)*dia)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Spain's Workers' Statute (Estatuto de los Trabajadores) sets a minimum of 30 calendar days of vacation per year (about 22 working days). If you have not worked the full year, they are calculated proportionally. Your collective agreement or contract may improve on those days, so check both. The euro value uses the gross daily salary and is only indicative.</p>",
+  "faq": [
+   [
+    "How much vacation am I entitled to by law in Spain?",
+    "A minimum of 30 calendar days per year, which your collective agreement or contract may improve."
+   ],
+   [
+    "What if I do not work the full year?",
+    "It is calculated in proportion to the time worked."
+   ]
+  ]
+ },
+ "calculadora-consumo-electrico": {
+  "title": "Appliance Electricity Consumption Calculator (kWh and €)",
+  "h1": "Appliance Electricity Consumption",
+  "desc": "Calculate how much electricity an appliance uses and how much it costs per month based on its power, hours of use and price per kWh.",
+  "body": "<div class=\"row\"><div><label for=\"w\">Power (watts)</label><input id=\"w\" inputmode=\"decimal\" value=\"1500\"></div><div><label for=\"h\">Hours of use per day</label><input id=\"h\" inputmode=\"decimal\" value=\"2\"></div></div>\n<div class=\"row\"><div><label for=\"d\">Days of use per month</label><input id=\"d\" inputmode=\"numeric\" value=\"30\"></div><div><label for=\"p\">Price per kWh (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"0,15\"></div></div><div id=\"o\"></div>",
+  "js": "function c(){const k=num('w')/1000*num('h'),m=k*num('d');$('o').innerHTML=show([['Daily consumption',fmt(k,2)+' kWh'],['Monthly consumption',fmt(m,1)+' kWh'],['Cost per month',eur(m*num('p'))],['Cost per year',eur(m*num('p')*12)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>Energy is measured in kilowatt-hours (kWh): power in kW multiplied by the hours of use. The power rating is shown on the appliance label. Enter the price per kWh from your bill and remember that the real cost also includes the power charge, taxes and meter rental.</p>",
+  "faq": [
+   [
+    "How is the cost of an appliance calculated?",
+    "Power in kW times hours of use gives the kWh consumed, which are multiplied by the price per kWh."
+   ],
+   [
+    "Where can I find the power rating of the appliance?",
+    "On the product label or in its manual, expressed in watts (W)."
+   ]
+  ]
+ },
+ "calculadora-consumo-combustible": {
+  "title": "Fuel Consumption Calculator (l/100 km)",
+  "h1": "Car Fuel Consumption in l/100 km",
+  "desc": "Calculate your car's average consumption in liters per 100 km and what you spend per kilometer.",
+  "body": "<div class=\"row\"><div><label for=\"k\">Kilometers driven</label><input id=\"k\" inputmode=\"decimal\" value=\"520\"></div><div><label for=\"l\">Liters refueled</label><input id=\"l\" inputmode=\"decimal\" value=\"31\"></div></div>\n<label for=\"p\">Price per liter (€)</label><input id=\"p\" inputmode=\"decimal\" value=\"1,55\"><div id=\"o\"></div>",
+  "js": "function c(){const k=num('k'),l=num('l'),p=num('p');$('o').innerHTML=show([['Consumption',fmt(l/k*100,2)+' l/100 km'],['Kilometers per liter',fmt(k/l,2)+' km/l'],['Cost per 100 km',eur(l/k*100*p)],['Cost per km',eur(l/k*p)]])}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<p>For a reliable figure, fill the tank, note the odometer reading, drive a good distance and fill it up to the top again: the liters that go in are those consumed over those kilometers.</p>",
+  "faq": [
+   [
+    "How do I calculate my car's real consumption?",
+    "Fill the tank, note the kilometers, drive and fill it up again: liters refueled divided by kilometers, times 100."
+   ],
+   [
+    "Why does it differ from the official consumption?",
+    "The official figure is measured under laboratory conditions; the real one depends on driving style, load and traffic."
+   ]
+  ]
+ },
+ "calculadora-ecuacion-segundo-grado": {
+  "title": "Quadratic Equation Calculator (Step by Step)",
+  "h1": "Quadratic Equation",
+  "desc": "Solve ax² + bx + c = 0 and get the solutions and the discriminant.",
+  "body": "<div class=\"row\"><div><label for=\"a\">a</label><input id=\"a\" inputmode=\"decimal\" value=\"1\"></div><div><label for=\"b\">b</label><input id=\"b\" inputmode=\"decimal\" value=\"-3\"></div></div>\n<label for=\"c\">c</label><input id=\"c\" inputmode=\"decimal\" value=\"2\"><div id=\"o\"></div>",
+  "js": "function c(){const a=num('a'),b=num('b'),cc=num('c');if(!a){$('o').innerHTML='<p>Coefficient a cannot be 0.</p>';return}\nconst D=b*b-4*a*cc;let r;if(D>0){r=[['x₁',fmt((-b+Math.sqrt(D))/(2*a),4)],['x₂',fmt((-b-Math.sqrt(D))/(2*a),4)]]}else if(D===0){r=[['Double solution',fmt(-b/(2*a),4)]]}else{const re=fmt(-b/(2*a),4),im=fmt(Math.sqrt(-D)/(2*a),4);r=[['x₁',re+' + '+im+'i'],['x₂',re+' − '+im+'i']]}\n$('o').innerHTML=show([['Discriminant',fmt(D,4)]].concat(r))}\ndocument.querySelectorAll('input').forEach(i=>i.oninput=c);c();",
+  "text": "<h2>Quadratic formula</h2><p>For ax² + bx + c = 0 the solutions are x = (−b ± √(b² − 4ac)) / 2a. The discriminant b² − 4ac indicates how many real solutions there are: two if it is positive, one repeated solution if it is zero and no real ones (two complex ones) if it is negative.</p>",
+  "faq": [
+   [
+    "What is the discriminant?",
+    "It is b² − 4ac. If it is positive there are two real solutions, if it is zero there is one repeated solution and if it is negative there are no real solutions."
+   ],
+   [
+    "What happens if a is 0?",
+    "It stops being a quadratic equation: it becomes a linear equation."
+   ]
+  ]
+ }
+}

@@ -1,3 +1,4 @@
+import re
 #!/usr/bin/env python3
 """Genera la web estática Cuentalia. Ejecuta: python3 build.py  ->  carpeta ../site"""
 import os, shutil, datetime
@@ -71,6 +72,7 @@ footer a{margin-right:14px}
 :focus-visible{outline:3px solid var(--acc);outline-offset:2px}
 .skip{position:absolute;left:-999px;top:8px;background:var(--acc);color:#fff;padding:8px 14px;border-radius:8px;z-index:50}.skip:focus{left:8px}
 #top{position:fixed;right:18px;bottom:22px;margin:0;width:44px;height:44px;padding:0;border-radius:50%;display:none;z-index:8;box-shadow:var(--sh)}
+#lg{width:auto;margin:0;padding:6px 8px;border-radius:10px;font-size:.85rem;background:var(--acc2);color:var(--ink);border:0;font-weight:700;cursor:pointer}
 #pz{margin:0;background:var(--acc2);color:var(--ink);padding:7px 11px;border-radius:10px;font-size:1rem;line-height:1}
 #pzp{position:fixed;top:0;right:0;bottom:0;width:min(370px,100%);background:var(--card);color:var(--ink);border-left:1px solid var(--bd);box-shadow:-10px 0 40px rgba(0,0,0,.25);z-index:30;transform:translateX(105%);transition:transform .25s;overflow:auto;padding:18px 18px 40px}
 #pzp.o{transform:none}#pzo{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:29;display:none}#pzo.o{display:block}
@@ -377,12 +379,13 @@ def head(title, desc, path):
 <meta property="og:title" content="{title}"><meta property="og:description" content="{desc}"><meta property="og:type" content="website"><meta property="og:url" content="{canon}">
 <script>{HEAD_JS}</script><style>{CSS}</style></head><body>"""
 
-HEADER = f"""<header><div class="w top"><a class="logo" href="/">Cuenta<span>lia</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><a class="hide" href="/mis-herramientas">⭐ Mis herramientas</a><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button><button id="pz" title="Personalizar la web" aria-label="Personalizar">⚙️</button></nav></div></header>"""
+HEADER = f"""<header><div class="w top"><a class="logo" href="/">Cuenta<span>lia</span></a><nav><a class="hide" href="/categoria-finanzas">Finanzas</a><a class="hide" href="/categoria-conversores">Conversores</a><a href="/">Todas</a><a class="hide" href="/mis-herramientas">⭐ Mis herramientas</a><select id="lg" aria-label="Idioma"><option value="">ES</option><option value="ca">CA</option><option value="va">VA</option><option value="en">EN</option></select><button id="th" title="Modo claro/oscuro" aria-label="Cambiar tema">🌙</button><button id="pz" title="Personalizar la web" aria-label="Personalizar">⚙️</button></nav></div></header>"""
 
 SITE_JS = """
 (function(){
 var L=function(k,d){try{return JSON.parse(localStorage.getItem(k))||d}catch(e){return d}},S=function(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
 function toast(m){var t=document.getElementById('toast');if(!t){t=document.createElement('div');t.id='toast';document.body.appendChild(t)}t.textContent=m;t.className='s';clearTimeout(t._h);t._h=setTimeout(function(){t.className=''},1800)}
+var lg=document.getElementById('lg');if(lg){var lm=location.pathname.match(/^\\/(ca|va|en)(\\/|$)/);lg.value=lm?lm[1]:'';lg.onchange=function(){var rest=location.pathname.replace(/^\\/(ca|va|en)(?=\\/|$)/,'')||'/';location.href=(lg.value?'/'+lg.value:'')+(lg.value&&rest==='/'?'/':rest)+location.search}}
 var P=L('pz',{}),R=document.documentElement;
 function apply(){var t=P.t;if(!t||t==='auto')t=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';R.setAttribute('data-t',t);
  if(P.a){R.style.setProperty('--au',P.a);R.style.setProperty('--au2',P.b||P.a)}else{R.style.removeProperty('--au');R.style.removeProperty('--au2')}
@@ -464,8 +467,11 @@ def adslot():
     if not ADSENSE_ID: return ''
     return '<div class="ad"><!-- ANUNCIO: pega aquí el bloque de AdSense --></div>'
 
+CUR = {"lang":"es","out":None}
 def write(path, html):
-    p = os.path.join(OUT, path)
+    if CUR["lang"]!="es": html = localize(html, CUR["lang"], path)
+    else: html = localize(html, "es", path)
+    p = os.path.join(CUR["out"] or OUT, path)
     os.makedirs(os.path.dirname(p), exist_ok=True)
     with open(p, "w", encoding="utf-8") as fh:
         fh.write(html)
@@ -511,9 +517,7 @@ def jsonld(o):
     import json
     return '<script type="application/ld+json">'+json.dumps(o,ensure_ascii=False)+'</script>'
 
-def build():
-    if os.path.exists(OUT): shutil.rmtree(OUT)
-    os.makedirs(OUT)
+def build_site(lang):
     cname = {c:n for c,n,_ in CATS}
     for t in TOOLS:
         t["cat"]=catof(t["slug"])
@@ -600,15 +604,49 @@ draw()})();"""
       f'''<main><div class="w"><h1>Contacto</h1><p>Puedes escribirnos para sugerir una calculadora, avisar de un error o cualquier consulta:</p>
 <p><a href="mailto:{CONTACT}"><b>{CONTACT}</b></a></p><p>Respondemos en cuanto podemos, normalmente en pocos días.</p></div></main>''' + footer())
     write("contacto.html", cont)
-    # SEO
-    urls = [""] + [t["slug"] + ".html" for t in TOOLS] + [f"categoria-{c}.html" for c,_,_ in CATS] + ["mis-herramientas.html","sobre-nosotros.html","contacto.html","privacidad.html", "aviso-legal.html"]
-    sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{SITE_URL}/{u[:-5] if u.endswith(".html") else u}</loc><lastmod>{TODAY}</lastmod></url>" for u in urls) + "</urlset>"
+    # SEO (solo idioma base; el sitemap se genera al final)
+    if lang=="es":
+        write("cy9k2m7q4x8w1v5b.txt","cy9k2m7q4x8w1v5b")
+        write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
+        write("ads.txt", f"google.com, pub-{ADSENSE_ID.replace('ca-pub-','')}, DIRECT, f08c47fec0942fa0\n" if ADSENSE_ID else "# Rellena cuando tengas AdSense\n")
+        write("google7462b51765c7efc9.html", "google-site-verification: google7462b51765c7efc9.html")
+
+PAGES = ["", "mis-herramientas","sobre-nosotros","contacto","privacidad","aviso-legal"]
+def localize(html, lang, path):
+    if not html.lstrip().startswith("<!doctype html>"): return html
+    slug = "" if path=="index.html" else path[:-5]
+    if lang!="es":
+        import ui
+        for a,t in ui.pairs(lang): html = html.replace(a,t)
+        html = re.sub(r'href="/(?!/)', f'href="/{lang}/', html)
+        html = html.replace(SITE_URL+"/", f"{SITE_URL}/{lang}/")
+        html = html.replace('<html lang="es"', '<html lang="%s"' % ("ca-valencia" if lang=="va" else lang))
+        html = html.replace('"inLanguage": "es"', '"inLanguage": "%s"' % ("ca-valencia" if lang=="va" else lang))
+        html = html.replace("'es-ES'", "'%s'" % ("en-US" if lang=="en" else "ca-ES"))
+    alts = "".join(f'<link rel="alternate" hreflang="{h}" href="{SITE_URL}{pre}/{slug}">' for h,pre in [("es",""),("ca","/ca"),("ca-valencia","/va"),("en","/en")])
+    alts += f'<link rel="alternate" hreflang="x-default" href="{SITE_URL}/{slug}">'
+    return html.replace("</head>", alts+"</head>", 1)
+
+def build():
+    global TOOLS, FAQS
+    import json
+    if os.path.exists(OUT): shutil.rmtree(OUT)
+    os.makedirs(OUT)
+    base_tools, base_faqs = TOOLS, FAQS
+    CUR.update(lang="es", out=OUT); build_site("es")
+    for lang in ("ca","va","en"):
+        tr = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "i18n", lang+".json"), encoding="utf-8"))
+        TOOLS = [dict(t, **{k: tr[t["slug"]][k] for k in ("title","h1","desc","body","js","text")}) for t in base_tools]
+        FAQS = {s: [tuple(x) for x in v["faq"]] for s, v in tr.items()}
+        CUR.update(lang=lang, out=os.path.join(OUT, lang)); os.makedirs(CUR["out"])
+        build_site(lang)
+    TOOLS, FAQS = base_tools, base_faqs
+    CUR.update(lang="es", out=OUT)
+    urls = [""] + [t["slug"] for t in TOOLS] + [f"categoria-{c}" for c,_,_ in CATS] + PAGES[1:]
+    loc = lambda pre,u: f"{SITE_URL}{pre}/{u}"
+    sm = '<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{loc(pre,u)}</loc><lastmod>{TODAY}</lastmod></url>" for pre in ("","/ca","/va","/en") for u in urls) + "</urlset>"
     write("sitemap.xml", sm)
-    write("cy9k2m7q4x8w1v5b.txt","cy9k2m7q4x8w1v5b")
-    write("robots.txt", f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
-    write("ads.txt", f"google.com, pub-{ADSENSE_ID.replace('ca-pub-','')}, DIRECT, f08c47fec0942fa0\n" if ADSENSE_ID else "# Rellena cuando tengas AdSense\n")
-    write("google7462b51765c7efc9.html", "google-site-verification: google7462b51765c7efc9.html")
-    print("OK:", len(TOOLS), "herramientas ->", os.path.abspath(OUT))
+    print("OK:", len(TOOLS), "herramientas x 4 idiomas ->", os.path.abspath(OUT))
 
 if __name__ == "__main__":
     build()
