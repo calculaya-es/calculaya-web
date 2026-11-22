@@ -178,4 +178,66 @@ FAQS = {
         ("¿Qué es el número de semana ISO?", "Es la numeración estándar ISO 8601: las semanas empiezan en lunes y la semana 1 es la que contiene el primer jueves del año."),
         ("¿Cuántas semanas tiene un año?", "52 o 53, según el año."),
     ],
+    "calculadora-horas-trabajadas": [
+        ("¿Cómo se calculan las horas trabajadas?", "Se resta la hora de entrada a la de salida y se descuentan los descansos no remunerados."),
+        ("¿Sirve para turnos que cruzan la medianoche?", "Sí, siempre que indiques correctamente las horas de entrada y salida."),
+    ],
+    "calculadora-nota-acceso-universidad": [
+        ("¿Cómo se calcula la nota de acceso?", "Se combina la nota media del bachillerato y la de la fase general de la prueba de acceso, con la ponderación que establece la normativa vigente."),
+        ("¿Es una cifra oficial?", "No, es una estimación orientativa. La nota oficial la publica tu universidad o comunidad autónoma."),
+    ],
+    "calculadora-pintura": [
+        ("¿Cuánta pintura necesito para una habitación?", "Calcula la superficie de paredes (y techo si procede) y divídela entre el rendimiento por litro indicado en el bote, normalmente 8-12 m²/l."),
+        ("¿Cuántas manos conviene dar?", "Lo habitual son dos manos, por lo que conviene multiplicar la cantidad por dos."),
+        ("¿Se descuentan puertas y ventanas?", "Para un cálculo más ajustado, resta su superficie de la total."),
+    ],
+    "contador-caracteres-redes": [
+        ("¿Cuántos caracteres admite cada red social?", "Varía según la plataforma y cambia con el tiempo. Comprueba el límite vigente en la propia red antes de publicar."),
+        ("¿Cuentan los espacios y los emojis?", "Los espacios cuentan como caracteres. Los emojis pueden contar como más de uno según la plataforma."),
+    ],
+    "contador-palabras": [
+        ("¿Cómo cuenta las palabras?", "Separa el texto por espacios y saltos de línea."),
+        ("¿Se guarda mi texto?", "No. El recuento se hace en tu navegador y el texto no se envía a ningún servidor."),
+    ],
+    "conversor-unidades": [
+        ("¿Qué unidades puedo convertir?", "Las de longitud, peso, volumen y otras magnitudes habituales que ofrece la herramienta."),
+        ("¿Es exacto el resultado?", "Usa factores de conversión estándar y redondea el resultado para facilitar la lectura."),
+    ],
+    "conversor-zonas-horarias": [
+        ("¿Tiene en cuenta el cambio de hora de verano?", "Sí, el cálculo usa las reglas de zonas horarias de tu navegador, que incluyen el horario de verano."),
+        ("¿Qué diferencia hay entre España peninsular y Canarias?", "Canarias va una hora por detrás de la península durante todo el año."),
+    ],
+    "convertidor-mayusculas": [
+        ("¿Qué formatos admite?", "Convierte el texto a MAYÚSCULAS, minúsculas y otros estilos de capitalización."),
+        ("¿Se guarda mi texto?", "No. La conversión se hace en tu navegador."),
+    ],
+    "coste-viaje-gasolina": [
+        ("¿Cómo se calcula el coste de un viaje en coche?", "Se multiplican los kilómetros por el consumo (l/100 km) dividido entre 100 y por el precio del litro."),
+        ("¿Incluye peajes o desgaste?", "No. Solo calcula el combustible; los peajes, aparcamiento y mantenimiento se suman aparte."),
+    ],
+    "cuanto-tardo-en-pagar-un-prestamo": [
+        ("¿Cómo se calcula el tiempo para pagar un préstamo?", "A partir del capital, el interés y la cuota que puedes pagar al mes se obtiene el número de cuotas necesarias."),
+        ("¿Qué pasa si la cuota es menor que los intereses?", "La deuda no se amortiza nunca: necesitas una cuota mayor que los intereses mensuales."),
+    ],
+    "lanzar-dado-moneda": [
+        ("¿Son aleatorios los lanzamientos?", "Usan números pseudoaleatorios del navegador, suficientes para juegos y decisiones cotidianas."),
+        ("¿Qué probabilidad tiene cada resultado?", "En una moneda, 50 % cada cara; en un dado de seis caras, un 16,7 % cada número."),
+    ],
+    "numero-aleatorio": [
+        ("¿Puedo elegir el rango?", "Sí, indica el mínimo y el máximo y se generará un número entre ambos."),
+        ("¿Sirve para sorteos oficiales o criptografía?", "No. Es aleatoriedad pensada para uso cotidiano."),
+    ],
+    "revision-hipoteca-variable-euribor": [
+        ("¿Cómo afecta el Euríbor a mi cuota?", "En una hipoteca variable el interés es el Euríbor más un diferencial; si el Euríbor sube o baja en la revisión, tu cuota cambia."),
+        ("¿Cada cuánto se revisa?", "Lo habitual es cada 6 o 12 meses, según indique tu contrato."),
+        ("¿Es el resultado definitivo?", "No, es una simulación. La cuota real la fija tu banco."),
+    ],
+    "sorteo-aleatorio": [
+        ("¿Cómo funciona el sorteo?", "Elige al azar entre los nombres o elementos que introduzcas."),
+        ("¿Es válido para sorteos con premios?", "Para sorteos públicos o con premios conviene seguir la normativa aplicable y las bases del sorteo."),
+    ],
+    "sumar-dias-a-fecha": [
+        ("¿Cómo sumo o resto días a una fecha?", "Indica la fecha de partida y el número de días; usa un valor negativo para restar."),
+        ("¿Cuenta los días laborables?", "No, cuenta días naturales."),
+    ],
 }
