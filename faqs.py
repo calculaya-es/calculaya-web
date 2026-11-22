@@ -144,4 +144,38 @@ FAQS = {
         ("¿Qué hace segura una contraseña?", "La longitud sobre todo: se recomiendan 14 caracteres o más, mezclando letras, números y símbolos, y una distinta para cada servicio."),
         ("¿Se guarda la contraseña generada?", "No. Se genera en tu navegador y no se envía a ningún servidor."),
     ],
+    "amortizacion-anticipada-hipoteca": [
+        ("¿Qué es amortizar anticipadamente una hipoteca?", "Es adelantar dinero al banco para reducir la deuda pendiente antes de lo previsto, ya sea acortando el plazo o bajando la cuota."),
+        ("¿Es mejor reducir plazo o cuota?", "Reducir el plazo suele ahorrar más intereses en total; reducir la cuota da más holgura mensual. Depende de tu situación."),
+        ("¿Hay comisión por amortización anticipada?", "Puede haberla según el contrato y la fecha de firma. Consulta tu escritura o pregunta a tu banco."),
+    ],
+    "calculadora-area-figuras": [
+        ("¿Cómo se calcula el área de un círculo?", "Con la fórmula π × radio². Si conoces el diámetro, divídelo entre 2 para obtener el radio."),
+        ("¿Y el área de un triángulo?", "Base × altura / 2."),
+        ("¿En qué unidades sale el resultado?", "En las mismas unidades que introduzcas, elevadas al cuadrado: si usas metros, el área sale en m²."),
+    ],
+    "calculadora-media-mediana-moda": [
+        ("¿Qué diferencia hay entre media, mediana y moda?", "La media es el promedio de todos los valores, la mediana es el valor central al ordenarlos y la moda es el que más se repite."),
+        ("¿Cuándo es mejor usar la mediana?", "Cuando hay valores extremos que distorsionan la media, por ejemplo en salarios o precios de vivienda."),
+    ],
+    "centimetros-a-pulgadas": [
+        ("¿Cuántas pulgadas son 10 centímetros?", "Unas 3,94 pulgadas. Una pulgada equivale exactamente a 2,54 cm."),
+        ("¿Cómo paso pulgadas a centímetros?", "Multiplica las pulgadas por 2,54."),
+    ],
+    "litros-a-galones": [
+        ("¿Cuántos galones son 10 litros?", "Unos 2,64 galones estadounidenses. Un galón US son 3,785 litros."),
+        ("¿El galón de EE. UU. y el británico son iguales?", "No. El galón imperial británico equivale a unos 4,546 litros, más grande que el estadounidense."),
+    ],
+    "conversor-binario-decimal-hexadecimal": [
+        ("¿Cómo se pasa de binario a decimal?", "Cada dígito binario vale una potencia de 2 según su posición, de derecha a izquierda; se suman las de los dígitos que son 1."),
+        ("¿Qué es el sistema hexadecimal?", "Es un sistema en base 16 que usa los dígitos 0-9 y las letras A-F. Se usa mucho en informática, por ejemplo en los colores web."),
+    ],
+    "dias-para-navidad": [
+        ("¿Qué día se cuenta como Navidad?", "El 25 de diciembre."),
+        ("¿Se actualiza solo el número de días?", "Sí. Se calcula en tu navegador con la fecha de hoy cada vez que abres la página."),
+    ],
+    "numero-de-semana": [
+        ("¿Qué es el número de semana ISO?", "Es la numeración estándar ISO 8601: las semanas empiezan en lunes y la semana 1 es la que contiene el primer jueves del año."),
+        ("¿Cuántas semanas tiene un año?", "52 o 53, según el año."),
+    ],
 }
