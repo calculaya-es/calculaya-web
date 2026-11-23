@@ -37,6 +37,8 @@ FAQS = {
     "calculadora-interes-compuesto": [
         ("¿Qué es el interés compuesto?", "Es el que se calcula sobre el capital más los intereses ya generados, por lo que el dinero crece cada vez más rápido."),
         ("¿Esta calculadora tiene en cuenta los impuestos?", "No. Tampoco la inflación ni las comisiones. Es una simulación con rentabilidad constante."),
+        ("¿Qué diferencia hay entre interés simple y compuesto?", "En el simple los intereses se calculan siempre sobre el capital inicial. En el compuesto los intereses generados se suman al capital y también producen intereses."),
+        ("¿Qué es la regla del 72?", "Dividir 72 entre el tipo de interés anual da, de forma aproximada, los años necesarios para duplicar el capital."),
     ],
     "kilometros-a-millas": [
         ("¿Cuántas millas son 10 kilómetros?", "10 km equivalen a unas 6,21 millas."),
@@ -49,6 +51,8 @@ FAQS = {
     "calculadora-edad": [
         ("¿Cómo se calcula la edad exacta?", "Se restan años, meses y días entre tu fecha de nacimiento y hoy, ajustando por la duración real de cada mes."),
         ("¿Se guarda mi fecha de nacimiento?", "No. Todo se calcula en tu navegador."),
+        ("¿Cómo se calcula la edad exacta?", "Se restan años, meses y días entre la fecha de nacimiento y la fecha de hoy, ajustando por la longitud de cada mes."),
+        ("¿Cuenta los años bisiestos?", "Sí, el cálculo usa el calendario real, así que los 29 de febrero se tienen en cuenta."),
     ],
     "capacidad-endeudamiento-hipoteca": [
         ("¿Qué porcentaje de mis ingresos puedo destinar a la hipoteca?", "Los bancos suelen aceptar entre un 30% y un 35% de tus ingresos netos, contando también otras deudas."),
@@ -57,6 +61,8 @@ FAQS = {
     "calculadora-tae": [
         ("¿Para qué sirve la TAE?", "Para comparar el coste real de préstamos distintos, porque incluye intereses, comisiones y la frecuencia de pago."),
         ("¿Por qué la TAE es mayor que el TIN?", "Porque suma el efecto de las comisiones (como la de apertura) y de pagar intereses mensualmente."),
+        ("¿Qué diferencia hay entre TIN y TAE?", "El TIN es solo el interés nominal. La TAE incluye además comisiones y la frecuencia de pago, por lo que refleja mejor el coste real."),
+        ("¿Qué TAE es buena?", "Cuanto menor, mejor si pides dinero; cuanto mayor, mejor si ahorras. Compara siempre productos con el mismo plazo."),
     ],
     "calculadora-indemnizacion-despido": [
         ("¿Cuántos días por año se pagan en un despido improcedente?", "33 días de salario por año trabajado, con un máximo de 24 mensualidades, para contratos posteriores a febrero de 2012."),
@@ -66,6 +72,8 @@ FAQS = {
     "calculadora-salario-bruto-neto": [
         ("¿Es exacto el sueldo neto que sale?", "No. Es una estimación con una escala media de IRPF y una cotización del 6,5% aprox. Tu nómina real depende de tu comunidad, tu situación familiar y la retención de tu empresa."),
         ("¿Qué diferencia hay entre 12 y 14 pagas?", "El neto anual es el mismo; con 14 pagas cobras dos extras y cada mensualidad es menor."),
+        ("¿Por qué el neto cambia según la comunidad autónoma?", "Porque el tramo autonómico del IRPF es distinto en cada comunidad. Esta calculadora da una estimación; la nómina real depende además de tu situación familiar y contrato."),
+        ("¿Qué es la retención de IRPF?", "Es el porcentaje del bruto que la empresa adelanta a Hacienda cada mes. La declaración de la renta ajusta la diferencia final."),
     ],
     "calculadora-pagas-extra": [
         ("¿Cobro más con 14 pagas que con 12?", "No. El salario anual es el mismo; solo cambia cómo se reparte entre los meses."),
@@ -83,6 +91,8 @@ FAQS = {
     "calculadora-roi": [
         ("¿Cómo se calcula el ROI?", "ROI = (ganancia − inversión) / inversión × 100. Invertir 1.000 € y obtener 1.200 € da un ROI del 20%."),
         ("¿Tiene en cuenta el tiempo?", "No. Un 20% en un año no es lo mismo que en cinco; para comparar usa la rentabilidad anualizada."),
+        ("¿Qué es un buen ROI?", "Depende del sector y del riesgo. Lo importante es compararlo con alternativas y tener en cuenta el plazo de la inversión."),
+        ("¿El ROI tiene en cuenta el tiempo?", "No. Para comparar inversiones de distinta duración conviene calcular también la rentabilidad anualizada."),
     ],
     "calculadora-margen-beneficio": [
         ("¿Qué diferencia hay entre margen y markup?", "El margen se calcula sobre el precio de venta y el markup sobre el coste. Con coste 60 € y venta 100 €, el margen es 40% y el markup 66,7%."),
