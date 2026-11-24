@@ -47,6 +47,7 @@ FAQS = {
     "calculadora-porcentajes": [
         ("¿Cómo calculo el 15% de una cantidad?", "Multiplica la cantidad por 15 y divide entre 100. El 15% de 200 es 30."),
         ("¿Cómo calculo una variación porcentual?", "Resta el valor inicial al final, divide entre el inicial y multiplica por 100."),
+        ("¿Cómo calculo qué porcentaje es una cantidad de otra?", "Divide la parte entre el total y multiplica por 100. Por ejemplo, 30 de 200 es (30 / 200) × 100 = 15%."),
     ],
     "calculadora-edad": [
         ("¿Cómo se calcula la edad exacta?", "Se restan años, meses y días entre tu fecha de nacimiento y hoy, ajustando por la duración real de cada mes."),
@@ -87,6 +88,7 @@ FAQS = {
     "calculadora-descuentos": [
         ("¿Cómo se calcula un descuento?", "Precio final = precio original × (1 − descuento/100). Por ejemplo, 80 € con un 25% de descuento son 60 €."),
         ("¿Dos descuentos del 20% y 10% suman un 30%?", "No. Se aplican en cadena: 100 € → 80 € → 72 €, un 28% de descuento total."),
+        ("¿Cómo saco el precio original si conozco el precio rebajado?", "Divide el precio final entre (1 − descuento/100). Si algo cuesta 60 € con un 25% de descuento, el original era 60 / 0,75 = 80 €."),
     ],
     "calculadora-roi": [
         ("¿Cómo se calcula el ROI?", "ROI = (ganancia − inversión) / inversión × 100. Invertir 1.000 € y obtener 1.200 € da un ROI del 20%."),
@@ -113,6 +115,7 @@ FAQS = {
     "regla-de-tres": [
         ("¿Qué es una regla de tres simple directa?", "Cuando al aumentar una magnitud aumenta la otra en la misma proporción: x = b × c / a."),
         ("¿Y la inversa?", "Cuando al aumentar una magnitud la otra disminuye, como velocidad y tiempo: x = a × b / c."),
+        ("¿Cómo sé si es directa o inversa?", "Pregúntate si al aumentar una magnitud la otra también aumenta (directa) o disminuye (inversa). Más kilos de fruta cuestan más dinero: directa; más obreros tardan menos días: inversa."),
     ],
     "dias-entre-fechas": [
         ("¿Se cuenta el día de inicio?", "Por defecto se calcula la diferencia entre ambas fechas, sin incluir el día inicial. Suma 1 si quieres contar ambos extremos."),
@@ -121,10 +124,12 @@ FAQS = {
     "calculadora-nota-media": [
         ("¿Cómo se calcula la nota media ponderada?", "Se multiplica cada nota por su peso o créditos, se suman los resultados y se divide entre la suma de pesos."),
         ("¿Sirve para la nota de acceso a la universidad?", "Para eso usa la calculadora específica de nota de acceso, que aplica las ponderaciones de la EBAU/PAU."),
+        ("¿Qué pasa si todas las asignaturas pesan lo mismo?", "Deja el mismo peso en todas y el resultado será la media aritmética: suma las notas y divide entre el número de asignaturas."),
     ],
     "calculadora-propinas": [
         ("¿Cuánta propina se suele dejar en España?", "No es obligatoria. Es habitual dejar entre un 5% y un 10% si el servicio ha sido bueno, y muchos lo redondean al euro más cercano."),
         ("¿Cómo divido la cuenta entre varias personas?", "Indica el número de comensales y la calculadora reparte el total con propina incluida a partes iguales."),
+        ("¿Puedo redondear la propina?", "Sí. Muchas personas redondean el total al euro o a los 5 € más cercanos para simplificar el pago; ajusta el porcentaje hasta obtener la cifra que prefieras."),
     ],
     "calculadora-pitagoras": [
         ("¿Qué dice el teorema de Pitágoras?", "En un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a² + b² = c²."),
