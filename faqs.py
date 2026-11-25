@@ -43,6 +43,7 @@ FAQS = {
     "kilometros-a-millas": [
         ("¿Cuántas millas son 10 kilómetros?", "10 km equivalen a unas 6,21 millas."),
         ("¿Cómo paso de km a millas?", "Multiplica los kilómetros por 0,621371, o divídelos entre 1,609344."),
+        ("¿Cuántos kilómetros tiene una milla?", "Una milla equivale a 1,609 km, así que 100 km son unas 62,1 millas."),
     ],
     "calculadora-porcentajes": [
         ("¿Cómo calculo el 15% de una cantidad?", "Multiplica la cantidad por 15 y divide entre 100. El 15% de 200 es 30."),
@@ -120,6 +121,7 @@ FAQS = {
     "dias-entre-fechas": [
         ("¿Se cuenta el día de inicio?", "Por defecto se calcula la diferencia entre ambas fechas, sin incluir el día inicial. Suma 1 si quieres contar ambos extremos."),
         ("¿Cuenta solo días laborables?", "No, cuenta días naturales."),
+        ("¿Se cuenta el día de inicio?", "Por defecto se calcula la diferencia entre ambas fechas, sin incluir el día inicial. Si necesitas contarlo, suma un día al resultado."),
     ],
     "calculadora-nota-media": [
         ("¿Cómo se calcula la nota media ponderada?", "Se multiplica cada nota por su peso o créditos, se suman los resultados y se divide entre la suma de pesos."),
@@ -134,6 +136,7 @@ FAQS = {
     "calculadora-pitagoras": [
         ("¿Qué dice el teorema de Pitágoras?", "En un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a² + b² = c²."),
         ("¿Puedo calcular un cateto si conozco la hipotenusa?", "Sí. Se resuelve restando: a = √(c² − b²)."),
+        ("¿Cuándo se puede usar el teorema de Pitágoras?", "Solo en triángulos rectángulos: el cuadrado de la hipotenusa es la suma de los cuadrados de los catetos."),
     ],
     "calculadora-fracciones": [
         ("¿Cómo se suman fracciones con distinto denominador?", "Se busca un denominador común, se convierten las fracciones y se suman los numeradores. Después se simplifica el resultado."),
@@ -142,14 +145,17 @@ FAQS = {
     "celsius-a-fahrenheit": [
         ("¿Cuál es la fórmula de Celsius a Fahrenheit?", "°F = °C × 9/5 + 32. Por ejemplo, 20 °C equivalen a 68 °F."),
         ("¿Y de Fahrenheit a Celsius?", "°C = (°F − 32) × 5/9."),
+        ("¿Cuál es la fórmula para pasar de Celsius a Fahrenheit?", "Se multiplica por 1,8 y se suman 32: °F = °C × 1,8 + 32. Por ejemplo, 20 °C son 68 °F."),
     ],
     "kilos-a-libras": [
         ("¿Cuántas libras son un kilo?", "Un kilogramo equivale a unas 2,2046 libras."),
         ("¿Cómo paso libras a kilos?", "Se multiplica por 0,4536 o se divide entre 2,2046."),
+        ("¿Cuántas libras es un kilo?", "Un kilo equivale a unas 2,2046 libras. Para pasar de libras a kilos se multiplica por 0,4536."),
     ],
     "kmh-a-mph": [
         ("¿Cuántas millas por hora son 100 km/h?", "Unas 62,14 mph. Un km/h equivale a 0,6214 mph."),
         ("¿Cómo paso mph a km/h?", "Se multiplica por 1,609."),
+        ("¿Cuántas mph son 120 km/h?", "Unas 74,6 mph. Como regla rápida, multiplica los km/h por 0,62."),
     ],
     "numeros-romanos": [
         ("¿Qué valor tiene cada símbolo romano?", "I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000."),
@@ -176,10 +182,12 @@ FAQS = {
     "centimetros-a-pulgadas": [
         ("¿Cuántas pulgadas son 10 centímetros?", "Unas 3,94 pulgadas. Una pulgada equivale exactamente a 2,54 cm."),
         ("¿Cómo paso pulgadas a centímetros?", "Multiplica las pulgadas por 2,54."),
+        ("¿Cuántos centímetros tiene una pulgada?", "Una pulgada son exactamente 2,54 cm."),
     ],
     "litros-a-galones": [
         ("¿Cuántos galones son 10 litros?", "Unos 2,64 galones estadounidenses. Un galón US son 3,785 litros."),
         ("¿El galón de EE. UU. y el británico son iguales?", "No. El galón imperial británico equivale a unos 4,546 litros, más grande que el estadounidense."),
+        ("¿Un galón es siempre igual?", "No. El galón estadounidense son 3,785 litros y el imperial (Reino Unido) 4,546 litros."),
     ],
     "conversor-binario-decimal-hexadecimal": [
         ("¿Cómo se pasa de binario a decimal?", "Cada dígito binario vale una potencia de 2 según su posición, de derecha a izquierda; se suman las de los dígitos que son 1."),
@@ -241,6 +249,7 @@ FAQS = {
     "numero-aleatorio": [
         ("¿Puedo elegir el rango?", "Sí, indica el mínimo y el máximo y se generará un número entre ambos."),
         ("¿Sirve para sorteos oficiales o criptografía?", "No. Es aleatoriedad pensada para uso cotidiano."),
+        ("¿Los números son realmente aleatorios?", "Son pseudoaleatorios, generados por el navegador. Valen para sorteos y juegos, pero no para criptografía."),
     ],
     "revision-hipoteca-variable-euribor": [
         ("¿Cómo afecta el Euríbor a mi cuota?", "En una hipoteca variable el interés es el Euríbor más un diferencial; si el Euríbor sube o baja en la revisión, tu cuota cambia."),
@@ -274,6 +283,7 @@ FAQS = {
     "calculadora-vacaciones": [
         ("¿Cuántas vacaciones me corresponden por ley en España?", "Un mínimo de 30 días naturales al año, que tu convenio o contrato pueden mejorar."),
         ("¿Y si no trabajo el año completo?", "Se calculan en proporción al tiempo trabajado."),
+        ("¿Cuántos días de vacaciones corresponden al año en España?", "Como mínimo 30 días naturales al año según el Estatuto de los Trabajadores, salvo que el convenio mejore esa cifra."),
     ],
     "calculadora-consumo-electrico": [
         ("¿Cómo se calcula el coste de un electrodoméstico?", "Potencia en kW por horas de uso da los kWh consumidos, que se multiplican por el precio del kWh."),
