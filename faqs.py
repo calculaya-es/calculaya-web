@@ -80,6 +80,7 @@ FAQS = {
     "calculadora-pagas-extra": [
         ("¿Cobro más con 14 pagas que con 12?", "No. El salario anual es el mismo; solo cambia cómo se reparte entre los meses."),
         ("¿Qué son las pagas prorrateadas?", "Las pagas extra repartidas en las 12 nóminas mensuales, de modo que cobras lo mismo cada mes."),
+        ("¿Cuántas pagas extra suele haber?", "Lo habitual son dos al año (verano y Navidad), pero el convenio puede fijar otras cifras o prorratearlas en 12 mensualidades."),
     ],
     "calculadora-inflacion": [
         ("¿Qué es la inflación?", "Es la subida generalizada y sostenida de los precios, que reduce el poder adquisitivo del dinero con el tiempo."),
@@ -100,6 +101,7 @@ FAQS = {
     "calculadora-margen-beneficio": [
         ("¿Qué diferencia hay entre margen y markup?", "El margen se calcula sobre el precio de venta y el markup sobre el coste. Con coste 60 € y venta 100 €, el margen es 40% y el markup 66,7%."),
         ("¿Cómo fijo el precio para un margen concreto?", "Precio = coste / (1 − margen). Para un 30% de margen con coste 70 €, el precio es 100 €."),
+        ("¿Qué diferencia hay entre margen y markup?", "El margen es el beneficio sobre el precio de venta; el markup, sobre el coste. Con coste 80 € y venta 100 €, el margen es del 20% y el markup del 25%."),
     ],
     "calculadora-rentabilidad-alquiler": [
         ("¿Qué es la rentabilidad bruta de un alquiler?", "Es el alquiler anual dividido entre el precio de compra, en porcentaje. No descuenta gastos ni impuestos."),
@@ -241,6 +243,7 @@ FAQS = {
     "cuanto-tardo-en-pagar-un-prestamo": [
         ("¿Cómo se calcula el tiempo para pagar un préstamo?", "A partir del capital, el interés y la cuota que puedes pagar al mes se obtiene el número de cuotas necesarias."),
         ("¿Qué pasa si la cuota es menor que los intereses?", "La deuda no se amortiza nunca: necesitas una cuota mayor que los intereses mensuales."),
+        ("¿Cómo acorto el plazo de un préstamo?", "Con amortizaciones anticipadas o aumentando la cuota. Cuanto antes se hagan, más intereses se ahorran."),
     ],
     "lanzar-dado-moneda": [
         ("¿Son aleatorios los lanzamientos?", "Usan números pseudoaleatorios del navegador, suficientes para juegos y decisiones cotidianas."),
@@ -267,14 +270,17 @@ FAQS = {
     "calculadora-calorias-tmb": [
         ("¿Qué es el metabolismo basal?", "Son las calorías que tu cuerpo gasta en reposo para mantener funciones vitales como respirar o la circulación."),
         ("¿Es exacto el resultado?", "Es una estimación con la ecuación de Mifflin-St Jeor. El gasto real varía de una persona a otra."),
+        ("¿Qué es la tasa metabólica basal?", "Son las calorías que tu cuerpo gasta en reposo para mantener sus funciones vitales. Se multiplica por un factor de actividad para estimar el gasto diario total."),
     ],
     "calculadora-peso-ideal": [
         ("¿Existe un único peso ideal?", "No. Se habla de un rango saludable, que depende de la altura, la constitución y la masa muscular."),
         ("¿Qué IMC se considera normal?", "Según la OMS, entre 18,5 y 24,9."),
+        ("¿Existe un único peso ideal?", "No. Las fórmulas dan un rango orientativo; la constitución, la edad y la masa muscular influyen. Consulta a un profesional sanitario."),
     ],
     "calculadora-ritmo-carrera": [
         ("¿Qué es el ritmo en carrera?", "Es el tiempo que tardas en recorrer un kilómetro, expresado en minutos por kilómetro."),
         ("¿Cómo paso de min/km a km/h?", "Divide 60 entre el ritmo en minutos. Por ejemplo, 5:00 min/km son 12 km/h."),
+        ("¿Cómo se calcula el ritmo por kilómetro?", "Dividiendo el tiempo total entre los kilómetros recorridos. Por ejemplo, 50 minutos en 10 km son 5:00 min/km."),
     ],
     "calculadora-fecha-probable-parto": [
         ("¿Cómo se calcula la fecha probable de parto?", "Se suman 280 días (40 semanas) al primer día de la última regla, con la regla de Naegele."),
@@ -283,18 +289,21 @@ FAQS = {
     "calculadora-vacaciones": [
         ("¿Cuántas vacaciones me corresponden por ley en España?", "Un mínimo de 30 días naturales al año, que tu convenio o contrato pueden mejorar."),
         ("¿Y si no trabajo el año completo?", "Se calculan en proporción al tiempo trabajado."),
-        ("¿Cuántos días de vacaciones corresponden al año en España?", "Como mínimo 30 días naturales al año según el Estatuto de los Trabajadores, salvo que el convenio mejore esa cifra."),
+        ("¿Las vacaciones se pagan o se disfrutan?", "Deben disfrutarse. Solo se compensan en dinero si el contrato termina con días pendientes de disfrutar."),
     ],
     "calculadora-consumo-electrico": [
         ("¿Cómo se calcula el coste de un electrodoméstico?", "Potencia en kW por horas de uso da los kWh consumidos, que se multiplican por el precio del kWh."),
         ("¿Dónde veo la potencia del aparato?", "En la etiqueta del producto o en su manual, expresada en vatios (W)."),
+        ("¿Cómo reduzco el consumo de mis aparatos?", "Apaga el modo en espera, elige aparatos con etiqueta energética A o B y usa los programas eco. El consumo en espera puede suponer una parte apreciable de la factura."),
     ],
     "calculadora-consumo-combustible": [
         ("¿Cómo calculo el consumo real de mi coche?", "Llena el depósito, anota los kilómetros, circula y vuelve a llenarlo: litros repostados entre kilómetros por 100."),
         ("¿Por qué difiere del consumo oficial?", "El oficial se mide en condiciones de laboratorio; el real depende de la conducción, la carga y el tráfico."),
+        ("¿Cómo puedo reducir el consumo de mi coche?", "Mantén la presión de los neumáticos correcta, evita acelerones y frenazos, no lleves peso innecesario y usa marchas largas a velocidad constante."),
     ],
     "calculadora-ecuacion-segundo-grado": [
         ("¿Qué es el discriminante?", "Es b² − 4ac. Si es positivo hay dos soluciones reales, si es cero una doble y si es negativo ninguna real."),
         ("¿Qué pasa si a vale 0?", "Deja de ser de segundo grado: es una ecuación lineal."),
+        ("¿Cuál es la fórmula para resolverla?", "x = (−b ± √(b² − 4ac)) / 2a. El signo ± da las dos soluciones posibles."),
     ],
 }
