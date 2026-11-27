@@ -59,6 +59,7 @@ FAQS = {
     "capacidad-endeudamiento-hipoteca": [
         ("¿Qué porcentaje de mis ingresos puedo destinar a la hipoteca?", "Los bancos suelen aceptar entre un 30% y un 35% de tus ingresos netos, contando también otras deudas."),
         ("¿Cuánto financia un banco del precio de la vivienda?", "Habitualmente hasta el 80% del valor de tasación, por lo que necesitas ahorrar el resto y los gastos de compra."),
+        ("¿Qué ratio de endeudamiento es seguro?", "Los expertos recomiendan que todas tus cuotas de deuda sumen como máximo el 35% de tus ingresos netos mensuales, para mantener margen ante imprevistos o subidas del Euríbor."),
     ],
     "calculadora-tae": [
         ("¿Para qué sirve la TAE?", "Para comparar el coste real de préstamos distintos, porque incluye intereses, comisiones y la frecuencia de pago."),
@@ -106,14 +107,17 @@ FAQS = {
     "calculadora-rentabilidad-alquiler": [
         ("¿Qué es la rentabilidad bruta de un alquiler?", "Es el alquiler anual dividido entre el precio de compra, en porcentaje. No descuenta gastos ni impuestos."),
         ("¿Y la rentabilidad neta?", "Resta gastos como IBI, comunidad, seguros, mantenimiento y periodos vacíos, y es la cifra más realista."),
+        ("¿Qué rentabilidad de alquiler se considera buena?", "Depende de la zona, pero una rentabilidad neta del 4% al 6% suele considerarse razonable. Compárala con otras alternativas de inversión y con el riesgo de impagos o periodos vacíos."),
     ],
     "calculadora-gastos-compra-vivienda": [
         ("¿Qué gastos hay al comprar una vivienda?", "Impuestos (ITP o IVA y AJD según el caso), notaría, registro, gestoría y tasación. Suelen rondar entre el 10% y el 15% del precio."),
         ("¿El resultado es exacto?", "Es orientativo: los impuestos varían según la comunidad autónoma y si la vivienda es nueva o de segunda mano."),
+        ("¿Cuánto dinero necesito ahorrar además de la entrada?", "Como los bancos financian normalmente hasta el 80%, necesitas el 20% restante más los gastos de compra: en total, conviene contar con entre el 30% y el 35% del precio de la vivienda."),
     ],
     "calculadora-ahorro-objetivo": [
         ("¿Cómo sé cuánto ahorrar al mes para una meta?", "Divide el objetivo entre los meses disponibles; si hay rentabilidad, la calculadora ajusta la cuota para tenerla en cuenta."),
         ("¿Incluye impuestos o inflación?", "No. Es una simulación con rentabilidad constante."),
+        ("¿Qué pasa si no llego a la cuota mensual necesaria?", "Puedes ampliar el plazo, reducir el objetivo o buscar una rentabilidad algo mayor. Prueba distintos plazos en la calculadora hasta que la cuota encaje en tu presupuesto."),
     ],
     "regla-de-tres": [
         ("¿Qué es una regla de tres simple directa?", "Cuando al aumentar una magnitud aumenta la otra en la misma proporción: x = b × c / a."),
@@ -206,6 +210,7 @@ FAQS = {
     "calculadora-horas-trabajadas": [
         ("¿Cómo se calculan las horas trabajadas?", "Se resta la hora de entrada a la de salida y se descuentan los descansos no remunerados."),
         ("¿Sirve para turnos que cruzan la medianoche?", "Sí, siempre que indiques correctamente las horas de entrada y salida."),
+        ("¿Cómo paso las horas y minutos a decimal?", "Divide los minutos entre 60 y súmalos a las horas. Por ejemplo, 7 h 30 min equivalen a 7,5 horas, un formato útil para calcular el sueldo por horas."),
     ],
     "calculadora-nota-acceso-universidad": [
         ("¿Cómo se calcula la nota de acceso?", "Se combina la nota media del bachillerato y la de la fase general de la prueba de acceso, con la ponderación que establece la normativa vigente."),
@@ -285,6 +290,7 @@ FAQS = {
     "calculadora-fecha-probable-parto": [
         ("¿Cómo se calcula la fecha probable de parto?", "Se suman 280 días (40 semanas) al primer día de la última regla, con la regla de Naegele."),
         ("¿Es una fecha segura?", "No, es una estimación. Tu médico o matrona la ajustará con la ecografía."),
+        ("¿Cuántas semanas dura un embarazo normal?", "Un embarazo a término dura unas 40 semanas desde la última regla, y se considera a término entre las semanas 37 y 42. Pocos bebés nacen exactamente en la fecha estimada."),
     ],
     "calculadora-vacaciones": [
         ("¿Cuántas vacaciones me corresponden por ley en España?", "Un mínimo de 30 días naturales al año, que tu convenio o contrato pueden mejorar."),
