@@ -23,6 +23,7 @@ FAQS = {
     "calcular-letra-nie": [
         ("¿Cómo se calcula la letra del NIE?", "Se sustituye la X por 0, la Y por 1 y la Z por 2, se divide el número resultante entre 23 y el resto da la letra."),
         ("¿Cuántas cifras tiene un NIE?", "Empieza por X, Y o Z, sigue con 7 cifras y termina con una letra de control."),
+        ("¿Se calcula igual que la letra del DNI?", "Casi. La única diferencia es que la letra inicial (X, Y o Z) se sustituye antes por 0, 1 o 2; después se aplica el mismo resto entre 23."),
     ],
     "validador-iban": [
         ("¿Cuántos caracteres tiene un IBAN español?", "24: las letras ES, dos dígitos de control y 20 dígitos de la cuenta."),
@@ -147,6 +148,7 @@ FAQS = {
     "calculadora-fracciones": [
         ("¿Cómo se suman fracciones con distinto denominador?", "Se busca un denominador común, se convierten las fracciones y se suman los numeradores. Después se simplifica el resultado."),
         ("¿Cómo se simplifica una fracción?", "Se dividen numerador y denominador entre su máximo común divisor."),
+        ("¿Cómo se multiplican y dividen fracciones?", "Para multiplicar se multiplican numeradores y denominadores entre sí. Para dividir se multiplica la primera fracción por la inversa de la segunda."),
     ],
     "celsius-a-fahrenheit": [
         ("¿Cuál es la fórmula de Celsius a Fahrenheit?", "°F = °C × 9/5 + 32. Por ejemplo, 20 °C equivalen a 68 °F."),
@@ -166,10 +168,12 @@ FAQS = {
     "numeros-romanos": [
         ("¿Qué valor tiene cada símbolo romano?", "I = 1, V = 5, X = 10, L = 50, C = 100, D = 500 y M = 1000."),
         ("¿Hasta qué número se puede convertir?", "Con la notación estándar, hasta 3999 (MMMCMXCIX)."),
+        ("¿Cómo se escribe el 4 o el 9 en números romanos?", "Con resta: IV es 4 (5 − 1) e IX es 9 (10 − 1). Lo mismo ocurre con XL (40), XC (90), CD (400) y CM (900)."),
     ],
     "generador-contrasenas": [
         ("¿Qué hace segura una contraseña?", "La longitud sobre todo: se recomiendan 14 caracteres o más, mezclando letras, números y símbolos, y una distinta para cada servicio."),
         ("¿Se guarda la contraseña generada?", "No. Se genera en tu navegador y no se envía a ningún servidor."),
+        ("¿Qué longitud mínima conviene usar?", "Se recomienda al menos 12 caracteres, mejor 16 o más, combinando mayúsculas, minúsculas, números y símbolos. Usa una contraseña distinta para cada servicio."),
     ],
     "amortizacion-anticipada-hipoteca": [
         ("¿Qué es amortizar anticipadamente una hipoteca?", "Es adelantar dinero al banco para reducir la deuda pendiente antes de lo previsto, ya sea acortando el plazo o bajando la cuota."),
@@ -184,6 +188,7 @@ FAQS = {
     "calculadora-media-mediana-moda": [
         ("¿Qué diferencia hay entre media, mediana y moda?", "La media es el promedio de todos los valores, la mediana es el valor central al ordenarlos y la moda es el que más se repite."),
         ("¿Cuándo es mejor usar la mediana?", "Cuando hay valores extremos que distorsionan la media, por ejemplo en salarios o precios de vivienda."),
+        ("¿Puede haber más de una moda?", "Sí. Si dos o más valores se repiten el mismo número máximo de veces, el conjunto es bimodal o multimodal. Si ningún valor se repite, no hay moda."),
     ],
     "centimetros-a-pulgadas": [
         ("¿Cuántas pulgadas son 10 centímetros?", "Unas 3,94 pulgadas. Una pulgada equivale exactamente a 2,54 cm."),
@@ -198,6 +203,7 @@ FAQS = {
     "conversor-binario-decimal-hexadecimal": [
         ("¿Cómo se pasa de binario a decimal?", "Cada dígito binario vale una potencia de 2 según su posición, de derecha a izquierda; se suman las de los dígitos que son 1."),
         ("¿Qué es el sistema hexadecimal?", "Es un sistema en base 16 que usa los dígitos 0-9 y las letras A-F. Se usa mucho en informática, por ejemplo en los colores web."),
+        ("¿Cómo se pasa de decimal a binario?", "Se divide el número entre 2 repetidamente y se anotan los restos; leídos de abajo arriba forman el número binario. Por ejemplo, 13 es 1101."),
     ],
     "dias-para-navidad": [
         ("¿Qué día se cuenta como Navidad?", "El 25 de diciembre."),
